@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ReactQueryProvider from "@/common/provider/usereactquery";
+import ReactQueryProvider from "@/hook/provider/usereactquery";
+import Header from "@/common/header/header";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const pretendard = localFont({
+  src: "./fonts/PretendardVariable.woff2",
 });
 
 export const metadata: Metadata = {
@@ -26,8 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+      <body className={`${pretendard.className}`}>
+        <Header />
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );
