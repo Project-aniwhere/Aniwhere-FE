@@ -4,21 +4,26 @@ import { Children, useCallback, useEffect, useMemo, useState } from 'react';
 import CarouselContainer from './carousel-container';
 import CarouselItem from './carousel-item';
 
-const Carousel = ({ children }: { children: React.ReactNode }) => {
+interface CarouselProps {
+  children: React.ReactNode;
+  itemPerCarousel?: number;
+}
+
+const Carousel = ({ children, itemPerCarousel }: CarouselProps) => {
   const childListLength = useMemo(() => Children.count(children), [children]);
 
   const screenWidthHandler = useCallback(() => {
     if (window.innerWidth < 640) {
-      return childListLength < 2 ? childListLength : 2;
+      setCountPerCarousel(childListLength < 2 ? childListLength : 2);
     } else if (window.innerWidth >= 640 && window.innerWidth < 1024) {
-      return childListLength < 3 ? childListLength : 3;
+      setCountPerCarousel(childListLength < 3 ? childListLength : 3);
     } else {
-      return childListLength < 4 ? childListLength : 4;
+      setCountPerCarousel(childListLength < 4 ? childListLength : 4);
     }
   }, [childListLength]);
 
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [countPerCarousel, setCountPerCarousel] = useState(screenWidthHandler);
+  const [countPerCarousel, setCountPerCarousel] = useState(2);
 
   const childList = useMemo(() => {
     return Children.toArray(children);
@@ -51,16 +56,16 @@ const Carousel = ({ children }: { children: React.ReactNode }) => {
   }, [countPerCarousel, childListLength]);
 
   useEffect(() => {
-    const resizeHandler = () => setCountPerCarousel(screenWidthHandler());
-    window.addEventListener('resize', resizeHandler);
+    screenWidthHandler();
+    window.addEventListener('resize', screenWidthHandler);
 
-    return () => window.removeEventListener('resize', resizeHandler);
+    return () => window.removeEventListener('resize', screenWidthHandler);
   }, [screenWidthHandler]);
 
   return (
     <CarouselContainer
       carouselIndex={currentIdx}
-      countPerCarousel={countPerCarousel}
+      countPerCarousel={itemPerCarousel ?? countPerCarousel}
       handleNext={handleNext}
       handlePrev={handlePrev}
     >

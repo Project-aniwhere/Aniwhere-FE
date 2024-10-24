@@ -48,18 +48,17 @@ const CarouselContainer = (
       onMouseLeave={() => setIsArrowVisible(false)}
     >
       <ArrowButton direction='left' onClick={handlePrev} />
-      <div className='w-full h-full overflow-y-hidden overflow-x-scroll scrollbar-none xl:overflow-x-hidden xl:scrollbar'>
+      <div className='w-full h-full overflow-x-scroll scrollbar-none xl:overflow-x-hidden xl:scrollbar'>
         <motion.ol
           ref={ref}
           transition={{
             ease: 'easeInOut',
             duration: 0.3,
           }}
-          style={{
-            gridTemplateColumns: `repeat(${carouselLength}, calc(${100 / countPerCarousel}% - ${(countPerCarousel - 1) / countPerCarousel}rem))`,
+          className={'w-full flex gap-4 items-center ' + className}
+          animate={{
+            x: `calc(-${(carouselIndex * 100) / countPerCarousel}% - ${carouselIndex / countPerCarousel}rem)`,
           }}
-          className={'w-full p-2 gap-4 grid ' + className}
-          animate={{ x: `calc(-${(carouselIndex * 100) / countPerCarousel}%)` }}
         >
           {children}
         </motion.ol>
