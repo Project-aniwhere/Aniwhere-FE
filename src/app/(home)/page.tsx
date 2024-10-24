@@ -3,6 +3,7 @@ import FullStarSvg from '@/asset/svg/star/fullstar';
 import sampleImage from '@/asset/img/mainslider/sample.jpg';
 import Image from 'next/image';
 import Carousel from '@/common/carousel/carousel';
+import CarouselItem from '@/common/carousel/carousel-item';
 
 // 컴포넌트를 어떤 폴더구조로 관리해야할까요?
 
@@ -16,7 +17,7 @@ const Video = () => {
         width={0}
         height={0}
         sizes='100vw'
-        className='w-full h-screen object-cover'
+        className='w-full h-[100dvh] object-cover'
       ></Image>
       <div className='absolute bottom-16 left-16'>
         <p className='text-white font-semibold'>
@@ -44,8 +45,13 @@ export default function Home() {
     <div className='w-screen flex justify-center'>
       <div className='w-[80%] flex items-center'>
         <Carousel>
-          <div>a</div>
-          <div>b</div>
+          {Array(10)
+            .fill(0)
+            .map((_, index) => (
+              <div className='bg-yellow-300 h-32' key={index}>
+                {index}
+              </div>
+            ))}
         </Carousel>
       </div>
     </div>

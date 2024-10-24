@@ -1,38 +1,70 @@
-import { Children, ForwardedRef, forwardRef } from 'react';
+import { Children, ForwardedRef, forwardRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import ArrowSvg from '@/asset/svg/arrow/arrow';
 
 interface CarouselContainerProps {
   children: React.ReactNode;
   carouselIndex: number;
+  countPerCarousel: number;
+  handleNext: () => void;
+  handlePrev: () => void;
   className?: string;
 }
 
+const ArrowButton = ({
+  direction,
+  onClick,
+}: {
+  direction: 'left' | 'right';
+  onClick: () => void;
+}) => {
+  return (
+    <button onClick={onClick}>
+      <ArrowSvg direction={direction} />
+    </button>
+  );
+};
+
 const CarouselContainer = (
-  { children, carouselIndex, className }: CarouselContainerProps,
+  {
+    children,
+    carouselIndex,
+    className,
+    countPerCarousel,
+    handleNext,
+    handlePrev,
+  }: CarouselContainerProps,
   ref?: ForwardedRef<HTMLOListElement>
 ) => {
+  const [isArrowVisible, setIsArrowVisible] = useState(false);
   const carouselLength = Children.count(children);
 
   if (!carouselLength) return <div>다음 기회에...</div>;
 
   return (
-    <div className='relative w-full h-full overflow-x-hidden overflow-y-hidden'>
-      <motion.ol
-        ref={ref}
-        transition={{
-          ease: 'easeInOut',
-          duration: 0.3,
-          type: 'spring',
-        }}
-        style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${carouselLength},calc(33.333333% - 0.66666rem))`,
-        }}
-        className={'relative w-full p-2 gap-4 ' + className}
-        animate={{ x: `-${3}00%` }}
-      >
-        {children}
-      </motion.ol>
+    <div
+      className='flex items-center justify-between gap-2 w-full h-full'
+      onMouseEnter={() => setIsArrowVisible(true)}
+      onMouseLeave={() => setIsArrowVisible(false)}
+    >
+      <ArrowButton direction='left' onClick={handlePrev} />
+      <div className='w-full h-full overflow-y-hidden overflow-x-scroll scrollbar-none xl:overflow-x-hidden xl:scrollbar'>
+        <motion.ol
+          ref={ref}
+          transition={{
+            ease: 'easeInOut',
+            duration: 0.3,
+          }}
+          style={{
+            gridTemplateColumns: `repeat(${carouselLength}, calc(${100 / countPerCarousel}% - ${(countPerCarousel - 1) / countPerCarousel}rem))`,
+          }}
+          className={'w-full p-2 gap-4 grid ' + className}
+          animate={{ x: `calc(-${(carouselIndex * 100) / countPerCarousel}%)` }}
+        >
+          {children}
+        </motion.ol>
+      </div>
+      <ArrowButton direction='right' onClick={handleNext} />
     </div>
   );
 };

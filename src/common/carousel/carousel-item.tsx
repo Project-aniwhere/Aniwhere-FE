@@ -7,8 +7,7 @@ const CarouselItem = ({
 }) => (
   <li
     className={
-      'w-full h-32 cursor-pointer bg-yellow-300 hover:scale-105 duration-200 ' +
-      className
+      'w-full h-32 cursor-pointer hover:scale-[1.02] duration-200 ' + className
     }
   >
     {children}
