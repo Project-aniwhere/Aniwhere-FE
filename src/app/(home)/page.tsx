@@ -2,6 +2,7 @@ import spylogo from '@/asset/img/mainslider/spylogo.png';
 import FullStarSvg from '@/asset/svg/star/fullstar';
 import sampleImage from '@/asset/img/mainslider/sample.jpg';
 import Image from 'next/image';
+import Carousel from '@/common/carousel/carousel';
 
 // 컴포넌트를 어떤 폴더구조로 관리해야할까요?
 
@@ -40,9 +41,13 @@ const Video = () => {
 
 export default function Home() {
   return (
-    <div>
-      <Video />
-      <div className='h-[200vw] w-full bg-white '>asdasd</div>
+    <div className='w-screen flex justify-center'>
+      <div className='w-[80%] flex items-center'>
+        <Carousel>
+          <div>a</div>
+          <div>b</div>
+        </Carousel>
+      </div>
     </div>
   );
 }
