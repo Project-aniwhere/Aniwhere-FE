@@ -1,6 +1,6 @@
 // In Next.js, this file would be called: app/providers.jsx
 
-"use client";
+'use client';
 
 // We can not useState or useRef in a server component, which is why we are
 // extracting this part out into it's own file with 'use client' on top
@@ -9,9 +9,9 @@ import {
   QueryClient,
   QueryClientProvider,
   dehydrate,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function makeQueryClient(): QueryClient {
   return new QueryClient({
@@ -28,7 +28,7 @@ function makeQueryClient(): QueryClient {
 let browserQueryClient: QueryClient | undefined;
 
 function getQueryClient() {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     // Server: always make a new query client
     return makeQueryClient();
   }
@@ -55,7 +55,7 @@ export default function ReactQueryProvider({
       <HydrationBoundary state={dehydrate(queryClient)}>
         {children}
       </HydrationBoundary>
-      {process.env.NODE_ENV === "development" ? <ReactQueryDevtools /> : null}
+      {process.env.NODE_ENV === 'development' ? <ReactQueryDevtools /> : null}
     </QueryClientProvider>
   );
 }
