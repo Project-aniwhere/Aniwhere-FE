@@ -10,36 +10,49 @@ import sample4 from '@/asset/img/subslider/sample4.jpg';
 
 // 컴포넌트를 어떤 폴더구조로 관리해야할까요?
 
-const Video = () => {
+const Video = ({
+  imageList,
+}: {
+  imageList: {
+    src: string;
+    alt: string;
+  }[];
+}) => {
   return (
-    <div className='relative'>
-      <div className='absolute z-0 bg-radial-gradient-r w-full h-full ' />
-      <Image
-        src={sampleImage.src}
-        alt='메인비디오'
-        width={0}
-        height={0}
-        sizes='100vw'
-        className='w-full h-[100dvh] object-cover'
-      ></Image>
-      <div className='absolute bottom-16 left-16'>
-        <p className='text-white font-semibold'>
-          평범하지 않은 가족, 평범하지 않은 일상!
-        </p>
-        <Image
-          src={spylogo.src}
-          alt='스패로고'
-          width={0}
-          height={0}
-          sizes='30vw'
-          className='-z-10 min-w-[30vw] object-cover'
-        ></Image>
-        <div className='flex flex-row items-center gap-2'>
-          <FullStarSvg />
-          <p className='text-white'>4.2 • 일상 • 25분</p>
-        </div>
-      </div>
-    </div>
+    <>
+      {imageList.map(({ src, alt }) => {
+        return (
+          <div key={src + alt} className='relative'>
+            <div className='absolute z-0 bg-radial-gradient-r w-full h-full ' />
+            <Image
+              src={src}
+              alt='메인비디오'
+              width={0}
+              height={0}
+              sizes='100vw'
+              className='w-full h-[100dvh] object-cover'
+            ></Image>
+            <div className='absolute bottom-16 left-16'>
+              <p className='text-white font-semibold'>
+                평범하지 않은 가족, 평범하지 않은 일상!
+              </p>
+              <Image
+                src={spylogo.src}
+                alt='스패로고'
+                width={0}
+                height={0}
+                sizes='30vw'
+                className='-z-10 min-w-[30vw] object-cover'
+              ></Image>
+              <div className='flex flex-row items-center gap-2'>
+                <FullStarSvg />
+                <p className='text-white'>4.2 • 일상 • 25분</p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </>
   );
 };
 
@@ -53,17 +66,18 @@ const sampleData = [
 export default function Home() {
   return (
     <div className='w-full flex flex-col items-center justify-center'>
-      <Video />
-
-      <Carousel>
+      <Carousel animation='fade' itemPerCarousel={1}>
+        <Video imageList={sampleData} />
+      </Carousel>
+      <Carousel animation='slide'>
         {Array(20)
           .fill(0)
           .map((_, index) => (
             <div
-              className='relative flex flex-col items-start gap-2 cursor-pointer'
+              className='relative flex flex-col gap-2 cursor-pointer p-2'
               key={index}
             >
-              <div className='relative hover:scale-105 duration-200'>
+              <div className='relative hover:scale-105 items-start duration-200'>
                 <p className='absolute top-2 left-2 rounded-lg flex items-center justify-center bg-aniviolet3 aspect-[3/2] w-12 text-white font-bold '>
                   1
                 </p>

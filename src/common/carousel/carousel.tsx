@@ -7,9 +7,14 @@ import CarouselItem from './carousel-item';
 interface CarouselProps {
   children: React.ReactNode;
   itemPerCarousel?: number;
+  animation?: 'slide' | 'fade';
 }
 
-const Carousel = ({ children, itemPerCarousel }: CarouselProps) => {
+const Carousel = ({
+  children,
+  itemPerCarousel,
+  animation = 'slide',
+}: CarouselProps) => {
   const childListLength = useMemo(() => Children.count(children), [children]);
 
   const screenWidthHandler = useCallback(() => {
@@ -25,53 +30,52 @@ const Carousel = ({ children, itemPerCarousel }: CarouselProps) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [countPerCarousel, setCountPerCarousel] = useState(2);
 
-  const childList = useMemo(() => {
-    return Children.toArray(children);
-  }, [children]);
-
   const handleNext = useCallback(() => {
     setCurrentIdx((prev) => {
-      const nextIdx = prev + countPerCarousel;
+      const currentPerCount = itemPerCarousel || countPerCarousel;
+      const nextIdx = prev + currentPerCount;
       if (nextIdx >= childListLength) {
         return 0;
       } else if (
         childListLength -
-          (countPerCarousel - (childListLength % countPerCarousel)) <=
+          (currentPerCount - (childListLength % currentPerCount)) <=
         nextIdx
       ) {
-        return childListLength - countPerCarousel;
+        return childListLength - currentPerCount;
       } else {
         return nextIdx;
       }
     });
-  }, [countPerCarousel, childListLength]);
+  }, [itemPerCarousel, countPerCarousel, childListLength]);
 
   const handlePrev = useCallback(() => {
     setCurrentIdx((prev) => {
-      const nextIdx = prev - countPerCarousel;
-      if (!prev) return childListLength - countPerCarousel;
+      const currentPerCount = itemPerCarousel || countPerCarousel;
+      const nextIdx = prev - (itemPerCarousel || countPerCarousel);
+      if (!prev) return childListLength - currentPerCount;
       else if (nextIdx < 0) return 0;
       else return nextIdx;
     });
-  }, [countPerCarousel, childListLength]);
+  }, [itemPerCarousel, countPerCarousel, childListLength]);
 
   useEffect(() => {
-    screenWidthHandler();
-    window.addEventListener('resize', screenWidthHandler);
+    if (!itemPerCarousel) {
+      screenWidthHandler();
+      window.addEventListener('resize', screenWidthHandler);
 
-    return () => window.removeEventListener('resize', screenWidthHandler);
-  }, [screenWidthHandler]);
+      return () => window.removeEventListener('resize', screenWidthHandler);
+    }
+  }, [itemPerCarousel, screenWidthHandler]);
 
   return (
     <CarouselContainer
       carouselIndex={currentIdx}
-      countPerCarousel={itemPerCarousel ?? countPerCarousel}
+      countPerCarousel={itemPerCarousel || countPerCarousel}
       handleNext={handleNext}
       handlePrev={handlePrev}
+      animation={animation}
     >
-      {childList.map((child, idx) => (
-        <CarouselItem key={idx}>{child}</CarouselItem>
-      ))}
+      {children}
     </CarouselContainer>
   );
 };

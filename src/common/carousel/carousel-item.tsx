@@ -1,15 +1,19 @@
-const CarouselItem = ({
-  children,
-  className,
-}: {
+interface CarouselitemProps {
   children: React.ReactNode;
   className?: string;
-}) => (
+  countPerItem?: number;
+}
+
+const CarouselItem = ({
+  children,
+  className = '',
+  countPerItem,
+}: CarouselitemProps) => (
   <li
-    className={
-      'flex-none w-[calc(50%-0.5rem)]  sm:w-[calc(33%-0.66666666rem)] lg:w-[calc(25%-0.75rem)] ' +
-      className
-    }
+    className={'flex-none basis-1/2 sm:basis-1/3 lg:basis-1/4 ' + className}
+    style={{
+      flexBasis: countPerItem ? `${100 / countPerItem}%` : '',
+    }}
   >
     {children}
   </li>

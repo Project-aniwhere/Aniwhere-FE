@@ -1,6 +1,13 @@
-import { Children, ForwardedRef, forwardRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  Children,
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useState,
+} from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import ArrowSvg from '@/asset/svg/arrow/arrow';
+import CarouselItem from './carousel-item';
 
 interface CarouselContainerProps {
   children: React.ReactNode;
@@ -9,18 +16,25 @@ interface CarouselContainerProps {
   handleNext: () => void;
   handlePrev: () => void;
   className?: string;
+  animation?: 'slide' | 'fade';
+}
+
+interface ArrorButtonProps {
+  direction: 'left' | 'right';
+  onClick: () => void;
+  className?: string;
+  fill?: string;
 }
 
 const ArrowButton = ({
   direction,
   onClick,
-}: {
-  direction: 'left' | 'right';
-  onClick: () => void;
-}) => {
+  fill = 'black',
+  className = '',
+}: ArrorButtonProps) => {
   return (
-    <button onClick={onClick}>
-      <ArrowSvg direction={direction} />
+    <button className={className} onClick={onClick}>
+      <ArrowSvg fill={fill} direction={direction} />
     </button>
   );
 };
@@ -29,41 +43,73 @@ const CarouselContainer = (
   {
     children,
     carouselIndex,
-    className,
+    className = '',
     countPerCarousel,
+    animation,
     handleNext,
     handlePrev,
   }: CarouselContainerProps,
   ref?: ForwardedRef<HTMLOListElement>
 ) => {
-  const [isArrowVisible, setIsArrowVisible] = useState(false);
   const carouselLength = Children.count(children);
-
+  const childrenList = Children.toArray(children);
   if (!carouselLength) return <div>다음 기회에...</div>;
 
   return (
-    <div
-      className='flex items-center justify-between gap-2 w-full h-full'
-      onMouseEnter={() => setIsArrowVisible(true)}
-      onMouseLeave={() => setIsArrowVisible(false)}
-    >
-      <ArrowButton direction='left' onClick={handlePrev} />
+    <div className='relative flex items-center justify-between gap-2 w-full h-full overflow-x-hidden overflow-y-hidden '>
+      <ArrowButton
+        direction='left'
+        onClick={handlePrev}
+        className={
+          animation === 'fade'
+            ? 'absolute z-40 h-full w-10 flex items-center justify-center hover:scale-110 duration-200'
+            : 'hover:scale-110 duration-200'
+        }
+        fill={animation === 'fade' ? 'white' : 'black'}
+      />
       <div className='w-full h-full overflow-x-scroll scrollbar-none xl:overflow-x-hidden xl:scrollbar'>
         <motion.ol
           ref={ref}
           transition={{
             ease: 'easeInOut',
             duration: 0.3,
+            x: { duration: animation === 'slide' ? 0.3 : 0 },
           }}
-          className={'w-full flex gap-4 items-center ' + className}
+          className={'relative w-full h-full flex items-center ' + className}
           animate={{
-            x: `calc(-${(carouselIndex * 100) / countPerCarousel}% - ${carouselIndex / countPerCarousel}rem)`,
+            x:
+              animation === 'slide'
+                ? `-${(carouselIndex * 100) / countPerCarousel}%`
+                : '',
           }}
         >
-          {children}
+          {childrenList.map((child, idx) => (
+            <CarouselItem
+              key={idx}
+              countPerItem={countPerCarousel}
+              className={
+                animation === 'fade'
+                  ? carouselIndex === idx
+                    ? 'relative  opacity-100 duration-1000 '
+                    : 'absolute w-full h-full opacity-0  duration-1000 '
+                  : ''
+              }
+            >
+              {child}
+            </CarouselItem>
+          ))}
         </motion.ol>
       </div>
-      <ArrowButton direction='right' onClick={handleNext} />
+      <ArrowButton
+        direction='right'
+        onClick={handleNext}
+        className={
+          animation === 'fade'
+            ? 'absolute z-40 right-0 h-full w-10 flex items-center justify-center hover:scale-110 duration-200'
+            : 'hover:scale-110 duration-200'
+        }
+        fill={animation === 'fade' ? 'white' : 'black'}
+      />
     </div>
   );
 };
