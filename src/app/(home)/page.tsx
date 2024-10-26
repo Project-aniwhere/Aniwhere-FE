@@ -8,8 +8,6 @@ import sample2 from '@/asset/img/subslider/sample2.jpg';
 import sample3 from '@/asset/img/subslider/sample3.jpg';
 import sample4 from '@/asset/img/subslider/sample4.jpg';
 import Link from 'next/link';
-import ModalTest from '@/container/home/modal-test';
-// 컴포넌트를 어떤 폴더구조로 관리해야할까요?
 
 const Video = ({
   imageList,
@@ -70,9 +68,8 @@ export default function Home() {
       <Carousel animation='fade' itemPerCarousel={1}>
         <Video imageList={sampleData} />
       </Carousel>
-      <ModalTest />
       <Carousel animation='slide'>
-        {Array(20)
+        {Array(10)
           .fill(0)
           .map((_, index) => (
             <div
@@ -81,7 +78,7 @@ export default function Home() {
             >
               <div className='relative hover:scale-105 items-start duration-200'>
                 <p className='absolute top-2 left-2 rounded-lg flex items-center justify-center bg-aniviolet3 aspect-[3/2] w-12 text-white font-bold '>
-                  1
+                  {index + 1}
                 </p>
                 <Image
                   src={sampleData[index % 4].src}
