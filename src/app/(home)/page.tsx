@@ -7,6 +7,7 @@ import sample1 from '@/asset/img/subslider/sample1.jpg';
 import sample2 from '@/asset/img/subslider/sample2.jpg';
 import sample3 from '@/asset/img/subslider/sample3.jpg';
 import sample4 from '@/asset/img/subslider/sample4.jpg';
+import Link from 'next/link';
 
 // 컴포넌트를 어떤 폴더구조로 관리해야할까요?
 
@@ -69,6 +70,7 @@ export default function Home() {
       <Carousel animation='fade' itemPerCarousel={1}>
         <Video imageList={sampleData} />
       </Carousel>
+      <Link href='/photo'>모달</Link>
       <Carousel animation='slide'>
         {Array(20)
           .fill(0)
