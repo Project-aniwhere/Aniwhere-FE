@@ -5,34 +5,25 @@ import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import ModalContainer from './modal-container';
 
-interface ModalProps {
-  children: React.ReactNode;
-  isCentered?: boolean;
-}
-
-const Modal = ({ children, isCentered = true }: ModalProps) => {
+const ModalRouter = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (!dialogRef.current?.open) {
-      if (isCentered) {
-        dialogRef.current?.showModal();
-      } else {
-        dialogRef.current?.show();
-      }
+      dialogRef.current?.showModal();
     }
-  }, [isCentered]);
+  }, []);
 
-  const onClose = () => {
+  function onDismiss() {
     router.back();
-  };
+  }
 
   return (
-    <ModalContainer ref={dialogRef} onClose={onClose}>
+    <ModalContainer onClose={onDismiss} ref={dialogRef}>
       {children}
     </ModalContainer>
   );
 };
 
-export default Modal;
+export default ModalRouter;

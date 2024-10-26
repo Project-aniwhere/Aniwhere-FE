@@ -28,7 +28,7 @@ const Carousel = ({
   }, [childListLength]);
 
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [countPerCarousel, setCountPerCarousel] = useState(2);
+  const [countPerCarousel, setCountPerCarousel] = useState(0);
 
   const handleNext = useCallback(() => {
     setCurrentIdx((prev) => {
