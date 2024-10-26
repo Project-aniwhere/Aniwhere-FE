@@ -1,13 +1,7 @@
-import {
-  Children,
-  ForwardedRef,
-  forwardRef,
-  useCallback,
-  useState,
-} from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import ArrowSvg from '@/asset/svg/arrow/arrow';
+import { Children, ForwardedRef, forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import CarouselItem from './carousel-item';
+import ArrowButton from './arrow-button';
 
 interface CarouselContainerProps {
   children: React.ReactNode;
@@ -18,26 +12,6 @@ interface CarouselContainerProps {
   className?: string;
   animation?: 'slide' | 'fade';
 }
-
-interface ArrorButtonProps {
-  direction: 'left' | 'right';
-  onClick: () => void;
-  className?: string;
-  fill?: string;
-}
-
-const ArrowButton = ({
-  direction,
-  onClick,
-  fill = 'black',
-  className = '',
-}: ArrorButtonProps) => {
-  return (
-    <button className={className} onClick={onClick}>
-      <ArrowSvg fill={fill} direction={direction} />
-    </button>
-  );
-};
 
 const CarouselContainer = (
   {
