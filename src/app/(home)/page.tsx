@@ -21,7 +21,7 @@ const Video = ({
     <>
       {imageList.map(({ src, alt }) => {
         return (
-          <div key={src + alt} className='relative'>
+          <div key={src + alt} className='relative w-full'>
             <div className='absolute z-0 bg-radial-gradient-r w-full h-full ' />
             <Image
               src={src}
@@ -29,7 +29,7 @@ const Video = ({
               width={0}
               height={0}
               sizes='100vw'
-              className='w-full h-[100dvh] object-cover'
+              className='w-screen h-[100dvh] object-cover'
             ></Image>
             <div className='absolute bottom-16 left-16'>
               <p className='text-white font-semibold'>
@@ -65,11 +65,17 @@ const sampleData = [
 export default function Home() {
   return (
     <div className='w-full flex flex-col items-center justify-center'>
-      <Carousel animation='fade' itemPerCarousel={1}>
+      <Carousel
+        animation='fade'
+        itemPerCarousel={1}
+        bullet
+        bulletPosition='right'
+        bulletContainer='inner'
+      >
         <Video imageList={sampleData} />
       </Carousel>
       <Carousel animation='slide'>
-        {Array(10)
+        {Array(9)
           .fill(0)
           .map((_, index) => (
             <div

@@ -2,18 +2,24 @@
 
 import { Children, useCallback, useEffect, useMemo, useState } from 'react';
 import CarouselContainer from './carousel-container';
-import CarouselItem from './carousel-item';
+import CarouselBullet from './bullet';
 
 interface CarouselProps {
   children: React.ReactNode;
   itemPerCarousel?: number;
   animation?: 'slide' | 'fade';
+  bullet?: boolean;
+  bulletContainer?: 'inner' | 'outer';
+  bulletPosition?: 'left' | 'center' | 'right';
 }
 
 const Carousel = ({
   children,
   itemPerCarousel,
   animation = 'slide',
+  bullet = true,
+  bulletPosition = 'center',
+  bulletContainer = 'outer',
 }: CarouselProps) => {
   const childListLength = useMemo(() => Children.count(children), [children]);
 
@@ -68,15 +74,38 @@ const Carousel = ({
   }, [itemPerCarousel, screenWidthHandler]);
 
   return (
-    <CarouselContainer
-      carouselIndex={currentIdx}
-      countPerCarousel={itemPerCarousel || countPerCarousel}
-      handleNext={handleNext}
-      handlePrev={handlePrev}
-      animation={animation}
+    <div
+      className='relative flex flex-col gap-2'
+      style={{
+        alignItems:
+          bulletPosition === 'left'
+            ? 'flex-start'
+            : bulletPosition === 'right'
+              ? 'flex-end'
+              : 'center',
+      }}
     >
-      {children}
-    </CarouselContainer>
+      <CarouselContainer
+        carouselIndex={currentIdx}
+        countPerCarousel={itemPerCarousel || countPerCarousel}
+        handleNext={handleNext}
+        handlePrev={handlePrev}
+        animation={animation}
+      >
+        {children}
+      </CarouselContainer>
+      {bullet && (
+        <CarouselBullet
+          count={childListLength}
+          currentIdx={currentIdx}
+          countPerCarousel={itemPerCarousel || countPerCarousel}
+          setCurrentIdx={setCurrentIdx}
+          className={
+            bulletContainer === 'inner' ? 'absolute bottom-4 mx-4' : 'mx-4'
+          }
+        />
+      )}
+    </div>
   );
 };
 
