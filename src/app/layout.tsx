@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import ReactQueryProvider from '@/hook/provider/usereactquery';
 import Header from '@/common/header/header';
+import Footer from '@/common/footer/footer';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${pretendard.className} scrollbar`}>
         <Header />
         <ReactQueryProvider>{children}</ReactQueryProvider>
+        <Footer />
       </body>
     </html>
   );
