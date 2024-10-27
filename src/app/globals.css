@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-.gradient-circle {
-  background: radial-gradient(circle, #f0f, #0ff);
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 0.875rem;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #909090;
+    border-radius: 100vh;
+    border: 0.2rem solid #f0f0f0;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+  }
 }
