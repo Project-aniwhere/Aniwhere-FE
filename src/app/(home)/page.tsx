@@ -8,6 +8,7 @@ import sample4 from '@/asset/img/subslider/sample4.jpg';
 import ContentSlider from '@/component/home/content-slider';
 import MainLayout from '@/component/common/layout/main-layout';
 import Footer from '@/component/common/footer/footer';
+import CommentSlider from '@/component/home/comment-slider';
 
 export default function Home() {
   const dummyData: ContentSliderProps = {
@@ -37,6 +38,7 @@ export default function Home() {
         <ContentSlider {...dummyData} />
         <ContentSlider {...dummyData} />
         <ContentSlider {...dummyData} />
+        <CommentSlider />
       </MainLayout>
       <Footer />
     </div>

@@ -1,6 +1,6 @@
 import { SvgProps } from '@/type/svgprops';
 
-const FullStarSvg = ({
+const EmptyStar = ({
   width = '16',
   height = '16',
   fill = 'white',
@@ -32,4 +32,4 @@ const FullStarSvg = ({
   );
 };
 
-export default FullStarSvg;
+export default EmptyStar;
