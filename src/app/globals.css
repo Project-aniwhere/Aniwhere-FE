@@ -20,4 +20,8 @@
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: #707070;
   }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${pretendard.className} scrollbar`}>
-        <Header />
+        <div id='modal-root' />
         <ReactQueryProvider>{children}</ReactQueryProvider>
         <Footer />
       </body>

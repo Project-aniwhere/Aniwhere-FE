@@ -37,3 +37,5 @@ next-env.d.ts
 
 #eslint cache file
 .eslintcache
+
+.vscode
