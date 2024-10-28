@@ -14,6 +14,10 @@ module.exports = {
         'radial-gradient-r':
           'radial-gradient(50% 50% at 58.23% 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.6) 100%)',
       },
+      screens: {
+        qhd: '2560px',
+        '4k': '3840px',
+      },
     },
   },
   plugins: [],

@@ -1,4 +1,4 @@
-import { SvgProps } from '@/type/svg/svgprops';
+import { SvgProps } from '@/type/svgprops';
 
 interface ArrowSvgProps extends SvgProps {
   direction?: 'left' | 'right' | 'up' | 'down';

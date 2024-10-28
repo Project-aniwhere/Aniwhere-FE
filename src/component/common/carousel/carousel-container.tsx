@@ -30,7 +30,7 @@ const CarouselContainer = (
   if (!carouselLength) return <div>다음 기회에...</div>;
 
   return (
-    <div className='relative flex items-center justify-between gap-2 w-full h-full overflow-x-hidden overflow-y-hidden '>
+    <div className='relative flex items-center justify-between gap-2 w-full h-full overflow-x-hidden overflow-y-hidden'>
       <ArrowButton
         direction='left'
         onClick={handlePrev}
@@ -49,7 +49,7 @@ const CarouselContainer = (
             duration: 0.3,
             x: { duration: animation === 'slide' ? 0.3 : 0 },
           }}
-          className={'relative w-full h-full flex items-center ' + className}
+          className={'relative flex items-center ' + className}
           animate={{
             x:
               animation === 'slide'
