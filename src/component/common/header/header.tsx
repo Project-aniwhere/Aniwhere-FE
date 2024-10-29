@@ -7,6 +7,7 @@ import ModalDialog from '../modal/modal-dialog';
 import { createPortal } from 'react-dom';
 import GoogleSvg from '@/asset/svg/google/google-svg';
 import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
+import ModalRouter from '../modal/modal-router';
 
 const Header = () => {
   const [isAtTop, setIsAtTop] = useState(true);
@@ -29,10 +30,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLoginClick = () => {
-    modalRef.current?.openModal();
-  };
-
   return (
     <>
       <header
@@ -52,12 +49,12 @@ const Header = () => {
         </div>
         <div className='flex flex-row items-center gap-8'>
           <search>검색</search>
-          <button onClick={handleLoginClick}>로그인/회원가입</button>
+          <Link href='/login'>로그인/회원가입</Link>
         </div>
       </header>
-      <ModalDialog ref={modalRef}>
-        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4'>
-          <div className='bg-white rounded-lg w-full max-w-md p-6 relative'>
+      <ModalRouter>
+        <div className='inset-0 bg-black bg-opacity-50 flex items-center justify-center'>
+          <div className='bg-white w-full max-w-md p-6 relative'>
             {/* Logo */}
             <h1 className='text-aniviolet3 text-2xl font-bold text-center mb-8'>
               ANIWHERE
@@ -130,7 +127,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </ModalDialog>
+      </ModalRouter>
     </>
   );
 };
