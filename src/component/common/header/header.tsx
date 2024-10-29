@@ -12,12 +12,7 @@ import LoginContainer from '@/component/login/login-container';
 
 const Header = () => {
   const [isAtTop, setIsAtTop] = useState(true);
-  const [mounted, setMounted] = useState(false);
   const modalRef = useRef<ModalRef>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
