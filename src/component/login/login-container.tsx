@@ -75,3 +75,4 @@ const LoginContainer = () => {
     </div>
   );
 };
+export default LoginContainer;
