@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { createPortal } from 'react-dom';
 import ModalContainer from './modal-container';
 
 const ModalRouter = ({ children }: { children: React.ReactNode }) => {

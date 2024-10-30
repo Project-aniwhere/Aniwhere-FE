@@ -1,3 +1,4 @@
+import CrossSvg from '@/asset/svg/cross/cross-svg';
 import { forwardRef, Ref } from 'react';
 
 interface ModalContainerProps {
@@ -14,10 +15,18 @@ const ModalContainer: React.ForwardRefRenderFunction<
   ref: Ref<HTMLDialogElement>
 ) => {
   return (
-    <dialog ref={ref} className={'bg-white ' + className} onClose={onClose}>
+    <dialog
+      ref={ref}
+      className={'relative bg-transparent ' + className}
+      onClose={onClose}
+    >
       {children}
-      <button onClick={onClose} className='close-button'>
-        X
+
+      <button
+        onClick={onClose}
+        className='absolute right-2 top-2 rounded-full bg-aniviolet4 bg-opacity-60 p-0.5'
+      >
+        <CrossSvg fill='white' />
       </button>
     </dialog>
   );
