@@ -48,9 +48,6 @@ const Header = () => {
           <Link href='/login'>로그인/회원가입</Link>
         </div>
       </header>
-      <ModalRouter>
-        <LoginContainer />
-      </ModalRouter>
     </>
   );
 };
