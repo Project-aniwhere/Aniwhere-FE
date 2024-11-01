@@ -1,8 +1,8 @@
 import { SvgProps } from '@/type/svgprops';
 
 const HeartSvg = ({
-  width = '21',
-  height = '19',
+  width = '1.25rem',
+  height = '1.25rem',
   fill = '#FB3D3D',
 }: SvgProps) => {
   return (

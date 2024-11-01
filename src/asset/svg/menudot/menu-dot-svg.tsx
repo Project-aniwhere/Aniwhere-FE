@@ -1,8 +1,8 @@
 import { SvgProps } from '@/type/svgprops';
 
 const MenuDotSvg = ({
-  width = '4',
-  height = '16',
+  width = '0.25rem',
+  height = '1rem',
   fill = '#121212',
 }: SvgProps) => {
   return (

@@ -1,8 +1,8 @@
 import { SvgProps } from '@/type/svgprops';
 
 const HalfStarSvg = ({
-  width = '16',
-  height = '16',
+  width = '1rem',
+  height = '1rem',
   fill = 'white',
 }: SvgProps) => {
   return (
