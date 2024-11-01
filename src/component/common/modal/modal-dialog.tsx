@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import ModalContainer from './modal-container';
-import { ModalRef } from '@/type/modal/modal';
+import { ModalRef } from '@/type/modal';
 
 interface ModalProps {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-import { SvgProps } from '@/type/svg/svgprops';
+import { SvgProps } from '@/type/svgprops';
 
 interface ArrowSvgProps extends SvgProps {
   direction?: 'left' | 'right' | 'up' | 'down';
@@ -12,8 +12,8 @@ const directionMap = {
 };
 
 const ArrowSvg = ({
-  width = '16',
-  height = '28',
+  width = '1rem',
+  height = '1.75rem',
   fill = 'black',
   direction = 'left',
   className,

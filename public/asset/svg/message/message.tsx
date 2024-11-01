@@ -1,4 +1,4 @@
-import { SvgProps } from '@/type/svg/svgprops';
+import { SvgProps } from '@/type/svgprops';
 
 const MessageSvg = ({}: SvgProps) => {
   return (

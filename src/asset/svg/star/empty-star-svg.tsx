@@ -1,8 +1,8 @@
-import { SvgProps } from '@/type/svg/svgprops';
+import { SvgProps } from '@/type/svgprops';
 
-const FullStarSvg = ({
-  width = '16',
-  height = '16',
+const EmptyStar = ({
+  width = '1rem',
+  height = '1rem',
   fill = 'white',
 }: SvgProps) => {
   return (
@@ -32,4 +32,4 @@ const FullStarSvg = ({
   );
 };
 
-export default FullStarSvg;
+export default EmptyStar;

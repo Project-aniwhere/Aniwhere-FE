@@ -20,11 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={`${pretendard.className} scrollbar`}>
+    <html
+      lang='en'
+      className='text-[12px] sm:text-[14px] lg:text-[16px] qhd:text-[24px] 4k:text-[32px]'
+    >
+      <body
+        className={`${pretendard.className} scrollbar flex flex-col items-center `}
+      >
+        <Header />
         <div id='modal-root' />
         <ReactQueryProvider>{children}</ReactQueryProvider>
-        <Footer />
       </body>
     </html>
   );
