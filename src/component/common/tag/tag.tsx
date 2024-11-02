@@ -21,7 +21,7 @@ const Tag = ({ text, size = 'medium', state = 'default' }: TagProps) => {
     } else if (state === 'active') {
       return 'bg-aniviolet2 text-white border border-aniviolet2 ';
     } else if (state === 'disabled') {
-      return 'bg-gray-400 text-white border border-gray-400 ';
+      return 'bg-gray-300 text-white border border-gray-300 ';
     }
     return '';
   };
