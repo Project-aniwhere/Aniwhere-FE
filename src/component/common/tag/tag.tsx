@@ -5,7 +5,7 @@ interface TagProps {
 }
 
 const Tag = ({ text, size = 'medium', state = 'default' }: TagProps) => {
-  const defaultStyle = 'px-1.5 py-0.5 rounded-lg ';
+  const defaultStyle = 'px-2 py-1 rounded-lg ';
 
   const sizeStyle = () => {
     if (size === 'small') {
