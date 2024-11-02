@@ -9,11 +9,11 @@ const DailyItem = ({ data }: DailyItemProps) => {
       <img
         src={data.thumbnailUrl}
         alt={`${data.titleName} 섬네일`}
-        className='rounded-md'
+        className='rounded'
       />
       <div>
         <p className='font-medium'>{data.titleName}</p>
-        <p className='text-sm text-slate-500'>{data.author}</p>
+        <p className='text-sm text-gray-500'>{data.author}</p>
       </div>
     </li>
   );
