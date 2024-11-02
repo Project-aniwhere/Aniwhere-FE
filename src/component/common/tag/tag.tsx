@@ -5,37 +5,23 @@ interface TagProps {
 }
 
 const Tag = ({ text, size = 'medium', state = 'default' }: TagProps) => {
-  const defaultStyle = 'px-2 py-1 rounded-lg ';
+  const baseStyles = 'px-2 py-1 rounded-lg border';
 
-  const sizeStyle = () => {
-    if (size === 'small') {
-      return 'text-sm ';
-    } else if (size === 'medium') {
-    }
-    return '';
+  const sizeStyles = {
+    small: 'text-sm',
+    medium: '',
   };
 
-  const colorStyle = () => {
-    if (state === 'default') {
-      return 'text-aniviolet2 border border-aniviolet2 ';
-    } else if (state === 'active') {
-      return 'bg-aniviolet2 text-white border border-aniviolet2 ';
-    } else if (state === 'disabled') {
-      return 'bg-gray-300 text-white border border-gray-300 ';
-    }
-    return '';
-  };
-
-  const cursorStyle = () => {
-    if (state === 'disabled') {
-      return 'cursor-auto ';
-    }
-    return '';
+  const colorStyles = {
+    default: 'text-aniviolet2 border-aniviolet2',
+    active: 'bg-aniviolet2 text-white border-aniviolet2',
+    disabled: 'bg-gray-300 text-white border-gray-300',
   };
 
   return (
     <button
-      className={defaultStyle + sizeStyle() + colorStyle() + cursorStyle()}
+      className={`${baseStyles} ${sizeStyles[size]} ${colorStyles[state]}`}
+      disabled={state === 'disabled'}
     >
       {text}
     </button>
