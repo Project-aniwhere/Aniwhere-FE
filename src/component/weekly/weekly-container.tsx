@@ -10,7 +10,7 @@ const WeeklyContainer = ({
   currentDayOfWeek,
 }: WeeklyContainerProps) => {
   return (
-    <ul className='flex'>
+    <ul className='grid grid-cols-7'>
       {Object.entries(weeklyList).map(([key, value]) => (
         <li key={key}>
           <DailyConatiner
