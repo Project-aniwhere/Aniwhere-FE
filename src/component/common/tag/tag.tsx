@@ -26,8 +26,19 @@ const Tag = ({ text, size = 'medium', state = 'default' }: TagProps) => {
     return '';
   };
 
+  const cursorStyle = () => {
+    if (state === 'disabled') {
+      return 'cursor-auto ';
+    }
+    return '';
+  };
+
   return (
-    <div className={defaultStyle + sizeStyle() + colorStyle()}>{text}</div>
+    <button
+      className={defaultStyle + sizeStyle() + colorStyle() + cursorStyle()}
+    >
+      {text}
+    </button>
   );
 };
 

@@ -8,19 +8,13 @@ const WeeklyTitle = () => {
       <ul className='flex gap-2.5'>
         {WEEKLY_TAGS.map((v) => (
           <li key={v.id}>
-            <button>
-              <Tag
-                text={v.value}
-                size='small'
-                state={
-                  v.id === '1'
-                    ? 'active'
-                    : v.id === '4'
-                      ? 'disabled'
-                      : 'default'
-                }
-              />
-            </button>
+            <Tag
+              text={v.value}
+              size='small'
+              state={
+                v.id === '1' ? 'active' : v.id === '4' ? 'disabled' : 'default'
+              }
+            />
           </li>
         ))}
       </ul>
