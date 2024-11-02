@@ -8,7 +8,7 @@ interface DailyConatinerProps {
 
 const DailyConatiner = ({ title, dailyList, active }: DailyConatinerProps) => {
   return (
-    <li
+    <div
       className={`px-2.5 py-3 flex flex-col gap-3 rounded-md ${active ? 'bg-aniviolet0' : ''}`}
     >
       <p
@@ -18,10 +18,12 @@ const DailyConatiner = ({ title, dailyList, active }: DailyConatinerProps) => {
       </p>
       <ul className={'flex flex-col gap-3'}>
         {dailyList.map((item) => (
-          <DailyItem key={item.titleId} data={item} />
+          <li key={item.titleId} className='cursor-pointer'>
+            <DailyItem data={item} />
+          </li>
         ))}
       </ul>
-    </li>
+    </div>
   );
 };
 

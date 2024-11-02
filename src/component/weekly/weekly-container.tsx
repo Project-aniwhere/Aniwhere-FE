@@ -12,12 +12,13 @@ const WeeklyContainer = ({
   return (
     <ul className='flex'>
       {Object.entries(weeklyList).map(([key, value]) => (
-        <DailyConatiner
-          key={key}
-          title={key}
-          dailyList={value}
-          active={key === currentDayOfWeek}
-        />
+        <li key={key}>
+          <DailyConatiner
+            title={key}
+            dailyList={value}
+            active={key === currentDayOfWeek}
+          />
+        </li>
       ))}
     </ul>
   );
