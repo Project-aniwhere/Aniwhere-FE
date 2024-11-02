@@ -10,13 +10,13 @@ const WeeklyContainer = ({
   currentDayOfWeek,
 }: WeeklyContainerProps) => {
   return (
-    <ul className='px-6 py-4 flex'>
+    <ul className='flex'>
       {Object.entries(weeklyList).map(([key, value]) => (
         <DailyConatiner
           key={key}
-          dayOfWeek={key}
+          title={key}
           dailyList={value}
-          currentDayOfWeek={currentDayOfWeek}
+          active={key === currentDayOfWeek}
         />
       ))}
     </ul>

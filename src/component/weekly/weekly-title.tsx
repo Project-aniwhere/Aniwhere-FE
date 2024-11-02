@@ -3,9 +3,9 @@ import Tag from '../common/tag/tag';
 
 const WeeklyTitle = () => {
   return (
-    <div className='px-6 py-4 flex flex-col gap-4 text-s'>
+    <div className='flex flex-col gap-4 text-s'>
       <h2 className='font-bold text-2xl'>2024년 요일별 신작</h2>
-      <ul className='flex gap-2'>
+      <ul className='flex gap-2.5'>
         {WEEKLY_TAGS.map((v) => (
           <li key={v.id}>
             <button>

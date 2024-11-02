@@ -4,7 +4,7 @@ interface DailyItemProps {
 
 const DailyItem = ({ data }: DailyItemProps) => {
   return (
-    <li className='flex flex-col gap-1'>
+    <li className='flex flex-col gap-2'>
       {/* todo. Image 전환 */}
       <img
         src={data.thumbnailUrl}
