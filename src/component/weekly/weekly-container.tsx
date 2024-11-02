@@ -2,16 +2,22 @@ import DailyConatiner from './daily-container';
 
 interface WeeklyContainerProps {
   weeklyList: { [key: string]: DailyAniProps[] };
+  currentDayOfWeek: string;
 }
 
-const WeeklyContainer = ({ weeklyList }: WeeklyContainerProps) => {
+const WeeklyContainer = ({
+  weeklyList,
+  currentDayOfWeek,
+}: WeeklyContainerProps) => {
   return (
-    <ul className='px-6 py-4 flex gap-4'>
+    <ul className='px-6 py-4 flex'>
       {Object.entries(weeklyList).map(([key, value]) => (
-        <li key={key} className='flex flex-col gap-5'>
-          <p className='text-center font-semibold'>{key}</p>
-          <DailyConatiner dailyList={value} />
-        </li>
+        <DailyConatiner
+          key={key}
+          dayOfWeek={key}
+          dailyList={value}
+          currentDayOfWeek={currentDayOfWeek}
+        />
       ))}
     </ul>
   );

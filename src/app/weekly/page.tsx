@@ -7,7 +7,10 @@ const WeeklyPage = () => {
   return (
     <div className='w-full pt-[96px] px-8 flex flex-col gap-4'>
       <WeeklyTitle />
-      <WeeklyContainer weeklyList={WEEKLY_DUMMY.titleListMap} />
+      <WeeklyContainer
+        weeklyList={WEEKLY_DUMMY.titleListMap}
+        currentDayOfWeek={WEEKLY_DUMMY.dayOfWeek}
+      />
     </div>
   );
 };
