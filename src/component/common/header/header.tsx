@@ -33,7 +33,7 @@ const Header = () => {
         <div className='flex flex-row gap-6'>
           <Link href='/tag'>태그 검색</Link>
           <Link href='/popular'>인기 작품</Link>
-          <Link href='/weekly'>요일별 신작</Link>
+          <Link href='/weekly'>요일별 작품</Link>
         </div>
       </div>
       <div className='flex flex-row items-center gap-8'>
