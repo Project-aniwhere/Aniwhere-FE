@@ -1,5 +1,5 @@
 import CalendarSvg from '@/asset/svg/calendar/calendar-svg';
-import { useState } from 'react';
+import useToggle from '@/hook/useToggle';
 
 interface Props extends YearPickerProps {
   startYear?: number;
@@ -12,13 +12,9 @@ const YearPicker = ({
   startYear = new Date().getFullYear(),
   length = 10,
 }: Props) => {
-  const [isOpenYearMenu, setIsOpenYearMenu] = useState(false);
+  const [isOpenYearMenu, handleToggleYearMenu] = useToggle(false);
 
   const years = Array.from({ length }, (_, i) => startYear - i);
-
-  const handleToggleYearMenu = () => {
-    setIsOpenYearMenu(!isOpenYearMenu);
-  };
 
   const handleChangeYear = (year: number) => {
     setSelectedYear(year);
