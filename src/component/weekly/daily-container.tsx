@@ -1,12 +1,12 @@
 import DailyItem from './daily-item';
 
 interface DailyConatinerProps {
-  title: string;
+  day: string;
   dailyList: DailyAniProps[];
   active: boolean;
 }
 
-const DailyConatiner = ({ title, dailyList, active }: DailyConatinerProps) => {
+const DailyConatiner = ({ day, dailyList, active }: DailyConatinerProps) => {
   return (
     <div
       className={`px-2.5 py-3 flex flex-col gap-3 rounded-md ${active ? 'bg-aniviolet0' : ''}`}
@@ -14,7 +14,7 @@ const DailyConatiner = ({ title, dailyList, active }: DailyConatinerProps) => {
       <p
         className={`text-center font-semibold ${active ? 'text-aniviolet2' : ''}`}
       >
-        {title}
+        {day}
       </p>
       <ul className={'flex flex-col gap-3'}>
         {dailyList.map((item) => (

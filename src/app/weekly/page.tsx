@@ -18,7 +18,7 @@ const WeeklyPage = () => {
       />
       <WeeklyContainer
         weeklyList={WEEKLY_DUMMY.titleListMap}
-        currentDayOfWeek={WEEKLY_DUMMY.dayOfWeek}
+        currentDay={WEEKLY_DUMMY.dayOfWeek}
       />
     </div>
   );

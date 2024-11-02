@@ -2,21 +2,18 @@ import DailyConatiner from './daily-container';
 
 interface WeeklyContainerProps {
   weeklyList: { [key: string]: DailyAniProps[] };
-  currentDayOfWeek: string;
+  currentDay: string;
 }
 
-const WeeklyContainer = ({
-  weeklyList,
-  currentDayOfWeek,
-}: WeeklyContainerProps) => {
+const WeeklyContainer = ({ weeklyList, currentDay }: WeeklyContainerProps) => {
   return (
     <ul className='grid grid-cols-7'>
-      {Object.entries(weeklyList).map(([key, value]) => (
-        <li key={key}>
+      {Object.entries(weeklyList).map(([day, dailyList]) => (
+        <li key={day}>
           <DailyConatiner
-            title={key}
-            dailyList={value}
-            active={key === currentDayOfWeek}
+            day={day}
+            dailyList={dailyList}
+            active={day === currentDay}
           />
         </li>
       ))}
