@@ -27,11 +27,13 @@ const Header = () => {
       }
     >
       <div className='flex flex-row items-center gap-8'>
-        <p className='text-lg font-black'>ANIWHERE</p>
-        <div className='flex flex-row gap-2'>
-          <Link href='/tag'>태그검색</Link>
-          <Link href='/popular'>인기작품</Link>
-          <Link href='/new'>신작</Link>
+        <Link href='/'>
+          <p className='text-lg font-black'>ANIWHERE</p>
+        </Link>
+        <div className='flex flex-row gap-6'>
+          <Link href='/tag'>태그 검색</Link>
+          <Link href='/popular'>인기 작품</Link>
+          <Link href='/weekly'>요일별 신작</Link>
         </div>
       </div>
       <div className='flex flex-row items-center gap-8'>
