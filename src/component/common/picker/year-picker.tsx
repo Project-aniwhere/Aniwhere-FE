@@ -1,5 +1,6 @@
 import CalendarSvg from '@/asset/svg/calendar/calendar-svg';
 import useToggle from '@/hook/useToggle';
+import YearList from './year-list';
 
 interface Props extends YearPickerProps {
   startYear?: number;
@@ -27,18 +28,11 @@ const YearPicker = ({
         <CalendarSvg fill='#9CA3AF' />
       </button>
       {isOpenYearMenu && (
-        <ul className='absolute bg-white py-2 mt-1 w-20 border border-gray-100 rounded z-10'>
-          {years.map((year) => (
-            <li key={year}>
-              <button
-                onClick={() => handleChangeYear(year)}
-                className={`w-full px-2 py-1.5 text-start hover:text-aniviolet2 hover:font-medium hover:bg-aniviolet0 ${year === selectedYear ? 'text-aniviolet2 font-medium' : ''}`}
-              >
-                {year}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <YearList
+          selectedYear={selectedYear}
+          years={years}
+          handleChangeYear={handleChangeYear}
+        />
       )}
     </div>
   );

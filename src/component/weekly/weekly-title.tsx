@@ -18,6 +18,7 @@ const WeeklyTitle = ({ selectedYear, setSelectedYear }: YearPickerProps) => {
             <Tag
               text={v.value}
               size='small'
+              // 확인용
               state={
                 v.id === '1' ? 'active' : v.id === '4' ? 'disabled' : 'default'
               }
