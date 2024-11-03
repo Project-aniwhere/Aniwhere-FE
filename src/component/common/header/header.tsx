@@ -3,12 +3,6 @@
 import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
 import { ModalRef } from '@/type/modal';
-import ModalDialog from '../modal/modal-dialog';
-import { createPortal } from 'react-dom';
-import GoogleSvg from '@/asset/svg/google/google-svg';
-import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
-import ModalRouter from '../modal/modal-router';
-import LoginContainer from '@/component/login/login-container';
 
 const Header = () => {
   const [isAtTop, setIsAtTop] = useState(true);
