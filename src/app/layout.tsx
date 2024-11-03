@@ -29,6 +29,7 @@ export default function RootLayout({
         <ReactQueryProvider>{children}</ReactQueryProvider>
         <Footer />
         {modal}
+
       </body>
     </html>
   );
