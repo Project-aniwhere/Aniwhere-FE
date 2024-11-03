@@ -1,5 +1,11 @@
+'use client';
+
 import GoogleSvg from '@/asset/svg/google/google-svg';
 import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
+import HoverColorButton from '../common/button/hover-color-button';
+import UnderlineButton from '../common/button/hover-underline-button';
+import IconButton from '../common/button/icon-button';
+import DefaultInput from '../common/input/default-input';
 
 const LoginContainer = () => {
   return (
@@ -14,35 +20,28 @@ const LoginContainer = () => {
 
       {/* Form */}
       <form className='space-y-4'>
-        <input
+        <DefaultInput
           type='email'
           placeholder='이메일'
-          className='w-full p-3 border border-gray-300 rounded-lg bg-gray-50'
+          className='w-full p-3'
         />
-        <input
+        <DefaultInput
           type='password'
           placeholder='비밀번호'
-          className='w-full p-3 border border-gray-300 rounded-lg bg-gray-50'
+          className='w-full p-3'
         />
-        <button
-          type='submit'
-          className='w-full py-3 bg-aniviolet3 text-white rounded-lg hover:bg-purple-700 transition-colors'
-        >
-          로그인
-        </button>
+        <HoverColorButton className='w-full py-3' text='로그인' />
       </form>
 
       {/* Links */}
       <div className='mt-4 text-center text-sm flex flex-col items-center'>
         <span className='text-gray-600 inline-flex'>
           <p className='whitespace-nowrap'>비밀번호를 잊어버리셨나요?</p>
-          <button className='text-aniviolet3 hover:underline ml-1'>찾기</button>
+          <UnderlineButton className='ml-1' text='찾기' />
         </span>
         <span className='mt-2 text-gray-600 inline-flex'>
           <p>계정이 없으신가요?</p>
-          <button className='text-aniviolet3 hover:underline ml-1'>
-            회원가입
-          </button>
+          <UnderlineButton className='ml-1' text='회원가입' />
         </span>
       </div>
 
@@ -55,12 +54,8 @@ const LoginContainer = () => {
         </div>
 
         <div className='flex justify-center gap-4'>
-          <button className='flex items-center justify-center rounded-full hover:opacity-80 transition-opacity'>
-            <KakaotalkSvg height='3rem' width='3rem'></KakaotalkSvg>
-          </button>
-          <button className='flex items-center justify-center rounded-full hover:opacity-80 transition-opacity'>
-            <GoogleSvg height='3rem' width='3rem'></GoogleSvg>
-          </button>
+          <IconButton Icon={KakaotalkSvg} height='3rem' width='3rem' />
+          <IconButton Icon={GoogleSvg} height='3rem' width='3rem' />
         </div>
       </div>
     </div>
