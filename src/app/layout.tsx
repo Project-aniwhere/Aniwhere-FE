@@ -16,20 +16,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal?: React.ReactNode;
 }>) {
   return (
-    <html
-      lang='en'
-      className='text-[12px] sm:text-[14px] lg:text-[16px] qhd:text-[24px] 4k:text-[32px]'
-    >
-      <body
-        className={`${pretendard.className} scrollbar flex flex-col items-center `}
-      >
+    <html lang='en'>
+      <body className={`${pretendard.className} scrollbar`}>
         <Header />
         <div id='modal-root' />
         <ReactQueryProvider>{children}</ReactQueryProvider>
+        <Footer />
+        {modal}
+
       </body>
     </html>
   );
