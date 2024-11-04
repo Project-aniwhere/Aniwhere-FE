@@ -1,3 +1,4 @@
+import { DailyAniProps } from '@/type/weekly';
 import DailyItem from './daily-item';
 
 interface DailyConatinerProps {

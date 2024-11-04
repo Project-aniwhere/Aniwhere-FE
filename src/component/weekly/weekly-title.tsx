@@ -1,6 +1,7 @@
 import { WEEKLY_TAGS } from '@/constant/common';
 import Tag from '../common/tag/tag';
 import YearPicker from '../common/picker/year-picker';
+import { YearPickerProps } from '@/type/year-picker';
 
 const WeeklyTitle = ({ selectedYear, setSelectedYear }: YearPickerProps) => {
   return (

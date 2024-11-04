@@ -1,6 +1,7 @@
 import CalendarSvg from '@/asset/svg/calendar/calendar-svg';
 import useToggle from '@/hook/useToggle';
 import YearList from './year-list';
+import { YearPickerProps } from '@/type/year-picker';
 
 interface Props extends YearPickerProps {
   startYear?: number;

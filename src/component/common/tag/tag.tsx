@@ -1,3 +1,5 @@
+import { SizeProps, StateProps } from '@/type/common';
+
 interface TagProps {
   text: string;
   size?: SizeProps;

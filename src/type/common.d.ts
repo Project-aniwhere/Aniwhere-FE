@@ -1,5 +1,5 @@
-type SizeProps = 'small' | 'medium';
-type StateProps = 'default' | 'active' | 'disabled';
+export type SizeProps = 'small' | 'medium';
+export type StateProps = 'default' | 'active' | 'disabled';
 
 export interface CommonButtonProps {
   text?: string;
