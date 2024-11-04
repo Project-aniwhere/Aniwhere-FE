@@ -11,7 +11,7 @@ const WeeklyPage = () => {
   // todo. GET 요일별 애니 목록
 
   return (
-    <div className='w-full max-w-[1200px] pt-[96px] pb-7 flex flex-col gap-10'>
+    <div className='w-full max-w-[1200px] mx-auto pt-[96px] pb-7 flex flex-col gap-10'>
       <WeeklyTitle
         selectedYear={selectedYear}
         setSelectedYear={setSelectedYear}
