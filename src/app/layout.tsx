@@ -3,6 +3,8 @@ import localFont from 'next/font/local';
 import './globals.css';
 import ReactQueryProvider from '@/hook/provider/usereactquery';
 import Header from '@/component/common/header/header';
+import JotaiProvider from '@/hook/provider/jotai-provider';
+import InitJotai from '@/store/init-jotai';
 import Footer from '@/component/common/footer/footer';
 
 const pretendard = localFont({
@@ -26,10 +28,11 @@ export default function RootLayout({
       <body className={`${pretendard.className} scrollbar`}>
         <Header />
         <div id='modal-root' />
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <JotaiProvider initialState={InitJotai}>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </JotaiProvider>
         <Footer />
         {modal}
-
       </body>
     </html>
   );
