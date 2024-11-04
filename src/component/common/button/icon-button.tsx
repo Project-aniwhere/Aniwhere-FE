@@ -1,12 +1,6 @@
 'use client';
 
-import { CommonButtonProps } from '@/type/common';
-
-interface IconButtonProps extends CommonButtonProps {
-  Icon: React.ComponentType<{ height?: string; width?: string }>;
-  height?: string;
-  width?: string;
-}
+import { IconButtonProps } from '@/type/common';
 
 const IconButton = ({
   type = 'submit',
