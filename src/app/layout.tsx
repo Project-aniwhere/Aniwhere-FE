@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={`${pretendard.className} scrollbar`}>
         <Header />
         <div id='modal-root' />
-        <JotaiProvider initialState={InitJotai}>
+        <JotaiProvider initialState={InitJotai()}>
           <ReactQueryProvider>{children}</ReactQueryProvider>
         </JotaiProvider>
         <Footer />
