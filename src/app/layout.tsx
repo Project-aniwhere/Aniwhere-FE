@@ -1,15 +1,10 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
 import ReactQueryProvider from '@/hook/provider/usereactquery';
 import Header from '@/component/common/header/header';
 import JotaiProvider from '@/hook/provider/jotai-provider';
 import InitJotai from '@/store/init-jotai';
 import Footer from '@/component/common/footer/footer';
-
-const pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
-});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${pretendard.className} scrollbar`}>
+      <body className='font-pretendard scrollbar'>
         <Header />
         <div id='modal-root' />
         <JotaiProvider initialState={InitJotai()}>
