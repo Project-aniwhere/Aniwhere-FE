@@ -12,7 +12,7 @@ const DefaultInput = ({
     <input
       type={type}
       placeholder={placeholder}
-      className={`${className} w-full p-3 border border-gray-300 rounded-lg bg-gray-50`}
+      className={`w-full p-3 border border-gray-300 rounded-lg bg-gray-50 ${className}`}
       onClick={onClick}
     />
   );

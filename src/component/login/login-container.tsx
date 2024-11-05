@@ -53,7 +53,7 @@ const LoginContainer = () => {
           <div className='flex-grow border-t border-gray-300' />
         </div>
 
-        <div className='flex justify-center gap-4'>
+        <div className='flex justify-center gap-4 mt-6'>
           <IconButton Icon={KakaotalkSvg} height='3rem' width='3rem' />
           <IconButton Icon={GoogleSvg} height='3rem' width='3rem' />
         </div>

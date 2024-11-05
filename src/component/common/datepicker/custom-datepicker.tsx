@@ -37,14 +37,16 @@ const DefaultDatepicker = ({
       <button
         type='button'
         onClick={handleToggleCalendar}
-        className={`${className} ${placeholderColor} text-left w-72 p-3 border border-gray-300 rounded-lg bg-gray-50`}
+        className={`text-left w-72 p-3 border border-gray-300 rounded-lg bg-gray-50 ${className} ${placeholderColor}`}
       >
         {nowDate}
       </button>
 
-      <div className={`absolute left-0 ${isOpen ? 'block' : 'hidden'}`}>
-        <Calendar onChange={handleDateChange} value={value} locale='ko-KR' />
-      </div>
+      {isOpen && (
+        <div className='absolute left-0'>
+          <Calendar onChange={handleDateChange} value={value} locale='ko-KR' />
+        </div>
+      )}
     </div>
   );
 };

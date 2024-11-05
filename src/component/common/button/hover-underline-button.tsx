@@ -11,7 +11,7 @@ const UnderlineButton = ({
   return (
     <button
       type={type}
-      className={`${className} text-aniviolet3 hover:underline`}
+      className={`text-aniviolet3 hover:underline ${className}`}
       onClick={onClick}
     >
       {text}

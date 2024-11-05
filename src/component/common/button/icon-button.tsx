@@ -13,7 +13,7 @@ const IconButton = ({
   return (
     <button
       type={type}
-      className={`${className} flex items-center justify-center rounded-full hover:opacity-80 transition-opacity`}
+      className={`flex items-center justify-center rounded-full hover:opacity-80 transition-opacity ${className}`}
       onClick={onClick}
     >
       <Icon height={height} width={width} />

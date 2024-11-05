@@ -11,7 +11,7 @@ const HoverColorButton = ({
   return (
     <button
       type={type}
-      className={`${className} bg-aniviolet3 text-white rounded-lg hover:bg-purple-700 transition-color`}
+      className={`bg-aniviolet3 text-white rounded-lg hover:bg-purple-700 transition-color ${className}`}
       onClick={onClick}
     >
       {text}

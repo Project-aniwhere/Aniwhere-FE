@@ -14,7 +14,7 @@ const RadioInput = ({
       type={type}
       name={name}
       placeholder={placeholder}
-      className={`${className} w-full p-3 border border-gray-300 rounded-lg bg-gray-50`}
+      className={`w-full p-3 border border-gray-300 rounded-lg bg-gray-50 ${className}`}
       onClick={onClick}
     />
   );
