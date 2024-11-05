@@ -9,7 +9,7 @@ import DefaultInput from '../common/input/default-input';
 
 const LoginContainer = () => {
   return (
-    <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2'>
+    <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2 rounded-lg'>
       {/* Logo */}
       <h1 className='text-aniviolet3 text-2xl font-bold text-center'>
         ANIWHERE

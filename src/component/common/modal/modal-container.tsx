@@ -17,7 +17,7 @@ const ModalContainer: React.ForwardRefRenderFunction<
   return (
     <dialog
       ref={ref}
-      className={'relative bg-transparent ' + className}
+      className={'bg-transparent ' + className}
       onClose={onClose}
     >
       {children}
