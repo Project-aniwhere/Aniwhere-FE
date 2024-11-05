@@ -20,7 +20,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className='font-pretendard scrollbar'>
+      <head>
+        <link
+          rel='preload'
+          as='style'
+          href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css'
+          crossOrigin='anonymous'
+        />
+        <link
+          rel='stylesheet'
+          href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css'
+        />
+      </head>
+      <body className={`font-pretendard scrollbar`}>
         <Header />
         <div id='modal-root' />
         <JotaiProvider initialState={InitJotai()}>
