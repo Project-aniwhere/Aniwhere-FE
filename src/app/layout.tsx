@@ -5,6 +5,7 @@ import Header from '@/component/common/header/header';
 import JotaiProvider from '@/hook/provider/jotai-provider';
 import InitJotai from '@/store/init-jotai';
 import Footer from '@/component/common/footer/footer';
+import { Provider } from 'jotai';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -35,9 +36,9 @@ export default function RootLayout({
       <body className={`font-pretendard scrollbar`}>
         <Header />
         <div id='modal-root' />
-        <JotaiProvider initialState={InitJotai()}>
+        <Provider>
           <ReactQueryProvider>{children}</ReactQueryProvider>
-        </JotaiProvider>
+        </Provider>
         <Footer />
         {modal}
       </body>
