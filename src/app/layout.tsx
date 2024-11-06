@@ -32,7 +32,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={`font-pretendard scrollbar`}>
+      <body className='font-pretendard scrollbar'>
         <Header />
         <div id='modal-root' />
         <Provider>
