@@ -15,7 +15,12 @@ const ArrowButton = ({
 }: ArrorButtonProps) => {
   return (
     <button className={className} onClick={onClick}>
-      <ArrowSvg fill={fill} direction={direction} />
+      <ArrowSvg
+        fill={fill}
+        direction={direction}
+        width='0.5rem'
+        height='0.875rem'
+      />
     </button>
   );
 };

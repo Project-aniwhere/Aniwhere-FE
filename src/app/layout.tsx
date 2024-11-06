@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import ReactQueryProvider from '@/hook/provider/usereactquery';
 import Header from '@/component/common/header/header';
-import JotaiProvider from '@/hook/provider/jotai-provider';
-import InitJotai from '@/store/init-jotai';
 import Footer from '@/component/common/footer/footer';
 import { Provider } from 'jotai';
 
@@ -33,6 +31,7 @@ export default function RootLayout({
           href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css'
         />
       </head>
+
       <body className={`font-pretendard scrollbar`}>
         <Header />
         <div id='modal-root' />

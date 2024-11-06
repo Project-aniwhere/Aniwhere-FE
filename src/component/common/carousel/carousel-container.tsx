@@ -1,5 +1,12 @@
-import { Children, ForwardedRef, forwardRef } from 'react';
-import { motion } from 'framer-motion';
+import {
+  Children,
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import CarouselItem from './carousel-item';
 import ArrowButton from './arrow-button';
 
@@ -27,34 +34,56 @@ const CarouselContainer = (
 ) => {
   const carouselLength = Children.count(children);
   const childrenList = Children.toArray(children);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMouseHover, setIsMouseHover] = useState(false);
+  useEffect(() => {
+    if (/android.+mobile|ip(hone|[oa]d)/i.test(navigator.userAgent))
+      setIsMobile(true);
+  }, []);
+
+  const handleMouseEnter = useCallback(() => setIsMouseHover(true), []);
+  const handleMouseLeave = useCallback(() => setIsMouseHover(false), []);
+
+  const isRenderArrow = useMemo(() => {
+    if (animation === 'fade') return true;
+    if (!isMobile && isMouseHover) return true;
+    return false;
+  }, [animation, isMobile, isMouseHover]);
+
   if (!carouselLength) return <div>다음 기회에...</div>;
 
   return (
-    <div className='relative flex items-center justify-between gap-2 w-full h-full overflow-x-hidden overflow-y-hidden'>
-      <ArrowButton
-        direction='left'
-        onClick={handlePrev}
-        className={
-          animation === 'fade'
-            ? 'absolute z-40 h-full w-10 flex items-center justify-center hover:scale-110 duration-200'
-            : 'hover:scale-110 duration-200'
-        }
-        fill={animation === 'fade' ? 'white' : 'black'}
-      />
+    <div
+      className='relative flex items-center justify-between gap-2 w-full h-full '
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {isRenderArrow && (
+        <ArrowButton
+          direction='left'
+          onClick={handlePrev}
+          className={
+            animation === 'fade'
+              ? 'absolute z-40 h-full w-10 flex items-center justify-center hover:scale-150 scale-125 hover:opacity-100 duration-200 origin-left '
+              : 'absolute -left-2 z-40 p-2 rounded-lg bg-aniviolet3 hover:scale-110 duration-200'
+          }
+          fill='white'
+        />
+      )}
       <div className='w-full h-full overflow-x-scroll scrollbar-none xl:overflow-x-hidden xl:scrollbar'>
-        <motion.ol
+        <ol
           ref={ref}
-          transition={{
-            ease: 'easeInOut',
-            duration: 0.3,
-            x: { duration: animation === 'slide' ? 0.3 : 0 },
-          }}
-          className={'relative flex items-center ' + className}
-          animate={{
-            x:
+          className={
+            'relative flex items-center transition-transform ease-in-out duration-300 ' +
+            className
+          }
+          style={{
+            transform: `translateX(${
               animation === 'slide'
                 ? `-${(carouselIndex * 100) / countPerCarousel}%`
-                : '',
+                : ''
+            })`,
           }}
         >
           {childrenList.map((child, idx) => (
@@ -72,18 +101,20 @@ const CarouselContainer = (
               {child}
             </CarouselItem>
           ))}
-        </motion.ol>
+        </ol>
       </div>
-      <ArrowButton
-        direction='right'
-        onClick={handleNext}
-        className={
-          animation === 'fade'
-            ? 'absolute z-40 right-0 h-full w-10 flex items-center justify-center hover:scale-110 duration-200'
-            : 'hover:scale-110 duration-200'
-        }
-        fill={animation === 'fade' ? 'white' : 'black'}
-      />
+      {isRenderArrow && (
+        <ArrowButton
+          direction='right'
+          onClick={handleNext}
+          className={
+            animation === 'fade'
+              ? 'absolute right-0 z-40 h-full w-10 flex items-center justify-center hover:scale-150 scale-125 hover:opacity-100 origin-right opacity-75 duration-200 '
+              : 'absolute -right-2 z-40 p-2 rounded-lg bg-aniviolet3 hover:scale-110 duration-200'
+          }
+          fill='white'
+        />
+      )}
     </div>
   );
 };
