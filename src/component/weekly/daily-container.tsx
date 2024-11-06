@@ -17,7 +17,7 @@ const DailyConatiner = ({ day, dailyList, active }: DailyConatinerProps) => {
       >
         {day}
       </p>
-      <ul className={'flex flex-col gap-3'}>
+      <ul className='flex flex-col gap-3'>
         {dailyList.map((item) => (
           <li key={item.titleId} className='cursor-pointer'>
             <DailyItem data={item} />
