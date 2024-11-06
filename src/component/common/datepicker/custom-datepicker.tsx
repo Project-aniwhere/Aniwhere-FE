@@ -15,7 +15,7 @@ const DefaultDatepicker = ({
   placeholder = '',
   className = '',
 }: CommonDatepickerProps) => {
-  const [nowDate, setNowDate] = useState<string>(`${placeholder}`); // 초기값 설정
+  const [nowDate, setNowDate] = useState<string>(placeholder); // 초기값 설정
   const [isOpen, setIsOpen] = useState(false);
   const [placeholderColor, setPlaceholderColor] = useState('text-gray-400');
 
