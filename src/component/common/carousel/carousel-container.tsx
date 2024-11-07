@@ -9,6 +9,7 @@ import {
 } from 'react';
 import CarouselItem from './carousel-item';
 import ArrowButton from './arrow-button';
+import useIsMobile from '@/hook/device-detect/use-is-mobile';
 
 interface CarouselContainerProps {
   children: React.ReactNode;
@@ -32,15 +33,11 @@ const CarouselContainer = (
   }: CarouselContainerProps,
   ref?: ForwardedRef<HTMLOListElement>
 ) => {
-  const carouselLength = Children.count(children);
-  const childrenList = Children.toArray(children);
+  const carouselLength = useMemo(() => Children.count(children), [children]);
+  const childrenList = useMemo(() => Children.toArray(children), [children]);
 
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [isMouseHover, setIsMouseHover] = useState(false);
-  useEffect(() => {
-    if (/android.+mobile|ip(hone|[oa]d)/i.test(navigator.userAgent))
-      setIsMobile(true);
-  }, []);
 
   const handleMouseEnter = useCallback(() => setIsMouseHover(true), []);
   const handleMouseLeave = useCallback(() => setIsMouseHover(false), []);
