@@ -4,9 +4,7 @@ export interface CommonButtonProps
 }
 
 export interface IconButtonProps extends CommonButtonProps {
-  Icon: React.ComponentType<{ height?: string; width?: string }>;
-  height?: string;
-  width?: string;
+  children: React.ReactNode;
 }
 
 export interface CommonDatepickerProps {

@@ -43,8 +43,13 @@ const Page = () => {
           </div>
 
           <div className='flex justify-center gap-4 mt-6'>
-            <IconButton Icon={KakaotalkSvg} height='3rem' width='3rem' />
-            <IconButton Icon={GoogleSvg} height='3rem' width='3rem' />
+            <IconButton>
+              <KakaotalkSvg height='3rem' width='3rem' />
+            </IconButton>
+
+            <IconButton>
+              <GoogleSvg height='3rem' width='3rem' />
+            </IconButton>
           </div>
         </div>
       </div>
