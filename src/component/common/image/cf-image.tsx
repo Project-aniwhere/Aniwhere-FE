@@ -4,7 +4,7 @@ import cloudfrontImageLoader from '@/component/common/image/cloudfront-image-loa
 import Image, { ImageProps } from 'next/image';
 
 const CFImage = (props: ImageProps) => {
-  return <Image {...props} loader={cloudfrontImageLoader} />;
+  return <Image {...props} loader={cloudfrontImageLoader} unoptimized />;
 };
 
 export default CFImage;
