@@ -93,7 +93,7 @@ const CarouselContainer = (
 
       <div
         ref={scrollContainerRef}
-        className={`w-full h-full overflow-x-scroll scrollbar-none`}
+        className='w-full h-full overflow-x-scroll scrollbar-none'
       >
         <ol
           ref={ref}
