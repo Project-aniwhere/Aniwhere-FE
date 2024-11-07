@@ -3,6 +3,7 @@
 import { Children, useCallback, useEffect, useMemo, useState } from 'react';
 import CarouselContainer from './carousel-container';
 import CarouselBullet from './bullet';
+import { throttle } from '@/util/throttle';
 
 interface CarouselProps {
   children: React.ReactNode;
@@ -67,9 +68,10 @@ const Carousel = ({
   useEffect(() => {
     if (!itemPerCarousel) {
       screenWidthHandler();
-      window.addEventListener('resize', screenWidthHandler);
+      const throttleResizeHandler = throttle(screenWidthHandler, 50);
+      window.addEventListener('resize', throttleResizeHandler);
 
-      return () => window.removeEventListener('resize', screenWidthHandler);
+      return () => window.removeEventListener('resize', throttleResizeHandler);
     }
   }, [itemPerCarousel, screenWidthHandler]);
 

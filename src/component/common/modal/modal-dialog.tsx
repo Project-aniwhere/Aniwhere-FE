@@ -35,6 +35,7 @@ const ModalDialog = ({ children }: ModalProps, ref: Ref<ModalRef>) => {
         className='absolute top-0 z-20 shadow-lg p-4 rounded-lg'
         ref={setDialogRef}
         onClose={closeModal}
+        modalType='dialog'
       >
         {children}
       </ModalContainer>

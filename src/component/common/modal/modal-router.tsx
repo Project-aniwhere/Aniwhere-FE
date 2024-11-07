@@ -19,7 +19,7 @@ const ModalRouter = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <ModalContainer onClose={onDismiss} ref={dialogRef}>
+    <ModalContainer onClose={onDismiss} ref={dialogRef} modalType='modal'>
       {children}
     </ModalContainer>
   );

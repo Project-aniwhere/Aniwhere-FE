@@ -26,7 +26,7 @@ const CarouselBullet = ({
   className = '',
 }: BulletProps) => {
   return (
-    <div className={'flex items-center gap-2 ' + className}>
+    <div className={'flex items-center h-6 ' + className}>
       {Array.from(
         { length: countPerCarousel ? Math.ceil(count / countPerCarousel) : 0 },
         (_, idx) => (

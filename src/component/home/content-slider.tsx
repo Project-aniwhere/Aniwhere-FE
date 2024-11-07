@@ -9,7 +9,7 @@ const ContentSlider = ({
 }: ContentSliderProps) => {
   return (
     <section className='flex flex-col items-start gap-3'>
-      <div className='px-8'>
+      <div className='px-2'>
         {subTitle && (
           <h3 className='text-aniviolet2 text-[0.875rem]'>{subTitle}</h3>
         )}

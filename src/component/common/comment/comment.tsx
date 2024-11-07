@@ -49,7 +49,7 @@ const Comment = ({
           </div>
         </div>
       </div>
-      {image && (
+      {image ? (
         <Image
           src={image}
           alt='comment image'
@@ -58,6 +58,8 @@ const Comment = ({
           sizes='100%'
           className='w-full aspect-video object-cover rounded-lg border'
         />
+      ) : (
+        <div className='flex-grow'></div>
       )}
       <p className='text-sm line-clamp-4'>{comment}</p>
       <div className='flex flex-row items-center justify-between'>

@@ -4,6 +4,7 @@ import { forwardRef, Ref } from 'react';
 interface ModalContainerProps {
   children: React.ReactNode;
   onClose: () => void;
+  modalType: 'dialog' | 'modal';
   className?: string;
 }
 
@@ -11,13 +12,15 @@ const ModalContainer: React.ForwardRefRenderFunction<
   HTMLDialogElement,
   ModalContainerProps
 > = (
-  { children, onClose, className = '' }: ModalContainerProps,
+  { children, onClose, className = '', modalType }: ModalContainerProps,
   ref: Ref<HTMLDialogElement>
 ) => {
   return (
     <dialog
       ref={ref}
-      className={'relative bg-transparent ' + className}
+      className={
+        `bg-transparent ${modalType === 'dialog' ? 'relative' : ''}` + className
+      }
       onClose={onClose}
     >
       {children}

@@ -38,7 +38,7 @@ const CommentSlider = () => {
         .map((_, idx) => (
           <div key={idx} className='p-2 h-full'>
             <Comment
-              userIcon='https://i.namu.wiki/i/yv7DECVbq50VlOg8CyCL8OAhzS_74zZXtGufek_A-EGH36nabiCTQExlGtLujvwiSawOnDNxCK9fNGx2vxZJIg.webp'
+              userIcon=''
               nickName='test'
               uploadedTime='2024.10.23'
               animeTitle='애니메이션 제목'

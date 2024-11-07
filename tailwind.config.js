@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ['Pretendard Variable', 'sans-serif'],
+      },
       colors: {
         aniblue: '#97DFFC',
         aniviolet1: '#858AE3',
