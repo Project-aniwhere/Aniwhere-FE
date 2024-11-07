@@ -3,7 +3,6 @@ import {
   ForwardedRef,
   forwardRef,
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -56,23 +55,35 @@ const CarouselContainer = (
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {isRenderArrow && (
-        <ArrowButton
-          direction='left'
-          onClick={handlePrev}
-          className={
-            animation === 'fade'
-              ? 'absolute z-40 h-full w-10 flex items-center justify-center hover:scale-150 scale-125 hover:opacity-100 duration-200 origin-left '
-              : 'absolute -left-2 z-40 p-2 rounded-lg bg-aniviolet3 hover:scale-110 duration-200'
-          }
-          fill='white'
-        />
-      )}
+      <ArrowButton
+        isShow={isRenderArrow}
+        direction='left'
+        onClick={handlePrev}
+        className={
+          animation === 'fade'
+            ? 'absolute z-40 h-full w-10 flex items-center justify-center hover:scale-150 scale-125 hover:opacity-100 duration-200 origin-left '
+            : 'absolute -left-2 z-40 p-2 rounded-lg bg-aniviolet3 hover:scale-110 duration-200'
+        }
+        fill='white'
+      />
+
+      <ArrowButton
+        isShow={isRenderArrow}
+        direction='right'
+        onClick={handleNext}
+        className={
+          animation === 'fade'
+            ? 'absolute right-0 z-40 h-full w-10 flex items-center justify-center hover:scale-150 scale-125 hover:opacity-100 origin-right opacity-75 duration-200 '
+            : 'absolute -right-2 z-40 p-2 rounded-lg bg-aniviolet3 hover:scale-110 duration-200'
+        }
+        fill='white'
+      />
+
       <div className='w-full h-full overflow-x-scroll scrollbar-none xl:overflow-x-hidden xl:scrollbar'>
         <ol
           ref={ref}
           className={
-            'relative flex items-center transition-transform ease-in-out duration-300 ' +
+            'relative flex items-stretch transition-transform ease-in-out duration-300 ' +
             className
           }
           style={{
@@ -100,18 +111,6 @@ const CarouselContainer = (
           ))}
         </ol>
       </div>
-      {isRenderArrow && (
-        <ArrowButton
-          direction='right'
-          onClick={handleNext}
-          className={
-            animation === 'fade'
-              ? 'absolute right-0 z-40 h-full w-10 flex items-center justify-center hover:scale-150 scale-125 hover:opacity-100 origin-right opacity-75 duration-200 '
-              : 'absolute -right-2 z-40 p-2 rounded-lg bg-aniviolet3 hover:scale-110 duration-200'
-          }
-          fill='white'
-        />
-      )}
     </div>
   );
 };
