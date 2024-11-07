@@ -18,7 +18,7 @@ const CarouselItem = ({
       flexBasis: countPerItem ? `${100 / countPerItem}%` : '',
     }}
   >
-    <div>{children}</div>
+    {children}
   </li>
 );
 
