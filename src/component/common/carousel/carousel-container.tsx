@@ -3,7 +3,9 @@ import {
   ForwardedRef,
   forwardRef,
   useCallback,
+  useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import CarouselItem from './carousel-item';
@@ -37,6 +39,7 @@ const CarouselContainer = (
 
   const isMobile = useIsMobile();
   const [isMouseHover, setIsMouseHover] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const handleMouseEnter = useCallback(() => setIsMouseHover(true), []);
   const handleMouseLeave = useCallback(() => setIsMouseHover(false), []);
@@ -46,6 +49,15 @@ const CarouselContainer = (
     if (!isMobile && isMouseHover) return true;
     return false;
   }, [animation, isMobile, isMouseHover]);
+
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+    const width = scrollContainerRef.current.clientWidth;
+    scrollContainerRef.current.scrollTo({
+      left: (width * carouselIndex) / countPerCarousel,
+      behavior: 'smooth',
+    });
+  }, [carouselIndex, countPerCarousel]);
 
   if (!carouselLength) return <div>다음 기회에...</div>;
 
@@ -79,20 +91,16 @@ const CarouselContainer = (
         fill='white'
       />
 
-      <div className='w-full h-full overflow-x-scroll scrollbar-none xl:overflow-x-hidden xl:scrollbar'>
+      <div
+        ref={scrollContainerRef}
+        className={`w-full h-full overflow-x-scroll scrollbar-none`}
+      >
         <ol
           ref={ref}
           className={
             'relative flex items-stretch transition-transform ease-in-out duration-300 ' +
             className
           }
-          style={{
-            transform: `translateX(${
-              animation === 'slide'
-                ? `-${(carouselIndex * 100) / countPerCarousel}%`
-                : ''
-            })`,
-          }}
         >
           {childrenList.map((child, idx) => (
             <CarouselItem
@@ -101,7 +109,7 @@ const CarouselContainer = (
               className={
                 animation === 'fade'
                   ? carouselIndex === idx
-                    ? 'relative  opacity-100 duration-1000 '
+                    ? 'relative opacity-100 duration-1000 '
                     : 'absolute w-full h-full opacity-0  duration-1000 '
                   : ''
               }
