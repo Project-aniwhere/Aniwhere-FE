@@ -1,13 +1,9 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
 import ReactQueryProvider from '@/hook/provider/usereactquery';
 import Header from '@/component/common/header/header';
 import Footer from '@/component/common/footer/footer';
-
-const pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
-});
+import { Provider } from 'jotai';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,14 +15,29 @@ export default function RootLayout({
   modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal?: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang='en'>
-      <body className={`${pretendard.className} scrollbar`}>
+      <head>
+        <link
+          rel='preload'
+          as='style'
+          href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css'
+          crossOrigin='anonymous'
+        />
+        <link
+          rel='stylesheet'
+          href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css'
+        />
+      </head>
+
+      <body className='font-pretendard scrollbar'>
         <Header />
         <div id='modal-root' />
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <Provider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </Provider>
         <Footer />
         {modal}
       </body>

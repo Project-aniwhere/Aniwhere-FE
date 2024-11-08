@@ -3,19 +3,20 @@
 import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
 import { ModalRef } from '@/type/modal';
+import { throttle } from '@/util/throttle';
 
 const Header = () => {
   const [isAtTop, setIsAtTop] = useState(true);
   const modalRef = useRef<ModalRef>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = throttle(() => {
       if (window.scrollY > 0) {
         setIsAtTop(false);
       } else {
         setIsAtTop(true);
       }
-    };
+    }, 100);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
