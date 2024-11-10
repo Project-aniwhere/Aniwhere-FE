@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         aniblue: '#97DFFC',
+        aniviolet0: '#F0EDFF',
         aniviolet1: '#858AE3',
         aniviolet2: '#613DC1',
         aniviolet3: '#4E148C',
