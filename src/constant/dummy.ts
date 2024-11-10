@@ -3,49 +3,49 @@ import { DailyAniProps } from '@/type/weekly';
 export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
   '0': [
     {
-      titleId: 805437,
+      titleId: 1,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
         'https://image-comic.pstatic.net/webtoon/805437/thumbnail/thumbnail_IMAG21_b42c6ad3-4ca8-4cdb-8dfb-7671b2fea0c0.jpg',
     },
     {
-      titleId: 805437,
+      titleId: 2,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
         'https://image-comic.pstatic.net/webtoon/805437/thumbnail/thumbnail_IMAG21_b42c6ad3-4ca8-4cdb-8dfb-7671b2fea0c0.jpg',
     },
     {
-      titleId: 805437,
+      titleId: 3,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
         'https://image-comic.pstatic.net/webtoon/805437/thumbnail/thumbnail_IMAG21_b42c6ad3-4ca8-4cdb-8dfb-7671b2fea0c0.jpg',
     },
     {
-      titleId: 805437,
+      titleId: 4,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
         'https://image-comic.pstatic.net/webtoon/805437/thumbnail/thumbnail_IMAG21_b42c6ad3-4ca8-4cdb-8dfb-7671b2fea0c0.jpg',
     },
     {
-      titleId: 805437,
+      titleId: 5,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
         'https://image-comic.pstatic.net/webtoon/805437/thumbnail/thumbnail_IMAG21_b42c6ad3-4ca8-4cdb-8dfb-7671b2fea0c0.jpg',
     },
     {
-      titleId: 805437,
+      titleId: 6,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
         'https://image-comic.pstatic.net/webtoon/805437/thumbnail/thumbnail_IMAG21_b42c6ad3-4ca8-4cdb-8dfb-7671b2fea0c0.jpg',
     },
     {
-      titleId: 805437,
+      titleId: 7,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
@@ -54,7 +54,7 @@ export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
   ],
   '1': [
     {
-      titleId: 805437,
+      titleId: 11,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
@@ -63,7 +63,7 @@ export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
   ],
   '2': [
     {
-      titleId: 805437,
+      titleId: 21,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
@@ -72,7 +72,7 @@ export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
   ],
   '3': [
     {
-      titleId: 805437,
+      titleId: 31,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
@@ -81,7 +81,7 @@ export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
   ],
   '4': [
     {
-      titleId: 805437,
+      titleId: 41,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
@@ -90,7 +90,7 @@ export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
   ],
   '5': [
     {
-      titleId: 805437,
+      titleId: 51,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:
@@ -99,7 +99,7 @@ export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
   ],
   '6': [
     {
-      titleId: 805437,
+      titleId: 61,
       titleName: '피폐물의 해피엔딩을 위하여',
       author: '호',
       thumbnailUrl:

@@ -26,21 +26,16 @@ const WeeklyTitle = ({
         />
       </div>
       <ul className='flex flex-wrap gap-2 md:gap-3'>
-        {Object.entries(QUARTERS)
-          .map(([id, value]) => ({
-            id,
-            value,
-          }))
-          .map((v) => (
-            <li key={v.id}>
-              <Tag
-                text={v.value}
-                size='small'
-                state={v.id === selectedQuarter ? 'active' : undefined}
-                handleClick={() => setSelectedQuarter(v.id)}
-              />
-            </li>
-          ))}
+        {Object.entries(QUARTERS).map(([id, value]) => (
+          <li key={id}>
+            <Tag
+              text={value}
+              size='small'
+              state={id === selectedQuarter ? 'active' : undefined}
+              handleClick={() => setSelectedQuarter(id)}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );
