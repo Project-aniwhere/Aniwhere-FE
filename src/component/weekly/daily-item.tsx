@@ -14,9 +14,10 @@ const DailyItem = ({ data }: DailyItemProps) => {
         src={sample1.src}
         alt={`${data.titleName} 섬네일`}
         layout='responsive'
-        width={1280} // 부모의 100% 너비에 맞게 크기 설정
-        height={720} // 비율에 맞춰 height 자동 계산
-        objectFit='cover' // 이미지가 부모 컨테이너를 덮도록 설정
+        width={1280}
+        height={720}
+        sizes='(min-width: 768px) 15vw, 33vw'
+        objectFit='cover'
         className='rounded hover:scale-105 duration-200'
       />
       <div>
