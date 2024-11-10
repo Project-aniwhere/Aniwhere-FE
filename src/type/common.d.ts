@@ -1,30 +1,17 @@
 export type SizeProps = 'small' | 'medium';
 export type StateProps = 'default' | 'active' | 'disabled';
 
-export interface CommonButtonProps {
+export interface CommonButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
-  type?: 'submit' | 'reset' | 'button';
-  className?: string;
-  onClick?: () => void;
 }
 
-export interface CommonInputProps {
-  type?:
-    | 'text'
-    | 'password'
-    | 'email'
-    | 'number'
-    | 'tel'
-    | 'search'
-    | 'reset'
-    | 'checkbox'
-    | 'radio'
-    | 'hidden'
-    | 'datetime-local'
-    | 'date'
-    | 'month'
-    | 'week';
+export interface IconButtonProps extends CommonButtonProps {
+  children: React.ReactNode;
+}
+
+export interface CommonDatepickerProps {
+  onChange: (date: Value) => void;
+  value: Value;
   placeholder?: string;
   className?: string;
-  onClick?: () => void;
 }

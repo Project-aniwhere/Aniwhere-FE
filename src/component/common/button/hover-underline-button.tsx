@@ -5,14 +5,13 @@ import { CommonButtonProps } from '@/type/common';
 const UnderlineButton = ({
   type = 'submit',
   text = '',
-  className = '',
-  onClick = () => {},
+  ...props
 }: CommonButtonProps) => {
   return (
     <button
       type={type}
-      className={`${className} text-aniviolet3 hover:underline`}
-      onClick={onClick}
+      className={`text-aniviolet3 hover:underline ${props.className}`}
+      onClick={props.onClick}
     >
       {text}
     </button>
