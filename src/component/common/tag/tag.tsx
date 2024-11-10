@@ -10,8 +10,8 @@ const Tag = ({ text, size = 'medium', state = 'default' }: TagProps) => {
   const baseStyles = 'px-2 py-1 rounded-lg border';
 
   const sizeStyles = {
-    small: 'text-sm',
-    medium: '',
+    small: 'text-xs md:text-sm',
+    medium: 'text-sm md:text-base',
   };
 
   const colorStyles = {

@@ -24,16 +24,18 @@ const YearPicker = ({
   };
 
   return (
-    <div className='relative w-6 h-6'>
-      <button className='text-2xl' onClick={handleToggleYearMenu}>
+    <div className='relative inline-flex'>
+      <button className='text-base md:text-xl' onClick={handleToggleYearMenu}>
         <CalendarSvg fill='#9CA3AF' />
       </button>
       {isOpenYearMenu && (
-        <YearList
-          selectedYear={selectedYear}
-          years={years}
-          handleChangeYear={handleChangeYear}
-        />
+        <div className='absolute z-10 left-0 top-5 md:top-6'>
+          <YearList
+            selectedYear={selectedYear}
+            years={years}
+            handleChangeYear={handleChangeYear}
+          />
+        </div>
       )}
     </div>
   );

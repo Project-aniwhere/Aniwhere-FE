@@ -13,7 +13,7 @@ const WeeklyPage = () => {
 
   return (
     <MainLayout>
-      <div className='w-full max-w-[1200px] mx-auto pt-[100px] pb-10 flex flex-col gap-10'>
+      <div className='w-full max-w-[1200px] mx-auto pt-[100px] pb-10 flex flex-col gap-8 md:gap-10'>
         <WeeklyTitle
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}

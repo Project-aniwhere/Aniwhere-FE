@@ -21,8 +21,12 @@ const DailyItem = ({ data }: DailyItemProps) => {
         className='rounded hover:scale-105 duration-200'
       />
       <div>
-        <p className='font-medium truncate'>{data.titleName}</p>
-        <p className='text-sm text-gray-500 truncate'>{data.author}</p>
+        <p className='font-medium truncate text-sm md:text-base'>
+          {data.titleName}
+        </p>
+        <p className='text-gray-500 truncate text-xs md:text-sm'>
+          {data.author}
+        </p>
       </div>
     </div>
   );
