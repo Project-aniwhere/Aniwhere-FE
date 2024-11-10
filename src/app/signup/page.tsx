@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 const Page = () => {
   return (
-    <div className='w-screen h-screen flex items-center justify-center'>
+    <div className='w-full h-screen flex items-center justify-center'>
       <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2'>
         {/* Logo */}
         <h1 className='text-aniviolet3 text-2xl font-bold text-center'>
