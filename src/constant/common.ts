@@ -1,4 +1,4 @@
-export const QUARTERS = {
+export const QUARTERS: Record<string, string> = {
   '1': '1분기',
   '2': '2분기',
   '3': '3분기',

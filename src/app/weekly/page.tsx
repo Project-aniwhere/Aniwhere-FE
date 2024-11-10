@@ -13,6 +13,7 @@ const WeeklyPage = () => {
   const [selectedYear, setSelectedYear] = useState(
     String(new Date().getFullYear())
   );
+  const [selectedQuarter, setSelectedQuarter] = useState('1');
   const [selectedDay, setSelectedDay] = useState(String(new Date().getDay()));
 
   // todo. GET 요일별 애니 목록
@@ -22,7 +23,9 @@ const WeeklyPage = () => {
       <div className='w-full max-w-[1200px] mx-auto pt-[100px] pb-10 flex flex-col gap-6 md:gap-10'>
         <WeeklyTitle
           selectedYear={selectedYear}
+          selectedQuarter={selectedQuarter}
           setSelectedYear={setSelectedYear}
+          setSelectedQuarter={setSelectedQuarter}
         />
         <div className='flex flex-col gap-3 md:hidden'>
           <Tabs

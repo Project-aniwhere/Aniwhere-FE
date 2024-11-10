@@ -13,8 +13,8 @@ const Tabs = ({ list, value, setValue }: TabsProps) => {
         <li key={v.id} className='w-full'>
           <TabItem
             text={v.value}
-            handleClick={() => setValue(v.id)}
             active={v.id === value}
+            handleClick={() => setValue(v.id)}
           />
         </li>
       ))}

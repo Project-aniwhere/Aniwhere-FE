@@ -1,7 +1,7 @@
 interface TabItemProps {
   text: string;
   active?: boolean;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 const TabItem = ({ text, active, handleClick }: TabItemProps) => {
