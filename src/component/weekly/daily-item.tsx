@@ -13,10 +13,11 @@ const DailyItem = ({ data }: DailyItemProps) => {
       <Image
         src={sample1.src}
         alt={`${data.titleName} 섬네일`}
-        width={0}
-        height={0}
-        sizes='15%'
-        className='w-full rounded hover:scale-105 duration-200'
+        layout='responsive'
+        width={100} // 부모의 100% 너비에 맞게 크기 설정
+        height={100} // 비율에 맞춰 height 자동 계산
+        objectFit='cover' // 이미지가 부모 컨테이너를 덮도록 설정
+        className='rounded hover:scale-105 duration-200'
       />
       <div>
         <p className='font-medium truncate text-sm md:text-base'>
