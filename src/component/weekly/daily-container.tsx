@@ -1,5 +1,6 @@
 import { DailyAniProps } from '@/type/weekly';
 import DailyItem from './daily-item';
+import { DAYS } from '@/constant/common';
 
 interface DailyConatinerProps {
   day: string;
@@ -15,7 +16,7 @@ const DailyConatiner = ({ day, dailyList, active }: DailyConatinerProps) => {
       <p
         className={`text-center font-semibold text-sm md:text-base ${active ? 'text-aniviolet2' : ''}`}
       >
-        {day}
+        {DAYS[day]}
       </p>
       <ul className='flex flex-col gap-3'>
         {dailyList.map((item) => (

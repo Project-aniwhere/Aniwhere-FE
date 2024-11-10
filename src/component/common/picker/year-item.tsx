@@ -1,6 +1,6 @@
 interface YearItemProps {
-  year: number;
-  handleChangeYear: (year: number) => void;
+  year: string;
+  handleChangeYear: (year: string) => void;
   active: boolean;
 }
 

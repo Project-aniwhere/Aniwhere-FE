@@ -1,9 +1,6 @@
 import Image from 'next/image';
 
 import sample1 from '@/asset/img/subslider/sample1.jpg';
-import sample2 from '@/asset/img/subslider/sample2.jpg';
-import sample3 from '@/asset/img/subslider/sample3.jpg';
-import sample4 from '@/asset/img/subslider/sample4.jpg';
 import { DailyAniProps } from '@/type/weekly';
 
 interface DailyItemProps {
@@ -16,9 +13,10 @@ const DailyItem = ({ data }: DailyItemProps) => {
       <Image
         src={sample1.src}
         alt={`${data.titleName} 섬네일`}
-        width={151.43}
-        height={85.17}
-        className='rounded hover:scale-105 duration-200'
+        width={0}
+        height={0}
+        sizes='15%'
+        className='w-full rounded hover:scale-105 duration-200'
       />
       <div>
         <p className='font-medium truncate text-sm md:text-base'>

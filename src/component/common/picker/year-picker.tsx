@@ -4,21 +4,21 @@ import YearList from './year-list';
 import { YearPickerProps } from '@/type/year-picker';
 
 interface Props extends YearPickerProps {
-  startYear?: number;
+  startYear?: string;
   length?: number;
 }
 
 const YearPicker = ({
   selectedYear,
   setSelectedYear,
-  startYear = new Date().getFullYear(),
+  startYear = String(new Date().getFullYear()),
   length = 10,
 }: Props) => {
   const [isOpenYearMenu, handleToggleYearMenu] = useToggle(false);
 
-  const years = Array.from({ length }, (_, i) => startYear - i);
+  const years = Array.from({ length }, (_, i) => String(Number(startYear) - i));
 
-  const handleChangeYear = (year: number) => {
+  const handleChangeYear = (year: string) => {
     setSelectedYear(year);
     handleToggleYearMenu();
   };

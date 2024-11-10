@@ -1,9 +1,9 @@
 import YearItem from './year-item';
 
 interface YearListProps {
-  selectedYear: number;
-  years: number[];
-  handleChangeYear: (year: number) => void;
+  selectedYear: string;
+  years: string[];
+  handleChangeYear: (year: string) => void;
 }
 
 const YearList = ({ selectedYear, years, handleChangeYear }: YearListProps) => {

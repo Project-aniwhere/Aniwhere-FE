@@ -1,4 +1,4 @@
-import { WEEKLY_TAGS } from '@/constant/common';
+import { QUARTERS } from '@/constant/common';
 import Tag from '../common/tag/tag';
 import YearPicker from '../common/picker/year-picker';
 import { YearPickerProps } from '@/type/year-picker';
@@ -16,18 +16,16 @@ const WeeklyTitle = ({ selectedYear, setSelectedYear }: YearPickerProps) => {
         />
       </div>
       <ul className='flex flex-wrap gap-2 md:gap-3'>
-        {WEEKLY_TAGS.map((v) => (
-          <li key={v.id}>
-            <Tag
-              text={v.value}
-              size='small'
-              // 확인용
-              state={
-                v.id === '1' ? 'active' : v.id === '4' ? 'disabled' : 'default'
-              }
-            />
-          </li>
-        ))}
+        {Object.entries(QUARTERS)
+          .map(([id, value]) => ({
+            id,
+            value,
+          }))
+          .map((v) => (
+            <li key={v.id}>
+              <Tag text={v.value} size='small' />
+            </li>
+          ))}
       </ul>
     </div>
   );
