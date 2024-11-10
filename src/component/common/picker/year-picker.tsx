@@ -26,7 +26,11 @@ const YearPicker = ({
 
   return (
     <div className='relative inline-flex'>
-      <button className='text-base md:text-xl' onClick={handleToggleYearMenu}>
+      <button
+        aria-label='calendar'
+        className='text-base md:text-xl'
+        onClick={handleToggleYearMenu}
+      >
         <CalendarSvg fill='#9CA3AF' />
       </button>
       {isOpenYearMenu && (
