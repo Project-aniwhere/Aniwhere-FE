@@ -7,14 +7,13 @@ import WeeklyContainer from '@/component/weekly/weekly-container';
 import WeeklyTitle from '@/component/weekly/weekly-title';
 import { DAYS } from '@/constant/common';
 import { WEEKLY_DUMMY } from '@/constant/dummy';
+import { getDay, getQuarter, getYear } from '@/util/date';
 import { useState } from 'react';
 
 const WeeklyPage = () => {
-  const [selectedYear, setSelectedYear] = useState(
-    String(new Date().getFullYear())
-  );
-  const [selectedQuarter, setSelectedQuarter] = useState('1');
-  const [selectedDay, setSelectedDay] = useState(String(new Date().getDay()));
+  const [selectedYear, setSelectedYear] = useState(getYear());
+  const [selectedQuarter, setSelectedQuarter] = useState(getQuarter());
+  const [selectedDay, setSelectedDay] = useState(getDay());
 
   // todo. GET 요일별 애니 목록
 

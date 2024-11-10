@@ -2,6 +2,7 @@ import CalendarSvg from '@/asset/svg/calendar/calendar-svg';
 import useToggle from '@/hook/usetoggle';
 import YearList from './year-list';
 import { YearPickerProps } from '@/type/year-picker';
+import { getYear } from '@/util/date';
 
 interface Props extends YearPickerProps {
   startYear?: string;
@@ -11,7 +12,7 @@ interface Props extends YearPickerProps {
 const YearPicker = ({
   selectedYear,
   setSelectedYear,
-  startYear = String(new Date().getFullYear()),
+  startYear = getYear(),
   length = 10,
 }: Props) => {
   const [isOpenYearMenu, handleToggleYearMenu] = useToggle(false);
