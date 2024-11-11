@@ -1,18 +1,16 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface SidebarProps {
-  activeTab: string;
-  setActiveTab: (value: string) => void;
   isSidebarOpen: boolean;
   setIsSidebarOpen: (value: boolean) => void;
 }
 
-const Sidebar = ({
-  activeTab,
-  setActiveTab,
-  isSidebarOpen,
-  setIsSidebarOpen,
-}: SidebarProps) => {
+const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
+  const pathName = usePathname();
+  const currentActiveTab = pathName.split('/').at(-1);
   return (
     <div
       className={`${
@@ -28,21 +26,27 @@ const Sidebar = ({
       <nav className='mt-8'>
         <Link
           href='/admin/dashboard'
-          className={`flex items-center px-4 py-2 ${activeTab === 'dashboard' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
+          className={`flex items-center px-4 py-2 ${currentActiveTab === 'dashboard' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
         >
           📊 Dashboard
         </Link>
         <Link
           href='/admin/users'
-          className={`flex items-center px-4 py-2 ${activeTab === 'users' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
+          className={`flex items-center px-4 py-2 ${currentActiveTab === 'users' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
         >
           👥 Users
         </Link>
         <Link
           href='/admin/anime'
-          className={`flex items-center px-4 py-2 ${activeTab === 'anime' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
+          className={`flex items-center px-4 py-2 ${currentActiveTab === 'anime' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
         >
           📺 Anime
+        </Link>
+        <Link
+          href='/admin/recommended-lists'
+          className={`flex items-center px-4 py-2 ${currentActiveTab === 'recommended-lists' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
+        >
+          📋 Recommended Lists
         </Link>
       </nav>
     </div>
