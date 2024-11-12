@@ -7,10 +7,13 @@ import WeeklyContainer from '@/component/weekly/weekly-container';
 import WeeklyTitle from '@/component/weekly/weekly-title';
 import { DAYS } from '@/constant/common';
 import { WEEKLY_DUMMY } from '@/constant/dummy';
+import useIsMobile from '@/hook/device-detect/use-is-mobile';
 import { getDay, getQuarter, getYear } from '@/util/date';
 import { useState } from 'react';
 
 const WeeklyPage = () => {
+  const isMobile = useIsMobile();
+
   const [selectedYear, setSelectedYear] = useState(getYear());
   const [selectedQuarter, setSelectedQuarter] = useState(getQuarter());
   const [selectedDay, setSelectedDay] = useState(getDay());
@@ -26,20 +29,21 @@ const WeeklyPage = () => {
           setSelectedYear={setSelectedYear}
           setSelectedQuarter={setSelectedQuarter}
         />
-        <div className='flex flex-col gap-3 md:hidden'>
-          <Tabs
-            list={Object.entries(DAYS).map(([id, value]) => ({
-              id,
-              value,
-            }))}
-            value={selectedDay}
-            setValue={setSelectedDay}
-          />
-          <MobileDailyConatiner dailyList={WEEKLY_DUMMY[selectedDay]} />
-        </div>
-        <div className='hidden md:block'>
+        {isMobile ? (
+          <div className='flex flex-col gap-3'>
+            <Tabs
+              list={Object.entries(DAYS).map(([id, value]) => ({
+                id,
+                value,
+              }))}
+              value={selectedDay}
+              setValue={setSelectedDay}
+            />
+            <MobileDailyConatiner dailyList={WEEKLY_DUMMY[selectedDay]} />
+          </div>
+        ) : (
           <WeeklyContainer weeklyList={WEEKLY_DUMMY} currentDay={selectedDay} />
-        </div>
+        )}
       </div>
     </MainLayout>
   );
