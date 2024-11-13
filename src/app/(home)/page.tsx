@@ -9,6 +9,7 @@ import ContentSlider from '@/component/home/content-slider';
 import MainLayout from '@/component/common/layout/main-layout';
 import Footer from '@/component/common/footer/footer';
 import CommentSlider from '@/component/home/comment-slider';
+import Header from '@/component/common/header/header';
 
 export default function Home() {
   const dummyData: ContentSliderProps = {
@@ -30,6 +31,7 @@ export default function Home() {
 
   return (
     <div className='w-full flex flex-col items-center gap-4'>
+      <Header />
       <MainImageSlider {...dummyData} />
       <MainLayout>
         <ContentSlider {...dummyData} />
