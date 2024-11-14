@@ -1,5 +1,11 @@
+import TagFilter from '@/component/tag/tag-filter';
+
 const TagPage = () => {
-  return <></>;
+  return (
+    <>
+      <TagFilter />
+    </>
+  );
 };
 
 export default TagPage;
