@@ -1,0 +1,24 @@
+'use client';
+
+import Link from 'next/link';
+
+const DesktopNav = () => {
+  return (
+    <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-row items-center gap-8'>
+        <div className='flex flex-row gap-8'>
+          <Link href='/tag'>태그 검색</Link>
+          <Link href='/popular'>인기 작품</Link>
+          <Link href='/weekly'>요일별 작품</Link>
+        </div>
+      </div>
+      <div className='flex flex-row items-center gap-5'>
+        <search>검색</search>
+        <Link href='/mypage'>마이페이지</Link>
+        <Link href='/login'>로그인/회원가입</Link>
+      </div>
+    </div>
+  );
+};
+
+export default DesktopNav;
