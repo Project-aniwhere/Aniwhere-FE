@@ -6,6 +6,8 @@ import MenuLineSvg from '@/asset/svg/menuline/menu-line-svg';
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isLogin, setIsLogin] = useState(false);
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuAniItems = [
@@ -81,9 +83,15 @@ const MobileNav = () => {
           ))}
         </div>
         <div className='absolute bottom-5 right-5'>
-          <Link href='/logout' className='text-white text-xl'>
-            로그아웃
-          </Link>
+          {isLogin ? (
+            <Link href='/logout' className='text-white text-xl'>
+              로그아웃
+            </Link>
+          ) : (
+            <Link href='/login' className='text-white text-xl'>
+              로그인
+            </Link>
+          )}
         </div>
       </div>
     </div>

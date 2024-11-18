@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 const DesktopNav = () => {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div className='flex flex-row items-center justify-between'>
       <div className='flex flex-row items-center gap-8'>
@@ -15,7 +17,11 @@ const DesktopNav = () => {
       <div className='flex flex-row items-center gap-5'>
         <search>검색</search>
         <Link href='/mypage'>마이페이지</Link>
-        <Link href='/login'>로그인/회원가입</Link>
+        {isLogin ? (
+          <Link href='/logout'>로그아웃</Link>
+        ) : (
+          <Link href='/login'>로그인</Link>
+        )}
       </div>
     </div>
   );
