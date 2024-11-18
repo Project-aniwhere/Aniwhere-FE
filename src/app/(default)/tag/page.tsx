@@ -1,10 +1,13 @@
-import TagFilter from '@/component/tag/tag-filter';
+import TagSearchBar from '@/component/tag/tag-search-bar';
+import TagSearchResult from '@/component/tag/tag-search-result';
 
 const TagPage = () => {
   return (
-    <>
-      <TagFilter />
-    </>
+    <div className='flex flex-col gap-4'>
+      <TagSearchBar />
+
+      <TagSearchResult />
+    </div>
   );
 };
 
