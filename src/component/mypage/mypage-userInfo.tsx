@@ -7,13 +7,11 @@ const MypageUserInfo = () => {
   return (
     <div className='h-screen p-8 pt-28'>
       <h1 className='text-2xl font-bold mb-8'>계정 설정</h1>
-
       <div className='space-y-6'>
         {/* Profile Info */}
         <div className='space-y-4'>
           <div className='flex items-center gap-4'>
             <label className='w-24 text-lg'>이메일</label>
-
             <span className='w-64 p-3 border border-gray-300 rounded-lg bg-gray-50'>
               이메일
             </span>

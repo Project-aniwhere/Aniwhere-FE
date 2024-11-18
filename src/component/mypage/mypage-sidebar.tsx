@@ -7,14 +7,14 @@ const MypageSidebar = () => {
   return (
     <div className='w-64 h-screen pt-28 border-r border-gray-300 p-6 bg-white flex flex-col items-center'>
       <div className='relative'>
-        <div className='w-24 h-24 rounded-full bg-sky-100 flex items-center justify-center overflow-hidden border-2 border-aniviolet2'>
+        <div className='size-24 rounded-full bg-sky-100 flex items-center justify-center overflow-hidden border-2 border-aniviolet2'>
           <Image
             src=''
             alt='comment image'
             width={0}
             height={0}
             sizes='100%'
-            className='w-full h-full object-cove'
+            className='w-full h-full object-cover'
           />
         </div>
         {/* Small Circle Decoration */}
