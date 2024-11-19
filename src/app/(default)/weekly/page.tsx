@@ -1,11 +1,9 @@
 'use client';
 
 import MainLayout from '@/component/common/layout/main-layout';
-import Tabs from '@/component/common/tab/tab-list';
 import MobileDailyConatiner from '@/component/weekly/daily-container-mobile';
 import WeeklyContainer from '@/component/weekly/weekly-container';
 import WeeklyTitle from '@/component/weekly/weekly-title';
-import { DAYS } from '@/constant/common';
 import { WEEKLY_DUMMY } from '@/constant/dummy';
 import useIsMobile from '@/hook/device-detect/use-is-mobile';
 import { getDay, getQuarter, getYear } from '@/util/date';
@@ -30,17 +28,11 @@ const WeeklyPage = () => {
           setSelectedQuarter={setSelectedQuarter}
         />
         {isMobile ? (
-          <div className='flex flex-col gap-3'>
-            <Tabs
-              list={Object.entries(DAYS).map(([id, value]) => ({
-                id,
-                value,
-              }))}
-              value={selectedDay}
-              setValue={setSelectedDay}
-            />
-            <MobileDailyConatiner dailyList={WEEKLY_DUMMY[selectedDay]} />
-          </div>
+          <MobileDailyConatiner
+            dailyList={WEEKLY_DUMMY[selectedDay]}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+          />
         ) : (
           <WeeklyContainer weeklyList={WEEKLY_DUMMY} currentDay={selectedDay} />
         )}
