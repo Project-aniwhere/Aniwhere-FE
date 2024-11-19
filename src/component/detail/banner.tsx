@@ -14,7 +14,7 @@ const DetailBanner = () => {
         height={720}
         className='object-cover max-h-[480px]'
       />
-      <div className='w-full absolute bottom-0 z-20 flex justify-between items-end p-8 text-white'>
+      <div className='w-full absolute bottom-0 z-20 flex justify-between items-end py-8 px-12 text-white'>
         <div className='flex flex-col gap-2'>
           <p className='text-4xl font-bold'>스파이 패밀리 시즌1</p>
           <div className='flex gap-2 text-lg font-medium'>
