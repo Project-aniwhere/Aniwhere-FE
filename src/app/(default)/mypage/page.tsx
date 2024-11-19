@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <>
       {isMobile() ? (
-        <div className='flex mt-20 h-screen md:hidden'>
+        <div className='flex mt-20'>
           <MypageMobile />
         </div>
       ) : (
