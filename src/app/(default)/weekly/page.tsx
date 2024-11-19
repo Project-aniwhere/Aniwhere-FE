@@ -22,7 +22,7 @@ const WeeklyPage = () => {
 
   return (
     <MainLayout>
-      <div className='w-full max-w-[1200px] mx-auto pt-[100px] pb-10 flex flex-col gap-6 md:gap-10'>
+      <div className='pt-5 pb-10 flex flex-col gap-6 md:gap-10'>
         <WeeklyTitle
           selectedYear={selectedYear}
           selectedQuarter={selectedQuarter}
