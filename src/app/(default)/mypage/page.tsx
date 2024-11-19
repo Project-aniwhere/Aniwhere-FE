@@ -1,20 +1,24 @@
+import MypageAccountInfo from '@/component/mypage/mypage-accountInfo';
 import MypageMobile from '@/component/mypage/mypage-mobile';
 import MypageSidebar from '@/component/mypage/mypage-sidebar';
-import MypageUserInfo from '@/component/mypage/mypage-userInfo';
+import { isMobile } from '@/util/detect-device';
 import { useState } from 'react';
 
 const Page = () => {
   return (
     <>
-      <div className='hidden md:block md:flex justify-center items-center h-screen w-4/5 mx-auto'>
-        {/* Left Sidebar */}
-        <MypageSidebar />
-        {/* Main Content */}
-        <MypageUserInfo />
-      </div>
-      <div className='flex mt-20 h-screen md:hidden'>
-        <MypageMobile />
-      </div>
+      {isMobile() ? (
+        <div className='flex mt-20 h-screen md:hidden'>
+          <MypageMobile />
+        </div>
+      ) : (
+        <div className='flex justify-center items-center h-screen mx-auto'>
+          {/* Left Sidebar */}
+          <MypageSidebar />
+          {/* Main Content */}
+          <MypageAccountInfo />
+        </div>
+      )}
     </>
   );
 };
