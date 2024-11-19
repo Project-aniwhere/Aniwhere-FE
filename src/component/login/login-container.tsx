@@ -6,10 +6,11 @@ import HoverColorButton from '../common/button/hover-color-button';
 import UnderlineButton from '../common/button/hover-underline-button';
 import IconButton from '../common/button/icon-button';
 import DefaultInput from '../common/input/default-input';
+import Link from 'next/link';
 
 const LoginContainer = () => {
   return (
-    <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2'>
+    <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2 rounded-lg'>
       {/* Logo */}
       <h1 className='text-aniviolet3 text-2xl font-bold text-center'>
         ANIWHERE
@@ -41,7 +42,9 @@ const LoginContainer = () => {
         </span>
         <span className='mt-2 text-gray-600 inline-flex'>
           <p>계정이 없으신가요?</p>
-          <UnderlineButton className='ml-1' text='회원가입' />
+          <Link href='/signup'>
+            <UnderlineButton className='ml-1' text='회원가입' />
+          </Link>
         </span>
       </div>
 
@@ -53,9 +56,14 @@ const LoginContainer = () => {
           <div className='flex-grow border-t border-gray-300' />
         </div>
 
-        <div className='flex justify-center gap-4'>
-          <IconButton Icon={KakaotalkSvg} height='3rem' width='3rem' />
-          <IconButton Icon={GoogleSvg} height='3rem' width='3rem' />
+        <div className='flex justify-center gap-4 mt-6'>
+          <IconButton>
+            <KakaotalkSvg height='3rem' width='3rem' />
+          </IconButton>
+
+          <IconButton>
+            <GoogleSvg height='3rem' width='3rem' />
+          </IconButton>
         </div>
       </div>
     </div>

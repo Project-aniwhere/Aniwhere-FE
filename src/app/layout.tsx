@@ -33,12 +33,10 @@ export default function RootLayout({
       </head>
 
       <body className='font-pretendard scrollbar'>
-        <Header />
         <div id='modal-root' />
         <Provider>
           <ReactQueryProvider>{children}</ReactQueryProvider>
         </Provider>
-        <Footer />
         {modal}
       </body>
     </html>

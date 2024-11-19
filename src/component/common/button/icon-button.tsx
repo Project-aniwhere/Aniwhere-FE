@@ -1,28 +1,19 @@
 'use client';
 
-import { CommonButtonProps } from '@/type/common';
-
-interface IconButtonProps extends CommonButtonProps {
-  Icon: React.ComponentType<{ height?: string; width?: string }>;
-  height?: string;
-  width?: string;
-}
+import { IconButtonProps } from '@/type/common';
 
 const IconButton = ({
   type = 'submit',
-  className = '',
-  onClick = () => {},
-  Icon,
-  height = '3rem',
-  width = '3rem',
+  children,
+  ...props
 }: IconButtonProps) => {
   return (
     <button
       type={type}
-      className={`${className} flex items-center justify-center rounded-full hover:opacity-80 transition-opacity`}
-      onClick={onClick}
+      className={`flex items-center justify-center rounded-full hover:opacity-80 transition-opacity ${props.className}`}
+      onClick={props.onClick}
     >
-      <Icon height={height} width={width} />
+      {children}
     </button>
   );
 };
