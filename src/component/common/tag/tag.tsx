@@ -4,14 +4,20 @@ interface TagProps {
   text: string;
   size?: SizeProps;
   state?: StateProps;
+  handleClick?: () => void;
 }
 
-const Tag = ({ text, size = 'medium', state = 'default' }: TagProps) => {
+const Tag = ({
+  text,
+  size = 'medium',
+  state = 'default',
+  handleClick,
+}: TagProps) => {
   const baseStyles = 'px-2 py-1 rounded-lg border';
 
   const sizeStyles = {
-    small: 'text-sm',
-    medium: '',
+    small: 'text-xs md:text-sm',
+    medium: 'text-sm md:text-base',
   };
 
   const colorStyles = {
@@ -22,8 +28,9 @@ const Tag = ({ text, size = 'medium', state = 'default' }: TagProps) => {
 
   return (
     <button
-      className={`${baseStyles} ${sizeStyles[size]} ${colorStyles[state]}`}
       disabled={state === 'disabled'}
+      onClick={handleClick}
+      className={`${baseStyles} ${sizeStyles[size]} ${colorStyles[state]}`}
     >
       {text}
     </button>

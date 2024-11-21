@@ -2,38 +2,45 @@ import CalendarSvg from '@/asset/svg/calendar/calendar-svg';
 import useToggle from '@/hook/usetoggle';
 import YearList from './year-list';
 import { YearPickerProps } from '@/type/year-picker';
+import { getYear } from '@/util/date';
 
 interface Props extends YearPickerProps {
-  startYear?: number;
+  startYear?: string;
   length?: number;
 }
 
 const YearPicker = ({
   selectedYear,
   setSelectedYear,
-  startYear = new Date().getFullYear(),
+  startYear = getYear(),
   length = 10,
 }: Props) => {
   const [isOpenYearMenu, handleToggleYearMenu] = useToggle(false);
 
-  const years = Array.from({ length }, (_, i) => startYear - i);
+  const years = Array.from({ length }, (_, i) => String(Number(startYear) - i));
 
-  const handleChangeYear = (year: number) => {
+  const handleChangeYear = (year: string) => {
     setSelectedYear(year);
     handleToggleYearMenu();
   };
 
   return (
-    <div className='relative w-6 h-6'>
-      <button className='text-2xl' onClick={handleToggleYearMenu}>
+    <div className='relative inline-flex'>
+      <button
+        aria-label='calendar'
+        className='text-base md:text-xl'
+        onClick={handleToggleYearMenu}
+      >
         <CalendarSvg fill='#9CA3AF' />
       </button>
       {isOpenYearMenu && (
-        <YearList
-          selectedYear={selectedYear}
-          years={years}
-          handleChangeYear={handleChangeYear}
-        />
+        <div className='absolute z-10 left-0 top-5 md:top-6'>
+          <YearList
+            selectedYear={selectedYear}
+            years={years}
+            handleChangeYear={handleChangeYear}
+          />
+        </div>
       )}
     </div>
   );

@@ -1,26 +1,18 @@
-export const WEEKLY_TAGS = [
-  {
-    id: '1',
-    value: '1분기',
-  },
-  {
-    id: '2',
-    value: '2분기',
-  },
-  {
-    id: '3',
-    value: '3분기',
-  },
-  {
-    id: '4',
-    value: '4분기',
-  },
-  {
-    id: 'airing',
-    value: '방영 중',
-  },
-  {
-    id: 'upcoming',
-    value: '방영 예정',
-  },
-];
+export const QUARTERS: Record<string, string> = {
+  '1': '1분기',
+  '2': '2분기',
+  '3': '3분기',
+  '4': '4분기',
+  airing: '방영 중',
+  upcoming: '방영 예정',
+};
+
+export const DAYS: Record<string, string> = {
+  '0': '일',
+  '1': '월',
+  '2': '화',
+  '3': '수',
+  '4': '목',
+  '5': '금',
+  '6': '토',
+};
