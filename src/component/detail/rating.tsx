@@ -4,7 +4,7 @@ const Rating = () => {
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-2'>
-        <p className='font-medium'>평가하기</p>
+        <p className='font-medium'>내 별점</p>
         <div className='flex gap-2 text-3xl font-medium'>
           <span>별</span>
           <span>별</span>

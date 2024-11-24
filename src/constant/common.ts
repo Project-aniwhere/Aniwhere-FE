@@ -16,3 +16,10 @@ export const DAYS: Record<string, string> = {
   '5': '금',
   '6': '토',
 };
+
+export const DETAIL_TABS: Record<string, string> = {
+  episode: '에피소드',
+  cast_production: '출연/제작',
+  comment: '코멘트',
+  related_ani: '비슷한 작품',
+};

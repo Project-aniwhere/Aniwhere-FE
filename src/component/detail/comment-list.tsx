@@ -4,7 +4,7 @@ const CommentList = () => {
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-2'>
-        <p className='font-medium'>평균별점</p>
+        <p className='font-medium'>평균 별점</p>
         <div>
           <span className='text-3xl font-medium'>4.1 </span>
           <span className='text-sm'>(3,067명)</span>
