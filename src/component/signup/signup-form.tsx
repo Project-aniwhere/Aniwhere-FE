@@ -16,7 +16,7 @@ const SignupForm = () => {
       {/* From-NickName */}
       <div className='flex gap-2'>
         <DefaultInput type='text' placeholder='닉네임' className='flex-1 p-2' />
-        <HoverColorButton className='px-4 py-2' text='중복확인' />
+        <HoverColorButton className='w-28 py-2' text='중복확인' />
       </div>
       {/* From-Email */}
       <div className='flex gap-2'>
@@ -25,9 +25,17 @@ const SignupForm = () => {
           placeholder='이메일'
           className='flex-1 p-2'
         />
-        <HoverColorButton className='px-4 py-2' text='인증번호' />
+        <HoverColorButton className='w-28 py-2' text='인증번호 발송' />
       </div>
-      {/* From-NickName */}
+      <div className='flex gap-2'>
+        <DefaultInput
+          type='text'
+          placeholder='인증번호'
+          className='flex-1 p-2'
+        />
+        <HoverColorButton className='w-28 py-2' text='인증번호 확인' />
+      </div>
+      {/* From-Password */}
       <DefaultInput
         type='password'
         placeholder='비밀번호'

@@ -1,8 +1,8 @@
-import { DailyAniProps, DayProps } from '@/type/weekly';
+import { DailyAniProps } from '@/type/weekly';
 import DailyConatiner from './daily-container';
 
 interface WeeklyContainerProps {
-  weeklyList: Record<DayProps, DailyAniProps[]>;
+  weeklyList: Record<string, DailyAniProps[]>;
   currentDay: string;
 }
 

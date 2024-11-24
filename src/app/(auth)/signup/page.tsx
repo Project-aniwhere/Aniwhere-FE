@@ -1,19 +1,13 @@
-'use client';
-
 import GoogleSvg from '@/asset/svg/google/google-svg';
 import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
-import HoverColorButton from '@/component/common/button/hover-color-button';
 import UnderlineButton from '@/component/common/button/hover-underline-button';
 import IconButton from '@/component/common/button/icon-button';
-import DefaultDatepicker from '@/component/common/datepicker/custom-datepicker';
-import DefaultInput from '@/component/common/input/default-input';
-import RadioInput from '@/component/common/input/radio-input';
 import SignupForm from '@/component/signup/signup-form';
 import { useState } from 'react';
 
 const Page = () => {
   return (
-    <div className='w-full h-screen flex items-center justify-center'>
+    <div className='w-full h-dvh flex items-center justify-center'>
       <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2'>
         {/* Logo */}
         <h1 className='text-aniviolet3 text-2xl font-bold text-center'>
