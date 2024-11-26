@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
+  QueryFunction,
+  QueryKey,
 } from '@tanstack/react-query';
-import { PropsWithChildren } from 'react';
 
 const HydrateQuery = async ({
   children,
@@ -12,8 +12,8 @@ const HydrateQuery = async ({
   queryFn,
 }: {
   children: React.ReactNode;
-  queryKey: any;
-  queryFn: any;
+  queryKey: QueryKey;
+  queryFn: QueryFunction;
 }) => {
   const queryClient = new QueryClient();
 
