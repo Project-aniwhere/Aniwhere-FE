@@ -19,12 +19,12 @@ const ModalContainer: React.ForwardRefRenderFunction<
     <dialog
       ref={ref}
       className={
-        `bg-transparent ${modalType === 'dialog' ? 'relative' : ''}` + className
+        `bg-transparent rounded-lg ${modalType === 'dialog' ? 'relative' : ''} ` +
+        className
       }
       onClose={onClose}
     >
       {children}
-
       <button
         onClick={onClose}
         className='absolute right-2 top-2 rounded-full bg-aniviolet4 bg-opacity-60 p-0.5'

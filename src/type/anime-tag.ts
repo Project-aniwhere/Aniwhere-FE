@@ -21,12 +21,12 @@ export const AnimeSeasonTypeObject = {
   2: '2분기',
   3: '3분기',
   4: '4분기',
-};
+} as const;
 
 export const AnimeBroadCastTypeObject = {
   broadcasting: '방영중',
   finish: '완결',
-};
+} as const;
 
 export const AnimeFilterObject = {
   genre: AnimeGenreObject,
@@ -42,7 +42,7 @@ export const AnimeFilterNameObject = {
   release: '출시 종류',
   season: '분기',
   broadcasting: '방영 유무',
-};
+} as const;
 
 export type AnimeGenreType = keyof typeof AnimeGenreObject;
 export type AnimeTagType = keyof typeof AnimeTagObject;

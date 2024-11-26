@@ -1,9 +1,16 @@
 import SearchIconSvg from '@/asset/svg/search/search-icon-svg';
 import DefaultInput from '../common/input/default-input';
 import ControlIconSvg from '@/asset/svg/control/control-icon-svg';
-import TagFilter from './tag-filter';
+import { TagFilterAction, TagFilterState } from './tag-filter-reducer';
+import { Dispatch } from 'react';
 
-export default function TagSearchBar() {
+interface TagSearchBarProps {
+  filterState: TagFilterState;
+  dispatch: Dispatch<TagFilterAction>;
+  setToggle: () => void;
+}
+
+export default function TagSearchBar({ setToggle }: TagSearchBarProps) {
   return (
     <>
       <div className='flex items-stretch gap-4 h-10'>
@@ -17,11 +24,13 @@ export default function TagSearchBar() {
             placeholder='검색어를 입력하세요.'
           />
         </div>
-        <button className='bg-aniviolet2 aspect-square rounded-lg flex items-center justify-center p-2'>
+        <button
+          className='bg-aniviolet2 aspect-square rounded-lg flex items-center justify-center p-2'
+          onClick={setToggle}
+        >
           <ControlIconSvg />
         </button>
       </div>
-      <TagFilter />
     </>
   );
 }
