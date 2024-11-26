@@ -9,14 +9,17 @@ import {
 } from '@/type/anime-tag';
 import { useCallback, useRef } from 'react';
 import ModalContainer from '../common/modal/modal-container';
+import { TagState } from './tag-filter-reducer';
 
-interface TagFilterModalSelectorProps {
+interface TagFilterModalSelectorProps<T> {
   filterType: AnimeFilterType;
+  tagList: [TagState, T][];
 }
 
-const TagFilterModalSelector = ({
+function TagFilterModalSelector<T extends string>({
   filterType,
-}: TagFilterModalSelectorProps) => {
+  tagList,
+}: TagFilterModalSelectorProps<T>) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const handleModalOpen = useCallback(() => modalRef.current?.showModal(), []);
   return (
@@ -51,13 +54,23 @@ const TagFilterModalSelector = ({
           {filterType === 'season' && (
             <input placeholder='selector' className='w-16'></input>
           )}
-          {Object.values(AnimeFilterObject[filterType]).map((value) => (
-            <TagItem key={value} onClick={() => {}} tagName={value} />
-          ))}
+          {tagList
+            .filter(([tagState]) => tagState !== 'neutral')
+            .map(([tagState, tag]) => (
+              <TagItem
+                key={tag}
+                onClick={() => {}}
+                tagName={
+                  AnimeFilterObject[filterType][
+                    tag as keyof (typeof AnimeFilterObject)[typeof filterType]
+                  ]
+                }
+              />
+            ))}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default TagFilterModalSelector;

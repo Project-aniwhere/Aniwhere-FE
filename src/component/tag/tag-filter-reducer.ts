@@ -32,7 +32,7 @@ export const TagFilterInitState: TagFilterState = {
   ]),
 };
 
-type TagState = 'included' | 'excluded' | 'neutral';
+export type TagState = 'included' | 'excluded' | 'neutral';
 
 export interface TagFilterAction {
   type: 'TOGGLE' | 'CLEAR';

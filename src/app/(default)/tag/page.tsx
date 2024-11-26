@@ -20,7 +20,7 @@ const TagPage = () => {
   return (
     <div className='flex flex-col gap-4'>
       <TagSearchBar setToggle={setToggle} />
-      {toggle && <TagFilter />}
+      {toggle && <TagFilter filterState={filterState} dispatch={dispatch} />}
       <TagSearchResult />
     </div>
   );
