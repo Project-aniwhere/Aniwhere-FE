@@ -3,6 +3,7 @@ import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
 import UnderlineButton from '@/component/common/button/hover-underline-button';
 import IconButton from '@/component/common/button/icon-button';
 import SignupForm from '@/component/signup/signup-form';
+import SocialSignIn from '@/component/signup/social-signin';
 import { useState } from 'react';
 
 const Page = () => {
@@ -10,12 +11,10 @@ const Page = () => {
     <div className='w-full h-dvh flex items-center justify-center'>
       <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2'>
         {/* Logo */}
-        <h1 className='text-aniviolet3 text-2xl font-bold text-center'>
-          ANIWHERE
-        </h1>
+        <h1 className='text-aniviolet3 text-3xl font-bold'>ANIWHERE</h1>
 
         {/* Title */}
-        <h2 className='text-lg font-medium text-center mb-6'>회원가입</h2>
+        <h2 className='text-2xl mb-6'>회원가입</h2>
 
         {/* Form */}
         <SignupForm />
@@ -36,15 +35,7 @@ const Page = () => {
             <div className='flex-grow border-t border-gray-300' />
           </div>
 
-          <div className='flex justify-center gap-4 mt-6'>
-            <IconButton>
-              <KakaotalkSvg height='3rem' width='3rem' />
-            </IconButton>
-
-            <IconButton>
-              <GoogleSvg height='3rem' width='3rem' />
-            </IconButton>
-          </div>
+          <SocialSignIn />
         </div>
       </div>
     </div>

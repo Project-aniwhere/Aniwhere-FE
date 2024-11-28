@@ -26,7 +26,6 @@ const DefaultDatepicker = ({
   const handleDateChange = (selectedDate: Value) => {
     if (selectedDate instanceof Date) {
       setPlaceholderColor('text-black');
-      onChange(selectedDate);
       setIsOpen(false);
       setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
     }
@@ -34,6 +33,7 @@ const DefaultDatepicker = ({
 
   return (
     <div className='relative'>
+      <input type='hidden' name='birth' value={nowDate} />
       <button
         type='button'
         onClick={handleToggleCalendar}
