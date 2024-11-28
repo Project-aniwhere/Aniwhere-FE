@@ -14,15 +14,13 @@ const MainImageSlider = async ({ animes }: AnimeRecommendInfoType) => {
         bulletPosition='right'
       >
         {animes.map((anime) => (
-          <div key={anime.poster} className='relative'>
+          <div key={anime.poster} className='relative w-full h-dvh'>
             <div className='absolute size-full bg-radial-gradient-r' />
             <CFImage
               src={anime.poster}
               alt='main slider image'
-              width={0}
-              height={0}
-              sizes='100vw'
-              className='w-full h-dvh object-cover '
+              fill
+              className='object-cover'
             />
             <div className='absolute left-4 bottom-4 text-white'>
               <p>{anime.releaseDate}</p>

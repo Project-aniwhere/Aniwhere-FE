@@ -19,16 +19,16 @@ const ContentSlider = ({
         {animes.map((anime) => (
           <div
             key={anime.poster + anime.title}
-            className='p-2 hover:scale-105 duration-200 flex flex-col gap-2 cursor-pointer h-fit'
+            className='p-2 hover:scale-105 duration-200 flex flex-col gap-2 cursor-pointer w-full'
           >
-            <CFImage
-              src={anime.poster}
-              alt='image list'
-              width={0}
-              height={0}
-              sizes='25%'
-              className='w-full rounded-lg'
-            />
+            <div className='relative aspect-video'>
+              <CFImage
+                src={anime.poster}
+                alt='image list'
+                fill
+                className='object-cover rounded-lg'
+              />
+            </div>
             <div>
               <p className='font-bold text-lg leading-5'>{anime.title}</p>
               <p className='text-[0.875rem] text-gray-500'>
