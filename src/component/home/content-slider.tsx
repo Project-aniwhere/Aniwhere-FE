@@ -1,8 +1,12 @@
 import Carousel from '../common/carousel/carousel';
-import { AnimeRecommendInfo } from '@/type/api/anime-recommend-api';
+import { AnimeRecommendInfoType } from '@/type/api/anime-recommend-api';
 import CFImage from '../common/image/cf-image';
 
-const ContentSlider = ({ title, description, animes }: AnimeRecommendInfo) => {
+const ContentSlider = ({
+  title,
+  description,
+  animes,
+}: AnimeRecommendInfoType) => {
   return (
     <section className='w-full flex flex-col items-start gap-3'>
       <div className='px-2'>

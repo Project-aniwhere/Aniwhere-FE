@@ -1,9 +1,9 @@
 import Carousel from '../common/carousel/carousel';
-import { AnimeRecommendInfo } from '@/type/api/anime-recommend-api';
+import { AnimeRecommendInfoType } from '@/type/api/anime-recommend-api';
 import CFImage from '../common/image/cf-image';
 import FullStarSvg from '@/asset/svg/star/full-star-svg';
 
-const MainImageSlider = async ({ animes }: AnimeRecommendInfo) => {
+const MainImageSlider = async ({ animes }: AnimeRecommendInfoType) => {
   return (
     <section className='relative w-full h-full'>
       <Carousel

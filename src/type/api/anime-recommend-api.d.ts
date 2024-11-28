@@ -77,7 +77,7 @@ interface Anime {
 }
 
 // MainObject 인터페이스
-export interface AnimeRecommendInfo {
+export interface AnimeRecommendInfoType {
   id: number;
   title: string;
   description: string;
@@ -87,4 +87,4 @@ export interface AnimeRecommendInfo {
 }
 
 // 최종 데이터 배열 인터페이스
-export type AnimeRecommendResponse = Array<AnimeRecommendInfo>;
+export type AnimeRecommendResponse = Array<AnimeRecommendInfoType>;
