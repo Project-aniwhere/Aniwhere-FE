@@ -20,7 +20,7 @@ const MainImageSlider = async ({ animes }: AnimeRecommendInfoType) => {
               src={anime.poster}
               alt='main slider image'
               fill
-              className='object-cover'
+              className='object-cover -z-10'
             />
             <div className='absolute left-4 bottom-4 text-white'>
               <p>{anime.releaseDate}</p>
