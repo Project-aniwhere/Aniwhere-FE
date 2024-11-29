@@ -1,10 +1,6 @@
-import GoogleSvg from '@/asset/svg/google/google-svg';
-import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
 import UnderlineButton from '@/component/common/button/hover-underline-button';
-import IconButton from '@/component/common/button/icon-button';
 import SignupForm from '@/component/signup/signup-form';
 import SocialSignIn from '@/component/signup/social-signin';
-import { useState } from 'react';
 
 const Page = () => {
   return (

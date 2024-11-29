@@ -33,7 +33,7 @@ const DefaultDatepicker = ({
 
   return (
     <div className='relative'>
-      <input type='hidden' name='birth' value={nowDate} />
+      <input type='hidden' name='date' value={nowDate} />
       <button
         type='button'
         onClick={handleToggleCalendar}

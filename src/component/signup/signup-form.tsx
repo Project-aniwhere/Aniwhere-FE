@@ -7,10 +7,6 @@ import BirthInput from './birth-input';
 import { handleForm } from './form-action';
 
 const SignupForm = () => {
-  async function handleSubmit() {
-    'use server';
-  }
-
   return (
     <form className='space-y-4' action={handleForm}>
       {/* From-NickName */}

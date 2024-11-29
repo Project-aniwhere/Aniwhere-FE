@@ -3,17 +3,21 @@ import HoverColorButton from '../common/button/hover-color-button';
 import DefaultInput from '../common/input/default-input';
 import { useEffect, useState } from 'react';
 
+const SET_VERIFICATION_TIME = 10;
+
 const EmailInput = () => {
-  const isShowEmailCheck: boolean = false;
   const regex_email = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
   const [showEmailCheck, setShowEmailCheck] = useState(false);
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailValidateError, setEmailValidateError] = useState<boolean>(false);
   const [errorMsgValidateEmail, setErrorMsgValidateEmail] = useState('');
   const [count, setCount] = useState(10);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [authCode, setAuthCode] = useState('');
+  const [successAuth, setSuccessAuth] = useState(false);
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!regex_email.test(e.target.value)) {
       e.target.value = '';
       setShowEmailCheck(false);
@@ -23,9 +27,15 @@ const EmailInput = () => {
     }
   };
 
+  const handelEmailchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowEmailCheck(false);
+    setIsTimerRunning(false);
+    setSuccessAuth(false);
+    setAuthCode('');
+  };
+
   useEffect(() => {
     let id: NodeJS.Timeout;
-
     if (isTimerRunning && count >= 0) {
       id = setInterval(() => {
         setCount((prev) => prev - 1);
@@ -45,22 +55,25 @@ const EmailInput = () => {
     if (!emailError) {
       setShowEmailCheck(true);
       setIsTimerRunning(true);
-      setCount(10);
+      setEmailValidateError(false);
+      setAuthCode('');
+      setCount(SET_VERIFICATION_TIME);
     }
   }
 
-  function sendEmailValidation() {}
+  function sendEmailValidation() {
+    setSuccessAuth(true);
+  }
 
   return (
     <div className='space-y-2'>
       <div className='flex gap-2'>
         <DefaultInput
           name='email'
-          type='email'
           placeholder='이메일'
           className='flex-1 p-2'
-          disabled={showEmailCheck}
-          onBlur={handleEmailChange}
+          onChange={handelEmailchange}
+          onBlur={handleEmailCheck}
         />
         <HoverColorButton
           type='button'
@@ -75,31 +88,39 @@ const EmailInput = () => {
         </div>
       )}
       {showEmailCheck && (
-        <div className='flex gap-2'>
-          <DefaultInput
-            type='text'
-            placeholder='인증번호'
-            className='flex-1 p-2'
-            disabled={emailValidateError}
-          />
-          <HoverColorButton
-            type='button'
-            className='w-28 py-2'
-            text='인증번호 확인'
-            onClick={sendEmailValidation}
-          />
+        <div className={`${successAuth ? 'hidden' : 'block'}`}>
+          <div className='flex gap-2'>
+            <DefaultInput
+              type='text'
+              name='authCode'
+              value={authCode}
+              onChange={(e) => setAuthCode(e.target.value)}
+              placeholder='인증번호'
+              className='flex-1 p-2'
+            />
+            <HoverColorButton
+              type='button'
+              className='w-28 py-2'
+              text='인증번호 확인'
+              onClick={sendEmailValidation}
+            />
+          </div>
+          {emailValidateError ? (
+            <div className='text-sm text-red-700 ml-2'>
+              {errorMsgValidateEmail}
+            </div>
+          ) : (
+            <div className='text-sm text-red-700 ml-2'>
+              {count}초 안에 입력해주십시오
+            </div>
+          )}
         </div>
       )}
-      {showEmailCheck &&
-        (emailValidateError ? (
-          <div className='text-sm text-red-700 ml-2'>
-            {errorMsgValidateEmail}
-          </div>
-        ) : (
-          <div className='text-sm text-red-700 ml-2'>
-            {count}초 안에 입력해주십시오
-          </div>
-        ))}
+      {successAuth && (
+        <div className='text-sm text-green-600 ml-2'>
+          이메일 인증이 완료되었습니다
+        </div>
+      )}
     </div>
   );
 };
