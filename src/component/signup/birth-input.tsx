@@ -20,6 +20,7 @@ const BirthInput = () => {
         onChange={handleDateChange}
         placeholder='생년월일'
         className='w-48'
+        type='birth'
       />
       <div className='flex gap-4 w-28'>
         <label className='flex gap-2'>

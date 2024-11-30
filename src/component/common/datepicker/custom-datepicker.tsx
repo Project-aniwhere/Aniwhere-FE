@@ -14,6 +14,7 @@ const DefaultDatepicker = ({
   value,
   placeholder = '',
   className = '',
+  type = '',
 }: CommonDatepickerProps) => {
   const [nowDate, setNowDate] = useState<string>(placeholder); // 초기값 설정
   const [isOpen, setIsOpen] = useState(false);
@@ -26,16 +27,20 @@ const DefaultDatepicker = ({
 
   const handleDateChange = (selectedDate: Value) => {
     if (selectedDate instanceof Date) {
-      setPlaceholderColor('text-black');
-      setIsOpen(false);
-      const today = moment();
-      if (moment(selectedDate) < today) {
-        setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
-        setDateError(false);
+      if (type === 'birth') {
+        setPlaceholderColor('text-black');
+        setIsOpen(false);
+        const today = moment();
+        if (moment(selectedDate) < today) {
+          setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
+          setDateError(false);
+        } else {
+          setPlaceholderColor('text-gray-400');
+          setNowDate(placeholder);
+          setDateError(true);
+        }
       } else {
-        setPlaceholderColor('text-gray-400');
-        setNowDate('생년월일');
-        setDateError(true);
+        setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
       }
     }
   };

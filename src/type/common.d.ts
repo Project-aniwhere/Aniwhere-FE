@@ -15,4 +15,5 @@ export interface CommonDatepickerProps {
   value: Value;
   placeholder?: string;
   className?: string;
+  type?: string;
 }
