@@ -1,6 +1,5 @@
 'use client';
 
-import GoogleSvg from '@/asset/svg/google/google-svg';
 import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
 import HoverColorButton from '../common/button/hover-color-button';
 import UnderlineButton from '../common/button/hover-underline-button';
@@ -59,10 +58,6 @@ const LoginContainer = () => {
         <div className='flex justify-center gap-4 mt-6'>
           <IconButton>
             <KakaotalkSvg height='3rem' width='3rem' />
-          </IconButton>
-
-          <IconButton>
-            <GoogleSvg height='3rem' width='3rem' />
           </IconButton>
         </div>
       </div>

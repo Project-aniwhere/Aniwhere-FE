@@ -19,8 +19,9 @@ const BirthInput = () => {
         value={selectedDate}
         onChange={handleDateChange}
         placeholder='생년월일'
+        className='w-48'
       />
-      <div className='flex gap-4'>
+      <div className='flex gap-4 w-28'>
         <label className='flex gap-2'>
           <RadioInput name='gender' value='male' className='w-full p-3' />
           <span>남</span>

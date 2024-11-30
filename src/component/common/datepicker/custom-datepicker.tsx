@@ -18,6 +18,7 @@ const DefaultDatepicker = ({
   const [nowDate, setNowDate] = useState<string>(placeholder); // 초기값 설정
   const [isOpen, setIsOpen] = useState(false);
   const [placeholderColor, setPlaceholderColor] = useState('text-gray-400');
+  const [dateError, setDateError] = useState(false);
 
   const handleToggleCalendar = () => {
     setIsOpen(!isOpen);
@@ -27,7 +28,15 @@ const DefaultDatepicker = ({
     if (selectedDate instanceof Date) {
       setPlaceholderColor('text-black');
       setIsOpen(false);
-      setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
+      const today = moment();
+      if (moment(selectedDate) < today) {
+        setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
+        setDateError(false);
+      } else {
+        setPlaceholderColor('text-gray-400');
+        setNowDate('생년월일');
+        setDateError(true);
+      }
     }
   };
 
@@ -37,7 +46,7 @@ const DefaultDatepicker = ({
       <button
         type='button'
         onClick={handleToggleCalendar}
-        className={`text-left w-72 p-3 border border-gray-300 rounded-lg bg-gray-50 ${className} ${placeholderColor}`}
+        className={`text-left p-3 border border-gray-300 rounded-lg bg-gray-50 ${className} ${placeholderColor}`}
       >
         {nowDate}
       </button>
@@ -45,6 +54,11 @@ const DefaultDatepicker = ({
       {isOpen && (
         <div className='absolute left-0'>
           <Calendar onChange={handleDateChange} value={value} locale='ko-KR' />
+        </div>
+      )}
+      {dateError && (
+        <div className='text-sm text-red-700 ml-2'>
+          오늘보다 이전 날짜를 입력해주십시오
         </div>
       )}
     </div>

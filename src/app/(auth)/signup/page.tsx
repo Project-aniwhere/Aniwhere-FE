@@ -1,6 +1,7 @@
 import UnderlineButton from '@/component/common/button/hover-underline-button';
 import SignupForm from '@/component/signup/signup-form';
 import SocialSignIn from '@/component/signup/social-signin';
+import Link from 'next/link';
 
 const Page = () => {
   return (
@@ -19,7 +20,9 @@ const Page = () => {
         <div className='mt-4 text-center flex flex-col items-center'>
           <span className='text-gray-600 inline-flex'>
             <p className='whitespace-nowrap'>이미 가입하셨나요?</p>
-            <UnderlineButton className='ml-1' text='로그인' />
+            <Link href='/login'>
+              <UnderlineButton className='ml-1' text='로그인' />
+            </Link>
           </span>
         </div>
 
