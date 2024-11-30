@@ -1,8 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import DefaultInput from '../common/input/default-input';
-import modalDialog from '../common/modal/modal-dialog';
-import ModalDialog from '../common/modal/modal-dialog';
 import { ModalRef } from '@/type/modal';
 
 const PasswordInput = () => {

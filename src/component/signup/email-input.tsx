@@ -1,24 +1,30 @@
 'use client';
-import { API_URL } from '@/constant/api-url';
 import HoverColorButton from '../common/button/hover-color-button';
 import DefaultInput from '../common/input/default-input';
 import { useEffect, useState } from 'react';
+import { Fetch } from '@/util/fetch';
 
 const SET_VERIFICATION_TIME = 300;
 
 const EmailInput = () => {
   const regex_email = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
+  // 이메일
   const [showEmailCheck, setShowEmailCheck] = useState(false);
   const [email, setEmail] = useState('');
+
+  // 이메일 인증 에러
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailValidateError, setEmailValidateError] = useState<boolean>(false);
   const [errorMsgValidateEmail, setErrorMsgValidateEmail] = useState('');
+
+  // Timer 설정
   const [count, setCount] = useState(10);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  // 인증코드
   const [authCode, setAuthCode] = useState('');
   const [successAuth, setSuccessAuth] = useState(false);
-  // const [successAuth, setSuccessAuth] = useState(false);
 
   const handleEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!regex_email.test(e.target.value)) {
@@ -78,7 +84,7 @@ const EmailInput = () => {
         body: JSON.stringify(obj),
       };
 
-      fetch(`${API_URL}/api/auth/email/verifications-requests`, data)
+      Fetch('api/auth/email/verifications-requests', data)
         .then((res) => {
           console.log('Response status:', res.status); // HTTP 상태 코드 확인
           if (res.status == 200) {
@@ -112,10 +118,14 @@ const EmailInput = () => {
       body: JSON.stringify(obj),
     };
 
-    fetch(`${API_URL}/api/auth/email/verifications`, data).then((res) => {
+    Fetch('api/auth/email/verifications', data).then((res) => {
       console.log('Response status:', res.status); // HTTP 상태 코드 확인
       if (res.status === 200) {
         setSuccessAuth(true);
+      } else {
+        setErrorMsgValidateEmail('인증코드가 일치하지 않습니다');
+        setEmailValidateError(true);
+        setIsTimerRunning(false);
       }
       return res.json();
     });
@@ -154,6 +164,7 @@ const EmailInput = () => {
               name='authCode'
               value={authCode}
               onChange={(e) => setAuthCode(e.target.value)}
+              disabled={emailValidateError}
               placeholder='인증번호'
               className='flex-1 p-2'
             />

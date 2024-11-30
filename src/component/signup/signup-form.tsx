@@ -1,4 +1,3 @@
-// import { useEffect, useState } from 'react';
 import HoverColorButton from '../common/button/hover-color-button';
 import PasswordInput from './password-input';
 import NicknameInput from './nickname-input';
