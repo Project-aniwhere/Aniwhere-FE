@@ -32,7 +32,7 @@ const ModalDialog = ({ children }: ModalProps, ref: Ref<ModalRef>) => {
   return (
     <div className='absolute w-full'>
       <ModalContainer
-        className='absolute top-0 z-20 shadow-lg p-4 rounded-lg'
+        className='absolute top-0 z-20 shadow-lg p-4 rounded-lg bg-white'
         ref={setDialogRef}
         onClose={closeModal}
         modalType='dialog'

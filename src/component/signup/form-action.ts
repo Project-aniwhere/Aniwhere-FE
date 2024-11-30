@@ -1,6 +1,7 @@
 'use server';
 
 import { Fetch } from '@/util/fetch';
+import { redirect } from 'next/navigation';
 
 export async function handleForm(formData: FormData) {
   const email = formData.get('email');
@@ -12,42 +13,56 @@ export async function handleForm(formData: FormData) {
   const authCode = formData.get('authCode');
   const sex = formData.get('gender');
 
-  console.log('FormData entries:', Object.fromEntries(formData.entries()));
+  const errors = [];
+  let errorMessage = '';
 
   const obj = {
-    nickname: nickName,
-    email: email,
-    password: password,
-    birthyear: birthyear,
-    birthday: birthday,
-    authCode: authCode,
-    sex: sex,
+    nickname: nickName?.toString(),
+    email: email?.toString(),
+    password: password?.toString(),
+    birthyear: birthyear?.toString(),
+    birthday: birthday?.toString(),
+    authCode: authCode?.toString(),
+    sex: sex?.toString(),
   };
 
-  console.log('test:', JSON.stringify(obj));
-
-  const data = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  };
-
-  // const response = await Fetch('api/auth/signup', data);
-  // const responseBody = await response.json();
-  // console.log(responseBody.status);
-
-  Fetch('api/auth/signup', data)
-    .then((res) => res.json())
-    .then((result) => {
-      console.log(result);
-    });
-  // { status: 400, code: 'M005', message: '이메일 인증에 실패하셨습니다.', errors: [] }
-
-  // Fetch('api/auth/signup', data)
-  //   .then((res) => res.json())
-  //   .then((result) => {
-  //     console.log(result.status);
-  //   });
+  if (!obj.nickname?.trim()) errors.push('닉네임');
+  if (!obj.email?.trim()) errors.push('이메일');
+  if (!obj.password?.trim()) errors.push('비밀번호');
+  if (!obj.birthyear?.trim() || obj.birthyear == '생년월일')
+    errors.push('생년월일');
+  if (!obj.sex?.trim()) errors.push('성별');
+  if (errors.length == 0 && !obj.authCode?.trim()) {
+    errorMessage = '이메일 검증을 해주십시오';
+  } else {
+    errorMessage = errors.join(', ') + '을 입력해주십시오';
+  }
+  if (errors.length == 0) {
+    const data = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
+    };
+    Fetch('api/auth/signup', data)
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          console.log('success');
+          redirect('/');
+        } else {
+          console.log('error occur : ', result);
+          redirect(
+            `signup/?status=error&message=${encodeURIComponent(result.message)}`
+          );
+        }
+      });
+  } else {
+    console.log(errorMessage);
+    redirect(
+      `signup/?status=error&message=${encodeURIComponent(errorMessage)}`
+    );
+  }
 }

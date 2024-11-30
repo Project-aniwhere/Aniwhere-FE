@@ -1,11 +1,33 @@
+'use client';
 import UnderlineButton from '@/component/common/button/hover-underline-button';
+import ModalDialog from '@/component/common/modal/modal-dialog';
 import SignupForm from '@/component/signup/signup-form';
 import SocialSignIn from '@/component/signup/social-signin';
+import { ModalRef } from '@/type/modal';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
 const Page = () => {
+  const modalRef = useRef<ModalRef>(null);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const status = searchParams.get('status');
+    if (status) {
+      console.log('status:', searchParams.get('status'));
+      console.log('message:', searchParams.get('message'));
+      console.log('modalRef:', modalRef.current);
+      setTimeout(() => {
+        modalRef.current?.openModal();
+      }, 100);
+      window.history.replaceState({}, '', '/signup');
+    }
+  }, [searchParams]);
+
   return (
-    <div className='w-full h-dvh flex items-center justify-center'>
+    <div className='w-full min-h-screen flex items-center justify-center pt-16'>
       <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2'>
         {/* Logo */}
         <h1 className='text-aniviolet3 text-3xl font-bold'>ANIWHERE</h1>
@@ -37,6 +59,16 @@ const Page = () => {
           <SocialSignIn />
         </div>
       </div>
+      <ModalDialog ref={modalRef}>
+        <div className='w-full max-w-sm p-4 rounded-lg z-50'>
+          <h3 className='text-lg font-semibold mb-2'>
+            {searchParams.get('status') === 'success'
+              ? '회원가입 완료'
+              : '회원가입 실패'}
+          </h3>
+          <p>{searchParams.get('message')}</p>
+        </div>
+      </ModalDialog>
     </div>
   );
 };
