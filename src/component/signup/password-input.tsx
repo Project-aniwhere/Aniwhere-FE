@@ -4,11 +4,15 @@ import DefaultInput from '../common/input/default-input';
 import { ModalRef } from '@/type/modal';
 
 const PasswordInput = () => {
+  // 비밀번호
+  const regex_pwd = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
   const [password, setPassword] = useState<string>('');
   const [passwordVerification, setPasswordVerification] = useState<string>('');
+
+  // 비밀번호 에러
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [checkPasswordError, setCheckPasswordError] = useState<boolean>(false);
-  const regex_pwd = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (passwordVerification !== '') {
       setPasswordVerification('');

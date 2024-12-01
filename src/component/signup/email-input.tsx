@@ -17,6 +17,7 @@ const EmailInput = () => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailValidateError, setEmailValidateError] = useState<boolean>(false);
   const [errorMsgValidateEmail, setErrorMsgValidateEmail] = useState('');
+  const [errorMsgValidateAuth, setErrorMsgValidateAuth] = useState('');
 
   // Timer 설정
   const [count, setCount] = useState(10);
@@ -26,16 +27,20 @@ const EmailInput = () => {
   const [authCode, setAuthCode] = useState('');
   const [successAuth, setSuccessAuth] = useState(false);
 
+  // 이메일 정규식 체크
   const handleEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!regex_email.test(e.target.value)) {
       e.target.value = '';
       setShowEmailCheck(false);
       setEmailError(true);
+      setErrorMsgValidateEmail('올바른 이메일을 입력해주십시오');
     } else {
       setEmail(e.target.value);
       setEmailError(false);
     }
   };
+
+  // 이메일 인증 변경
   const handelEmailchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowEmailCheck(false);
     setIsTimerRunning(false);
@@ -44,16 +49,7 @@ const EmailInput = () => {
     setEmail(e.target.value);
   };
 
-  // const handleEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!regex_email.test(e.target.value)) {
-  //     e.target.value = '';
-  //     setShowEmailCheck(false);
-  //     setEmailError(true);
-  //   } else {
-  //     setEmailError(false);
-  //   }
-  // };
-
+  // 인증번호 카운트다운
   useEffect(() => {
     let id: NodeJS.Timeout;
     if (isTimerRunning && count >= 0) {
@@ -61,16 +57,15 @@ const EmailInput = () => {
         setCount((prev) => prev - 1);
       }, 1000);
     }
-
     if (count === -1) {
-      setErrorMsgValidateEmail('시간초과로 인해 재인증 부탁드립니다');
+      setErrorMsgValidateAuth('시간초과로 인해 재인증 부탁드립니다');
       setEmailValidateError(true);
       setIsTimerRunning(false);
     }
-
     return () => clearInterval(id);
   }, [count, isTimerRunning]);
 
+  // 인증코드 발송
   async function sendEmailCode() {
     if (!emailError && email !== '') {
       const obj = {
@@ -84,51 +79,64 @@ const EmailInput = () => {
         body: JSON.stringify(obj),
       };
 
-      Fetch('api/auth/email/verifications-requests', data)
-        .then((res) => {
-          console.log('Response status:', res.status); // HTTP 상태 코드 확인
-          if (res.status == 200) {
-            setAuthCode('');
-            setCount(SET_VERIFICATION_TIME);
-            setShowEmailCheck(true);
-            setIsTimerRunning(true);
-            setEmailValidateError(false);
-          }
-          return res.text();
-        })
-        .then((result) => {
-          console.log('Result:', result);
-        });
+      try {
+        const response = await Fetch(
+          'api/auth/email/verifications-requests',
+          data
+        );
+        const result = await response.text();
+
+        console.log('send Email authCode result : ', response);
+
+        if (response.status === 200) {
+          setAuthCode('');
+          setCount(SET_VERIFICATION_TIME);
+          setShowEmailCheck(true);
+          setIsTimerRunning(true);
+          setEmailValidateError(false);
+        } else {
+          setShowEmailCheck(false);
+          setEmailError(true);
+          setErrorMsgValidateEmail('이미 회원가입한 메일입니다');
+        }
+      } catch (error) {
+        console.error('send Email authCode Error:', error);
+      }
     } else {
       setShowEmailCheck(false);
       setEmailError(true);
     }
   }
 
-  function sendEmailValidation() {
+  // 인증코드 체크
+  async function sendEmailValidation() {
     const obj = {
       email: email,
       code: authCode,
     };
     const data = {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(obj),
     };
+    try {
+      const response = await Fetch('api/auth/email/verifications', data);
+      const result = await response.json();
 
-    Fetch('api/auth/email/verifications', data).then((res) => {
-      console.log('Response status:', res.status); // HTTP 상태 코드 확인
-      if (res.status === 200) {
+      console.log('check Email authCode result : ', response);
+
+      if (response.status === 200) {
         setSuccessAuth(true);
       } else {
-        setErrorMsgValidateEmail('인증코드가 일치하지 않습니다');
+        setErrorMsgValidateAuth('인증코드가 일치하지 않습니다');
         setEmailValidateError(true);
         setIsTimerRunning(false);
       }
-      return res.json();
-    });
+    } catch (error) {
+      console.error('check Email authCode Error:', error);
+    }
   }
 
   return (
@@ -149,9 +157,7 @@ const EmailInput = () => {
         />
       </div>
       {emailError && (
-        <div className='text-sm text-red-700 ml-2'>
-          올바른 이메일을 입력해주십시오
-        </div>
+        <div className='text-sm text-red-700 ml-2'>{errorMsgValidateEmail}</div>
       )}
       {showEmailCheck && (
         <div className={`${successAuth ? 'hidden' : 'block'}`}>
@@ -177,7 +183,7 @@ const EmailInput = () => {
           </div>
           {emailValidateError ? (
             <div className='text-sm text-red-700 ml-2'>
-              {errorMsgValidateEmail}
+              {errorMsgValidateAuth}
             </div>
           ) : (
             <div className='text-sm text-red-700 ml-2'>
