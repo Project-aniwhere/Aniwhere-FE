@@ -3,11 +3,11 @@ import PasswordInput from './password-input';
 import NicknameInput from './nickname-input';
 import EmailInput from './email-input';
 import BirthInput from './birth-input';
-import { handleForm } from './form-action';
+import { onSubmit } from './form-action';
 
 const SignupForm = () => {
   return (
-    <form className='space-y-4' action={handleForm}>
+    <form className='space-y-4' action={onSubmit}>
       {/* From-NickName */}
       <NicknameInput />
       {/* From-Email */}

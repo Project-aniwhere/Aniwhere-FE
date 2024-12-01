@@ -6,23 +6,29 @@ import SocialSignIn from '@/component/signup/social-signin';
 import { ModalRef } from '@/type/modal';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 const Page = () => {
   const modalRef = useRef<ModalRef>(null);
-
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const [modalContent, setModalContent] = useState({
+    status: '',
+    message: '',
+  });
 
   useEffect(() => {
     const status = searchParams.get('status');
     if (status) {
-      console.log('status:', searchParams.get('status'));
-      console.log('message:', searchParams.get('message'));
-      console.log('modalRef:', modalRef.current);
+      setModalContent({
+        status: status,
+        message: searchParams.get('message') || '',
+      });
       setTimeout(() => {
         modalRef.current?.openModal();
+        router.replace('/signup');
       }, 100);
-      window.history.replaceState({}, '', '/signup');
     }
   }, [searchParams]);
 
@@ -60,13 +66,13 @@ const Page = () => {
         </div>
       </div>
       <ModalDialog ref={modalRef}>
-        <div className='w-full max-w-sm p-4 rounded-lg z-50'>
+        <div className='w-full max-w-sm h-56 p-4 rounded-lg z-50'>
           <h3 className='text-lg font-semibold mb-2'>
-            {searchParams.get('status') === 'success'
+            {modalContent.status === 'success'
               ? '회원가입 완료'
               : '회원가입 실패'}
           </h3>
-          <p>{searchParams.get('message')}</p>
+          <p>{modalContent.message}</p>
         </div>
       </ModalDialog>
     </div>
