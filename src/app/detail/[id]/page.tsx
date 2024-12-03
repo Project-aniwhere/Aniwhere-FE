@@ -1,6 +1,5 @@
 'use client';
 
-import Footer from '@/component/common/footer/footer';
 import Header from '@/component/common/header/header';
 import MainLayout from '@/component/common/layout/main-layout';
 import Tabs from '@/component/common/tab/tab-list';
@@ -9,6 +8,7 @@ import CastProductList from '@/component/detail/cast-production-list';
 import CommentContainer from '@/component/detail/comment-container';
 import EpisodeList from '@/component/detail/episode-list';
 import { DETAIL_TABS } from '@/constant/common';
+import { ANIME_DUMMY } from '@/constant/dummy';
 import { useState } from 'react';
 
 const DetailPage = () => {
@@ -17,7 +17,13 @@ const DetailPage = () => {
   return (
     <div>
       <Header />
-      <DetailBanner />
+      <DetailBanner
+        poster={ANIME_DUMMY.poster}
+        title={ANIME_DUMMY.title}
+        rating={4.3}
+        runningTime={46}
+        categories={ANIME_DUMMY.categories}
+      />
       <MainLayout>
         <div className='p-8 flex flex-col gap-8'>
           <Tabs
@@ -30,7 +36,9 @@ const DetailPage = () => {
           />
           <div className='px-5'>
             {selectedTab === 'episode' && <EpisodeList />}
-            {selectedTab === 'cast_production' && <CastProductList />}
+            {selectedTab === 'cast_production' && (
+              <CastProductList list={ANIME_DUMMY.castings} />
+            )}
             {selectedTab === 'comment' && <CommentContainer />}
           </div>
         </div>

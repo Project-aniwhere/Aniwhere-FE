@@ -1,35 +1,21 @@
+import { AnimeCastingProps } from '@/type/anime';
 import CastProductItem from './cast-production-item';
 
-const CastProductList = () => {
+interface CastProductListProps {
+  list: AnimeCastingProps[];
+}
+
+const CastProductList = ({ list }: CastProductListProps) => {
   return (
-    <ul className='grid grid-cols-5 gap-6'>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
-      <li>
-        <CastProductItem />
-      </li>
+    <ul className='grid grid-cols-4 gap-6'>
+      {list.map((item) => (
+        <li key={item.castingId}>
+          <CastProductItem
+            characterName={item.characterName}
+            voiceActorName={item.voiceActorName}
+          />
+        </li>
+      ))}
     </ul>
   );
 };
