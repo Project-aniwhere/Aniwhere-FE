@@ -3,9 +3,36 @@ import PasswordInput from './password-input';
 import NicknameInput from './nickname-input';
 import EmailInput from './email-input';
 import BirthInput from './birth-input';
-import { onSubmit } from './form-action';
+import { handleForm } from './form-action';
 
-const SignupForm = () => {
+interface SignupFormProps {
+  setModalContent: (content: { status: string; message: string }) => void;
+}
+
+const SignupForm = ({ setModalContent }: SignupFormProps) => {
+  const onSubmit = async (formData: FormData) => {
+    try {
+      const result = await handleForm(formData);
+
+      if (result.success) {
+        setModalContent({
+          status: 'success',
+          message: result.message || '회원가입이 완료되었습니다.',
+        });
+      } else {
+        setModalContent({
+          status: 'error',
+          message: result.message || '회원가입에 실패했습니다.',
+        });
+      }
+    } catch (error) {
+      setModalContent({
+        status: 'error',
+        message: '회원가입 중 오류가 발생했습니다.',
+      });
+    }
+  };
+
   return (
     <form className='space-y-4' action={onSubmit}>
       {/* From-NickName */}

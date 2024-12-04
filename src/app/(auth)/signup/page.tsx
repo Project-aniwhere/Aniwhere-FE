@@ -5,32 +5,19 @@ import SignupForm from '@/component/signup/signup-form';
 import SocialSignIn from '@/component/signup/social-signin';
 import { ModalRef } from '@/type/modal';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 const Page = () => {
   const modalRef = useRef<ModalRef>(null);
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const [modalContent, setModalContent] = useState({
     status: '',
     message: '',
   });
 
   useEffect(() => {
-    const status = searchParams.get('status');
-    if (status) {
-      setModalContent({
-        status: status,
-        message: searchParams.get('message') || '',
-      });
-      setTimeout(() => {
-        modalRef.current?.openModal();
-        router.replace('/signup');
-      }, 100);
-    }
-  }, [searchParams]);
+    modalRef.current?.openModal();
+  }, [modalContent]);
 
   return (
     <div className='w-full min-h-screen flex items-center justify-center pt-16'>
@@ -42,7 +29,7 @@ const Page = () => {
         <h2 className='text-2xl mb-6'>회원가입</h2>
 
         {/* Form */}
-        <SignupForm />
+        <SignupForm setModalContent={setModalContent} />
 
         {/* Links */}
         <div className='mt-4 text-center flex flex-col items-center'>

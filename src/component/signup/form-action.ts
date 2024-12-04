@@ -9,7 +9,7 @@ type ActionResult = {
   message?: string;
 };
 
-async function handleForm(formData: FormData): Promise<ActionResult> {
+export async function handleForm(formData: FormData): Promise<ActionResult> {
   const email = formData.get('email');
   const nickName = formData.get('nickname');
   const password = formData.get('password');
@@ -46,6 +46,7 @@ async function handleForm(formData: FormData): Promise<ActionResult> {
       message: '비밀번호 확인을 해주십시오',
     };
   }
+
   if (errors.length === 0 && !obj.authCode?.trim()) {
     return {
       success: false,
@@ -94,16 +95,5 @@ async function handleForm(formData: FormData): Promise<ActionResult> {
       success: false,
       message: '서버 오류가 발생했습니다',
     };
-  }
-}
-
-export async function onSubmit(formData: FormData) {
-  const result = await handleForm(formData);
-  if (result.success) {
-    redirect('/');
-  } else {
-    redirect(
-      `/signup?status=error&message=${encodeURIComponent(result.message || '')}`
-    );
   }
 }

@@ -16,52 +16,51 @@ const DefaultDatepicker = ({
   className = '',
   type = '',
 }: CommonDatepickerProps) => {
-  const [nowDate, setNowDate] = useState<string>(placeholder); // 초기값 설정
+  const [nowDate, setNowDate] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
-  const [placeholderColor, setPlaceholderColor] = useState('text-gray-400');
-  const [dateError, setDateError] = useState(false);
+  const [birthError, setBirthError] = useState(false);
 
   const handleToggleCalendar = () => {
     setIsOpen(!isOpen);
   };
 
   const handleDateChange = (selectedDate: Value) => {
-    if (selectedDate instanceof Date) {
-      if (type === 'birth') {
-        setPlaceholderColor('text-black');
-        setIsOpen(false);
+    if (!(selectedDate instanceof Date)) return;
+
+    setIsOpen(false);
+    setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
+
+    switch (type) {
+      case 'birth': {
         const today = moment();
         if (moment(selectedDate) < today) {
-          setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
-          setDateError(false);
+          setBirthError(false);
         } else {
-          setPlaceholderColor('text-gray-400');
-          setNowDate(placeholder);
-          setDateError(true);
+          setNowDate('');
+          setBirthError(true);
         }
-      } else {
-        setNowDate(moment(selectedDate).format('YYYY년 MM월 DD일'));
+        break;
       }
     }
   };
 
   return (
     <div className='relative'>
-      <input type='hidden' name='date' value={nowDate} />
-      <button
-        type='button'
+      <input
+        name='date'
+        value={nowDate}
+        placeholder={placeholder}
         onClick={handleToggleCalendar}
-        className={`text-left p-3 border border-gray-300 rounded-lg bg-gray-50 ${className} ${placeholderColor}`}
-      >
-        {nowDate}
-      </button>
+        className={`text-left p-3 border border-gray-300 rounded-lg bg-gray-50 ${className}`}
+        readOnly
+      />
 
       {isOpen && (
         <div className='absolute left-0'>
           <Calendar onChange={handleDateChange} value={value} locale='ko-KR' />
         </div>
       )}
-      {dateError && (
+      {birthError && (
         <div className='text-sm text-red-700 ml-2'>
           오늘보다 이전 날짜를 입력해주십시오
         </div>
