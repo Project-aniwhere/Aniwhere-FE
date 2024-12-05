@@ -1,8 +1,6 @@
 'use server';
 
 import { Fetch } from '@/util/fetch';
-import { redirect } from 'next/navigation';
-// import { Router } from 'next/router';
 
 type ActionResult = {
   success: boolean;
@@ -10,26 +8,21 @@ type ActionResult = {
 };
 
 export async function handleForm(formData: FormData): Promise<ActionResult> {
-  const email = formData.get('email');
-  const nickName = formData.get('nickname');
-  const password = formData.get('password');
-  const passwordAuth = formData.get('passwordAuth');
+  const passwordAuth = formData.get('passwordAuth')?.toString();
   const birth = formData.get('date');
-  const birthyear = birth ? birth.slice(0, 4) : '';
-  const birthday = birth ? `${birth.slice(6, 8)}${birth.slice(10, 12)}` : '';
-  const authCode = formData.get('authCode');
-  const sex = formData.get('gender');
-
   const errors = [];
 
   const obj = {
-    nickname: nickName?.toString(),
-    email: email?.toString(),
-    password: password?.toString(),
-    birthyear: birthyear?.toString(),
-    birthday: birthday?.toString(),
-    authCode: authCode?.toString(),
-    sex: sex?.toString(),
+    nickname: formData.get('nickname')?.toString(),
+    email: formData.get('email')?.toString(),
+    password: formData.get('password')?.toString(),
+    birthyear: (birth ? birth.slice(0, 4) : '')?.toString(),
+    birthday: (birth
+      ? `${birth.slice(6, 8)}${birth.slice(10, 12)}`
+      : ''
+    )?.toString(),
+    authCode: formData.get('authCode')?.toString(),
+    sex: formData.get('gender')?.toString(),
   };
 
   // 클라이언트 1차 검토
@@ -40,7 +33,7 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
     errors.push('생년월일');
   if (!obj.sex?.trim()) errors.push('성별');
 
-  if (passwordAuth != password) {
+  if (passwordAuth != obj.password) {
     return {
       success: false,
       message: '비밀번호 확인을 해주십시오',
@@ -70,30 +63,26 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
   };
 
   // signin 서버 통신
-  try {
-    const response = await Fetch('api/auth/signup', data);
-    const result = await response.json();
-
-    console.log('signup result : ', response);
-
-    if (response.status === 200) {
-      return {
-        success: true,
-      };
-    } else {
-      return {
-        success: false,
-        message:
-          result.errors?.[0]?.reason ||
-          result.message ||
-          '서버 오류가 발생했습니다',
-      };
-    }
-  } catch (error) {
-    console.error('Error:', error);
+  const response = await Fetch('api/auth/signup', data);
+  if (!response.ok) {
     return {
       success: false,
       message: '서버 오류가 발생했습니다',
+    };
+  }
+  const result = await response.json();
+
+  if (response.status === 200) {
+    return {
+      success: true,
+    };
+  } else {
+    return {
+      success: false,
+      message:
+        result.errors?.[0]?.reason ||
+        result.message ||
+        '서버 오류가 발생했습니다',
     };
   }
 }

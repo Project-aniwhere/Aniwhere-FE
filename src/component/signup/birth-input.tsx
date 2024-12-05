@@ -1,11 +1,7 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DefaultDatepicker from '../common/datepicker/custom-datepicker';
 import RadioInput from '../common/input/radio-input';
-
-interface Props {
-  onDataChange: (birthDay: string, birthYear: string, gender: string) => void;
-}
 
 const BirthInput = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);

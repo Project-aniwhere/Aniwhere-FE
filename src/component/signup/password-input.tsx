@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import DefaultInput from '../common/input/default-input';
-import { ModalRef } from '@/type/modal';
+
+const REGEX_PWD = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
 
 const PasswordInput = () => {
   // 비밀번호
-  const regex_pwd = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
   const [password, setPassword] = useState<string>('');
   const [passwordVerification, setPasswordVerification] = useState<string>('');
 
@@ -26,7 +26,7 @@ const PasswordInput = () => {
   };
 
   const handlePasswordCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!regex_pwd.test(e.target.value)) {
+    if (!REGEX_PWD.test(e.target.value)) {
       e.target.value = '';
       setPasswordError(true);
     } else {
