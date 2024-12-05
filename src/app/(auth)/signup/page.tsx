@@ -15,8 +15,19 @@ const Page = () => {
     message: '',
   });
 
+  const router = useRouter();
+
   useEffect(() => {
     modalRef.current?.openModal();
+
+    if (modalContent.status === 'success') {
+      const timer = setTimeout(() => {
+        modalRef.current?.closeModal();
+        router.push('/');
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
   }, [modalContent]);
 
   return (
