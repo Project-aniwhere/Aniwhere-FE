@@ -29,7 +29,7 @@ const FetchWithCookie = async (
       ...init,
       headers: {
         'Content-Type': 'application/json',
-        Cookie: cookies.toString(),
+        Cookie: cookies().toString(),
       },
       credentials: 'include',
     });
