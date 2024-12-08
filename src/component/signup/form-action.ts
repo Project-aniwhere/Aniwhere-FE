@@ -12,7 +12,7 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
   const birth = formData.get('date');
   const errors = [];
 
-  const obj = {
+  const signUpFormData = {
     nickname: formData.get('nickname')?.toString(),
     email: formData.get('email')?.toString(),
     password: formData.get('password')?.toString(),
@@ -26,21 +26,24 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
   };
 
   // 클라이언트 1차 검토
-  if (!obj.nickname?.trim()) errors.push('닉네임');
-  if (!obj.email?.trim()) errors.push('이메일');
-  if (!obj.password?.trim()) errors.push('비밀번호');
-  if (!obj.birthyear?.trim() || obj.birthyear == '생년월일')
+  if (!signUpFormData.nickname?.trim()) errors.push('닉네임');
+  if (!signUpFormData.email?.trim()) errors.push('이메일');
+  if (!signUpFormData.password?.trim()) errors.push('비밀번호');
+  if (
+    !signUpFormData.birthyear?.trim() ||
+    signUpFormData.birthyear == '생년월일'
+  )
     errors.push('생년월일');
-  if (!obj.sex?.trim()) errors.push('성별');
+  if (!signUpFormData.sex?.trim()) errors.push('성별');
 
-  if (passwordAuth != obj.password) {
+  if (passwordAuth != signUpFormData.password) {
     return {
       success: false,
       message: '비밀번호 확인을 해주십시오',
     };
   }
 
-  if (errors.length === 0 && !obj.authCode?.trim()) {
+  if (errors.length === 0 && !signUpFormData.authCode?.trim()) {
     return {
       success: false,
       message: '이메일 검증을 해주십시오',
@@ -59,7 +62,7 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(obj),
+    body: JSON.stringify(signUpFormData),
   };
 
   // signin 서버 통신
