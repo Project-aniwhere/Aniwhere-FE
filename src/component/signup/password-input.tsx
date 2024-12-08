@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import DefaultInput from '../common/input/default-input';
 
 const REGEX_PWD = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
@@ -7,45 +7,41 @@ const REGEX_PWD = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
 const PasswordInput = () => {
   // 비밀번호
   const [password, setPassword] = useState<string>('');
-  const [passwordVerification, setPasswordVerification] = useState<string>('');
+  const [passwordCheck, setPasswordCheck] = useState<string>('');
 
   // 비밀번호 에러
   const [passwordError, setPasswordError] = useState<boolean>(false);
-  const [checkPasswordError, setCheckPasswordError] = useState<boolean>(false);
+  const [passwordCheckError, setPasswordCheckError] = useState<boolean>(false);
 
+  // 비밀번호 정규식 체크
+  const validatePassword = (passwordValue: string) => {
+    if (REGEX_PWD.test(passwordValue)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // 비밀번호 체크
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (passwordVerification !== '') {
-      setPasswordVerification('');
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setPasswordError(!validatePassword(newPassword));
+
+    if (passwordCheck) {
+      setPasswordCheckError(newPassword !== passwordCheck);
     }
   };
 
-  const handlePasswordVerificationChange = (
+  // 비밀번호 확인 체크
+  const handlePasswordCheckChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setPasswordVerification(e.target.value);
+    const newPasswordCheck = e.target.value;
+    setPasswordCheck(newPasswordCheck);
+    setPasswordCheckError(password !== newPasswordCheck);
   };
 
-  const handlePasswordCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!REGEX_PWD.test(e.target.value)) {
-      e.target.value = '';
-      setPasswordError(true);
-    } else {
-      setPassword(e.target.value);
-      setPasswordError(false);
-    }
-  };
-
-  const handlePasswordVerification = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (password != e.target.value) {
-      e.target.value = '';
-      setCheckPasswordError(true);
-    } else {
-      setPasswordVerification(e.target.value);
-      setCheckPasswordError(false);
-    }
-  };
   return (
     <div className='space-y-2'>
       <DefaultInput
@@ -54,23 +50,21 @@ const PasswordInput = () => {
         placeholder='비밀번호'
         className='w-full p-3'
         onChange={handlePasswordChange}
-        onBlur={handlePasswordCheck}
       />
       {passwordError && (
         <span className='text-sm text-red-700 ml-2'>
           비밀번호는 최소 8자 이상의 영문자와 숫자로 이루어져야 합니다
         </span>
       )}
+
       <DefaultInput
         type='password'
         name='passwordAuth'
         placeholder='비밀번호 확인'
         className='w-full p-3'
-        value={passwordVerification}
-        onChange={handlePasswordVerificationChange}
-        onBlur={handlePasswordVerification}
+        onChange={handlePasswordCheckChange}
       />
-      {checkPasswordError && (
+      {passwordCheckError && (
         <span className='text-sm text-red-700 ml-2'>
           비밀번호가 일치하지 않습니다.
         </span>
