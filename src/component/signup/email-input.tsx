@@ -38,32 +38,32 @@ const EmailInput = () => {
 
   // 이메일 정규식 체크
   const validateEmail = (emailValue: string) => {
-    if (!EMAIL_REGEX.test(emailValue)) {
-      return '올바른 이메일을 입력해주십시오';
+    if (EMAIL_REGEX.test(emailValue)) {
+      return true;
     }
-    return '';
-  };
-  const handleEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const error = validateEmail(e.target.value);
-    if (error) {
-      e.target.value = '';
-      setEmail((prev) => ({
-        ...prev,
-        value: '',
-        errorMsg: error,
-        showVerification: false,
-      }));
-    }
+    return false;
   };
 
+  // 이메일 체크
   const handleEmailchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
-    setEmail((prev) => ({
-      value: newEmail,
-      errorMsg: '',
-      showVerification: false,
-      isVerified: false,
-    }));
+    const checkEmailwithRegex = validateEmail(newEmail);
+    if (!checkEmailwithRegex) {
+      e.target.value = '';
+      setEmail((prev) => ({
+        value: newEmail,
+        errorMsg: '올바른 이메일을 입력해주십시오',
+        showVerification: false,
+        isVerified: false,
+      }));
+    } else {
+      setEmail((prev) => ({
+        value: newEmail,
+        errorMsg: '',
+        showVerification: false,
+        isVerified: false,
+      }));
+    }
     setVerification({
       value: '',
       errorMsg: '',
@@ -72,8 +72,16 @@ const EmailInput = () => {
     });
   };
 
+  // 인증 코드 보내는 코드
   const sendAuthCode = async () => {
-    if (email.errorMsg || !email.value) return;
+    if (email.errorMsg || !email.value) {
+      setEmail((prev) => ({
+        ...prev,
+        errorMsg: '올바른 이메일을 입력해주십시오',
+        showVerification: false,
+      }));
+      return;
+    }
 
     setVerification((prev) => ({
       value: '',
@@ -87,14 +95,19 @@ const EmailInput = () => {
       showVerification: true,
     }));
 
-    const data = {
+    const verifyEmailData = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email: email.value }),
     };
-    const response = await Fetch('api/auth/email/verifications-requests', data);
+
+    const response = await Fetch(
+      'api/auth/email/verifications-requests',
+      verifyEmailData
+    );
+
     if (!response.ok) {
       setEmail((prev) => ({
         ...prev,
@@ -108,11 +121,17 @@ const EmailInput = () => {
         errorMsg: '이미 회원가입한 메일입니다',
         showVerification: false,
       }));
+      setVerification((prev) => ({
+        ...prev,
+        timeRemaining: VERIFICATION_TIME,
+        isActive: false,
+      }));
     }
   };
 
+  // 이메일 인증코드 검사
   const verifyCode = async () => {
-    const data = {
+    const verifyAuthCodeData = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -120,7 +139,10 @@ const EmailInput = () => {
       body: JSON.stringify({ email: email.value, code: verification.value }),
     };
 
-    const response = await Fetch('api/auth/email/verifications', data);
+    const response = await Fetch(
+      'api/auth/email/verifications',
+      verifyAuthCodeData
+    );
 
     if (!response.ok) {
       setVerification((prev) => ({
@@ -184,8 +206,8 @@ const EmailInput = () => {
           name='email'
           placeholder='이메일'
           className='flex-1 p-2'
+          value={email.value}
           onChange={handleEmailchange}
-          onBlur={handleEmailCheck}
         />
         <HoverColorButton
           type='button'
