@@ -21,7 +21,6 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
       ? `${birth.slice(6, 8)}${birth.slice(10, 12)}`
       : ''
     )?.toString(),
-    authCode: formData.get('authCode')?.toString(),
     sex: formData.get('gender')?.toString(),
   };
 
@@ -43,7 +42,7 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
     };
   }
 
-  if (errors.length === 0 && !signUpFormData.authCode?.trim()) {
+  if (errors.length === 0 && !formData.get('authCode')?.toString().trim()) {
     return {
       success: false,
       message: '이메일 검증을 해주십시오',
