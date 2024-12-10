@@ -9,9 +9,9 @@ const UnderlineButton = ({
 }: CommonButtonProps) => {
   return (
     <button
+      {...props}
       type={type}
       className={`text-aniviolet3 hover:underline ${props.className}`}
-      onClick={props.onClick}
     >
       {text}
     </button>
