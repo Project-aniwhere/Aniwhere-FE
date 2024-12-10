@@ -3,15 +3,16 @@ import HoverColorButton from '../common/button/hover-color-button';
 import DefaultInput from '../common/input/default-input';
 import { useEffect, useState } from 'react';
 import { Fetch } from '@/util/fetch';
+import { SERVER_RESPONSE } from '@/constant/common';
 
-interface emailState {
+interface EmailState {
   value: string;
   errorMsg: string;
   showVerification: boolean;
   isVerified: boolean;
 }
 
-interface verificationState {
+interface VerificationState {
   value: string;
   errorMsg: string;
   timeRemaining: number;
@@ -22,14 +23,14 @@ const VERIFICATION_TIME = 300;
 const EMAIL_REGEX = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
 const EmailInput = () => {
-  const [email, setEmail] = useState<emailState>({
+  const [email, setEmail] = useState<EmailState>({
     value: '',
     errorMsg: '',
     showVerification: false,
     isVerified: false,
   });
 
-  const [verification, setVerification] = useState<verificationState>({
+  const [verification, setVerification] = useState<VerificationState>({
     value: '',
     errorMsg: '',
     timeRemaining: VERIFICATION_TIME,
@@ -37,33 +38,19 @@ const EmailInput = () => {
   });
 
   // 이메일 정규식 체크
-  const validateEmail = (emailValue: string) => {
-    if (EMAIL_REGEX.test(emailValue)) {
-      return true;
-    }
-    return false;
-  };
+  const validateEmail = (emailValue: string) => EMAIL_REGEX.test(emailValue);
 
   // 이메일 체크
   const handleEmailchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
-    const checkEmailwithRegex = validateEmail(newEmail);
-    if (!checkEmailwithRegex) {
-      e.target.value = '';
-      setEmail((prev) => ({
-        value: newEmail,
-        errorMsg: '올바른 이메일을 입력해주십시오',
-        showVerification: false,
-        isVerified: false,
-      }));
-    } else {
-      setEmail((prev) => ({
-        value: newEmail,
-        errorMsg: '',
-        showVerification: false,
-        isVerified: false,
-      }));
-    }
+    const checkEmail = validateEmail(newEmail);
+    setEmail({
+      value: newEmail,
+      errorMsg: !checkEmail ? '올바른 이메일을 입력해주십시오' : '',
+      showVerification: false,
+      isVerified: false,
+    });
+
     setVerification({
       value: '',
       errorMsg: '',
@@ -83,12 +70,12 @@ const EmailInput = () => {
       return;
     }
 
-    setVerification((prev) => ({
+    setVerification({
       value: '',
       errorMsg: '',
       timeRemaining: VERIFICATION_TIME,
       isActive: true,
-    }));
+    });
     setEmail((prev) => ({
       ...prev,
       errorMsg: '',
@@ -108,6 +95,8 @@ const EmailInput = () => {
       verifyEmailData
     );
 
+    const result = await response.json();
+
     if (!response.ok) {
       setEmail((prev) => ({
         ...prev,
@@ -115,10 +104,10 @@ const EmailInput = () => {
         showVerification: false,
       }));
     }
-    if (response.status !== 200) {
+    if (result.code !== 200) {
       setEmail((prev) => ({
         ...prev,
-        errorMsg: '이미 회원가입한 메일입니다',
+        errorMsg: SERVER_RESPONSE[result.code],
         showVerification: false,
       }));
       setVerification((prev) => ({
@@ -172,6 +161,7 @@ const EmailInput = () => {
   };
 
   // 타이머 설정
+
   useEffect(() => {
     if (!verification.isActive) return;
     if (verification.timeRemaining < 0) {
@@ -183,15 +173,15 @@ const EmailInput = () => {
       return;
     }
 
-    const countDown = setInterval(() => {
+    const countDown = setTimeout(() => {
       setVerification((prev) => ({
         ...prev,
         timeRemaining: prev.timeRemaining - 1,
       }));
     }, 1000);
 
-    return () => clearInterval(countDown);
-  }, [verification.isActive, verification.timeRemaining]);
+    return () => clearTimeout(countDown);
+  }, [verification]);
 
   // useEffect(() => {
   //   console.log('email: ', email);

@@ -14,13 +14,8 @@ const PasswordInput = () => {
   const [passwordCheckError, setPasswordCheckError] = useState<boolean>(false);
 
   // 비밀번호 정규식 체크
-  const validatePassword = (passwordValue: string) => {
-    if (REGEX_PWD.test(passwordValue)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const validatePassword = (passwordValue: string) =>
+    REGEX_PWD.test(passwordValue);
 
   // 비밀번호 체크
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {

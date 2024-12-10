@@ -9,9 +9,9 @@ const IconButton = ({
 }: IconButtonProps) => {
   return (
     <button
+      {...props}
       type={type}
       className={`flex items-center justify-center rounded-full hover:opacity-80 transition-opacity ${props.className}`}
-      onClick={props.onClick}
     >
       {children}
     </button>

@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { Fetch } from '@/util/fetch';
-import HoverColorButton from '../common/button/hover-color-button';
 import DefaultInput from '../common/input/default-input';
 
 const NicknameInput = () => {

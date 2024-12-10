@@ -3,7 +3,7 @@ import PasswordInput from './password-input';
 import NicknameInput from './nickname-input';
 import EmailInput from './email-input';
 import BirthInput from './birth-input';
-import { handleForm } from './form-action';
+import { handleForm } from '@/action/signup';
 
 interface SignupFormProps {
   setModalContent: (content: { status: string; message: string }) => void;
@@ -11,24 +11,17 @@ interface SignupFormProps {
 
 const SignupForm = ({ setModalContent }: SignupFormProps) => {
   const onSubmit = async (formData: FormData) => {
-    try {
-      const result = await handleForm(formData);
+    const result = await handleForm(formData);
 
-      if (result.success) {
-        setModalContent({
-          status: 'success',
-          message: result.message || '회원가입이 완료되었습니다.',
-        });
-      } else {
-        setModalContent({
-          status: 'error',
-          message: result.message || '회원가입에 실패했습니다.',
-        });
-      }
-    } catch (error) {
+    if (result.code < 400) {
+      setModalContent({
+        status: 'success',
+        message: '회원가입이 완료되었습니다.',
+      });
+    } else {
       setModalContent({
         status: 'error',
-        message: '회원가입 중 오류가 발생했습니다.',
+        message: result.message || '회원가입에 실패했습니다.',
       });
     }
   };

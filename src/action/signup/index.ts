@@ -1,13 +1,11 @@
-'use server';
-
+import { SERVER_RESPONSE } from '@/constant/common';
+import { SignupResponse } from '@/type/api/signup';
+import { APIResult } from '@/type/common';
 import { Fetch } from '@/util/fetch';
 
-type ActionResult = {
-  success: boolean;
-  message?: string;
-};
-
-export async function handleForm(formData: FormData): Promise<ActionResult> {
+export async function handleForm(
+  formData: FormData
+): Promise<APIResult<SignupResponse>> {
   const passwordAuth = formData.get('passwordAuth')?.toString();
   const birth = formData.get('date');
   const errors = [];
@@ -37,21 +35,21 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
 
   if (passwordAuth != signUpFormData.password) {
     return {
-      success: false,
+      code: 400,
       message: '비밀번호 확인을 해주십시오',
     };
   }
 
   if (errors.length === 0 && !formData.get('authCode')?.toString().trim()) {
     return {
-      success: false,
+      code: 400,
       message: '이메일 검증을 해주십시오',
     };
   }
 
   if (errors.length > 0) {
     return {
-      success: false,
+      code: 400,
       message: `${errors.join(', ')}을 입력해주십시오`,
     };
   }
@@ -68,7 +66,7 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
   const response = await Fetch('api/auth/signup', data);
   if (!response.ok) {
     return {
-      success: false,
+      code: 400,
       message: '서버 오류가 발생했습니다',
     };
   }
@@ -76,15 +74,13 @@ export async function handleForm(formData: FormData): Promise<ActionResult> {
 
   if (response.status === 200) {
     return {
-      success: true,
+      code: 200,
+      message: '',
     };
   } else {
     return {
-      success: false,
-      message:
-        result.errors?.[0]?.reason ||
-        result.message ||
-        '서버 오류가 발생했습니다',
+      code: result.code,
+      message: SERVER_RESPONSE[result.code] || '서버 오류가 발생했습니다',
     };
   }
 }
