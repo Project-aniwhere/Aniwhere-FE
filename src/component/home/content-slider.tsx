@@ -1,38 +1,40 @@
-import Image from 'next/image';
 import Carousel from '../common/carousel/carousel';
-import { ContentSliderProps } from '@/type/content-slider';
+import { AnimeRecommendInfoType } from '@/type/api/anime-recommend-api';
+import CFImage from '../common/image/cf-image';
 
 const ContentSlider = ({
-  mainTitle,
-  subTitle,
-  contentList,
-}: ContentSliderProps) => {
+  title,
+  description,
+  animes,
+}: AnimeRecommendInfoType) => {
   return (
-    <section className='flex flex-col items-start gap-3'>
+    <section className='w-full flex flex-col items-start gap-3'>
       <div className='px-2'>
-        {subTitle && (
-          <h3 className='text-aniviolet2 text-[0.875rem]'>{subTitle}</h3>
+        {description && (
+          <h3 className='text-aniviolet2 text-[0.875rem]'>{description}</h3>
         )}
-        <h2 className='font-bold text-xl'>{mainTitle}</h2>
+        <h2 className='font-bold text-xl'>{title}</h2>
       </div>
       <Carousel>
-        {contentList.map((content) => (
+        {animes.map((anime) => (
           <div
-            key={content.imageSrc + content.title}
-            className='p-2 hover:scale-105 duration-200 flex flex-col gap-2 cursor-pointer h-fit'
+            key={anime.poster + anime.title}
+            className='p-2 hover:scale-105 duration-200 flex flex-col gap-2 cursor-pointer w-full'
           >
-            <Image
-              src={content.imageSrc}
-              alt='image list'
-              width={0}
-              height={0}
-              sizes='25%'
-              className='w-full rounded-lg'
-            />
+            <div className='relative aspect-video'>
+              <CFImage
+                src={anime.poster}
+                alt='image list'
+                fill
+                className='object-cover rounded-lg'
+              />
+            </div>
             <div>
-              <p className='font-bold text-lg leading-5'>{content.title}</p>
+              <p className='font-bold text-lg leading-5'>{anime.title}</p>
               <p className='text-[0.875rem] text-gray-500'>
-                {content.tag.join(', ')}
+                {anime.categories
+                  .map((category) => category.categoryName)
+                  .join(', ')}
               </p>
             </div>
           </div>

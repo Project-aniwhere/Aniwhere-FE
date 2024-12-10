@@ -1,5 +1,4 @@
 import MainImageSlider from '@/component/home/main-image-slider';
-import { ContentSliderProps } from '@/type/content-slider';
 
 import sample1 from '@/asset/img/subslider/sample1.jpg';
 import sample2 from '@/asset/img/subslider/sample2.jpg';
@@ -10,36 +9,22 @@ import MainLayout from '@/component/common/layout/main-layout';
 import Footer from '@/component/common/footer/footer';
 import CommentSlider from '@/component/home/comment-slider';
 import Header from '@/component/common/header/header';
+import { Fetch } from '@/util/fetch';
+import { AnimeRecommendResponse } from '@/type/api/anime-recommend-api';
 
-export default function Home() {
-  const dummyData: ContentSliderProps = {
-    mainTitle: '인기 작품 모음',
-    subTitle: '요즘 인기있는 작품을 소개해드려요.',
-    contentList: [
-      { imageSrc: sample1.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample2.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample3.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample4.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample1.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample2.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample3.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample4.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample1.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-      { imageSrc: sample2.src, title: '스파이 패밀리', tag: ['일상', '힐링'] },
-    ],
-  };
+export default async function Home() {
+  const data: AnimeRecommendResponse = await (
+    await Fetch('recommend', { next: { revalidate: 1200 } })
+  ).json();
 
   return (
     <div className='w-full flex flex-col items-center gap-4'>
       <Header />
-      <MainImageSlider {...dummyData} />
+      <MainImageSlider {...data[0]} />
       <MainLayout>
-        <ContentSlider {...dummyData} />
-        <ContentSlider {...dummyData} />
-        <ContentSlider {...dummyData} />
-        <ContentSlider {...dummyData} />
-        <ContentSlider {...dummyData} />
-        <ContentSlider {...dummyData} />
+        {data.slice(1).map((anime) => (
+          <ContentSlider key={anime.id} {...anime} />
+        ))}
         <CommentSlider />
       </MainLayout>
       <Footer />
