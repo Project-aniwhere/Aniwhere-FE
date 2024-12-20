@@ -14,6 +14,8 @@ import Image from 'next/image';
 import sample from '@/asset/img/mainslider/sample.jpg';
 import TagItem from '@/component/tag/tag-item';
 import Link from 'next/link';
+import { Review } from '@/type/api/anime-recommend-api';
+import AnimeCardReviews from './anime-card-reviews';
 interface AnimeCardProps {
   title: string;
   genre: AnimeGenreType;
@@ -23,6 +25,7 @@ interface AnimeCardProps {
   isBroadcasting: AnimeBroadCastType;
   thumbnail?: string;
   className?: string;
+  reviews?: Review[];
 }
 
 const AnimeCard = ({
@@ -33,6 +36,7 @@ const AnimeCard = ({
   releaseType,
   isBroadcasting,
   thumbnail,
+  reviews,
   className,
 }: AnimeCardProps) => {
   return (
@@ -74,6 +78,7 @@ const AnimeCard = ({
             />
           ))}
         </div>
+        {reviews && <AnimeCardReviews reviews={reviews} />}
         <p className='text-sm text-aniviolet3'>{`${AnimeSeasonTypeObject[season]} • ${AnimeReleaseTypeObject[releaseType]} • ${AnimeBroadCastTypeObject[isBroadcasting]}`}</p>
       </div>
     </div>

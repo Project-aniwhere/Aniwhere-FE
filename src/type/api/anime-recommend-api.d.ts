@@ -30,10 +30,10 @@ interface User {
 }
 
 // Review 인터페이스
-interface Review {
+export interface Review {
   reviewId: number;
   anime: string;
-  user: User;
+  user?: User;
   rating: number;
   content: string;
   createdAt: string;
