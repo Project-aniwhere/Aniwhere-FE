@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import ReactQueryProvider from '@/hook/provider/usereactquery';
-import Header from '@/component/common/header/header';
-import Footer from '@/component/common/footer/footer';
-import { Provider } from 'jotai';
+import JotaiProvider from '@/hook/provider/jotai-provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,6 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
+  const initialState = {
+    // isMobile: false, // 기본값 설정
+    isLogin: false, // 기본값 설정
+  };
   return (
     <html lang='en'>
       <head>
@@ -34,10 +36,12 @@ export default function RootLayout({
 
       <body className='font-pretendard scrollbar'>
         <div id='modal-root' />
-        <Provider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </Provider>
-        {modal}
+        <JotaiProvider initialState={initialState}>
+          <ReactQueryProvider>
+            {children}
+            {modal}
+          </ReactQueryProvider>
+        </JotaiProvider>
       </body>
     </html>
   );
