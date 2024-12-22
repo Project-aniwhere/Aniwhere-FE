@@ -1,12 +1,26 @@
-/** @type {import('next').NextConfig} */
+/* @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        loader: "default",
-        remotePatterns: [{
-            protocol: "https",
-            hostname: "cloudfronturl",
-        }],
-    }
+  images: {
+    loader: 'default',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cloudfronturl',
+      },
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/reissue',
+        destination: 'http://15.164.142.195/api/auth/reissue',
+      },
+      {
+        source: '/api/:path*',
+        destination: 'http://15.164.142.195/api/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
