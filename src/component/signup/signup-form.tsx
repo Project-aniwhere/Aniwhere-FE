@@ -3,7 +3,7 @@ import PasswordInput from './password-input';
 import NicknameInput from './nickname-input';
 import EmailInput from './email-input';
 import BirthInput from './birth-input';
-import { handleForm } from '@/action/signup';
+import { handleSignupForm } from '@/action/signup';
 
 interface SignupFormProps {
   setModalContent: (content: { status: string; message: string }) => void;
@@ -11,7 +11,7 @@ interface SignupFormProps {
 
 const SignupForm = ({ setModalContent }: SignupFormProps) => {
   const onSubmit = async (formData: FormData) => {
-    const result = await handleForm(formData);
+    const result = await handleSignupForm(formData);
 
     if (result.code < 400) {
       setModalContent({

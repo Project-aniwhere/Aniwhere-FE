@@ -3,7 +3,7 @@ import { SignupResponse } from '@/type/api/signup';
 import { APIResult } from '@/type/common';
 import { Fetch } from '@/util/fetch';
 
-export async function handleForm(
+export async function handleSignupForm(
   formData: FormData
 ): Promise<APIResult<SignupResponse>> {
   const passwordAuth = formData.get('passwordAuth')?.toString();
@@ -64,22 +64,16 @@ export async function handleForm(
 
   // signin 서버 통신
   const response = await Fetch('api/auth/signup', data);
-  if (!response.ok) {
-    return {
-      code: 400,
-      message: '서버 오류가 발생했습니다',
-    };
-  }
   const result = await response.json();
 
-  if (response.status === 200) {
+  if (response.status < 400) {
     return {
       code: 200,
       message: '',
     };
   } else {
     return {
-      code: result.code,
+      code: 400,
       message: SERVER_RESPONSE[result.code] || '서버 오류가 발생했습니다',
     };
   }

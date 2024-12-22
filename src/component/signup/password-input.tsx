@@ -48,7 +48,7 @@ const PasswordInput = () => {
       />
       {passwordError && (
         <span className='text-sm text-red-700 ml-2'>
-          비밀번호는 최소 8자 이상의 영문자와 숫자로 이루어져야 합니다
+          비밀번호는 최소 8자 이상의 영문자와 숫자로 이루어져야 합니다.
         </span>
       )}
 
@@ -64,6 +64,9 @@ const PasswordInput = () => {
           비밀번호가 일치하지 않습니다.
         </span>
       )}
+      <div className='text-sm'>
+        ※ 최소 8자 이상의 영문자와 숫자를 사용하세요.
+      </div>
     </div>
   );
 };
