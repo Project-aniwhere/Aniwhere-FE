@@ -16,28 +16,49 @@ import TagItem from '@/component/tag/tag-item';
 import Link from 'next/link';
 import { Review } from '@/type/api/anime-recommend-api';
 import AnimeCardReviews from './anime-card-reviews';
+import StarRate from '../comment/star-rate';
+
 interface AnimeCardProps {
+  id: number;
   title: string;
   genre: AnimeGenreType;
   tag: AnimeTagType[];
   season: AnimeSeasonType;
   releaseType: AnimeReleaseType;
   isBroadcasting: AnimeBroadCastType;
+  rating: number;
   thumbnail?: string;
   className?: string;
   reviews?: Review[];
+  ranking?: number;
 }
 
+const getRankColor = (idx: number) => {
+  switch (idx) {
+    case 1:
+      return 'bg-aniviolet1';
+    case 2:
+      return 'bg-aniviolet2';
+    case 3:
+      return 'bg-aniviolet3';
+    default:
+      return 'bg-aniviolet4';
+  }
+};
+
 const AnimeCard = ({
+  id,
   title,
   tag,
   genre,
   season,
   releaseType,
   isBroadcasting,
+  rating,
   thumbnail,
   reviews,
   className,
+  ranking,
 }: AnimeCardProps) => {
   return (
     <div
@@ -47,8 +68,15 @@ const AnimeCard = ({
       }
     >
       <div className='relative w-full aspect-square'>
+        {ranking && (
+          <p
+            className={`absolute z-10 font-bold text-lg flex items-center justify-center text-white w-10 h-10 rounded-ee-lg ${getRankColor(ranking)}`}
+          >
+            {ranking}
+          </p>
+        )}
         <Link
-          href='/'
+          href={`/detail/${id}`}
           className='absolute opacity-0 bg-black/40 size-full z-10 hover:opacity-100 duration-300 flex items-center justify-center'
         >
           <span className='px-4 py-2 text-white bg-aniviolet1 rounded-lg'>
@@ -64,7 +92,10 @@ const AnimeCard = ({
       </div>
 
       <div className='p-4 space-y-2'>
-        <p className='font-semibold'>{title}</p>
+        <div className='flex flex-row justify-between'>
+          <p className='font-semibold'>{title}</p>
+          <StarRate rate={rating} />
+        </div>
         <div className='flex flex-row gap-2 overflow-x-scroll scrollbar-none'>
           <TagItem
             tagName={AnimeGenreObject[genre]}
