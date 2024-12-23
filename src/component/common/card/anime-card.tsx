@@ -31,12 +31,13 @@ interface AnimeCardProps {
   className?: string;
   reviews?: Review[];
   ranking?: number;
+  imageAspect?: string;
 }
 
 const getRankColor = (idx: number) => {
   switch (idx) {
     case 1:
-      return 'bg-aniviolet1';
+      return 'bg-g';
     case 2:
       return 'bg-aniviolet2';
     case 3:
@@ -59,6 +60,7 @@ const AnimeCard = ({
   reviews,
   className,
   ranking,
+  imageAspect = '1/1',
 }: AnimeCardProps) => {
   return (
     <div
@@ -67,7 +69,7 @@ const AnimeCard = ({
         className
       }
     >
-      <div className='relative w-full aspect-square'>
+      <div className='relative w-full' style={{ aspectRatio: imageAspect }}>
         {ranking && (
           <p
             className={`absolute z-10 font-bold text-lg flex items-center justify-center text-white w-10 h-10 rounded-ee-lg ${getRankColor(ranking)}`}
