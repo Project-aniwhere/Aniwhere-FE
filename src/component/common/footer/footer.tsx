@@ -4,9 +4,18 @@ import MessageSvg from '@public/asset/svg/message/message';
 import PhoneSvg from '@public/asset/svg/phone/phone';
 import Link from 'next/link';
 
-const Footer = () => {
+interface FooterProps {
+  className?: string;
+}
+
+const Footer = ({ className }: FooterProps) => {
   return (
-    <footer className='w-full relative flex flex-col items-center py-4 bg-aniviolet3 text-white'>
+    <footer
+      className={
+        'w-full relative flex flex-col items-center py-4 bg-aniviolet3 text-white ' +
+        className
+      }
+    >
       <h2 className='font-bold text-2xl mb-4'>ANIWHERE</h2>
       <div className='flex space-x-14 mb-4'>
         <div className='w-6 h-6'>
