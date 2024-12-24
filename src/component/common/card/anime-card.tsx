@@ -15,7 +15,7 @@ import sample from '@/asset/img/mainslider/sample.jpg';
 import TagItem from '@/component/tag/tag-item';
 import Link from 'next/link';
 import { Review } from '@/type/api/anime-recommend-api';
-import AnimeCardReviews from './anime-card-reviews';
+import CommentSwiper from '../comment/comment-swiper';
 import StarRate from '../comment/star-rate';
 
 interface AnimeCardProps {
@@ -34,19 +34,6 @@ interface AnimeCardProps {
   imageAspect?: string;
 }
 
-const getRankColor = (idx: number) => {
-  switch (idx) {
-    case 1:
-      return 'bg-g';
-    case 2:
-      return 'bg-aniviolet2';
-    case 3:
-      return 'bg-aniviolet3';
-    default:
-      return 'bg-aniviolet4';
-  }
-};
-
 const AnimeCard = ({
   id,
   title,
@@ -60,7 +47,7 @@ const AnimeCard = ({
   reviews,
   className,
   ranking,
-  imageAspect = '1/1',
+  imageAspect = '9/16',
 }: AnimeCardProps) => {
   return (
     <div
@@ -72,7 +59,7 @@ const AnimeCard = ({
       <div className='relative w-full' style={{ aspectRatio: imageAspect }}>
         {ranking && (
           <p
-            className={`absolute z-10 font-bold text-lg flex items-center justify-center text-white w-10 h-10 rounded-ee-lg ${getRankColor(ranking)}`}
+            className={`absolute z-10 font-bold text-lg flex items-center justify-center text-white w-10 h-10 rounded-ee-lg bg-aniviolet4`}
           >
             {ranking}
           </p>
@@ -111,7 +98,7 @@ const AnimeCard = ({
             />
           ))}
         </div>
-        {reviews && <AnimeCardReviews reviews={reviews} />}
+        {reviews && <CommentSwiper reviews={reviews} />}
         <p className='text-sm text-aniviolet3'>{`${AnimeSeasonTypeObject[season]} • ${AnimeReleaseTypeObject[releaseType]} • ${AnimeBroadCastTypeObject[isBroadcasting]}`}</p>
       </div>
     </div>

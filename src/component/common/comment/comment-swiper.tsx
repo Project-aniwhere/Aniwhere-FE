@@ -3,11 +3,12 @@
 import { Review } from '@/type/api/anime-recommend-api';
 import { useEffect, useState } from 'react';
 import FullStarSvg from '@/asset/svg/star/full-star-svg';
-interface AnimeCardReviewsProps {
+interface CommentSwiper {
   reviews: Review[];
+  lineCount?: number;
 }
 
-const AnimeCardReviews = ({ reviews }: AnimeCardReviewsProps) => {
+const CommentSwiper = ({ reviews, lineCount }: CommentSwiper) => {
   const [reviewIdx, setReviewIdx] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const curReview = reviews[reviewIdx];
@@ -39,9 +40,16 @@ const AnimeCardReviews = ({ reviews }: AnimeCardReviewsProps) => {
         <FullStarSvg fill='#613DC1' />
         <p>{curReview.rating}</p>
       </div>
-      <span className='line-clamp-1'>{curReview.content}</span>
+      <span
+        style={{
+          display: '-webkit-box',
+          WebkitLineClamp: lineCount ?? 1,
+        }}
+      >
+        {curReview.content}
+      </span>
     </div>
   );
 };
 
-export default AnimeCardReviews;
+export default CommentSwiper;
