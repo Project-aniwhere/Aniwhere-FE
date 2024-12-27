@@ -11,6 +11,7 @@ const CommentList = ({ list }: CommentListProps) => {
       <div className='flex flex-col gap-2'>
         <p className='text-sm md:text-base font-medium'>평균 별점</p>
         <div>
+          {/* TODO 평균 별점 추가 */}
           <span className='text-xl md:text-3xl font-medium'>4.1 </span>
           <span className='text-xs md:text-sm'>({list.length}명)</span>
         </div>

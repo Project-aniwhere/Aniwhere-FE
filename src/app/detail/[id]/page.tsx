@@ -43,6 +43,7 @@ const DetailPage = () => {
           <DetailBanner
             poster={data.poster}
             title={data.title}
+            // TODO 평균 별점 추가
             rating={4.3}
             runningTime={data.runningTime}
             categories={data.categories}

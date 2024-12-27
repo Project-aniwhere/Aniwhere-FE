@@ -22,6 +22,7 @@ const DailyItem = ({ data }: DailyItemProps) => {
         <p className='font-medium truncate text-sm md:text-base'>
           {data.title}
         </p>
+        {/* TODO 작가이름 추가 */}
         <p className='text-gray-500 truncate text-xs md:text-sm'>작가이름</p>
       </div>
     </div>

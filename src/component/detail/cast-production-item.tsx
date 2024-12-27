@@ -16,6 +16,7 @@ const CastProductItem = ({ data }: CastProductItemProps) => {
         height={80}
         className='object-cover rounded-full'
       />
+      {/* TODO 제작은 어떻게? */}
       <div className='flex flex-col gap-1'>
         <p className='text-sm md:text-base font-medium'>
           {data.voiceActorName}
