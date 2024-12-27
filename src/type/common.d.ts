@@ -15,4 +15,12 @@ export interface CommonDatepickerProps {
   value: Value;
   placeholder?: string;
   className?: string;
+  type?: string;
 }
+
+export type APIResult<T> =
+  | T
+  | {
+      code: number;
+      message: string;
+    };

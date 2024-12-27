@@ -77,7 +77,7 @@ const Carousel = ({
 
   return (
     <div
-      className='relative flex flex-col gap-2'
+      className='w-full relative flex flex-col gap-2'
       style={{
         alignItems:
           bulletPosition === 'left'

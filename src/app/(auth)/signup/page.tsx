@@ -1,30 +1,54 @@
-import GoogleSvg from '@/asset/svg/google/google-svg';
-import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
+'use client';
 import UnderlineButton from '@/component/common/button/hover-underline-button';
-import IconButton from '@/component/common/button/icon-button';
+import ModalDialog from '@/component/common/modal/modal-dialog';
 import SignupForm from '@/component/signup/signup-form';
-import { useState } from 'react';
+import SocialSignIn from '@/component/signup/social-signin';
+import { ModalRef } from '@/type/modal';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 const Page = () => {
+  const modalRef = useRef<ModalRef>(null);
+  const [modalContent, setModalContent] = useState({
+    status: '',
+    message: '',
+  });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    modalRef.current?.openModal();
+
+    if (modalContent.status === 'success') {
+      const timer = setTimeout(() => {
+        modalRef.current?.closeModal();
+        router.push('/');
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [modalContent, router]);
+
   return (
-    <div className='w-full h-dvh flex items-center justify-center'>
+    <div className='w-full min-h-screen flex items-center justify-center pt-16'>
       <div className='bg-white w-full max-w-md p-6 relative flex flex-col items-center gap-2'>
         {/* Logo */}
-        <h1 className='text-aniviolet3 text-2xl font-bold text-center'>
-          ANIWHERE
-        </h1>
+        <h1 className='text-aniviolet3 text-3xl font-bold'>ANIWHERE</h1>
 
         {/* Title */}
-        <h2 className='text-lg font-medium text-center mb-6'>회원가입</h2>
+        <h2 className='text-2xl mb-6'>회원가입</h2>
 
         {/* Form */}
-        <SignupForm />
+        <SignupForm setModalContent={setModalContent} />
 
         {/* Links */}
         <div className='mt-4 text-center flex flex-col items-center'>
           <span className='text-gray-600 inline-flex'>
             <p className='whitespace-nowrap'>이미 가입하셨나요?</p>
-            <UnderlineButton className='ml-1' text='로그인' />
+            <Link href='/login'>
+              <UnderlineButton className='ml-1' text='로그인' />
+            </Link>
           </span>
         </div>
 
@@ -36,17 +60,19 @@ const Page = () => {
             <div className='flex-grow border-t border-gray-300' />
           </div>
 
-          <div className='flex justify-center gap-4 mt-6'>
-            <IconButton>
-              <KakaotalkSvg height='3rem' width='3rem' />
-            </IconButton>
-
-            <IconButton>
-              <GoogleSvg height='3rem' width='3rem' />
-            </IconButton>
-          </div>
+          <SocialSignIn />
         </div>
       </div>
+      <ModalDialog ref={modalRef}>
+        <div className='w-full max-w-sm h-56 p-4 rounded-lg z-50'>
+          <h3 className='text-lg font-semibold mb-2'>
+            {modalContent.status === 'success'
+              ? '회원가입 완료'
+              : '회원가입 실패'}
+          </h3>
+          <p>{modalContent.message}</p>
+        </div>
+      </ModalDialog>
     </div>
   );
 };

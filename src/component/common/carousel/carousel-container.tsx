@@ -110,7 +110,7 @@ const CarouselContainer = (
                 animation === 'fade'
                   ? carouselIndex === idx
                     ? 'relative opacity-100 duration-1000 '
-                    : 'absolute w-full h-full opacity-0  duration-1000 '
+                    : 'absolute w-full h-full opacity-0 duration-1000 '
                   : ''
               }
             >

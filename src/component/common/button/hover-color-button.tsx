@@ -9,9 +9,9 @@ const HoverColorButton = ({
 }: CommonButtonProps) => {
   return (
     <button
+      {...props}
       type={type}
       className={`bg-aniviolet3 text-white rounded-lg hover:bg-purple-700 transition-color ${props.className}`}
-      onClick={props.onClick}
     >
       {text}
     </button>

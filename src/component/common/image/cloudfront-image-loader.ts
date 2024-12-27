@@ -7,10 +7,12 @@ const cloudfrontImageLoader = ({
   width: number;
   quality?: number;
 }) => {
-  const url = new URL(`https://sampleCloudimage${src}`);
+  const url = new URL(`${src}`);
+  /*
   url.searchParams.set('format', 'auto');
   url.searchParams.set('width', width.toString());
   url.searchParams.set('quality', (quality || 75).toString());
+  */
   return url.href;
 };
 
