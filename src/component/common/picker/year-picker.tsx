@@ -10,7 +10,7 @@ interface Props extends YearPickerProps {
 }
 
 const YearPicker = ({
-  year,
+  currentYear,
   handleSelectYear,
   startYear = getYear(),
   length = 10,
@@ -36,7 +36,7 @@ const YearPicker = ({
       {isOpenYearMenu && (
         <div className='absolute z-10 left-0 top-5 md:top-6'>
           <YearList
-            year={year}
+            currentYear={currentYear}
             years={years}
             handleSelectYear={handleChangeYear}
           />

@@ -5,15 +5,15 @@ interface YearListProps extends YearPickerProps {
   years: string[];
 }
 
-const YearList = ({ year, years, handleSelectYear }: YearListProps) => {
+const YearList = ({ currentYear, years, handleSelectYear }: YearListProps) => {
   return (
     <ul className='bg-white py-2 w-20 border border-gray-100 rounded'>
-      {years.map((v) => (
-        <li key={v}>
+      {years.map((year) => (
+        <li key={year}>
           <YearItem
-            year={v}
+            year={year}
             handleSelectYear={handleSelectYear}
-            active={v === year}
+            active={year === currentYear}
           />
         </li>
       ))}
