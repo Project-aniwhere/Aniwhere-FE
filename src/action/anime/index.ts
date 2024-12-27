@@ -1,4 +1,8 @@
-import { AnimeDetailResponse, AnimeWeeklyResponse } from '@/type/api/anime-api';
+import {
+  AnimeDetailResponse,
+  AnimeEpisodeListResponse,
+  AnimeWeeklyResponse,
+} from '@/type/api/anime-api';
 import { Fetch } from '@/util/fetch';
 
 const prefix = 'api/anime';
@@ -37,6 +41,18 @@ export const getAnimeQuarterList = async ({
       next: { revalidate: 1200 },
     }
   );
+
+  if (response.ok) return response.json();
+  return null;
+};
+
+export const getAnimeEpisodeList = async (
+  id: string | null
+): Promise<AnimeEpisodeListResponse | null> => {
+  // TODO API URL 변경 ( api/animes -> api/anime )
+  const response = await Fetch(`api/animes/${id}/episodes`, {
+    next: { revalidate: 1200 },
+  });
 
   if (response.ok) return response.json();
   return null;

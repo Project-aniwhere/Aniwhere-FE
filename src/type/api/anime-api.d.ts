@@ -1,3 +1,5 @@
+import { PageableResponse } from '../common';
+
 export interface AnimeWeeklyInfoType {
   animeId: number;
   title: string;
@@ -53,3 +55,16 @@ export interface AnimeDetailInfoType {
 }
 
 export type AnimeDetailResponse = AnimeDetailInfoType;
+
+export interface AnimeEpisodeInfoType {
+  episode_id: number;
+  animeId: number;
+  episodeNumber: number;
+  title: string;
+  releaseDate: string;
+  duration: number;
+  episodeStory: string;
+  stillImage: string;
+}
+
+export type AnimeEpisodeListResponse = PageableResponse<AnimeEpisodeInfoType[]>;

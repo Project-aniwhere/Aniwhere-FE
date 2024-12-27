@@ -24,3 +24,32 @@ export type APIResult<T> =
       code: number;
       message: string;
     };
+
+export type PageableResponse<T> = {
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  content: T;
+  number: number;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  pageable: {
+    offset: number;
+    sort: {
+      empty: boolean;
+      sorted: boolean;
+      unsorted: boolean;
+    };
+    paged: boolean;
+    pageNumber: number;
+    pageSize: number;
+    unpaged: boolean;
+  };
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+};
