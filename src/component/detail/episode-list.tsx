@@ -1,13 +1,26 @@
 import useIsMobile from '@/hook/device-detect/use-is-mobile';
 import EpisodeItem from './episode-item';
 import MobileEpisodeItem from './episode-item-mobile';
+import { AnimeEpisodeInfoType } from '@/type/api/anime-api';
 
-const EpisodeList = () => {
+interface EpisodeListProps {
+  list: AnimeEpisodeInfoType[];
+}
+
+const EpisodeList = ({ list }: EpisodeListProps) => {
   const isMobile = useIsMobile();
 
   return (
     <ul className='flex flex-col'>
-      <li>{isMobile ? <MobileEpisodeItem /> : <EpisodeItem />}</li>
+      {list.map((item) => (
+        <li key={item.episode_id}>
+          {isMobile ? (
+            <MobileEpisodeItem data={item} />
+          ) : (
+            <EpisodeItem data={item} />
+          )}
+        </li>
+      ))}
     </ul>
   );
 };
