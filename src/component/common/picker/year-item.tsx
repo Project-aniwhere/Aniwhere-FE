@@ -1,13 +1,13 @@
 interface YearItemProps {
   year: string;
-  handleChangeYear: (year: string) => void;
+  handleSelectYear: (year: string) => void;
   active: boolean;
 }
 
-const YearItem = ({ year, handleChangeYear, active }: YearItemProps) => {
+const YearItem = ({ year, handleSelectYear, active }: YearItemProps) => {
   return (
     <button
-      onClick={() => handleChangeYear(year)}
+      onClick={() => handleSelectYear(year)}
       className={`w-full px-2 py-1.5 text-start hover:text-aniviolet2 hover:font-medium hover:bg-aniviolet0 text-sm md:text-base ${active ? 'text-aniviolet2 font-medium' : ''}`}
     >
       {year}
