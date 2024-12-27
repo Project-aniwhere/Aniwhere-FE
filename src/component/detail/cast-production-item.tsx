@@ -11,7 +11,7 @@ const CastProductItem = ({
   voiceActorName,
 }: CastProductItemProps) => {
   return (
-    <div className='flex items-center gap-4'>
+    <div className='flex items-center gap-4 p-5'>
       <Image
         src={sample1.src}
         alt='프로필'

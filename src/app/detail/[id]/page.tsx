@@ -1,7 +1,6 @@
 'use client';
 
 import Header from '@/component/common/header/header';
-import MainLayout from '@/component/common/layout/main-layout';
 import Tabs from '@/component/common/tab/tab-list';
 import DetailBanner from '@/component/detail/banner';
 import CastProductList from '@/component/detail/cast-production-list';
@@ -24,28 +23,25 @@ const DetailPage = () => {
         runningTime={46}
         categories={ANIME_DUMMY.categories}
       />
-      <MainLayout>
-        <div className='p-8 flex flex-col gap-8'>
-          <Tabs
-            list={Object.entries(DETAIL_TABS).map(([id, value]) => ({
-              id,
-              value,
-            }))}
-            value={selectedTab}
-            setValue={setSelectedTab}
-          />
-          <div className='px-5'>
-            {selectedTab === 'episode' && <EpisodeList />}
-            {selectedTab === 'cast_production' && (
-              <CastProductList list={ANIME_DUMMY.castings} />
-            )}
-            {selectedTab === 'comment' && (
-              <CommentContainer list={ANIME_DUMMY.reviews} />
-            )}
-          </div>
+      <div className='py-5 px-8 flex flex-col gap-5'>
+        <Tabs
+          list={Object.entries(DETAIL_TABS).map(([id, value]) => ({
+            id,
+            value,
+          }))}
+          value={selectedTab}
+          setValue={setSelectedTab}
+        />
+        <div>
+          {selectedTab === 'episode' && <EpisodeList />}
+          {selectedTab === 'cast_production' && (
+            <CastProductList list={ANIME_DUMMY.castings} />
+          )}
+          {selectedTab === 'comment' && (
+            <CommentContainer list={ANIME_DUMMY.reviews} />
+          )}
         </div>
-      </MainLayout>
-      {/* <Footer /> */}
+      </div>
     </div>
   );
 };

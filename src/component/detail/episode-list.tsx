@@ -2,7 +2,7 @@ import EpisodeItem from './episode-item';
 
 const EpisodeList = () => {
   return (
-    <ul className='flex flex-col gap-8'>
+    <ul className='flex flex-col'>
       <li>
         <EpisodeItem />
       </li>

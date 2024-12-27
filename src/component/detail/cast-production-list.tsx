@@ -7,7 +7,7 @@ interface CastProductListProps {
 
 const CastProductList = ({ list }: CastProductListProps) => {
   return (
-    <ul className='grid grid-cols-4 gap-6'>
+    <ul className='grid grid-cols-4'>
       {list.map((item) => (
         <li key={item.castingId}>
           <CastProductItem

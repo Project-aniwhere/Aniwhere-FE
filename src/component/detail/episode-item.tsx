@@ -3,7 +3,7 @@ import sample1 from '@/asset/img/subslider/sample1.jpg';
 
 const EpisodeItem = () => {
   return (
-    <div className='flex items-center gap-6'>
+    <div className='p-5 flex items-center gap-6'>
       <Image
         src={sample1.src}
         alt='섬네일'
