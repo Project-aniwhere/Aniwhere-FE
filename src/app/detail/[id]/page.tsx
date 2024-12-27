@@ -49,9 +49,7 @@ const DetailPage = () => {
         />
         <div>
           {tab === 'episode' && <EpisodeList />}
-          {tab === 'cast_production' && (
-            <CastProductList list={ANIME_DUMMY.castings} />
-          )}
+          {tab === 'cast' && <CastProductList list={ANIME_DUMMY.castings} />}
           {tab === 'comment' && <CommentContainer list={ANIME_DUMMY.reviews} />}
         </div>
       </div>
