@@ -10,11 +10,7 @@ const CastProductList = ({ list }: CastProductListProps) => {
     <ul className='grid md:grid-cols-4'>
       {list.map((item) => (
         <li key={item.castingId}>
-          <CastProductItem
-            characterName={item.characterName}
-            characterDescription={item.characterDescription}
-            voiceActorName={item.voiceActorName}
-          />
+          <CastProductItem data={item} />
         </li>
       ))}
     </ul>

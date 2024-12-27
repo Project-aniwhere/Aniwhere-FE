@@ -18,7 +18,7 @@ const CommentList = ({ list }: CommentListProps) => {
       <ul className='grid grid-cols-4 gap-4'>
         {list.map((item) => (
           <li key={item.reviewId}>
-            <CommentItem rating={item.rating} content={item.content} />
+            <CommentItem data={item} />
           </li>
         ))}
       </ul>
