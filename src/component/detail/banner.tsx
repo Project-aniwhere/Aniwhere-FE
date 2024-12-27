@@ -24,12 +24,12 @@ const DetailBanner = ({
         layout='responsive'
         width={1280}
         height={720}
-        className='object-cover max-h-[480px]'
+        className='object-cover max-h-96 md:max-h-[480px]'
       />
-      <div className='w-full absolute bottom-0 z-20 flex justify-between items-end py-8 px-12 text-white'>
+      <div className='w-full absolute bottom-0 z-20 flex justify-between items-end px-5 md:px-12 py-6 md:py-8 text-white'>
         <div className='flex flex-col gap-2'>
-          <p className='text-4xl font-bold'>{title}</p>
-          <div className='flex gap-2 text-lg font-medium'>
+          <p className='text-2xl md:text-4xl font-bold'>{title}</p>
+          <div className='flex gap-2 md:text-lg font-medium'>
             <div className='flex gap-1'>
               <span>별</span>
               <span>{rating}</span>
@@ -40,7 +40,7 @@ const DetailBanner = ({
         </div>
         <button className='flex flex-col items-center gap-1 opacity-85'>
           <span>+</span>
-          <span className='font-medium'>위시 리스트</span>
+          <span className='font-medium text-sm md:text-base'>위시 리스트</span>
         </button>
       </div>
     </div>
