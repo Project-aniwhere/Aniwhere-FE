@@ -3,6 +3,7 @@ import {
   AnimeEpisodeListResponse,
   AnimeWeeklyResponse,
 } from '@/type/api/anime-api';
+import { PageableRequest } from '@/type/common';
 import { Fetch } from '@/util/fetch';
 
 const prefix = 'api/anime';
@@ -47,12 +48,16 @@ export const getAnimeQuarterList = async ({
 };
 
 export const getAnimeEpisodeList = async (
-  id: string | null
+  id: string | null,
+  pageable?: PageableRequest
 ): Promise<AnimeEpisodeListResponse | null> => {
   // TODO API URL 변경 ( api/animes -> api/anime )
-  const response = await Fetch(`api/animes/${id}/episodes`, {
-    next: { revalidate: 1200 },
-  });
+  const response = await Fetch(
+    `api/animes/${id}/episodes?pageable=${pageable}`,
+    {
+      next: { revalidate: 1200 },
+    }
+  );
 
   if (response.ok) return response.json();
   return null;

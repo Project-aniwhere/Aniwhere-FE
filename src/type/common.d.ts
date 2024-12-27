@@ -53,3 +53,5 @@ export type PageableResponse<T> = {
   last: boolean;
   empty: boolean;
 };
+
+export type PageableRequest = { page: number; size: number; sort: string[] };
