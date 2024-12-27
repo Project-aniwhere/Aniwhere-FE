@@ -4,7 +4,7 @@ import { Fetch } from '@/util/fetch';
 const prefix = 'api/anime';
 
 export const getAnimeDetail = async (
-  id: number
+  id: string | null
 ): Promise<AnimeDetailResponse | null> => {
   const response = await Fetch(`${prefix}/${id}`, {
     next: { revalidate: 1200 },

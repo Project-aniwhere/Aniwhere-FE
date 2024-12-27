@@ -1,5 +1,6 @@
 'use client';
 
+import { getAnimeDetail } from '@/action/anime';
 import Header from '@/component/common/header/header';
 import Tabs from '@/component/common/tab/tab-list';
 import DetailBanner from '@/component/detail/banner';
@@ -8,10 +9,24 @@ import CommentContainer from '@/component/detail/comment-container';
 import EpisodeList from '@/component/detail/episode-list';
 import { DETAIL_TABS } from '@/constant/common';
 import { ANIME_DUMMY } from '@/constant/dummy';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 const DetailPage = () => {
-  const [selectedTab, setSelectedTab] = useState('episode');
+  const router = useRouter();
+  const { id } = useParams();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab') || 'episode';
+
+  const { data } = useQuery({
+    queryKey: ['animeDetail', id],
+    queryFn: () => getAnimeDetail(id as string),
+    enabled: !!id,
+  });
+
+  const handleChangeTab = (tab: string) => {
+    router.push(`/detail/${id}?tab=${tab}`);
+  };
 
   return (
     <div>
@@ -29,17 +44,15 @@ const DetailPage = () => {
             id,
             value,
           }))}
-          value={selectedTab}
-          setValue={setSelectedTab}
+          value={tab}
+          setValue={handleChangeTab}
         />
         <div>
-          {selectedTab === 'episode' && <EpisodeList />}
-          {selectedTab === 'cast_production' && (
+          {tab === 'episode' && <EpisodeList />}
+          {tab === 'cast_production' && (
             <CastProductList list={ANIME_DUMMY.castings} />
           )}
-          {selectedTab === 'comment' && (
-            <CommentContainer list={ANIME_DUMMY.reviews} />
-          )}
+          {tab === 'comment' && <CommentContainer list={ANIME_DUMMY.reviews} />}
         </div>
       </div>
     </div>
