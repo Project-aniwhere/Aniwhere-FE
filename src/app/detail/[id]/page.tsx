@@ -23,7 +23,7 @@ const DetailPage = () => {
         runningTime={46}
         categories={ANIME_DUMMY.categories}
       />
-      <div className='py-5 px-8 flex flex-col gap-5'>
+      <div className='py-5 px-5 md:px-8 flex flex-col gap-5'>
         <Tabs
           list={Object.entries(DETAIL_TABS).map(([id, value]) => ({
             id,

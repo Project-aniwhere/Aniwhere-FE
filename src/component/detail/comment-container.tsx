@@ -8,7 +8,7 @@ interface CommentContainerProps {
 
 const CommentContainer = ({ list }: CommentContainerProps) => {
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-5'>
       <Rating />
       <CommentList list={list} />
     </div>

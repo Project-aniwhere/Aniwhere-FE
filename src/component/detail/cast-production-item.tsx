@@ -20,8 +20,8 @@ const CastProductItem = ({
         className='object-cover rounded-full'
       />
       <div className='flex flex-col gap-1'>
-        <p className='font-medium'>{voiceActorName}</p>
-        <div className='text-sm text-gray-400'>
+        <p className='text-sm md:text-base font-medium'>{voiceActorName}</p>
+        <div className='text-xs md:text-sm text-gray-400'>
           <span>성우 </span>
           <span>{characterName}</span>
         </div>

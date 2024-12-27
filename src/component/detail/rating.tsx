@@ -2,10 +2,10 @@ import HoverColorButton from '../common/button/hover-color-button';
 
 const Rating = () => {
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 p-3 md:p-5'>
       <div className='flex flex-col gap-2'>
-        <p className='font-medium'>내 별점</p>
-        <div className='flex gap-2 text-3xl font-medium'>
+        <p className='text-sm md:text-base font-medium'>내 별점</p>
+        <div className='flex gap-2 text-xl md:text-3xl font-medium'>
           <span>별</span>
           <span>별</span>
           <span>별</span>
