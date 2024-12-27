@@ -12,7 +12,7 @@ const EpisodeItem = () => {
         className='object-cover rounded-md'
       />
       <div className='flex flex-col gap-3'>
-        <div>
+        <div className='flex flex-col gap-0.5'>
           <div className='text-xl font-bold'>
             <span>3화 </span>
             <span>수험 대책을 세워라</span>
