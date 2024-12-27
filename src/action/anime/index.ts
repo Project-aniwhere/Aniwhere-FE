@@ -5,7 +5,7 @@ const prefix = 'api/anime';
 
 export const getAnimeDetail = async (
   id: number
-): Promise<AnimeDetailResponse> => {
+): Promise<AnimeDetailResponse | null> => {
   const response = await Fetch(`${prefix}/${id}`, {
     next: { revalidate: 1200 },
   });
@@ -14,22 +14,23 @@ export const getAnimeDetail = async (
   return null;
 };
 
-export const getAnimeWeeklyList = async (): Promise<AnimeWeeklyResponse> => {
-  const response = await Fetch(`${prefix}/weekday`, {
-    next: { revalidate: 1200 },
-  });
+export const getAnimeWeeklyList =
+  async (): Promise<AnimeWeeklyResponse | null> => {
+    const response = await Fetch(`${prefix}/weekday`, {
+      next: { revalidate: 1200 },
+    });
 
-  if (response.ok) return response.json();
-  return null;
-};
+    if (response.ok) return response.json();
+    return null;
+  };
 
 export const getAnimeQuarterList = async ({
   year,
   quarter,
 }: {
-  year: number;
-  quarter: number;
-}): Promise<AnimeWeeklyResponse> => {
+  year: string;
+  quarter: string;
+}): Promise<AnimeWeeklyResponse | null> => {
   const response = await Fetch(
     `${prefix}/quarter?year=${year}&quarter=${quarter}`,
     {

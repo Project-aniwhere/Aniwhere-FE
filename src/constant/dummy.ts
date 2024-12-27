@@ -1,6 +1,6 @@
-import { DailyAniProps } from '@/type/weekly';
+import { AnimeWeeklyInfoType } from '@/type/api/anime-api';
 
-export const WEEKLY_DUMMY: Record<string, DailyAniProps[]> = {
+export const WEEKLY_DUMMY: Record<string, AnimeWeeklyInfoType[]> = {
   '0': [
     {
       titleId: 1,

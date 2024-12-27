@@ -1,18 +1,18 @@
-import { DailyAniProps } from '@/type/weekly';
 import DailyItem from './daily-item';
 import Tabs from '../common/tab/tab-list';
 import { DAYS } from '@/constant/common';
+import { AnimeWeeklyInfoType } from '@/type/api/anime-api';
 
 interface DailyConatinerProps {
-  dailyList: DailyAniProps[];
-  selectedDay: string;
-  setSelectedDay: (value: string) => void;
+  dailyList: AnimeWeeklyInfoType[];
+  currentDay: string;
+  handleSelectDay: (value: string) => void;
 }
 
 const MobileDailyConatiner = ({
   dailyList,
-  selectedDay,
-  setSelectedDay,
+  currentDay,
+  handleSelectDay,
 }: DailyConatinerProps) => {
   return (
     <div className='flex flex-col gap-3'>
@@ -21,12 +21,12 @@ const MobileDailyConatiner = ({
           id,
           value,
         }))}
-        value={selectedDay}
-        setValue={setSelectedDay}
+        value={currentDay}
+        setValue={handleSelectDay}
       />
       <ul className='grid grid-cols-3 gap-2'>
         {dailyList.map((item) => (
-          <li key={item.titleId} className='cursor-pointer'>
+          <li key={item.animeId} className='cursor-pointer'>
             <DailyItem data={item} />
           </li>
         ))}

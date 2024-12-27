@@ -1,20 +1,19 @@
+import { YearPickerProps } from '@/type/year-picker';
 import YearItem from './year-item';
 
-interface YearListProps {
-  selectedYear: string;
+interface YearListProps extends YearPickerProps {
   years: string[];
-  handleChangeYear: (year: string) => void;
 }
 
-const YearList = ({ selectedYear, years, handleChangeYear }: YearListProps) => {
+const YearList = ({ year, years, handleSelectYear }: YearListProps) => {
   return (
     <ul className='bg-white py-2 w-20 border border-gray-100 rounded'>
-      {years.map((year) => (
-        <li key={year}>
+      {years.map((v) => (
+        <li key={v}>
           <YearItem
-            year={year}
-            handleChangeYear={handleChangeYear}
-            active={year === selectedYear}
+            year={v}
+            handleSelectYear={handleSelectYear}
+            active={v === year}
           />
         </li>
       ))}

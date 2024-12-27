@@ -7,7 +7,7 @@ export interface AnimeWeeklyInfoType {
 
 export type AnimeWeeklyResponse = {
   [key: string]: AnimeWeeklyInfoType[];
-} | null;
+};
 
 export interface AnimeCastingInfoType {
   castingId: number;
@@ -52,4 +52,4 @@ export interface AnimeDetailInfoType {
   reviews: AnimeReviewInfoType[];
 }
 
-export type AnimeDetailResponse = AnimeDetailInfoType | null;
+export type AnimeDetailResponse = AnimeDetailInfoType;
