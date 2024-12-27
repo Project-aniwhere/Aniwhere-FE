@@ -1,8 +1,8 @@
-import { AnimeCastingProps } from '@/type/anime';
 import CastProductItem from './cast-production-item';
+import { AnimeCastingInfoType } from '@/type/api/anime-api';
 
 interface CastProductListProps {
-  list: AnimeCastingProps[];
+  list: AnimeCastingInfoType[];
 }
 
 const CastProductList = ({ list }: CastProductListProps) => {
@@ -12,6 +12,7 @@ const CastProductList = ({ list }: CastProductListProps) => {
         <li key={item.castingId}>
           <CastProductItem
             characterName={item.characterName}
+            characterDescription={item.characterDescription}
             voiceActorName={item.voiceActorName}
           />
         </li>

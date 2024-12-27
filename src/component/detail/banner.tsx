@@ -4,7 +4,7 @@ interface DetailBannerProps {
   poster: string;
   title: string;
   rating: number;
-  runningTime: number;
+  runningTime: string;
   categories: string[];
 }
 

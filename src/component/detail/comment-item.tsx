@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import sample1 from '@/asset/img/subslider/sample1.jpg';
 
-const CommentItem = () => {
+interface CommentItemProps {
+  rating: number;
+  content: string;
+}
+
+const CommentItem = ({ rating, content }: CommentItemProps) => {
   return (
     <div className='flex flex-col gap-4 p-4 bg-gray-100 rounded-md'>
       <div className='flex justify-between items-center gap-4'>
@@ -17,12 +22,10 @@ const CommentItem = () => {
         </div>
         <div className='flex gap-2 text-gray-400 text-sm'>
           <span>별</span>
-          <span>3.0</span>
+          <span>{rating}</span>
         </div>
       </div>
-      <p className='text-gray-400'>
-        가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라
-      </p>
+      <p className='text-gray-400'>{content}</p>
       <div className='flex justify-end gap-4 text-gray-400 text-sm'>
         <button className='flex gap-2'>
           <span>따봉</span>

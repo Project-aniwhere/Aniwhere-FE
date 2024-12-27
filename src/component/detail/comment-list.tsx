@@ -1,8 +1,8 @@
-import { AnimeReviewProps } from '@/type/anime';
 import CommentItem from './comment-item';
+import { AnimeReviewInfoType } from '@/type/api/anime-api';
 
 interface CommentListProps {
-  list: AnimeReviewProps[];
+  list: AnimeReviewInfoType[];
 }
 
 const CommentList = ({ list }: CommentListProps) => {
@@ -18,7 +18,7 @@ const CommentList = ({ list }: CommentListProps) => {
       <ul className='grid grid-cols-4 gap-4'>
         {list.map((item) => (
           <li key={item.reviewId}>
-            <CommentItem />
+            <CommentItem rating={item.rating} content={item.content} />
           </li>
         ))}
       </ul>

@@ -1,9 +1,9 @@
-import { AnimeReviewProps } from '@/type/anime';
 import CommentList from './comment-list';
 import Rating from './rating';
+import { AnimeReviewInfoType } from '@/type/api/anime-api';
 
 interface CommentContainerProps {
-  list: AnimeReviewProps[];
+  list: AnimeReviewInfoType[];
 }
 
 const CommentContainer = ({ list }: CommentContainerProps) => {

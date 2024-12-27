@@ -3,11 +3,13 @@ import Image from 'next/image';
 
 interface CastProductItemProps {
   characterName: string;
+  characterDescription: string;
   voiceActorName: string;
 }
 
 const CastProductItem = ({
   characterName,
+  characterDescription,
   voiceActorName,
 }: CastProductItemProps) => {
   return (
@@ -22,7 +24,7 @@ const CastProductItem = ({
       <div className='flex flex-col gap-1'>
         <p className='text-sm md:text-base font-medium'>{voiceActorName}</p>
         <div className='text-xs md:text-sm text-gray-400'>
-          <span>성우 </span>
+          <span>{characterDescription} </span>
           <span>{characterName}</span>
         </div>
       </div>
