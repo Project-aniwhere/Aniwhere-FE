@@ -39,13 +39,13 @@ export async function handleLoginForm(
 
   if (response.status < 400) {
     return {
-      code: 200,
+      code: response.status,
       message: '',
       userInfo: result,
     };
   } else {
     return {
-      code: 400,
+      code: response.status,
       message: SERVER_RESPONSE[result.code] || '서버 오류가 발생했습니다',
     };
   }

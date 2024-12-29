@@ -65,15 +65,15 @@ export async function handleSignupForm(
   // signin 서버 통신
   const response = await Fetch('api/auth/signup', data);
 
-  if (response.status < 400) {
+  if (response.ok) {
     return {
-      code: 200,
+      code: response.status,
       message: '',
     };
   } else {
     const result = await response.json();
     return {
-      code: 400,
+      code: response.status,
       message: SERVER_RESPONSE[result.code] || '서버 오류가 발생했습니다',
     };
   }
