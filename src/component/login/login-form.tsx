@@ -7,20 +7,24 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { isLoginAtom } from '@/store/auth-atom';
 import { useSetAtom } from 'jotai';
+import { userInfoAtom } from '@/store/user-atom';
 const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
   const setIsLogin = useSetAtom(isLoginAtom);
+  const setUserInfo = useSetAtom(userInfoAtom);
 
   const onSubmit = async (formData: FormData) => {
     const result = await handleLoginForm(formData);
-
+    console.log(result);
     if (result.code < 400) {
       setErrorMsg('');
       setIsLogin(true);
+      setUserInfo(result.userInfo);
       router.back();
     } else {
       setErrorMsg(result.message || '로그인에 실패했습니다.');
+      setIsLogin(false);
     }
   };
 

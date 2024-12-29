@@ -41,6 +41,7 @@ export async function handleLoginForm(
     return {
       code: 200,
       message: '',
+      userInfo: result,
     };
   } else {
     return {

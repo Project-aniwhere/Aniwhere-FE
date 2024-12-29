@@ -9,7 +9,6 @@ export async function handleLogout(): Promise<APIResult<SignupResponse>> {
     method: 'POST',
   };
   const response = await FetchWithCookie('api/auth/logout', data);
-  const result = await response.json();
 
   if (response.status < 400) {
     return {
@@ -17,6 +16,7 @@ export async function handleLogout(): Promise<APIResult<SignupResponse>> {
       message: '',
     };
   } else {
+    const result = await response.json();
     return {
       code: 400,
       message: SERVER_RESPONSE[result.code] || '서버 오류가 발생했습니다',

@@ -64,7 +64,6 @@ export async function handleSignupForm(
 
   // signin 서버 통신
   const response = await Fetch('api/auth/signup', data);
-  const result = await response.json();
 
   if (response.status < 400) {
     return {
@@ -72,6 +71,7 @@ export async function handleSignupForm(
       message: '',
     };
   } else {
+    const result = await response.json();
     return {
       code: 400,
       message: SERVER_RESPONSE[result.code] || '서버 오류가 발생했습니다',
