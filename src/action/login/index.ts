@@ -34,7 +34,7 @@ export async function handleLoginForm(
   };
 
   // login 서버 통신
-  const response = await Fetch('api/auth/login', data);
+  const response = await Fetch('/api/auth/login', data);
   const result = await response.json();
 
   if (response.status < 400) {

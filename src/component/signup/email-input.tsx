@@ -91,7 +91,7 @@ const EmailInput = () => {
     };
 
     const response = await Fetch(
-      'api/auth/email/verifications-requests',
+      '/api/auth/email/verifications-requests',
       verifyEmailData
     );
 
@@ -126,7 +126,7 @@ const EmailInput = () => {
     };
 
     const response = await Fetch(
-      'api/auth/email/verifications',
+      '/api/auth/email/verifications',
       verifyAuthCodeData
     );
 
