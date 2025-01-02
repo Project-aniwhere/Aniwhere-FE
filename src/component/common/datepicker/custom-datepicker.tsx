@@ -10,7 +10,6 @@ type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const DefaultDatepicker = ({
-  onChange,
   value,
   placeholder = '',
   className = '',
@@ -51,7 +50,7 @@ const DefaultDatepicker = ({
         value={nowDate}
         placeholder={placeholder}
         onClick={handleToggleCalendar}
-        className={`text-left p-3 border border-gray-300 rounded-lg bg-gray-50 ${className}`}
+        className={`w-full text-left p-3 border border-gray-300 rounded-lg bg-gray-50 ${className}`}
         readOnly
       />
 

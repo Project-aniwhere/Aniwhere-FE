@@ -16,29 +16,41 @@ const getServerCookies = async () => {
 };
 
 export const Fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-  return fetch(`${getURL()}/${input}`, init);
+  return fetch(input, init);
 };
 
-const FetchWithCookie = async (
+export const FetchWithCookie = async (
   input: RequestInfo | URL,
   init?: RequestInit
 ) => {
   if (process.env.NODE_ENV === 'production' && isServer) {
-    const cookies = await getServerCookies();
-    return Fetch(input, {
-      ...init,
-      headers: {
-        'Content-Type': 'application/json',
-        Cookie: cookies().toString(),
-      },
-      credentials: 'include',
-    });
+    try {
+      const cookies = await getServerCookies();
+      const cookieString = cookies().toString();
+      return Fetch(input, {
+        ...init,
+        headers: {
+          ...init?.headers,
+          'Content-Type': 'application/json',
+          Cookie: cookieString,
+        },
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error('Failed to get server cookies:', error);
+      // 에러 상황에 대한 폴백 처리
+      return Fetch(input, {
+        ...init,
+        credentials: 'include',
+      });
+    }
   }
+
   return Fetch(input, {
     ...init,
+    credentials: 'include',
   });
 };
-
 export const FetchWithJWT = async (
   input: RequestInfo | URL,
   init?: RequestInit

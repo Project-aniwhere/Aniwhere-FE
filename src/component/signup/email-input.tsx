@@ -95,16 +95,13 @@ const EmailInput = () => {
       verifyEmailData
     );
 
-    const result = await response.json();
-
     if (!response.ok) {
       setEmail((prev) => ({
         ...prev,
         errorMsg: '서버 에러가 발생했습니다',
         showVerification: false,
       }));
-    }
-    if (result.code !== 200) {
+      const result = await response.json();
       setEmail((prev) => ({
         ...prev,
         errorMsg: SERVER_RESPONSE[result.code],

@@ -10,24 +10,25 @@ const BirthInput = () => {
   };
 
   return (
-    <div className='flex gap-4 items-center'>
-      <DefaultDatepicker
-        value={selectedDate}
-        onChange={handleDateChange}
-        placeholder='생년월일'
-        className='w-48'
-        type='birth'
-      />
-      <div className='flex gap-4 w-28'>
-        <label className='flex gap-2'>
-          <RadioInput name='gender' value='male' className='w-full p-3' />
-          <span>남</span>
-        </label>
-        <label className='flex gap-2'>
-          <RadioInput name='gender' value='female' className='w-full p-3' />
-          <span>여</span>
-        </label>
+    <div className='grid grid-cols-5 gap-4 items-center'>
+      <div className='col-span-3'>
+        <DefaultDatepicker
+          value={selectedDate}
+          onChange={handleDateChange}
+          placeholder='생년월일'
+          type='birth'
+        />
       </div>
+      {/* <div className='col-span-1'> */}
+      <label className='col-span-1 flex'>
+        <RadioInput name='gender' value='male' className='w-full' />
+        <span>남</span>
+      </label>
+      <label className='col-span-1 flex'>
+        <RadioInput name='gender' value='female' className='w-full' />
+        <span>여</span>
+      </label>
+      {/* </div> */}
     </div>
   );
 };

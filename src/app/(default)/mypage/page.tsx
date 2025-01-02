@@ -2,7 +2,6 @@ import MypageAccountInfo from '@/component/mypage/mypage-accountInfo';
 import MypageMobile from '@/component/mypage/mypage-mobile';
 import MypageSidebar from '@/component/mypage/mypage-sidebar';
 import { isMobile } from '@/util/detect-device';
-import { useState } from 'react';
 
 const Page = () => {
   return (
