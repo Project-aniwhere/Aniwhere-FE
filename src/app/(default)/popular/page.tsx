@@ -30,7 +30,7 @@ const PopularPage = () => {
               key={idx}
               className='flex flex-col sm:flex-row flex-grow rounded-lg border p-2 sm:p-4 gap-4'
             >
-              <div className='relative w-full aspect-video'>
+              <div className='relative sm:min-w-60 lg:min-w-80 max-w-full min-h-full aspect-video'>
                 <div
                   className={`absolute z-10 w-10 h-10 font-bold text-lg flex items-center justify-center text-white rounded-ss-lg rounded-ee-lg ${getRankColor(idx)}`}
                 >
