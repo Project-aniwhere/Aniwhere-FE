@@ -24,12 +24,12 @@ export async function handleLoginForm(
     };
   }
 
-  const data = {
+  const data: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include' as RequestCredentials,
+    credentials: 'include',
     body: JSON.stringify(loginFormData),
   };
 

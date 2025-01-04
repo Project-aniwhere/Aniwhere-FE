@@ -19,6 +19,10 @@ const nextConfig = {
         source: '/api/:path*',
         destination: 'http://15.164.142.195/api/:path*',
       },
+      {
+        source: '/recommend',
+        destination: 'http://15.164.142.195/recommend',
+      },
     ];
   },
 };

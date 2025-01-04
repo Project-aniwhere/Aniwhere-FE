@@ -5,11 +5,14 @@ import MenuLineSvg from '@/asset/svg/menuline/menu-line-svg';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { isLoginAtom } from '@/store/auth-atom';
 import { handleLogout } from '@/action/logout';
+import { userInfoAtom } from '@/store/user-atom';
+import { RESET } from 'jotai/utils';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const isLogin = useAtomValue(isLoginAtom);
   const setIsLogin = useSetAtom(isLoginAtom);
+  const setUserInfo = useSetAtom(userInfoAtom);
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuAniItems = [
@@ -23,8 +26,10 @@ const MobileNav = () => {
   const logoutAction = async (e: React.MouseEvent) => {
     e.preventDefault(); // 기본 이벤트 동작 방지
     const result = await handleLogout();
-    if (result.code < 400) {
+
+    if (result.code < 400 || result.code == 401) {
       setIsLogin(false);
+      setUserInfo(RESET);
     }
   };
 
