@@ -1,4 +1,5 @@
 import { API_URL } from '@/constant/api-url';
+import { isLoginAtom } from '@/store/auth-atom';
 import { isServer } from '@tanstack/react-query';
 // import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -6,6 +7,9 @@ import { redirect } from 'next/navigation';
 const getURL = () => {
   if (process.env.NODE_ENV === 'production' && isServer) {
     return 'http://localhost:8080';
+  }
+  if (process.env.NODE_ENV === 'development' && !isServer) {
+    return '';
   }
   return API_URL;
 };
@@ -16,7 +20,7 @@ const getServerCookies = async () => {
 };
 
 export const Fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-  return fetch(input, init);
+  return fetch(`${getURL()}${input}`, init);
 };
 
 export const FetchWithCookie = async (
@@ -51,6 +55,7 @@ export const FetchWithCookie = async (
     credentials: 'include',
   });
 };
+
 export const FetchWithJWT = async (
   input: RequestInfo | URL,
   init?: RequestInit
@@ -58,8 +63,8 @@ export const FetchWithJWT = async (
   const res = await FetchWithCookie(input, init);
 
   if (res.status === 401) {
-    const tokensRequest = await fetch('/reissue', init);
-    if (!tokensRequest.ok) return redirect('/login');
+    const tokensRequest = await fetch('/api/reissue', init);
+    if (!tokensRequest.ok) return tokensRequest;
 
     if (process.env.NODE_ENV === 'production' && isServer) {
       const cookies = await getServerCookies();

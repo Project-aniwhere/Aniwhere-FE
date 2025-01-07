@@ -63,7 +63,7 @@ export async function handleSignupForm(
   };
 
   // signin 서버 통신
-  const response = await Fetch('api/auth/signup', data);
+  const response = await Fetch('/api/auth/signup', data);
 
   if (response.ok) {
     return {

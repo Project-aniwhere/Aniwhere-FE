@@ -24,17 +24,17 @@ export async function handleLoginForm(
     };
   }
 
-  const data = {
+  const data: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include' as RequestCredentials,
+    credentials: 'include',
     body: JSON.stringify(loginFormData),
   };
 
   // login 서버 통신
-  const response = await Fetch('api/auth/login', data);
+  const response = await Fetch('/api/auth/login', data);
   const result = await response.json();
 
   if (response.status < 400) {

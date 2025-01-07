@@ -1,14 +1,14 @@
 import { SERVER_RESPONSE } from '@/constant/common';
 import { SignupResponse } from '@/type/api/signup';
 import { APIResult } from '@/type/common';
-import { FetchWithCookie } from '@/util/fetch';
+import { FetchWithJWT } from '@/util/fetch';
 
 export async function handleLogout(): Promise<APIResult<SignupResponse>> {
   // login 서버 통신
   const data = {
     method: 'POST',
   };
-  const response = await FetchWithCookie('api/auth/logout', data);
+  const response = await FetchWithJWT('/api/auth/logout', data);
 
   if (response.ok) {
     return {

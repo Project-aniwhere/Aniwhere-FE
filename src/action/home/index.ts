@@ -3,7 +3,7 @@ import { Fetch } from '@/util/fetch';
 
 export const getAnimeRecommendList =
   async (): Promise<AnimeRecommendResponse> => {
-    const response = await Fetch('recommend', {
+    const response = await Fetch('/recommend', {
       next: { revalidate: 1200 },
     });
 
