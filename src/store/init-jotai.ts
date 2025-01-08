@@ -1,8 +1,7 @@
-import { isMobile } from '@/util/detect-device';
 import { InitialJotaiState } from '@/type/jotai';
 
 const InitJotai = (): InitialJotaiState => ({
-  isMobile: isMobile(),
+  isLogin: false,
 });
 
 export default InitJotai;

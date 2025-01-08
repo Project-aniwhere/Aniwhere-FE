@@ -1,6 +1,5 @@
 'use client';
 
-import CrossSvg from '@/asset/svg/cross/cross-svg';
 import TagItem from './tag-item';
 import {
   AnimeFilterNameObject,

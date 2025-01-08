@@ -18,9 +18,8 @@ export interface CommonDatepickerProps {
   type?: string;
 }
 
-export type APIResult<T> =
-  | T
-  | {
-      code: number;
-      message: string;
-    };
+export type ErrorResult = {
+  code: number;
+  message: string;
+};
+export type APIResult<T> = T | ErrorResult;

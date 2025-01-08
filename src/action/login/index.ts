@@ -38,11 +38,7 @@ export async function handleLoginForm(
   const result = await response.json();
 
   if (response.status < 400) {
-    return {
-      code: response.status,
-      message: '',
-      userInfo: result,
-    };
+    return result;
   } else {
     return {
       code: response.status,

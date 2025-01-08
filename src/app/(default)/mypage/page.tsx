@@ -3,10 +3,10 @@ import MypageMobile from '@/component/mypage/mypage-mobile';
 import MypageSidebar from '@/component/mypage/mypage-sidebar';
 import { isMobile } from '@/util/detect-device';
 
-const Page = () => {
+const Page = async () => {
   return (
     <>
-      {isMobile() ? (
+      {(await isMobile()) ? (
         <div className='flex mt-20'>
           <MypageMobile />
         </div>
