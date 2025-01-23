@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { isLoginAtom } from '@/store/auth-atom';
 import { useSetAtom } from 'jotai';
 import { userInfoAtom } from '@/store/user-atom';
+import { isFetchError } from '@/util/fetch';
+
 const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
@@ -17,10 +19,10 @@ const LoginForm = () => {
   const onSubmit = async (formData: FormData) => {
     const result = await handleLoginForm(formData);
     console.log(result);
-    if (result.code < 400) {
+    if (!isFetchError(result)) {
       setErrorMsg('');
       setIsLogin(true);
-      setUserInfo(result.userInfo);
+      setUserInfo(result);
       router.back();
     } else {
       setErrorMsg(result.message || '로그인에 실패했습니다.');

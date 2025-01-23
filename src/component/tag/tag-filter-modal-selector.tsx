@@ -56,7 +56,7 @@ function TagFilterModalSelector<T extends string>({
           )}
           {tagList
             .filter(([tagState]) => tagState !== 'neutral')
-            .map(([tagState, tag]) => (
+            .map(([_, tag]) => (
               <TagItem
                 key={tag}
                 onClick={() => {}}
