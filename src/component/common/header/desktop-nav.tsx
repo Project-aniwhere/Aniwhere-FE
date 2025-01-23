@@ -1,10 +1,27 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { isLoginAtom } from '@/store/auth-atom';
+import { handleLogout } from '@/action/logout';
+import { userInfoAtom } from '@/store/user-atom';
+import { RESET } from 'jotai/utils';
 
 const DesktopNav = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogin = useAtomValue(isLoginAtom);
+  const setIsLogin = useSetAtom(isLoginAtom);
+  const setUserInfo = useSetAtom(userInfoAtom);
+
+  const logoutAction = async (e: React.MouseEvent) => {
+    e.preventDefault(); // 기본 이벤트 동작 방지
+    const result = await handleLogout();
+
+    if (result.code < 400 || result.code == 401) {
+      setIsLogin(false);
+      setUserInfo(RESET);
+    }
+  };
+
   return (
     <div className='flex flex-row items-center justify-between'>
       <div className='flex flex-row items-center gap-8'>
@@ -18,7 +35,9 @@ const DesktopNav = () => {
         <search>검색</search>
         <Link href='/mypage'>마이페이지</Link>
         {isLogin ? (
-          <Link href='/logout'>로그아웃</Link>
+          <Link href='#' onClick={logoutAction}>
+            로그아웃
+          </Link>
         ) : (
           <Link href='/login'>로그인</Link>
         )}

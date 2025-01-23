@@ -1,6 +1,6 @@
 'use client';
 
-import { isMobileAtom } from '@/store/device-detect-atom';
+// import { isMobileAtom } from '@/store/device-detect-atom';
 import { InitialJotaiState } from '@/type/jotai';
 import { Provider } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
@@ -11,7 +11,9 @@ interface JotaiProviderProps {
 }
 
 const InitJotaiWrapper = ({ children, initialState }: JotaiProviderProps) => {
-  useHydrateAtoms([[isMobileAtom, initialState.isMobile]]);
+  useHydrateAtoms([
+    // [isMobileAtom, initialState.isMobile],
+  ]);
   return children;
 };
 

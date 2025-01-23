@@ -1,4 +1,3 @@
-import HoverColorButton from '../common/button/hover-color-button';
 import CheckInput from '../common/input/check-input';
 import UnderlineButton from '../common/button/hover-underline-button';
 import MypageProfile from './mypage-profile';

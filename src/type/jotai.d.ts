@@ -1,3 +1,4 @@
 export interface InitialJotaiState {
-  isMobile: boolean;
+  // isMobile: boolean;
+  isLogin: boolean;
 }

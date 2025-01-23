@@ -2,12 +2,17 @@ import { useState } from 'react';
 import Link from 'next/link';
 import CrossSvg from '@/asset/svg/cross/cross-svg';
 import MenuLineSvg from '@/asset/svg/menuline/menu-line-svg';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { isLoginAtom } from '@/store/auth-atom';
+import { handleLogout } from '@/action/logout';
+import { userInfoAtom } from '@/store/user-atom';
+import { RESET } from 'jotai/utils';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const [isLogin, setIsLogin] = useState(false);
-
+  const isLogin = useAtomValue(isLoginAtom);
+  const setIsLogin = useSetAtom(isLoginAtom);
+  const setUserInfo = useSetAtom(userInfoAtom);
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuAniItems = [
@@ -17,6 +22,16 @@ const MobileNav = () => {
   ];
 
   const menuUserItems = [{ href: '/userinfo', text: '마이페이지' }];
+
+  const logoutAction = async (e: React.MouseEvent) => {
+    e.preventDefault(); // 기본 이벤트 동작 방지
+    const result = await handleLogout();
+
+    if (result.code < 400 || result.code == 401) {
+      setIsLogin(false);
+      setUserInfo(RESET);
+    }
+  };
 
   return (
     <div className='relative'>
@@ -84,7 +99,11 @@ const MobileNav = () => {
         </div>
         <div className='absolute bottom-5 right-5'>
           {isLogin ? (
-            <Link href='/logout' className='text-white text-xl'>
+            <Link
+              href='#'
+              onClick={logoutAction}
+              className='text-white text-xl'
+            >
               로그아웃
             </Link>
           ) : (
