@@ -3,16 +3,14 @@ import Link from 'next/link';
 import CrossSvg from '@/asset/svg/cross/cross-svg';
 import MenuLineSvg from '@/asset/svg/menuline/menu-line-svg';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { isLoginAtom } from '@/store/auth-atom';
 import { handleLogout } from '@/action/logout';
-import { userInfoAtom } from '@/store/user-atom';
+import { sessionAtom } from '@/store/session-atom';
 import { RESET } from 'jotai/utils';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLogin = useAtomValue(isLoginAtom);
-  const setIsLogin = useSetAtom(isLoginAtom);
-  const setUserInfo = useSetAtom(userInfoAtom);
+  const session = useAtomValue(sessionAtom);
+  const setSession = useSetAtom(sessionAtom);
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuAniItems = [
@@ -28,8 +26,7 @@ const MobileNav = () => {
     const result = await handleLogout();
 
     if (result.code < 400 || result.code == 401) {
-      setIsLogin(false);
-      setUserInfo(RESET);
+      setSession(RESET);
     }
   };
 
@@ -98,7 +95,7 @@ const MobileNav = () => {
           ))}
         </div>
         <div className='absolute bottom-5 right-5'>
-          {isLogin ? (
+          {session.isLogin ? (
             <Link
               href='#'
               onClick={logoutAction}
