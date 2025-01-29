@@ -3,6 +3,7 @@ import UnderlineButton from '../common/button/hover-underline-button';
 import IconButton from '../common/button/icon-button';
 import Link from 'next/link';
 import LoginForm from './login-form';
+import { API_URL } from '@/constant/api-url';
 
 const LoginContainer = () => {
   return (
@@ -41,9 +42,13 @@ const LoginContainer = () => {
         </div>
 
         <div className='flex justify-center gap-4 mt-6'>
-          <IconButton>
-            <KakaotalkSvg height='3rem' width='3rem' />
-          </IconButton>
+          <Link
+            href={`https://kauth.kakao.com/oauth/authorize?client_id=a311edb6f85642a8b3c8dfa59a459a38&redirect_uri=http://${process.env.NODE_ENV === 'production' ? API_URL : 'localhost:3000'}/auth/kakao/callback&response_type=code`}
+          >
+            <IconButton>
+              <KakaotalkSvg height='3rem' width='3rem' />
+            </IconButton>
+          </Link>
         </div>
       </div>
     </div>
