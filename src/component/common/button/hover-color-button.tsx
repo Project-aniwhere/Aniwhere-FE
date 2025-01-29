@@ -5,13 +5,19 @@ import { CommonButtonProps } from '@/type/common';
 const HoverColorButton = ({
   type = 'submit',
   text = '',
+  disabled = false,
   ...props
 }: CommonButtonProps) => {
   return (
     <button
       {...props}
       type={type}
-      className={`bg-aniviolet3 text-white rounded-lg hover:bg-purple-700 transition-color ${props.className}`}
+      disabled={disabled}
+      className={` text-white rounded-lg transition-color ${
+        disabled
+          ? 'bg-gray-300 cursor-not-allowed hover:bg-gray-300'
+          : 'bg-aniviolet3 hover:bg-purple-700'
+      } ${props.className}`}
     >
       {text}
     </button>
