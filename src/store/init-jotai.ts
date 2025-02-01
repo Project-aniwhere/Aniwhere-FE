@@ -1,7 +1,5 @@
 import { InitialJotaiState } from '@/type/jotai';
 
-const InitJotai = (): InitialJotaiState => ({
-  isLogin: false,
-});
+const InitJotai = (): InitialJotaiState => ({});
 
 export default InitJotai;
