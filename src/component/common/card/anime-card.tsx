@@ -14,26 +14,40 @@ import Image from 'next/image';
 import sample from '@/asset/img/mainslider/sample.jpg';
 import TagItem from '@/component/tag/tag-item';
 import Link from 'next/link';
+import { Review } from '@/type/api/anime-recommend-api';
+import CommentSwiper from '../comment/comment-swiper';
+import StarRate from '../comment/star-rate';
+
 interface AnimeCardProps {
+  id: number;
   title: string;
   genre: AnimeGenreType;
   tag: AnimeTagType[];
   season: AnimeSeasonType;
   releaseType: AnimeReleaseType;
   isBroadcasting: AnimeBroadCastType;
+  rating: number;
   thumbnail?: string;
   className?: string;
+  reviews?: Review[];
+  ranking?: number;
+  imageAspect?: string;
 }
 
 const AnimeCard = ({
+  id,
   title,
   tag,
   genre,
   season,
   releaseType,
   isBroadcasting,
+  rating,
   thumbnail,
+  reviews,
   className,
+  ranking,
+  imageAspect = '9/16',
 }: AnimeCardProps) => {
   return (
     <div
@@ -42,9 +56,16 @@ const AnimeCard = ({
         className
       }
     >
-      <div className='relative w-full aspect-square'>
+      <div className='relative w-full' style={{ aspectRatio: imageAspect }}>
+        {ranking && (
+          <p
+            className={`absolute z-10 font-bold text-lg flex items-center justify-center text-white w-10 h-10 rounded-ee-lg bg-aniviolet4`}
+          >
+            {ranking}
+          </p>
+        )}
         <Link
-          href='/'
+          href={`/detail/${id}`}
           className='absolute opacity-0 bg-black/40 size-full z-10 hover:opacity-100 duration-300 flex items-center justify-center'
         >
           <span className='px-4 py-2 text-white bg-aniviolet1 rounded-lg'>
@@ -60,7 +81,10 @@ const AnimeCard = ({
       </div>
 
       <div className='p-4 space-y-2'>
-        <p className='font-semibold'>{title}</p>
+        <div className='flex flex-row justify-between'>
+          <p className='font-semibold'>{title}</p>
+          <StarRate rate={rating} />
+        </div>
         <div className='flex flex-row gap-2 overflow-x-scroll scrollbar-none'>
           <TagItem
             tagName={AnimeGenreObject[genre]}
@@ -74,6 +98,7 @@ const AnimeCard = ({
             />
           ))}
         </div>
+        {reviews && <CommentSwiper reviews={reviews} />}
         <p className='text-sm text-aniviolet3'>{`${AnimeSeasonTypeObject[season]} • ${AnimeReleaseTypeObject[releaseType]} • ${AnimeBroadCastTypeObject[isBroadcasting]}`}</p>
       </div>
     </div>
