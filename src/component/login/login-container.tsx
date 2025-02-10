@@ -1,11 +1,9 @@
-'use client';
-
 import KakaotalkSvg from '@/asset/svg/kakaotalk/kakaotalk-svg';
-import HoverColorButton from '../common/button/hover-color-button';
 import UnderlineButton from '../common/button/hover-underline-button';
 import IconButton from '../common/button/icon-button';
-import DefaultInput from '../common/input/default-input';
 import Link from 'next/link';
+import LoginForm from './login-form';
+import { API_URL } from '@/constant/api-url';
 
 const LoginContainer = () => {
   return (
@@ -19,19 +17,7 @@ const LoginContainer = () => {
       <h2 className='text-lg font-medium text-center mb-6'>로그인</h2>
 
       {/* Form */}
-      <form className='space-y-4'>
-        <DefaultInput
-          type='email'
-          placeholder='이메일'
-          className='w-full p-3'
-        />
-        <DefaultInput
-          type='password'
-          placeholder='비밀번호'
-          className='w-full p-3'
-        />
-        <HoverColorButton className='w-full py-3' text='로그인' />
-      </form>
+      <LoginForm />
 
       {/* Links */}
       <div className='mt-4 text-center text-sm flex flex-col items-center'>
@@ -56,9 +42,13 @@ const LoginContainer = () => {
         </div>
 
         <div className='flex justify-center gap-4 mt-6'>
-          <IconButton>
-            <KakaotalkSvg height='3rem' width='3rem' />
-          </IconButton>
+          <Link
+            href={`https://kauth.kakao.com/oauth/authorize?client_id=a311edb6f85642a8b3c8dfa59a459a38&redirect_uri=http://${process.env.NODE_ENV === 'production' ? API_URL : 'localhost:3000'}/auth/kakao/callback&response_type=code`}
+          >
+            <IconButton>
+              <KakaotalkSvg height='3rem' width='3rem' />
+            </IconButton>
+          </Link>
         </div>
       </div>
     </div>

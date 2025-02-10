@@ -1,3 +1,1 @@
-export interface InitialJotaiState {
-  isMobile: boolean;
-}
+export type InitialJotaiState = object;

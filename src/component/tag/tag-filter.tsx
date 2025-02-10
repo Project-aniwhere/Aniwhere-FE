@@ -8,7 +8,7 @@ interface TagFilterProps {
   dispatch: Dispatch<TagFilterAction>;
 }
 
-const TagFilter = ({ filterState, dispatch }: TagFilterProps) => {
+const TagFilter = ({ filterState }: TagFilterProps) => {
   return (
     <div className='rounded-lg bg-[#f0f0f0] font-semibold p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
       <TagFilterModalSelector filterType='genre' tagList={filterState.genre} />
