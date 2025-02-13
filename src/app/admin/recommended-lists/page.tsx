@@ -2,67 +2,13 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-
-// Mock data for recommended anime lists
-let recommendedAnimeLists = [
-  {
-    id: 1,
-    name: 'Top Shonen Anime',
-    animes: ['Naruto', 'One Piece', 'Dragon Ball Z'],
-  },
-  {
-    id: 2,
-    name: 'Best Psychological Thrillers',
-    animes: ['Death Note', 'Steins;Gate', 'Psycho-Pass'],
-  },
-  {
-    id: 3,
-    name: 'Must-Watch Classics',
-    animes: [
-      'Cowboy Bebop',
-      'Neon Genesis Evangelion',
-      'Fullmetal Alchemist: Brotherhood',
-    ],
-  },
-];
-
-const fetchRecommendedAnimeLists = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return recommendedAnimeLists;
-};
-
-const addRecommendedAnimeList = async (newList: {
-  name: string;
-  animes: string[];
-}) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  const newId = Math.max(...recommendedAnimeLists.map((list) => list.id)) + 1;
-  const addedList = { id: newId, ...newList };
-  recommendedAnimeLists.push(addedList);
-  return addedList;
-};
-
-const updateRecommendedAnimeList = async (updatedList: {
-  id: number;
-  name: string;
-  animes: string[];
-}) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  const index = recommendedAnimeLists.findIndex(
-    (list) => list.id === updatedList.id
-  );
-  if (index !== -1) {
-    recommendedAnimeLists[index] = updatedList;
-  }
-  return updatedList;
-};
-
-const deleteRecommendedAnimeList = async (id: number) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  recommendedAnimeLists = recommendedAnimeLists.filter(
-    (list) => list.id !== id
-  );
-};
+import adminQuery from '@/hook/query/admin';
+import {
+  AdminRecommendedAnimeList,
+  deleteAdminRecommendedAnime,
+  postAdminRecommendedAnime,
+  putAdminRecommendedAnime,
+} from '@/action/admin/recommended-list';
 
 const RecommendedAnimeListPage = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -75,33 +21,58 @@ const RecommendedAnimeListPage = () => {
   const [newList, setNewList] = useState({ name: '', animes: ['', '', ''] });
   const queryClient = useQueryClient();
 
-  const { data: recommendedLists, isLoading } = useQuery({
-    queryKey: ['recommendedAnimeLists'],
-    queryFn: fetchRecommendedAnimeLists,
-  });
+  const { data: recommendedLists, isLoading } = useQuery(
+    adminQuery.recommend()
+  );
 
   const addMutation = useMutation({
-    mutationFn: addRecommendedAnimeList,
+    mutationFn: postAdminRecommendedAnime,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['recommendedAnimeLists'] });
+      const data = queryClient.getQueryData<AdminRecommendedAnimeList>(
+        adminQuery.recommend().queryKey
+      );
+      if (data) {
+        queryClient.setQueryData(adminQuery.recommend().queryKey, [
+          ...data,
+          newList,
+        ]);
+      }
       setIsAddModalOpen(false);
       setNewList({ name: '', animes: ['', '', ''] });
     },
   });
 
   const updateMutation = useMutation({
-    mutationFn: updateRecommendedAnimeList,
+    mutationFn: putAdminRecommendedAnime,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['recommendedAnimeLists'] });
+      const data = queryClient.getQueryData<AdminRecommendedAnimeList>(
+        adminQuery.recommend().queryKey
+      );
+
+      if (data) {
+        const updatedData = data.map((list) =>
+          list.id === currentList?.id ? currentList : list
+        );
+        queryClient.setQueryData(adminQuery.recommend().queryKey, updatedData);
+      }
       setIsEditModalOpen(false);
       setCurrentList(null);
     },
   });
 
   const deleteMutation = useMutation({
-    mutationFn: deleteRecommendedAnimeList,
+    mutationFn: deleteAdminRecommendedAnime,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['recommendedAnimeLists'] });
+      const data = queryClient.getQueryData<AdminRecommendedAnimeList>(
+        adminQuery.recommend().queryKey
+      );
+
+      if (data) {
+        const updatedData = data.filter((list) => list.id !== currentList?.id);
+        queryClient.setQueryData(adminQuery.recommend().queryKey, updatedData);
+      }
+      setIsEditModalOpen(false);
+      setCurrentList(null);
     },
   });
 
