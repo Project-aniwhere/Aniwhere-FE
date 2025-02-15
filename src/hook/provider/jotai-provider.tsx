@@ -10,7 +10,7 @@ interface JotaiProviderProps {
   initialState: InitialJotaiState;
 }
 
-const InitJotaiWrapper = ({ children, initialState }: JotaiProviderProps) => {
+const InitJotaiWrapper = ({ children }: JotaiProviderProps) => {
   useHydrateAtoms([
     // [isMobileAtom, initialState.isMobile],
   ]);

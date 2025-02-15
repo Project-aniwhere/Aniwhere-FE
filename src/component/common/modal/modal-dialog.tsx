@@ -12,13 +12,24 @@ import { ModalRef } from '@/type/modal';
 
 interface ModalProps {
   children: React.ReactNode;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
-const ModalDialog = ({ children }: ModalProps, ref: Ref<ModalRef>) => {
+const ModalDialog = (
+  { children, onOpen, onClose }: ModalProps,
+  ref: Ref<ModalRef>
+) => {
   const [dialogRef, setDialogRef] = useState<HTMLDialogElement | null>(null);
 
-  const closeModal = useCallback(() => dialogRef?.close(), [dialogRef]);
-  const openModal = useCallback(() => dialogRef?.show(), [dialogRef]);
+  const closeModal = useCallback(() => {
+    dialogRef?.close();
+    onClose?.();
+  }, [dialogRef, onClose]);
+  const openModal = useCallback(() => {
+    dialogRef?.showModal();
+    onOpen?.();
+  }, [dialogRef, onOpen]);
 
   useImperativeHandle(
     ref,

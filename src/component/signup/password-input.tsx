@@ -1,27 +1,20 @@
 'use client';
 import { useState } from 'react';
 import DefaultInput from '../common/input/default-input';
+import { SignupInputProps } from '@/type/common';
 
-const REGEX_PWD = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-
-const PasswordInput = () => {
+const PasswordInput = ({ onValidation }: SignupInputProps) => {
   // 비밀번호
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
 
   // 비밀번호 에러
-  const [passwordError, setPasswordError] = useState<boolean>(false);
-  const [passwordCheckError, setPasswordCheckError] = useState<boolean>(false);
-
-  // 비밀번호 정규식 체크
-  const validatePassword = (passwordValue: string) =>
-    REGEX_PWD.test(passwordValue);
+  const [passwordCheckError, setPasswordCheckError] = useState<boolean>(true);
 
   // 비밀번호 체크
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
-    setPasswordError(!validatePassword(newPassword));
 
     if (passwordCheck) {
       setPasswordCheckError(newPassword !== passwordCheck);
@@ -35,7 +28,24 @@ const PasswordInput = () => {
     const newPasswordCheck = e.target.value;
     setPasswordCheck(newPasswordCheck);
     setPasswordCheckError(password !== newPasswordCheck);
+    onValidation(password === newPasswordCheck);
   };
+
+  // 개별 비밀번호 요구사항 검증
+  const requirements = [
+    {
+      label: '8자 이상 20자 이하',
+      met: password.length >= 8 && password.length <= 20,
+    },
+    {
+      label: '영문자',
+      met: /[a-zA-Z]/.test(password),
+    },
+    {
+      label: '숫자',
+      met: /\d/.test(password),
+    },
+  ];
 
   return (
     <div className='space-y-2'>
@@ -46,11 +56,20 @@ const PasswordInput = () => {
         className='w-full p-3'
         onChange={handlePasswordChange}
       />
-      {passwordError && (
-        <span className='text-sm text-red-700 ml-2'>
-          비밀번호는 최소 8자 이상의 영문자와 숫자로 이루어져야 합니다.
-        </span>
-      )}
+      <div className='flex flex-wrap gap-2 mt-2'>
+        {requirements.map((req, index) => (
+          <span
+            key={index}
+            className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${
+              req.met
+                ? 'bg-green-50 text-green-700 border border-green-200'
+                : 'bg-red-400 text-gray-100 border border-gray-200'
+            }`}
+          >
+            {req.label}
+          </span>
+        ))}
+      </div>
 
       <DefaultInput
         type='password'
@@ -59,14 +78,15 @@ const PasswordInput = () => {
         className='w-full p-3'
         onChange={handlePasswordCheckChange}
       />
-      {passwordCheckError && (
-        <span className='text-sm text-red-700 ml-2'>
-          비밀번호가 일치하지 않습니다.
-        </span>
-      )}
-      <div className='text-sm'>
-        ※ 최소 8자 이상의 영문자와 숫자를 사용하세요.
-      </div>
+      <span
+        className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${
+          !passwordCheckError
+            ? 'bg-green-50 text-green-700 border border-green-200'
+            : 'bg-red-400 text-gray-100 border border-gray-200'
+        }`}
+      >
+        비밀번호 일치
+      </span>
     </div>
   );
 };

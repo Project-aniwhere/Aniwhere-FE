@@ -5,26 +5,28 @@ import HoverColorButton from '../common/button/hover-color-button';
 import DefaultInput from '../common/input/default-input';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isLoginAtom } from '@/store/auth-atom';
 import { useSetAtom } from 'jotai';
-import { userInfoAtom } from '@/store/user-atom';
+import { sessionAtom } from '@/store/session-atom';
+import { isFetchError } from '@/util/fetch';
+import { RESET } from 'jotai/utils';
+
 const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
-  const setIsLogin = useSetAtom(isLoginAtom);
-  const setUserInfo = useSetAtom(userInfoAtom);
+  const setSession = useSetAtom(sessionAtom);
 
   const onSubmit = async (formData: FormData) => {
     const result = await handleLoginForm(formData);
-    console.log(result);
-    if (result.code < 400) {
+    if (!isFetchError(result)) {
       setErrorMsg('');
-      setIsLogin(true);
-      setUserInfo(result.userInfo);
+      setSession({
+        isLogin: true,
+        userInfo: result,
+      });
       router.back();
     } else {
       setErrorMsg(result.message || '로그인에 실패했습니다.');
-      setIsLogin(false);
+      setSession(RESET);
     }
   };
 

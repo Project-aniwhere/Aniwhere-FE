@@ -4,6 +4,7 @@ import DefaultInput from '../common/input/default-input';
 import { useEffect, useState } from 'react';
 import { Fetch } from '@/util/fetch';
 import { SERVER_RESPONSE } from '@/constant/common';
+import { SignupInputProps } from '@/type/common';
 
 interface EmailState {
   value: string;
@@ -22,7 +23,7 @@ interface VerificationState {
 const VERIFICATION_TIME = 300;
 const EMAIL_REGEX = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
-const EmailInput = () => {
+const EmailInput = ({ onValidation }: SignupInputProps) => {
   const [email, setEmail] = useState<EmailState>({
     value: '',
     errorMsg: '',
@@ -138,17 +139,16 @@ const EmailInput = () => {
       }));
     }
 
-    // const responseData = await response.json();
-    // console.log('인증번호 체크 response : ', response.status, responseData);
-
     if (response.status === 200) {
       setEmail((prev) => ({ ...prev, isVerified: true }));
+      onValidation(true);
       setVerification((prev) => ({
         ...prev,
         errorMsg: '',
         isActive: false,
       }));
     } else {
+      onValidation(false);
       setVerification((prev) => ({
         ...prev,
         errorMsg: '인증코드가 일치하지 않습니다.',
@@ -158,7 +158,6 @@ const EmailInput = () => {
   };
 
   // 타이머 설정
-
   useEffect(() => {
     if (!verification.isActive) return;
     if (verification.timeRemaining < 0) {
@@ -179,12 +178,6 @@ const EmailInput = () => {
 
     return () => clearTimeout(countDown);
   }, [verification]);
-
-  // useEffect(() => {
-  //   console.log('email: ', email);
-  //   console.log('verification: ', verification);
-  //   console.log(!!verification.errorMsg);
-  // }, [verification, email]);
 
   return (
     <div className='space-y-2'>
@@ -240,11 +233,15 @@ const EmailInput = () => {
           </div>
         )}
       </div>
-      {email.isVerified && (
-        <div className='text-sm text-green-600 ml-2'>
-          이메일 인증이 완료되었습니다
-        </div>
-      )}
+      <span
+        className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${
+          email.isVerified
+            ? 'bg-green-50 text-green-700 border border-green-200'
+            : 'bg-red-400 text-gray-100 border border-gray-200'
+        }`}
+      >
+        이메일 인증
+      </span>
     </div>
   );
 };

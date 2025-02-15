@@ -1,14 +1,24 @@
 import { API_URL } from '@/constant/api-url';
-import { isLoginAtom } from '@/store/auth-atom';
+import { APIResult, ErrorResult } from '@/type/common';
 import { isServer } from '@tanstack/react-query';
 // import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+
+export const isFetchError = <T>(
+  result: APIResult<T>
+): result is ErrorResult => {
+  return (result as ErrorResult).code !== undefined;
+};
 
 const getURL = () => {
+  // redirect fetch url for production build
+  if (process.env.NEXT_PHASE === 'phase-production-build' && true) {
+    return API_URL;
+  }
+
   if (process.env.NODE_ENV === 'production' && isServer) {
     return 'http://localhost:8080';
   }
-  if (process.env.NODE_ENV === 'development' && !isServer) {
+  if (!isServer) {
     return '';
   }
   return API_URL;
@@ -20,6 +30,7 @@ const getServerCookies = async () => {
 };
 
 export const Fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+  console.log('fetch', `${getURL()}${input}`, init);
   return fetch(`${getURL()}${input}`, init);
 };
 
@@ -67,11 +78,13 @@ export const FetchWithJWT = async (
     if (!tokensRequest.ok) return tokensRequest;
 
     if (process.env.NODE_ENV === 'production' && isServer) {
-      const cookies = await getServerCookies();
-      const newCookies = tokensRequest.headers.getSetCookie();
-      newCookies.forEach((cookie) => {
+      const cookiesPromise = await getServerCookies();
+      const cookies = await cookiesPromise();
+      const newCookies = tokensRequest.headers.get('set-cookie')?.split(';');
+
+      newCookies?.forEach((cookie) => {
         const [name, value] = cookie.split('=');
-        cookies().set(name, value);
+        cookies.set(name, value);
       });
     }
 

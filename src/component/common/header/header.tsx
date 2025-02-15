@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { throttle } from '@/util/throttle';
 import MobileNav from './mobile-nav';
 import DesktopNav from './desktop-nav';
