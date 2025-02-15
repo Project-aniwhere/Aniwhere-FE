@@ -9,12 +9,12 @@ interface TabsProps {
 const Tabs = ({ list, value, setValue }: TabsProps) => {
   return (
     <ul className='flex'>
-      {list.map((v) => (
-        <li key={v.id} className='w-full'>
+      {list.map((tab) => (
+        <li key={tab.id} className='w-full'>
           <TabItem
-            text={v.value}
-            active={v.id === value}
-            handleClick={() => setValue(v.id)}
+            text={tab.value}
+            active={tab.id === value}
+            handleClick={() => setValue(tab.id)}
           />
         </li>
       ))}

@@ -10,7 +10,11 @@ interface TagSearchBarProps {
   setToggle: () => void;
 }
 
-export default function TagSearchBar({ setToggle }: TagSearchBarProps) {
+export default function TagSearchBar({
+  setToggle,
+  dispatch,
+  filterState,
+}: TagSearchBarProps) {
   return (
     <>
       <div className='flex items-stretch gap-4 h-10'>

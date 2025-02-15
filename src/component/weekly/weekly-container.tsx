@@ -1,8 +1,8 @@
-import { DailyAniProps } from '@/type/weekly';
+import { AnimeWeeklyResponse } from '@/type/api/anime-api';
 import DailyConatiner from './daily-container';
 
 interface WeeklyContainerProps {
-  weeklyList: Record<string, DailyAniProps[]>;
+  weeklyList: AnimeWeeklyResponse;
   currentDay: string;
 }
 

@@ -1,4 +1,3 @@
-import Footer from '@/component/common/footer/footer';
 import Header from '@/component/common/header/header';
 import MainLayout from '@/component/common/layout/main-layout';
 

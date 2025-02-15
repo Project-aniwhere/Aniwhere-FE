@@ -27,7 +27,7 @@ const ModalContainer: React.ForwardRefRenderFunction<
       {children}
       <button
         onClick={onClose}
-        className='absolute right-2 top-2 rounded-full bg-aniviolet4 bg-opacity-60 p-0.5'
+        className='absolute right-2 top-2 rounded-full bg-aniviolet3 bg-opacity-60 p-0.5 size-6 flex items-center justify-center'
       >
         <CrossSvg fill='white' />
       </button>
