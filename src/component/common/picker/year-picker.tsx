@@ -10,8 +10,8 @@ interface Props extends YearPickerProps {
 }
 
 const YearPicker = ({
-  selectedYear,
-  setSelectedYear,
+  currentYear,
+  handleSelectYear,
   startYear = getYear(),
   length = 10,
 }: Props) => {
@@ -20,7 +20,7 @@ const YearPicker = ({
   const years = Array.from({ length }, (_, i) => String(Number(startYear) - i));
 
   const handleChangeYear = (year: string) => {
-    setSelectedYear(year);
+    handleSelectYear(year);
     handleToggleYearMenu();
   };
 
@@ -36,9 +36,9 @@ const YearPicker = ({
       {isOpenYearMenu && (
         <div className='absolute z-10 left-0 top-5 md:top-6'>
           <YearList
-            selectedYear={selectedYear}
+            currentYear={currentYear}
             years={years}
-            handleChangeYear={handleChangeYear}
+            handleSelectYear={handleChangeYear}
           />
         </div>
       )}

@@ -1,4 +1,4 @@
 export interface YearPickerProps {
-  selectedYear: string;
-  setSelectedYear: (year: string) => void;
+  currentYear: string;
+  handleSelectYear: (year: string) => void;
 }

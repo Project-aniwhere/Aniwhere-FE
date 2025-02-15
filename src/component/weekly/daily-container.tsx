@@ -1,10 +1,10 @@
-import { DailyAniProps } from '@/type/weekly';
+import { AnimeWeeklyInfoType } from '@/type/api/anime-api';
 import DailyItem from './daily-item';
 import { DAYS } from '@/constant/common';
 
 interface DailyConatinerProps {
   day: string;
-  dailyList: DailyAniProps[];
+  dailyList: AnimeWeeklyInfoType[];
   active: boolean;
 }
 
@@ -20,7 +20,7 @@ const DailyConatiner = ({ day, dailyList, active }: DailyConatinerProps) => {
       </p>
       <ul className='flex flex-col gap-3'>
         {dailyList.map((item) => (
-          <li key={item.titleId} className='cursor-pointer'>
+          <li key={item.animeId} className='cursor-pointer'>
             <DailyItem data={item} />
           </li>
         ))}
