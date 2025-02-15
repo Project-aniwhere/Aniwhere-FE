@@ -19,7 +19,7 @@ const WeeklyPage = () => {
   const day = searchParams.get('day') || getDay();
 
   const { data } = useQuery({
-    queryKey: ['animeQuarterList'],
+    queryKey: ['animeQuarterList', year, quarter],
     queryFn: () =>
       getAnimeQuarterList({
         year,

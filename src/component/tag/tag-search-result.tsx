@@ -7,6 +7,7 @@ const TagSearchResult = () => {
         .fill(0)
         .map((_, idx) => (
           <AnimeCard
+            id={idx}
             key={idx}
             title='스파이 패밀리'
             genre='action'
@@ -14,6 +15,7 @@ const TagSearchResult = () => {
             season={1}
             releaseType='tva'
             isBroadcasting='broadcasting'
+            rating={4.5}
           />
         ))}
     </div>

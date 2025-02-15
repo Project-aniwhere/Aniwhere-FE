@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import ReactQueryProvider from '@/hook/provider/usereactquery';
-import Header from '@/component/common/header/header';
-import Footer from '@/component/common/footer/footer';
 import { Provider } from 'jotai';
 
 export const metadata: Metadata = {
@@ -35,9 +33,11 @@ export default function RootLayout({
       <body className='font-pretendard scrollbar'>
         <div id='modal-root' />
         <Provider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            {children}
+            {modal}
+          </ReactQueryProvider>
         </Provider>
-        {modal}
       </body>
     </html>
   );

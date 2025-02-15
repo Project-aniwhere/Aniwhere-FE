@@ -17,7 +17,7 @@ const DetailBanner = ({
 }: DetailBannerProps) => {
   return (
     <div className='relative'>
-      <div className='w-full h-full absolute z-10 bg-gradient-to-b from-transparent to-black/50'></div>
+      <div className='size-full absolute z-10 bg-gradient-to-b from-transparent to-black/50'></div>
       <Image
         src={poster}
         alt='배너'

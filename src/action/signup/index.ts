@@ -3,12 +3,10 @@ import { SignupResponse } from '@/type/api/signup';
 import { APIResult } from '@/type/common';
 import { Fetch } from '@/util/fetch';
 
-export async function handleForm(
+export async function handleSignupForm(
   formData: FormData
 ): Promise<APIResult<SignupResponse>> {
-  const passwordAuth = formData.get('passwordAuth')?.toString();
   const birth = formData.get('date');
-  const errors = [];
 
   const signUpFormData = {
     nickname: formData.get('nickname')?.toString(),
@@ -22,38 +20,6 @@ export async function handleForm(
     sex: formData.get('gender')?.toString(),
   };
 
-  // 클라이언트 1차 검토
-  if (!signUpFormData.nickname?.trim()) errors.push('닉네임');
-  if (!signUpFormData.email?.trim()) errors.push('이메일');
-  if (!signUpFormData.password?.trim()) errors.push('비밀번호');
-  if (
-    !signUpFormData.birthyear?.trim() ||
-    signUpFormData.birthyear == '생년월일'
-  )
-    errors.push('생년월일');
-  if (!signUpFormData.sex?.trim()) errors.push('성별');
-
-  if (passwordAuth != signUpFormData.password) {
-    return {
-      code: 400,
-      message: '비밀번호 확인을 해주십시오',
-    };
-  }
-
-  if (errors.length === 0 && !formData.get('authCode')?.toString().trim()) {
-    return {
-      code: 400,
-      message: '이메일 검증을 해주십시오',
-    };
-  }
-
-  if (errors.length > 0) {
-    return {
-      code: 400,
-      message: `${errors.join(', ')}을 입력해주십시오`,
-    };
-  }
-
   const data = {
     method: 'POST',
     headers: {
@@ -63,23 +29,17 @@ export async function handleForm(
   };
 
   // signin 서버 통신
-  const response = await Fetch('api/auth/signup', data);
-  if (!response.ok) {
-    return {
-      code: 400,
-      message: '서버 오류가 발생했습니다',
-    };
-  }
-  const result = await response.json();
+  const response = await Fetch('/api/auth/signup', data);
 
-  if (response.status === 200) {
+  if (response.ok) {
     return {
-      code: 200,
+      code: response.status,
       message: '',
     };
   } else {
+    const result = await response.json();
     return {
-      code: result.code,
+      code: response.status,
       message: SERVER_RESPONSE[result.code] || '서버 오류가 발생했습니다',
     };
   }

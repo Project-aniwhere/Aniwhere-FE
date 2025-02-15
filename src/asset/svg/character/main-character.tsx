@@ -3,7 +3,6 @@ import { SvgProps } from '@/type/svgprops';
 const MainCharacterSvg = ({
   width = '1.5rem',
   height = '1.5rem',
-  fill = '#1D1B20',
 }: SvgProps) => {
   return (
     <svg

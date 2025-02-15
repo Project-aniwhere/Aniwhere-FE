@@ -16,6 +16,7 @@ export interface CommonDatepickerProps {
   placeholder?: string;
   className?: string;
   type?: string;
+  onError?: (hasError: boolean) => void;
 }
 
 export type APIResult<T> =
@@ -55,3 +56,12 @@ export type PageableResponse<T> = {
 };
 
 export type PageableRequest = { page: number; size: number; sort: string[] };
+export type ErrorResult = {
+  code: number;
+  message: string;
+};
+
+export interface SignupInputProps {
+  onValidation: (isValid: boolean) => void;
+}
+export type APIResult<T> = T | ErrorResult;
