@@ -22,17 +22,17 @@ const RecommendedAnimeListPage = () => {
   const queryClient = useQueryClient();
 
   const { data: recommendedLists, isLoading } = useQuery(
-    adminQuery.recommend()
+    adminQuery.query.recommend()
   );
 
   const addMutation = useMutation({
     mutationFn: postAdminRecommendedAnime,
     onSuccess: () => {
       const data = queryClient.getQueryData<AdminRecommendedAnimeList>(
-        adminQuery.recommend().queryKey
+        adminQuery.query.recommend().queryKey
       );
       if (data) {
-        queryClient.setQueryData(adminQuery.recommend().queryKey, [
+        queryClient.setQueryData(adminQuery.query.recommend().queryKey, [
           ...data,
           newList,
         ]);
@@ -46,14 +46,17 @@ const RecommendedAnimeListPage = () => {
     mutationFn: putAdminRecommendedAnime,
     onSuccess: () => {
       const data = queryClient.getQueryData<AdminRecommendedAnimeList>(
-        adminQuery.recommend().queryKey
+        adminQuery.query.recommend().queryKey
       );
 
       if (data) {
         const updatedData = data.map((list) =>
           list.id === currentList?.id ? currentList : list
         );
-        queryClient.setQueryData(adminQuery.recommend().queryKey, updatedData);
+        queryClient.setQueryData(
+          adminQuery.query.recommend().queryKey,
+          updatedData
+        );
       }
       setIsEditModalOpen(false);
       setCurrentList(null);
@@ -64,12 +67,15 @@ const RecommendedAnimeListPage = () => {
     mutationFn: deleteAdminRecommendedAnime,
     onSuccess: () => {
       const data = queryClient.getQueryData<AdminRecommendedAnimeList>(
-        adminQuery.recommend().queryKey
+        adminQuery.query.recommend().queryKey
       );
 
       if (data) {
         const updatedData = data.filter((list) => list.id !== currentList?.id);
-        queryClient.setQueryData(adminQuery.recommend().queryKey, updatedData);
+        queryClient.setQueryData(
+          adminQuery.query.recommend().queryKey,
+          updatedData
+        );
       }
       setIsEditModalOpen(false);
       setCurrentList(null);

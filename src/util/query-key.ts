@@ -15,11 +15,13 @@ export const createQuery = <
 } => {
   const res = Object.keys(queries).reduce(
     (acc, key) => {
-      const prevKeys = queries[key as keyof TQueries]().queryKey;
-      acc[key as keyof TQueries] = ((...value: any) => ({
-        ...queries[key as keyof TQueries](...value),
-        queryKey: [...queryKey, key, ...prevKeys] as QueryKey,
-      })) as TQueries[keyof TQueries];
+      acc[key as keyof TQueries] = ((...value: any) => {
+        const prevKeys = queries[key as keyof TQueries](...value).queryKey;
+        return {
+          ...queries[key as keyof TQueries](...value),
+          queryKey: [...queryKey, key, ...prevKeys] as QueryKey,
+        };
+      }) as TQueries[keyof TQueries];
       return acc;
     },
     {} as {
@@ -30,18 +32,25 @@ export const createQuery = <
 };
 
 export const createInfiniteQuery = <
-  TQueries extends Record<string, (value?: any) => UseInfiniteQueryOptions>,
+  TQueries extends Record<
+    string,
+    (
+      ...value: any
+    ) => UseInfiniteQueryOptions<any, any, any, any, QueryKey, number>
+  >,
 >(
   queryKey: QueryKey,
   queries: TQueries
 ) => {
   const res = Object.keys(queries).reduce(
     (acc, key) => {
-      const prevKeys = queries[key as keyof TQueries]().queryKey;
-      acc[key as keyof TQueries] = ((value?: any) => ({
-        ...queries[key as keyof TQueries](value),
-        queryKey: ['infinite', ...queryKey, key, ...prevKeys] as QueryKey,
-      })) as TQueries[keyof TQueries];
+      acc[key as keyof TQueries] = ((...value: any) => {
+        const prevKeys = queries[key as keyof TQueries](...value).queryKey;
+        return {
+          ...queries[key as keyof TQueries](...value),
+          queryKey: ['infinite', ...queryKey, key, ...prevKeys] as QueryKey,
+        };
+      }) as TQueries[keyof TQueries];
       return acc;
     },
     {} as {

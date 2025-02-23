@@ -13,14 +13,14 @@ const AnimePage = () => {
   const queryClient = useQueryClient();
 
   const { data: animeData, isLoading: isAnimeLoading } = useQuery(
-    adminQuery.animeList(animePage, animeSearch)
+    adminQuery.query.animeList(animePage, animeSearch)
   );
 
   const deleteAnimeMutation = useMutation({
     mutationFn: deleteAdminAnime,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: adminQuery.animeList().queryKey,
+        queryKey: adminQuery.query.animeList().queryKey,
       });
     },
   });
