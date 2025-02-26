@@ -2,36 +2,71 @@
 
 import CrossSvg from '@/asset/svg/cross/cross-svg';
 import TagItem from './tag-item';
-import {
-  AnimeFilterNameObject,
-  AnimeFilterObject,
-  AnimeFilterType,
-} from '@/type/anime-tag';
-import { useCallback, useRef } from 'react';
+import { AnimeFilterNameObject, AnimeFilterType } from '@/type/anime-tag';
+import { Dispatch, useCallback, useRef } from 'react';
 import ModalContainer from '../common/modal/modal-container';
-import { TagState } from './tag-filter-reducer';
+import { TagFilterAction, TagState } from './tag-filter-reducer';
+import { AnimeTagType } from '@/type/api/tag-api';
 
-interface TagFilterModalSelectorProps<T> {
+interface TagFilterModalSelectorProps {
   filterType: AnimeFilterType;
-  tagList: [TagState, T][];
+  tagList: [TagState, AnimeTagType][];
+  dispatch: Dispatch<TagFilterAction>;
 }
 
-function TagFilterModalSelector<T extends string>({
+function TagFilterModalSelector({
   filterType,
   tagList,
-}: TagFilterModalSelectorProps<T>) {
+  dispatch,
+}: TagFilterModalSelectorProps) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const handleModalOpen = useCallback(() => modalRef.current?.showModal(), []);
+
+  const handleTagClick = useCallback(
+    (tag: AnimeTagType) => {
+      dispatch({
+        type: 'TOGGLE',
+        payload: {
+          filterType,
+          target: tag.categoryId,
+        },
+      });
+    },
+    [dispatch, filterType]
+  );
+
+  const handleTagClose = useCallback(
+    (tag: AnimeTagType) => {
+      dispatch({
+        type: 'CLEAR',
+        payload: {
+          filterType,
+          target: tag.categoryId,
+        },
+      });
+    },
+    [dispatch, filterType]
+  );
+
   return (
-    <div className=' flex flex-col gap-2 flex-grow'>
+    <div className='col-span-2 flex flex-col gap-2 flex-grow'>
       <ModalContainer
         modalType='modal'
         ref={modalRef}
         onClose={() => modalRef.current?.close()}
         className='bg-white scrollbar-none size-full sm:size-11/12 lg:size-3/4 p-4'
       >
-        <div className='flex flex-row'>
-          <p>{AnimeFilterNameObject[filterType]}</p>
+        <p className='font-bold text-xl'>태그 목록</p>
+        <div className='flex flex-row flex-wrap gap-2 border rounded-lg p-2'>
+          {tagList.map(([tagState, tag]) => (
+            <TagItem
+              key={tag.categoryId}
+              tagName={tag.categoryName}
+              tagState={tagState}
+              onClick={() => handleTagClick(tag)}
+              onClose={() => handleTagClose(tag)}
+            />
+          ))}
         </div>
       </ModalContainer>
       <div className='flex items-center justify-between h-7'>
@@ -56,15 +91,13 @@ function TagFilterModalSelector<T extends string>({
           )}
           {tagList
             .filter(([tagState]) => tagState !== 'neutral')
-            .map(([_, tag]) => (
+            .map(([tagState, tag]) => (
               <TagItem
-                key={tag}
-                onClick={() => {}}
-                tagName={
-                  AnimeFilterObject[filterType][
-                    tag as keyof (typeof AnimeFilterObject)[typeof filterType]
-                  ]
-                }
+                key={tag.categoryId}
+                tagName={tag.categoryName}
+                tagState={tagState}
+                onClick={() => handleTagClick(tag)}
+                onClose={() => handleTagClose(tag)}
               />
             ))}
         </div>
