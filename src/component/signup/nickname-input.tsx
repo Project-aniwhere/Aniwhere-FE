@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DefaultInput from '../common/input/default-input';
 import { SignupInputProps } from '@/type/common';
 
 const NicknameInput = ({ onValidation }: SignupInputProps) => {
   const [nickname, setNickname] = useState('');
 
-  useEffect(() => {
-    validateNickname(nickname);
-  }, [nickname]);
-
-  const validateNickname = (value: string) => {
+  const validateNickname = useCallback(() => {
     let isValid = false;
     if (nickname.length > 0) {
       isValid = true;
@@ -17,7 +13,12 @@ const NicknameInput = ({ onValidation }: SignupInputProps) => {
       isValid = false;
     }
     onValidation(isValid);
-  };
+  }, [nickname, onValidation]);
+
+  useEffect(() => {
+    validateNickname();
+  }, [validateNickname]);
+
   return (
     <div className='flex gap-2 flex-col'>
       <DefaultInput

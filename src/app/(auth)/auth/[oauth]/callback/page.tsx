@@ -3,14 +3,22 @@
 import ModalDialog from '@/component/common/modal/modal-dialog';
 import { ModalRef } from '@/type/modal';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { use, useEffect, useRef } from 'react';
 
-const OauthCallbackPage = ({ params }: { params: { oauth: string } }) => {
+const OauthCallbackPage = ({
+  params,
+}: {
+  params: Promise<{
+    oauth: string;
+  }>;
+}) => {
   const query = useSearchParams();
   const router = useRouter();
   const code = query.get('code');
 
   const modalRef = useRef<ModalRef>(null);
+
+  const { oauth } = use(params);
 
   const onCloseModal = () => {
     router.push('/login');
@@ -20,7 +28,7 @@ const OauthCallbackPage = ({ params }: { params: { oauth: string } }) => {
     if (!code) return;
 
     // need to fix...
-    fetch(`/api/auth/${params.oauth}/callback?code=${code}`, {
+    fetch(`/api/auth/${oauth}/callback?code=${code}`, {
       method: 'POST',
     })
       .then((res) => {
@@ -30,13 +38,13 @@ const OauthCallbackPage = ({ params }: { params: { oauth: string } }) => {
           modalRef.current?.openModal();
         }
       })
-      .then((res) => {
+      .then(() => {
         // set user info to store
       })
-      .catch((err) => {
+      .catch(() => {
         modalRef.current?.openModal();
       });
-  }, [code, router]);
+  }, [code, oauth, router]);
 
   return (
     <>
