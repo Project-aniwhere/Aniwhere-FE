@@ -15,9 +15,6 @@ const getURL = () => {
     return API_URL;
   }
 
-  if (process.env.NODE_ENV === 'production' && isServer) {
-    return 'http://localhost:8080';
-  }
   if (!isServer) {
     return '';
   }
