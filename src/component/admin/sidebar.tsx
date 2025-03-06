@@ -25,12 +25,6 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
       </div>
       <nav className='mt-8'>
         <Link
-          href='/admin/dashboard'
-          className={`flex items-center px-4 py-2 ${currentActiveTab === 'dashboard' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
-        >
-          📊 Dashboard
-        </Link>
-        <Link
           href='/admin/users'
           className={`flex items-center px-4 py-2 ${currentActiveTab === 'users' ? 'bg-gray-900' : 'hover:bg-gray-700'}`}
         >

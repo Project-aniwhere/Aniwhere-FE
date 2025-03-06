@@ -1,7 +1,7 @@
 import ArrowSvg from '@/asset/svg/arrow/arrow';
 import { AnimatePresence, motion } from 'framer-motion';
 interface ArrorButtonProps {
-  direction: 'left' | 'right';
+  direction: 'left' | 'right' | 'up' | 'down';
   onClick: () => void;
   className?: string;
   fill?: string;
