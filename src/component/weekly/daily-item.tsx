@@ -1,18 +1,16 @@
 import Image from 'next/image';
-
-import sample1 from '@/asset/img/subslider/sample1.jpg';
-import { DailyAniProps } from '@/type/weekly';
+import { AnimeWeeklyInfoType } from '@/type/api/anime-api';
 
 interface DailyItemProps {
-  data: DailyAniProps;
+  data: AnimeWeeklyInfoType;
 }
 
 const DailyItem = ({ data }: DailyItemProps) => {
   return (
     <div className='flex flex-col gap-2'>
       <Image
-        src={sample1.src}
-        alt={`${data.titleName} 섬네일`}
+        src={data.poster}
+        alt={`${data.title} 섬네일`}
         layout='responsive'
         width={1280}
         height={720}
@@ -22,11 +20,9 @@ const DailyItem = ({ data }: DailyItemProps) => {
       />
       <div>
         <p className='font-medium truncate text-sm md:text-base'>
-          {data.titleName}
+          {data.title}
         </p>
-        <p className='text-gray-500 truncate text-xs md:text-sm'>
-          {data.author}
-        </p>
+        <p className='text-gray-500 truncate text-xs md:text-sm'>작가이름</p>
       </div>
     </div>
   );

@@ -4,25 +4,25 @@ import YearPicker from '../common/picker/year-picker';
 import { YearPickerProps } from '@/type/year-picker';
 
 interface WeeklyTitleProps extends YearPickerProps {
-  selectedQuarter: string;
-  setSelectedQuarter: (quarter: string) => void;
+  currentQuarter: string;
+  handleSelectQuarter: (quarter: string) => void;
 }
 
 const WeeklyTitle = ({
-  selectedYear,
-  selectedQuarter,
-  setSelectedYear,
-  setSelectedQuarter,
+  currentYear,
+  currentQuarter,
+  handleSelectYear,
+  handleSelectQuarter,
 }: WeeklyTitleProps) => {
   return (
     <div className='flex flex-col gap-3 md:gap-5'>
       <div className='flex gap-2 md:gap-3 items-center'>
         <h2 className='font-bold text-lg md:text-2xl'>
-          {selectedYear}년 요일별 작품
+          {currentYear}년 요일별 작품
         </h2>
         <YearPicker
-          selectedYear={selectedYear}
-          setSelectedYear={setSelectedYear}
+          currentYear={currentYear}
+          handleSelectYear={handleSelectYear}
         />
       </div>
       <ul className='flex flex-wrap gap-2 md:gap-3'>
@@ -31,8 +31,8 @@ const WeeklyTitle = ({
             <Tag
               text={value}
               size='small'
-              state={id === selectedQuarter ? 'active' : undefined}
-              handleClick={() => setSelectedQuarter(id)}
+              state={id === currentQuarter ? 'active' : undefined}
+              handleClick={() => handleSelectQuarter(id)}
             />
           </li>
         ))}
