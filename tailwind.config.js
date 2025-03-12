@@ -1,14 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+  content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ['Pretendard Variable', 'sans-serif'],
+      },
       colors: {
-        aniblue: "#97DFFC",
-        aniviolet1: "#858AE3",
-        aniviolet2: "#613DC1",
-        aniviolet3: "#4E148C",
-        aniviolet4: "#2C0735",
+        aniblue: '#97DFFC',
+        aniviolet0: '#F0EDFF',
+        aniviolet1: '#858AE3',
+        aniviolet2: '#613DC1',
+        aniviolet3: '#4E148C',
+        aniviolet4: '#2C0735',
+      },
+      backgroundImage: {
+        'radial-gradient-r':
+          'radial-gradient(50% 50% at 58.23% 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.6) 100%)',
+      },
+      screens: {
+        qhd: '2560px',
+        '4k': '3840px',
       },
     },
   },

@@ -1,0 +1,27 @@
+import { SvgProps } from '@/type/svgprops';
+
+const MenuLineSvg = ({
+  width = '0.25rem',
+  height = '1rem',
+  fill = '#121212',
+}: SvgProps) => {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width={width}
+      height={height}
+      viewBox='0 0 24 24'
+      fill={fill}
+      stroke='currentColor'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    >
+      <line x1='4' x2='20' y1='12' y2='12' />
+      <line x1='4' x2='20' y1='6' y2='6' />
+      <line x1='4' x2='20' y1='18' y2='18' />
+    </svg>
+  );
+};
+
+export default MenuLineSvg;
