@@ -1,6 +1,6 @@
 import Carousel from '../common/carousel/carousel';
 import { AnimeRecommendInfoType } from '@/type/api/anime-recommend-api';
-import CFImage from '../common/image/cf-image';
+import AWImage from '../common/image/cf-image';
 
 const ContentSlider = ({
   title,
@@ -22,7 +22,7 @@ const ContentSlider = ({
             className='p-2 hover:scale-105 duration-200 flex flex-col gap-2 cursor-pointer w-full'
           >
             <div className='relative aspect-video'>
-              <CFImage
+              <AWImage
                 src={anime.poster}
                 alt='image list'
                 fill

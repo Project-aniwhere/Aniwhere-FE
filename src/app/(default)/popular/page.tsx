@@ -1,7 +1,7 @@
 import AnimeCard from '@/component/common/card/anime-card';
 import CommentSwiper from '@/component/common/comment/comment-swiper';
 import StarRate from '@/component/common/comment/star-rate';
-import CFImage from '@/component/common/image/cf-image';
+import AWImage from '@/component/common/image/cf-image';
 import TagItem from '@/component/tag/tag-item';
 
 const getRankColor = (idx: number) => {
@@ -36,7 +36,7 @@ const PopularPage = () => {
                 >
                   {idx + 1}
                 </div>
-                <CFImage
+                <AWImage
                   src='https://image.tmdb.org/t/p/original/gDvxT2z6TNxervG97WfpePRZ3aR.jpg'
                   alt='랭킹 이미지'
                   fill
