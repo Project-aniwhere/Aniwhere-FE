@@ -13,6 +13,8 @@ export const TagFilterInitState = async (): Promise<TagFilterState> => {
   const res = await getAnimeTagList();
 
   return {
+    searchKeyword: '',
+    year: new Date().getFullYear(),
     tag: res.map((tag) => ['neutral', tag]),
     release: Object.keys(AnimeFilterObject.release).map((key) => [
       'neutral',
@@ -31,7 +33,7 @@ export const TagFilterInitState = async (): Promise<TagFilterState> => {
 
 export type TagState = 'included' | 'excluded' | 'neutral';
 
-export interface TagFilterAction {
+interface TagHandleAction {
   type: 'TOGGLE' | 'CLEAR';
   payload: {
     filterType: AnimeFilterType;
@@ -39,7 +41,16 @@ export interface TagFilterAction {
   };
 }
 
+interface TagSearchAction {
+  type: 'SEARCH';
+  payload: string;
+}
+
+export type TagFilterAction = TagHandleAction | TagSearchAction;
+
 export interface TagFilterState {
+  searchKeyword: string;
+  year: number;
   tag: [TagState, AnimeTagType][];
   release: [TagState, AnimeReleaseType][];
   season: [TagState, AnimeSeasonType][];
@@ -48,9 +59,8 @@ export interface TagFilterState {
 
 export const TagFilterReducer = (
   state: TagFilterState,
-  action: TagFilterAction
+  action: TagHandleAction | TagSearchAction
 ): TagFilterState => {
-  console.log(state, action);
   switch (action.type) {
     case 'TOGGLE':
       return {
@@ -81,6 +91,12 @@ export const TagFilterReducer = (
           (item) => ['neutral', item[1]]
         ),
       };
+    case 'SEARCH':
+      return {
+        ...state,
+        searchKeyword: action.payload,
+      };
+
     default:
       return state;
   }

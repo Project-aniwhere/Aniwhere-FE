@@ -1,7 +1,9 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import AnimeCard from '../common/card/anime-card';
 import { TagFilterState } from './tag-filter-reducer';
-import { AnimeTagType } from '@/type/api/tag-api';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import tagQuery from '@/hook/query/tag';
+import InfiniteScroll from '../common/infinite-scroll/infinite-scroll';
 
 interface TagSearchResultProps {
   filterState: TagFilterState;
@@ -9,29 +11,29 @@ interface TagSearchResultProps {
 
 const TagSearchResult = ({ filterState }: TagSearchResultProps) => {
   const query = useMemo(() => {
-    return Object.keys(filterState)
-      .flatMap((key) =>
-        filterState[key as keyof TagFilterState]
-          .filter(([tagState]) => tagState !== 'neutral')
-          .map(([tagState, tag]) => {
-            if (key === 'tag') {
-              return `tag=${(tag as AnimeTagType).categoryId}`;
-            }
-            return `${key}=${tagState}`;
-          })
-      )
-      .join('&');
+    return {
+      searchKeyword: filterState.searchKeyword,
+      tag: filterState.tag.filter((tag) => tag[0] === 'included'),
+      release: filterState.release.filter(
+        (release) => release[0] === 'included'
+      ),
+      season: filterState.season.filter((season) => season[0] === 'included'),
+      broadcasting: filterState.broadcasting.filter((broadcasting) => false),
+    };
   }, [filterState]);
+
+  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
+    tagQuery.infiniteQuery.search(query)
+  );
 
   return (
     <div className='relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2'>
-      {Array(50)
-        .fill(0)
-        .map((_, idx) => (
+      {data?.pages.flatMap((page) =>
+        page.content.map((anime) => (
           <AnimeCard
-            id={idx}
-            key={idx}
-            title='스파이 패밀리'
+            id={anime.animeId}
+            key={anime.animeId}
+            title={anime.title}
             tag={[
               { categoryId: 1, categoryName: '코미디' },
               { categoryId: 2, categoryName: '액션' },
@@ -42,9 +44,13 @@ const TagSearchResult = ({ filterState }: TagSearchResultProps) => {
             isBroadcasting='broadcasting'
             rating={4.5}
           />
-        ))}
+        ))
+      )}
+      <InfiniteScroll hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
     </div>
   );
 };
 
-export default TagSearchResult;
+const MemoTagSearchResult = memo(TagSearchResult);
+
+export default MemoTagSearchResult;

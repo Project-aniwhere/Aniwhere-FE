@@ -17,7 +17,7 @@ export default function TagSearchBar({
 }: TagSearchBarProps) {
   return (
     <>
-      <div className='flex items-stretch gap-4 h-10'>
+      <div className='z-40 w-[calc(100%+1rem)] -translate-x-2 p-2 bg-white sticky top-[calc(5rem-1px)] md:top-16 flex items-stretch gap-4 h-12'>
         <p className='flex items-center min-w-fit font-bold text-2xl'>
           태그 검색
         </p>
@@ -26,6 +26,10 @@ export default function TagSearchBar({
           <DefaultInput
             className='w-full h-full pl-12 pr-4 outline-none border-aniviolet3'
             placeholder='검색어를 입력하세요.'
+            value={filterState.searchKeyword}
+            onChange={(e) =>
+              dispatch({ type: 'SEARCH', payload: e.target.value })
+            }
           />
         </div>
         <button

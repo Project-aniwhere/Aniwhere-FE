@@ -1,6 +1,6 @@
 import { UserListResponse } from '@/type/api/admin';
 import { APIResult } from '@/type/common';
-import { Fetch, isFetchError } from '@/util/fetch';
+import { Fetch, FetchWithJWT, isFetchError } from '@/util/fetch';
 import { ApiError } from 'next/dist/server/api-utils';
 
 const allUsers = [
@@ -125,15 +125,13 @@ export const getAdminUsers = async (
     .filter(([, value]) => value !== '')
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
-  const res = await Fetch(
+  const res = await FetchWithJWT(
     `/api/admin/filter?page=${page}&size=${size}&direction=${direction}&${query}`
   );
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
 export const deleteAdminUser = async (id: number) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  console.log(`User ${id} deleted`);
 };

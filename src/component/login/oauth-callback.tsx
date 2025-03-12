@@ -12,9 +12,6 @@ const OauthCallback = ({ oauth }: { oauth: OauthType }) => {
   const code = query.get('code');
 
   const modalRef = useRef<ModalRef>(null);
-
-  console.log(oauth);
-
   const onCloseModal = () => {
     router.push('/login');
   };
@@ -30,15 +27,12 @@ const OauthCallback = ({ oauth }: { oauth: OauthType }) => {
     })
       .then((res) => {
         if (res.ok) {
-          console.log(res);
           return res.json();
         } else {
           modalRef.current?.openModal();
         }
       })
-      .then(() => {
-        console.log('success');
-      })
+      .then(() => {})
       .catch(() => {
         modalRef.current?.openModal();
       });

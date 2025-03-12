@@ -10,7 +10,7 @@ interface TagFilterProps {
 
 const TagFilter = ({ filterState, dispatch }: TagFilterProps) => {
   return (
-    <div className='rounded-lg bg-[#f0f0f0] font-semibold p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+    <div className='sticky top-[calc(8rem-1px)] md:top-28 z-40 rounded-lg bg-[#f0f0f0] font-semibold p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
       <TagFilterModalSelector
         filterType='tag'
         tagList={filterState.tag}
