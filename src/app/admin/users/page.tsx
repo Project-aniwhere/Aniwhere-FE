@@ -5,7 +5,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import adminQuery from '@/hook/query/admin';
 import { deleteAdminUser, UserSearchOptionType } from '@/action/admin/user';
 import ArrowSvg from '@/asset/svg/arrow/arrow';
-import ArrowButton from '@/component/common/carousel/arrow-button';
 
 const UsersPage = () => {
   const [userPage, setUserPage] = useState(1);

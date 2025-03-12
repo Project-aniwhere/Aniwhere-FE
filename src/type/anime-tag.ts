@@ -29,7 +29,6 @@ export const AnimeBroadCastTypeObject = {
 } as const;
 
 export const AnimeFilterObject = {
-  genre: AnimeGenreObject,
   tag: AnimeTagObject,
   release: AnimeReleaseTypeObject,
   season: AnimeSeasonTypeObject,
@@ -37,7 +36,6 @@ export const AnimeFilterObject = {
 } as const;
 
 export const AnimeFilterNameObject = {
-  genre: '장르',
   tag: '태그',
   release: '출시 종류',
   season: '분기',
@@ -45,7 +43,6 @@ export const AnimeFilterNameObject = {
 } as const;
 
 export type AnimeGenreType = keyof typeof AnimeGenreObject;
-export type AnimeTagType = keyof typeof AnimeTagObject;
 export type AnimeReleaseType = keyof typeof AnimeReleaseTypeObject;
 export type AnimeFilterType = keyof typeof AnimeFilterObject;
 export type AnimeSeasonType = keyof typeof AnimeSeasonTypeObject;

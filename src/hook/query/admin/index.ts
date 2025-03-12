@@ -24,6 +24,7 @@ const query = createQuery(['admin'], {
       if (isFetchError(res)) throw new Error(res.message);
       return res;
     },
+    throwOnError: true,
   }),
 });
 

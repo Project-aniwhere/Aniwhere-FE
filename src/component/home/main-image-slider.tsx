@@ -1,6 +1,6 @@
 import Carousel from '../common/carousel/carousel';
 import { AnimeRecommendInfoType } from '@/type/api/anime-recommend-api';
-import CFImage from '../common/image/cf-image';
+import AWImage from '../common/image/cf-image';
 import FullStarSvg from '@/asset/svg/star/full-star-svg';
 
 const MainImageSlider = async ({ animes }: AnimeRecommendInfoType) => {
@@ -16,7 +16,7 @@ const MainImageSlider = async ({ animes }: AnimeRecommendInfoType) => {
         {animes.map((anime) => (
           <div key={anime.poster} className='relative w-full h-dvh'>
             <div className='absolute size-full bg-radial-gradient-r' />
-            <CFImage
+            <AWImage
               src={anime.poster}
               alt='main slider image'
               fill

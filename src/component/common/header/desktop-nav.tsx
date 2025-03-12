@@ -5,6 +5,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { handleLogout } from '@/action/logout';
 import { sessionAtom } from '@/store/session-atom';
 import { RESET } from 'jotai/utils';
+import SearchInput from '@/component/search/search-input';
 
 const DesktopNav = () => {
   const session = useAtomValue(sessionAtom);
@@ -28,8 +29,8 @@ const DesktopNav = () => {
           <Link href='/weekly'>요일별 작품</Link>
         </div>
       </div>
-      <div className='flex flex-row items-center gap-5'>
-        <search>검색</search>
+      <div className='flex flex-row items-center gap-5 whitespace-nowrap'>
+        <SearchInput />
         <Link href='/mypage'>마이페이지</Link>
         {session.isLogin ? (
           <Link href='#' onClick={logoutAction}>
