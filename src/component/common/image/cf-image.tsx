@@ -4,17 +4,15 @@ import Image, { ImageProps } from 'next/image';
 const AniwhereImageLoader = ({
   src,
   width,
-  quality,
 }: {
   src: string;
   width: number;
-  quality?: number;
 }) => {
   try {
     const url = new URL(`https://aniwhere.duckdns.org/images/${src}`);
     url.searchParams.set('width', width.toString());
     return url.href;
-  } catch (e) {
+  } catch {
     return src;
   }
 };

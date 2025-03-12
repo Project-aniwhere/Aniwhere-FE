@@ -27,8 +27,6 @@ const WeeklyPage = () => {
       }),
   });
 
-  console.log('data', data);
-
   const handleSelectYear = (year: string) => {
     router.push(`/weekly?year=${year}&quarter=${quarter}&day=${day}`);
   };

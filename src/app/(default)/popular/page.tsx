@@ -101,8 +101,12 @@ const PopularPage = () => {
               id={idx}
               key={idx}
               title='스파이 패밀리'
-              genre='action'
-              tag={['healing', 'humor', 'ishkai']}
+              tag={[
+                {
+                  categoryId: 1,
+                  categoryName: '액션',
+                },
+              ]}
               season={1}
               releaseType='tva'
               isBroadcasting='broadcasting'

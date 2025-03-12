@@ -3,7 +3,7 @@ import { TagState } from './tag-filter-reducer';
 
 interface TagItemProps {
   tagName: string;
-  tagState: TagState;
+  tagState?: TagState;
   className?: string;
   onClick?: () => void;
   onClose?: () => void;
@@ -11,7 +11,7 @@ interface TagItemProps {
 
 const TagItem = ({
   tagName,
-  tagState,
+  tagState = 'neutral',
   className,
   onClick,
   onClose,

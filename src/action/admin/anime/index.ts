@@ -73,6 +73,7 @@ export const getAdminAnimeList = async (page = 1, search = '') => {
 
 export const deleteAdminAnime = async (id: number) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
+  return id;
 };
 
 export const postAdminAnime = async (newAnime: {

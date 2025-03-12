@@ -1,8 +1,6 @@
 import {
   AnimeBroadCastType,
   AnimeBroadCastTypeObject,
-  AnimeGenreObject,
-  AnimeGenreType,
   AnimeReleaseType,
   AnimeReleaseTypeObject,
   AnimeSeasonType,

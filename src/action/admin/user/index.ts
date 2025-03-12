@@ -1,7 +1,6 @@
 import { UserListResponse } from '@/type/api/admin';
 import { APIResult } from '@/type/common';
-import { Fetch, FetchWithJWT, isFetchError } from '@/util/fetch';
-import { ApiError } from 'next/dist/server/api-utils';
+import { FetchWithJWT } from '@/util/fetch';
 
 const allUsers = [
   {
@@ -134,4 +133,5 @@ export const getAdminUsers = async (
 
 export const deleteAdminUser = async (id: number) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
+  return id;
 };

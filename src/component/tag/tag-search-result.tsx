@@ -18,7 +18,7 @@ const TagSearchResult = ({ filterState }: TagSearchResultProps) => {
         (release) => release[0] === 'included'
       ),
       season: filterState.season.filter((season) => season[0] === 'included'),
-      broadcasting: filterState.broadcasting.filter((broadcasting) => false),
+      broadcasting: filterState.broadcasting.filter(() => false),
     };
   }, [filterState]);
 

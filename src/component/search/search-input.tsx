@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, useCallback, useMemo, useRef, useState } from 'react';
 import DefaultInput from '../common/input/default-input';
 import { useQuery } from '@tanstack/react-query';
 import tagQuery from '@/hook/query/tag';
@@ -40,8 +33,6 @@ const SearchInput = () => {
   const handleDialogClose = useCallback(() => {
     setDialogOpen(false);
   }, [setDialogOpen]);
-
-  console.log(data);
 
   return (
     <div className='relative' ref={modalRef}>
