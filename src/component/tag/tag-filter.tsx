@@ -8,11 +8,14 @@ interface TagFilterProps {
   dispatch: Dispatch<TagFilterAction>;
 }
 
-const TagFilter = ({ filterState }: TagFilterProps) => {
+const TagFilter = ({ filterState, dispatch }: TagFilterProps) => {
   return (
-    <div className='rounded-lg bg-[#f0f0f0] font-semibold p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-      <TagFilterModalSelector filterType='genre' tagList={filterState.genre} />
-      <TagFilterModalSelector filterType='tag' tagList={filterState.tag} />
+    <div className='sticky top-[calc(8rem-1px)] md:top-28 z-40 rounded-lg bg-[#f0f0f0] font-semibold p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+      <TagFilterModalSelector
+        filterType='tag'
+        tagList={filterState.tag}
+        dispatch={dispatch}
+      />
       <div className='col-span-full lg:col-span-1'>
         <TagFilterSelector filterType='season' />
         <TagFilterSelector filterType='release' />

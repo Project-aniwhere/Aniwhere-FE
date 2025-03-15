@@ -17,6 +17,13 @@ export const DAYS: Record<string, string> = {
   '6': '토',
 };
 
+export const DETAIL_TABS: Record<string, string> = {
+  episode: '에피소드',
+  cast_production: '출연/제작',
+  comment: '코멘트',
+  related_ani: '비슷한 작품',
+};
+
 export const SERVER_RESPONSE: Record<string, string> = {
   // common
   C001: '서버 에러가 발생했습니다.',

@@ -7,6 +7,7 @@ import CommentSlider from '@/component/home/comment-slider';
 import Header from '@/component/common/header/header';
 import { AnimeRecommendResponse } from '@/type/api/anime-recommend-api';
 import { getAnimeRecommendList } from '@/action/home';
+import AWImage from '@/component/common/image/cf-image';
 
 export default async function Home() {
   const data: AnimeRecommendResponse = await getAnimeRecommendList();
@@ -14,6 +15,12 @@ export default async function Home() {
   return (
     <div className='w-full min-h-dvh flex flex-col items-center gap-4'>
       <Header />
+      <AWImage
+        src={'posters/1iWzgAU9MMKrS67VnxH4XhDnTUa.jpg'}
+        alt=''
+        width={200}
+        height={200}
+      />
       {data.length > 0 && <MainImageSlider {...data[0]} />}
 
       {data.length > 1 ? (
