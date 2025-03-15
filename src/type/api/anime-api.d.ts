@@ -25,6 +25,16 @@ export interface AnimeCastingInfoType {
   voiceActorName: string;
 }
 
+export interface AnimeDetailEpisodeInfoType {
+  episodeId: number;
+  episodeNumber: number;
+  title: string;
+  releaseDate: string;
+  duration: number;
+  episodeStory: string;
+  stillImage: string;
+}
+
 export interface AnimeReviewInfoType {
   animeId: number;
   rating: number;
@@ -58,21 +68,35 @@ export interface AnimeDetailInfoType {
   backgroundImage: string;
   categories: string[];
   castings: AnimeCastingInfoType[];
-  episodes: AnimeEpisodeInfoType[];
+  episodes: AnimeDetailEpisodeInfoType[];
   averageRating: number;
   reviews: AnimeReviewInfoType[];
 }
 
 export type AnimeDetailResponse = AnimeDetailInfoType;
 
-export interface AnimeEpisodeInfoType {
-  episodeId: number;
+export interface AnimeEpisodeContentInfoType {
+  episode_id: number;
+  animeId: number;
   episodeNumber: number;
   title: string;
   releaseDate: string;
   duration: number;
   episodeStory: string;
   stillImage: string;
+}
+
+export interface AnimeEpisodeInfoType {
+  content: AnimeEpisodeContentInfoType[];
+  // totalCount: number;
+  // pageNumber: number;
+  // pageSize: number;
+  // totalPages: number;
+  // sort: {
+  //   empty: boolean;
+  //   sorted: boolean;
+  //   unsorted: boolean;
+  // };
 }
 
 export type AnimeEpisodeListResponse = PageableResponse<AnimeEpisodeInfoType[]>;
