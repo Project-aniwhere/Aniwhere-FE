@@ -1,6 +1,7 @@
 import { API_URL } from '@/constant/api-url';
 import { APIResult, ErrorResult } from '@/type/common';
 import { isServer } from '@tanstack/react-query';
+import { redirect } from 'next/navigation';
 // import { cookies } from 'next/headers';
 
 export const isFetchError = <T>(
@@ -10,11 +11,6 @@ export const isFetchError = <T>(
 };
 
 const getURL = () => {
-  // redirect fetch url for production build
-  if (process.env.NEXT_PHASE === 'phase-production-build' && true) {
-    return API_URL;
-  }
-
   if (!isServer) {
     return '';
   }
@@ -71,8 +67,13 @@ export const FetchWithJWT = async (
   const res = await FetchWithCookie(input, init);
 
   if (res.status === 401) {
-    const tokensRequest = await fetch('/api/reissue', init);
-    if (!tokensRequest.ok) return tokensRequest;
+    const tokensRequest = await fetch('/api/reissue', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!tokensRequest.ok) redirect('/login');
 
     if (process.env.NODE_ENV === 'production' && isServer) {
       const cookiesPromise = await getServerCookies();

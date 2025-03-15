@@ -15,7 +15,6 @@ export default async function Home() {
     <div className='w-full min-h-dvh flex flex-col items-center gap-4'>
       <Header />
       {data.length > 0 && <MainImageSlider {...data[0]} />}
-
       {data.length > 1 ? (
         <MainLayout>
           {data.slice(1).map((anime) => (
