@@ -9,7 +9,7 @@ interface DetailBannerProps {
   categories: string[];
   isAdult: boolean;
   releaseDate: string[];
-  endDate: string[];
+  endDate: string[] | null;
   status: string;
   description: string;
   trailer: string;
@@ -52,7 +52,7 @@ const DetailBanner = ({
           </div>
           <div className='flex gap-1.5 text-sm md:text-base opacity-70 font-medium'>
             <span>
-              {releaseDate.join('.')} ~ {endDate.join('.')}
+              {releaseDate.join('.')} ~ {endDate?.join('.')}
             </span>
             <span>|</span>
             <span>{status}</span>

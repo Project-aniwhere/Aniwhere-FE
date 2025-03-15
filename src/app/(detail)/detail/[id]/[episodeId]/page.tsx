@@ -18,7 +18,7 @@ const EpisodeDetailPage = () => {
 
   return data ? (
     <>
-      <DetailBanner
+      {/* <DetailBanner
         poster={data.poster}
         title={data.title}
         rating={data.averageRating}
@@ -32,7 +32,7 @@ const EpisodeDetailPage = () => {
           id={episodeId as string}
           refetchGetAnimeDetail={() => {}}
         />
-      </div>
+      </div> */}
     </>
   ) : (
     <Layout>데이터가 없습니다.</Layout>

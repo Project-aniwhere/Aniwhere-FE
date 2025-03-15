@@ -5,7 +5,7 @@ import { AnimeDetailEpisodeInfoType } from '@/type/api/anime-api';
 import Link from 'next/link';
 
 interface EpisodeListProps {
-  list: AnimeDetailEpisodeInfoType[];
+  list: AnimeDetailEpisodeInfoType[] | null;
 }
 
 const EpisodeList = ({ list }: EpisodeListProps) => {

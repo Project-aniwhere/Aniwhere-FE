@@ -52,7 +52,7 @@ export interface AnimeDetailInfoType {
   producer: string;
   studio: string;
   releaseDate: string[];
-  endDate: string[];
+  endDate: string[] | null;
   runningTime: string;
   status: string;
   trailer: string;
@@ -68,7 +68,7 @@ export interface AnimeDetailInfoType {
   castings: AnimeCastingInfoType[];
   averageRating: number;
   reviews: AnimeReviewInfoType[];
-  episodes: AnimeDetailEpisodeInfoType[];
+  episodes: AnimeDetailEpisodeInfoType[] | null;
 }
 
 export type AnimeDetailResponse = AnimeDetailInfoType;
