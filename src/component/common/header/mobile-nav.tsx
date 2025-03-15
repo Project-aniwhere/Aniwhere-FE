@@ -2,15 +2,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import CrossSvg from '@/asset/svg/cross/cross-svg';
 import MenuLineSvg from '@/asset/svg/menuline/menu-line-svg';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { handleLogout } from '@/action/logout';
-import { sessionAtom } from '@/store/session-atom';
-import { RESET } from 'jotai/utils';
+import useSession from '@/hook/session/use-session';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const session = useAtomValue(sessionAtom);
-  const setSession = useSetAtom(sessionAtom);
+  const { isLogin, logoutAction } = useSession();
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuAniItems = [
@@ -20,15 +16,6 @@ const MobileNav = () => {
   ];
 
   const menuUserItems = [{ href: '/userinfo', text: '마이페이지' }];
-
-  const logoutAction = async (e: React.MouseEvent) => {
-    e.preventDefault(); // 기본 이벤트 동작 방지
-    const result = await handleLogout();
-
-    if (result.code < 400 || result.code == 401) {
-      setSession(RESET);
-    }
-  };
 
   return (
     <div className='relative'>
@@ -95,7 +82,7 @@ const MobileNav = () => {
           ))}
         </div>
         <div className='absolute bottom-5 right-5'>
-          {session.isLogin ? (
+          {isLogin ? (
             <Link
               href='#'
               onClick={logoutAction}

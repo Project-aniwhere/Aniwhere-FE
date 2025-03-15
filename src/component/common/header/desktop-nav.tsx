@@ -1,24 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { handleLogout } from '@/action/logout';
-import { sessionAtom } from '@/store/session-atom';
-import { RESET } from 'jotai/utils';
 import SearchInput from '@/component/search/search-input';
+import useSession from '@/hook/session/use-session';
 
 const DesktopNav = () => {
-  const session = useAtomValue(sessionAtom);
-  const setSession = useSetAtom(sessionAtom);
-
-  const logoutAction = async (e: React.MouseEvent) => {
-    e.preventDefault(); // 기본 이벤트 동작 방지
-    const result = await handleLogout();
-
-    if (result.code < 400 || result.code == 401) {
-      setSession(RESET);
-    }
-  };
+  const { isLogin, logoutAction } = useSession();
 
   return (
     <div className='flex flex-row items-center justify-between'>
@@ -32,7 +19,7 @@ const DesktopNav = () => {
       <div className='flex flex-row items-center gap-5 whitespace-nowrap'>
         <SearchInput />
         <Link href='/mypage'>마이페이지</Link>
-        {session.isLogin ? (
+        {isLogin ? (
           <Link href='#' onClick={logoutAction}>
             로그아웃
           </Link>
