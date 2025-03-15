@@ -12,6 +12,12 @@ export type AnimeWeeklyResponse = {
   animes: AnimeWeeklyInfoType[];
 }[];
 
+export interface AnimeRatingInfoType {
+  userId: number;
+  animeId: number;
+  rating: number;
+}
+
 export interface AnimeCastingInfoType {
   castingId: number;
   characterName: string;
@@ -20,11 +26,10 @@ export interface AnimeCastingInfoType {
 }
 
 export interface AnimeReviewInfoType {
-  reviewId: number;
-  userId: string;
+  animeId: number;
   rating: number;
   content: string;
-  createdAt: string;
+  nickname: string;
 }
 
 export interface AnimeDetailInfoType {
@@ -39,7 +44,7 @@ export interface AnimeDetailInfoType {
   studio: string;
   releaseDate: string;
   endDate: string;
-  episodes: number;
+  episodeNum: number;
   runningTime: string;
   status: string;
   trailer: string;
@@ -49,17 +54,19 @@ export interface AnimeDetailInfoType {
   isAdult: boolean;
   duration: string;
   weekday: string;
-  anilistId: string;
+  ratings: AnimeRatingInfoType[];
+  backgroundImage: string;
   categories: string[];
   castings: AnimeCastingInfoType[];
+  episodes: AnimeEpisodeInfoType[];
+  averageRating: number;
   reviews: AnimeReviewInfoType[];
 }
 
 export type AnimeDetailResponse = AnimeDetailInfoType;
 
 export interface AnimeEpisodeInfoType {
-  episode_id: number;
-  animeId: number;
+  episodeId: number;
   episodeNumber: number;
   title: string;
   releaseDate: string;
