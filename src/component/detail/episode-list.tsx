@@ -23,7 +23,7 @@ const EpisodeList = ({ list }: EpisodeListProps) => {
           </li>
         ))
       ) : (
-        <div>에피소드가 없습니다.</div>
+        <div className='p-4'>에피소드가 없습니다.</div>
       )}
     </ul>
   );

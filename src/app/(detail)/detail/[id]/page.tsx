@@ -47,7 +47,14 @@ const DetailPage = () => {
         />
         <div>
           {tab === 'episode' && <EpisodeList list={data.episodes} />}
-          {tab === 'cast' && <CastProductList list={data.castings} />}
+          {tab === 'cast' && (
+            <CastProductList
+              list={data.castings}
+              studio={data.studio}
+              director={data.director}
+              script={data.script}
+            />
+          )}
           {tab === 'comment' && (
             <CommentContainer
               list={data.reviews}
