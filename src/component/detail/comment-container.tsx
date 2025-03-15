@@ -4,13 +4,14 @@ import { AnimeReviewInfoType } from '@/type/api/anime-api';
 
 interface CommentContainerProps {
   list: AnimeReviewInfoType[];
+  rating: number;
 }
 
-const CommentContainer = ({ list }: CommentContainerProps) => {
+const CommentContainer = ({ list, rating }: CommentContainerProps) => {
   return (
     <div className='flex flex-col gap-5'>
       <Rating />
-      <CommentList list={list} />
+      <CommentList list={list} rating={rating} />
     </div>
   );
 };

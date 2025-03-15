@@ -48,8 +48,7 @@ const DetailPage = () => {
           <DetailBanner
             poster={data.poster}
             title={data.title}
-            // TODO 평균 별점 추가
-            rating={4.3}
+            rating={data.averageRating}
             runningTime={data.runningTime}
             categories={data.categories}
           />
@@ -69,7 +68,12 @@ const DetailPage = () => {
                 <div>데이터가 없습니다</div>
               )}
               {tab === 'cast' && <CastProductList list={data.castings} />}
-              {tab === 'comment' && <CommentContainer list={data.reviews} />}
+              {tab === 'comment' && (
+                <CommentContainer
+                  list={data.reviews}
+                  rating={data.averageRating}
+                />
+              )}
             </div>
           </div>
         </>
