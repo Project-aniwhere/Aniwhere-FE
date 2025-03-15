@@ -45,10 +45,12 @@ const WeeklyPage = () => {
         handleSelectYear={handleSelectYear}
         handleSelectQuarter={handleSelectQuarter}
       />
-      {data ? (
+      {data?.length ? (
         isMobile ? (
           <MobileDailyConatiner
-            dailyList={data[day]}
+            dailyList={
+              data.filter((item) => String(item.weekdayCode) === day)[0].animes
+            }
             currentDay={day}
             handleSelectDay={handleSelectDay}
           />

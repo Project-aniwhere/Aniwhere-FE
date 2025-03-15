@@ -13,7 +13,7 @@ const WeeklyContainer = ({ weeklyList, currentDay }: WeeklyContainerProps) => {
         <li key={day}>
           <DailyConatiner
             day={day}
-            dailyList={dailyList}
+            dailyList={dailyList.animes}
             active={day === currentDay}
           />
         </li>
