@@ -2,6 +2,7 @@ import useIsMobile from '@/hook/device-detect/use-is-mobile';
 import EpisodeItem from './episode-item';
 import MobileEpisodeItem from './episode-item-mobile';
 import { AnimeDetailEpisodeInfoType } from '@/type/api/anime-api';
+import Link from 'next/link';
 
 interface EpisodeListProps {
   list: AnimeDetailEpisodeInfoType[];
@@ -15,11 +16,13 @@ const EpisodeList = ({ list }: EpisodeListProps) => {
       {list ? (
         list.map((item) => (
           <li key={item.episode_id}>
-            {isMobile ? (
-              <MobileEpisodeItem data={item} />
-            ) : (
-              <EpisodeItem data={item} />
-            )}
+            <Link href={`/detail/${item.animeId}/${item.episode_id}`}>
+              {isMobile ? (
+                <MobileEpisodeItem data={item} />
+              ) : (
+                <EpisodeItem data={item} />
+              )}
+            </Link>
           </li>
         ))
       ) : (
