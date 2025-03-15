@@ -33,10 +33,15 @@ const DetailPage = () => {
         poster={data.poster}
         title={data.title}
         rating={data.averageRating}
-        runningTime={data.runningTime}
         categories={data.categories}
+        releaseDate={data.releaseDate}
+        endDate={data.endDate}
+        status={data.status}
+        isAdult={data.isAdult}
+        description={data.description}
+        trailer={data.trailer}
       />
-      <div className='py-5 px-5 md:px-8 flex flex-col gap-5'>
+      <div className='pt-5 pb-20 px-5 md:px-8 flex flex-col gap-5'>
         <Tabs
           list={Object.entries(DETAIL_TABS).map(([id, value]) => ({
             id,

@@ -23,10 +23,10 @@ const EpisodeItem = ({ data }: EpisodeItemProps) => {
           </div>
           <div className='flex gap-1 text-sm font-medium text-gray-400'>
             <span>{data.duration}분</span>
-            <span>{data.releaseDate}</span>
+            <span>{data.releaseDate.join('.')}</span>
           </div>
         </div>
-        <p className='text-gray-400'>{data.episodeStory}</p>
+        <p className='text-gray-400 line-clamp-3'>{data.episodeStory}</p>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ const MobileEpisodeItem = ({ data }: EpisodeItemProps) => {
           </div>
         </div>
       </div>
-      <p className='text-gray-400 text-sm'>{data.episodeStory}</p>
+      <p className='text-gray-400 text-sm line-clamp-3'>{data.episodeStory}</p>
     </div>
   );
 };
