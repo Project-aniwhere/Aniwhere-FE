@@ -1,13 +1,34 @@
 import HoverColorButton from '../common/button/hover-color-button';
 import { useState } from 'react';
 import StarRating from '../common/star-rating/star-rating';
+import { putAnimeReview } from '@/action/anime';
+import { useAtomValue } from 'jotai';
+import { sessionAtom } from '@/store/session-atom';
 
-const Rating = () => {
+interface RatingProps {
+  id: string;
+  refetchGetAnimeDetail: () => void;
+}
+
+const Rating = ({ id, refetchGetAnimeDetail }: RatingProps) => {
+  const session = useAtomValue(sessionAtom);
+
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
 
-  const handleSubmit = () => {
-    console.log(rating, content);
+  const handleInit = () => {
+    refetchGetAnimeDetail();
+    setRating(0);
+    setContent('');
+  };
+
+  const handleSubmit = async () => {
+    const result = await putAnimeReview(id, session.userInfo?.userId || 0, {
+      rating,
+      content,
+    });
+
+    if (result?.code === 200) handleInit();
   };
 
   return (

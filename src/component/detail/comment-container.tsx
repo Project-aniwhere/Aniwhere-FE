@@ -5,12 +5,19 @@ import { AnimeReviewInfoType } from '@/type/api/anime-api';
 interface CommentContainerProps {
   list: AnimeReviewInfoType[];
   rating: number;
+  id: string;
+  refetchGetAnimeDetail: () => void;
 }
 
-const CommentContainer = ({ list, rating }: CommentContainerProps) => {
+const CommentContainer = ({
+  list,
+  rating,
+  id,
+  refetchGetAnimeDetail,
+}: CommentContainerProps) => {
   return (
     <div className='flex flex-col'>
-      <Rating />
+      <Rating id={id} refetchGetAnimeDetail={refetchGetAnimeDetail} />
       <CommentList list={list} rating={rating} />
     </div>
   );
