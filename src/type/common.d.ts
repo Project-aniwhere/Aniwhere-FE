@@ -55,7 +55,11 @@ export type PageableResponse<T> = {
   empty: boolean;
 };
 
-export type PageableRequest = { page: number; size: number; sort: string[] };
+export type PageableRequest = {
+  page: number;
+  size: number;
+  direction: 'ASC' | 'DESC';
+};
 export type ErrorResult = {
   code: number;
   message: string;

@@ -25,7 +25,12 @@ const DetailPage = () => {
   });
   const { data: episodes } = useQuery({
     queryKey: ['animeEpisodeList', id],
-    queryFn: () => getAnimeEpisodeList(id as string),
+    queryFn: () =>
+      getAnimeEpisodeList(id as string, {
+        page: 1,
+        size: 100,
+        direction: 'ASC',
+      }),
     enabled: isSuccess,
   });
 

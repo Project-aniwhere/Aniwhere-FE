@@ -8,17 +8,6 @@ import { Fetch } from '@/util/fetch';
 
 const prefix = 'api/anime';
 
-export const getAnimeDetail = async (
-  id: string | null
-): Promise<AnimeDetailResponse | null> => {
-  const response = await Fetch(`${prefix}/${id}`, {
-    next: { revalidate: 1200 },
-  });
-
-  if (response.ok) return response.json();
-  return null;
-};
-
 export const getAnimeWeeklyList = async ({
   year,
   quarter,
@@ -37,19 +26,12 @@ export const getAnimeWeeklyList = async ({
   return null;
 };
 
-export const getAnimeQuarterList = async ({
-  year,
-  quarter,
-}: {
-  year: string;
-  quarter: string;
-}): Promise<AnimeWeeklyResponse | null> => {
-  const response = await Fetch(
-    `${prefix}/quarter?year=${year}&quarter=${quarter}`,
-    {
-      next: { revalidate: 1200 },
-    }
-  );
+export const getAnimeDetail = async (
+  id: string | null
+): Promise<AnimeDetailResponse | null> => {
+  const response = await Fetch(`${prefix}/${id}`, {
+    next: { revalidate: 1200 },
+  });
 
   if (response.ok) return response.json();
   return null;
@@ -57,15 +39,11 @@ export const getAnimeQuarterList = async ({
 
 export const getAnimeEpisodeList = async (
   id: string | null,
-  pageable?: PageableRequest
+  request: PageableRequest
 ): Promise<AnimeEpisodeListResponse | null> => {
-  // TODO API URL 변경 ( api/animes -> api/anime )
-  const response = await Fetch(
-    `api/animes/${id}/episodes?pageable=${pageable}`,
-    {
-      next: { revalidate: 1200 },
-    }
-  );
+  const response = await Fetch(`api/anime/${id}/episodes?request=${request}`, {
+    next: { revalidate: 1200 },
+  });
 
   if (response.ok) return response.json();
   return null;
