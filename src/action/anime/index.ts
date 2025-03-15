@@ -13,10 +13,7 @@ export const getAnimeWeeklyList = async ({
   quarter: string;
 }): Promise<AnimeWeeklyResponse | null> => {
   const response = await Fetch(
-    `${prefix}/weekday?year=${year}&quarter=${quarter}`,
-    {
-      next: { revalidate: 1200 },
-    }
+    `${prefix}/weekday?year=${year}&quarter=${quarter}`
   );
 
   if (response.ok) return response.json();
@@ -27,9 +24,7 @@ export const getAnimeWeeklyList = async ({
 export const getAnimeDetail = async (
   id: string | null
 ): Promise<AnimeDetailResponse | null> => {
-  const response = await Fetch(`${prefix}/${id}`, {
-    next: { revalidate: 1200 },
-  });
+  const response = await Fetch(`${prefix}/${id}`);
 
   if (response.ok) return response.json();
   return null;
@@ -48,8 +43,46 @@ export const putAnimeReview = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 1200 },
       body: JSON.stringify(data),
+    }
+  );
+
+  if (response.ok) return response.json();
+  return null;
+};
+
+// 애니메이션 리뷰 수정
+export const patchAnimeReview = async (
+  animeId: string | null,
+  animeReviewId: number,
+  userId: number,
+  data: { rating: number; content: string }
+): Promise<APIResult<null>> => {
+  const response = await Fetch(
+    `${prefix}/${animeId}/reviews?userId=${userId}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (response.ok) return response.json();
+  return null;
+};
+
+// 애니메이션 리뷰 삭제
+export const deleteAnimeReview = async (
+  animeId: string | null,
+  animeReviewId: number,
+  userId: number
+): Promise<APIResult<null>> => {
+  const response = await Fetch(
+    `${prefix}/${animeId}/reviews/${animeReviewId}?userId=${userId}`,
+    {
+      method: 'DELETE',
     }
   );
 
