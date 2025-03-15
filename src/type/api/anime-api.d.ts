@@ -8,8 +8,9 @@ export interface AnimeWeeklyInfoType {
 }
 
 export type AnimeWeeklyResponse = {
-  [key: string]: AnimeWeeklyInfoType[];
-};
+  weekdayCode: number;
+  animes: AnimeWeeklyInfoType[];
+}[];
 
 export interface AnimeCastingInfoType {
   castingId: number;
