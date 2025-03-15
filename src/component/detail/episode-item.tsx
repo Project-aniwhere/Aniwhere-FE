@@ -1,8 +1,8 @@
-import { AnimeEpisodeInfoType } from '@/type/api/anime-api';
+import { AnimeEpisodeContentInfoType } from '@/type/api/anime-api';
 import Image from 'next/image';
 
 export interface EpisodeItemProps {
-  data: AnimeEpisodeInfoType;
+  data: AnimeEpisodeContentInfoType;
 }
 
 const EpisodeItem = ({ data }: EpisodeItemProps) => {

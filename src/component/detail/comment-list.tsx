@@ -18,7 +18,7 @@ const CommentList = ({ list }: CommentListProps) => {
       </div>
       <ul className='grid grid-cols-4 gap-4'>
         {list.map((item) => (
-          <li key={item.reviewId}>
+          <li key={item.nickname}>
             <CommentItem data={item} />
           </li>
         ))}

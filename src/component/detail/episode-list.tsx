@@ -1,10 +1,10 @@
 import useIsMobile from '@/hook/device-detect/use-is-mobile';
 import EpisodeItem from './episode-item';
 import MobileEpisodeItem from './episode-item-mobile';
-import { AnimeEpisodeInfoType } from '@/type/api/anime-api';
+import { AnimeEpisodeContentInfoType } from '@/type/api/anime-api';
 
 interface EpisodeListProps {
-  list: AnimeEpisodeInfoType[];
+  list: AnimeEpisodeContentInfoType[];
 }
 
 const EpisodeList = ({ list }: EpisodeListProps) => {
