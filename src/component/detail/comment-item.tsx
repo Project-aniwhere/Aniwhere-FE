@@ -1,3 +1,4 @@
+import FullStarSvg from '@/asset/svg/star/full-star-svg';
 import { AnimeReviewInfoType } from '@/type/api/anime-api';
 
 interface CommentItemProps {
@@ -10,7 +11,7 @@ const CommentItem = ({ data }: CommentItemProps) => {
       <div className='flex justify-between items-center gap-4'>
         <span className='font-medium'>{data.nickname}</span>
         <div className='flex gap-2 text-gray-400 text-sm'>
-          <span>별</span>
+          <FullStarSvg />
           <span>{data.rating}</span>
         </div>
       </div>

@@ -21,7 +21,6 @@ export const DETAIL_TABS: Record<string, string> = {
   episode: '에피소드',
   cast: '출연/제작',
   comment: '코멘트',
-  related: '비슷한 작품',
 };
 
 export const SERVER_RESPONSE: Record<string, string> = {

@@ -1,11 +1,11 @@
-import Image from 'next/image';
+import AWImage from '../common/image/cf-image';
 import { EpisodeItemProps } from './episode-item';
 
 const MobileEpisodeItem = ({ data }: EpisodeItemProps) => {
   return (
     <div className='p-3 flex flex-col gap-3'>
       <div className='flex gap-3'>
-        <Image
+        <AWImage
           src={data.stillImage}
           alt='섬네일 이미지'
           width={100}

@@ -9,7 +9,7 @@ interface CommentContainerProps {
 
 const CommentContainer = ({ list, rating }: CommentContainerProps) => {
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col'>
       <Rating />
       <CommentList list={list} rating={rating} />
     </div>

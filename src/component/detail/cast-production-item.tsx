@@ -1,6 +1,4 @@
-import sample1 from '@/asset/img/subslider/sample1.jpg';
 import { AnimeCastingInfoType } from '@/type/api/anime-api';
-import Image from 'next/image';
 
 interface CastProductItemProps {
   data: AnimeCastingInfoType;
@@ -9,14 +7,6 @@ interface CastProductItemProps {
 const CastProductItem = ({ data }: CastProductItemProps) => {
   return (
     <div className='flex items-center gap-4 p-3 md:p-5'>
-      <Image
-        src={sample1.src}
-        alt='프로필 이미지'
-        width={80}
-        height={80}
-        className='object-cover rounded-full'
-      />
-      {/* TODO 제작은 어떻게? */}
       <div className='flex flex-col gap-1'>
         <p className='text-sm md:text-base font-medium'>
           {data.voiceActorName}

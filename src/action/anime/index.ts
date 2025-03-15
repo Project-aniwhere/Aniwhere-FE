@@ -6,7 +6,7 @@ import {
 import { PageableRequest } from '@/type/common';
 import { Fetch } from '@/util/fetch';
 
-const prefix = 'api/anime';
+const prefix = '/api/anime';
 
 export const getAnimeWeeklyList = async ({
   year,

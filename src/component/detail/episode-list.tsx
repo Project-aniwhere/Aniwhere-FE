@@ -12,15 +12,19 @@ const EpisodeList = ({ list }: EpisodeListProps) => {
 
   return (
     <ul className='flex flex-col'>
-      {list.map((item) => (
-        <li key={item.episodeId}>
-          {isMobile ? (
-            <MobileEpisodeItem data={item} />
-          ) : (
-            <EpisodeItem data={item} />
-          )}
-        </li>
-      ))}
+      {list ? (
+        list.map((item) => (
+          <li key={item.episodeId}>
+            {isMobile ? (
+              <MobileEpisodeItem data={item} />
+            ) : (
+              <EpisodeItem data={item} />
+            )}
+          </li>
+        ))
+      ) : (
+        <div>에피소드가 없습니다.</div>
+      )}
     </ul>
   );
 };
