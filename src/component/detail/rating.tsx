@@ -12,6 +12,7 @@ interface RatingProps {
 
 const Rating = ({ id, refetchGetAnimeDetail }: RatingProps) => {
   const session = useAtomValue(sessionAtom);
+  const disabled = !session.isLogin;
 
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
@@ -35,20 +36,22 @@ const Rating = ({ id, refetchGetAnimeDetail }: RatingProps) => {
     <div className='flex flex-col gap-4 p-3 md:p-5'>
       <div className='flex flex-col gap-3'>
         <p className='md:text-lg font-bold'>내 평점</p>
-        <StarRating rating={rating} setRating={setRating} />
+        <StarRating rating={rating} setRating={setRating} disabled={disabled} />
       </div>
       <div className='p-4 flex flex-col gap-2 border border-gray-200 rounded-md'>
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder='이 작품에 대한 내 리뷰를 남겨보세요!'
+          placeholder={`${disabled ? '로그인 후 ' : ''}이 작품에 대한 리뷰를 남겨보세요!`}
           className='p-2 resize-none focus-visible:outline-aniviolet2'
+          disabled={disabled}
         />
         <div className='flex justify-end'>
           <HoverColorButton
             text='등록'
             className='px-3 py-1'
             onClick={handleSubmit}
+            disabled={disabled}
           />
         </div>
       </div>

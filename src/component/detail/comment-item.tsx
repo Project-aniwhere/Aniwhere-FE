@@ -10,8 +10,8 @@ const CommentItem = ({ data }: CommentItemProps) => {
     <div className='flex flex-col gap-4 p-4 bg-gray-100 rounded-md'>
       <div className='flex justify-between items-center gap-4'>
         <span className='font-medium'>{data.nickname}</span>
-        <div className='flex gap-2 text-gray-400 text-sm'>
-          <FullStarSvg />
+        <div className='flex items-center gap-1.5 text-gray-400 text-sm bg-white py-0.5 px-1.5 rounded-lg'>
+          <FullStarSvg fill='#9CA3AF' />
           <span>{data.rating}</span>
         </div>
       </div>
