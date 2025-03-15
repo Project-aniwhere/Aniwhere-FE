@@ -1,14 +1,10 @@
 import {
   AnimeBroadCastType,
   AnimeBroadCastTypeObject,
-  AnimeGenreObject,
-  AnimeGenreType,
   AnimeReleaseType,
   AnimeReleaseTypeObject,
   AnimeSeasonType,
   AnimeSeasonTypeObject,
-  AnimeTagObject,
-  AnimeTagType,
 } from '@/type/anime-tag';
 import Image from 'next/image';
 import sample from '@/asset/img/mainslider/sample.jpg';
@@ -17,11 +13,11 @@ import Link from 'next/link';
 import { Review } from '@/type/api/anime-recommend-api';
 import CommentSwiper from '../comment/comment-swiper';
 import StarRate from '../comment/star-rate';
+import { AnimeTagType } from '@/type/api/tag-api';
 
 interface AnimeCardProps {
   id: number;
   title: string;
-  genre: AnimeGenreType;
   tag: AnimeTagType[];
   season: AnimeSeasonType;
   releaseType: AnimeReleaseType;
@@ -38,7 +34,6 @@ const AnimeCard = ({
   id,
   title,
   tag,
-  genre,
   season,
   releaseType,
   isBroadcasting,
@@ -86,15 +81,12 @@ const AnimeCard = ({
           <StarRate rate={rating} />
         </div>
         <div className='flex flex-row gap-2 overflow-x-scroll scrollbar-none'>
-          <TagItem
-            tagName={AnimeGenreObject[genre]}
-            className='bg-aniviolet1'
-          />
-          {tag.slice(0, 2).map((name) => (
+          {tag.map(({ categoryId, categoryName }) => (
             <TagItem
-              key={name}
-              tagName={AnimeTagObject[name]}
+              tagName={categoryName}
               className='bg-aniviolet1'
+              key={categoryId}
+              tagState='neutral'
             />
           ))}
         </div>

@@ -1,10 +1,24 @@
 'use client';
 
-import cloudfrontImageLoader from '@/component/common/image/cloudfront-image-loader';
 import Image, { ImageProps } from 'next/image';
-
-const CFImage = (props: ImageProps) => {
-  return <Image {...props} loader={cloudfrontImageLoader} />;
+const AniwhereImageLoader = ({
+  src,
+  width,
+}: {
+  src: string;
+  width: number;
+}) => {
+  try {
+    const url = new URL(`https://aniwhere.duckdns.org/images/${src}`);
+    url.searchParams.set('width', width.toString());
+    return url.href;
+  } catch {
+    return src;
+  }
 };
 
-export default CFImage;
+const AWImage = (props: ImageProps) => {
+  return <Image {...props} loader={AniwhereImageLoader} />;
+};
+
+export default AWImage;

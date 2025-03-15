@@ -30,7 +30,7 @@ const Header = ({ fixedStyle = false }: HeaderProps) => {
       <header
         className={
           isAtTop && !fixedStyle
-            ? 'font-semibold duration-300 py-5 px-8 text-white w-full fixed z-50 flex flex-row items-center justify-between bg-gradient-to-b from-black/40 to-transparent'
+            ? 'font-semibold duration-300 py-5 px-8 text-white w-full fixed z-50 flex flex-row items-center justify-between bg-gradient-to-b from-black/40 to-transparent whitespace-nowrap'
             : 'font-semibold duration-300 py-5 px-8 text-black bg-white w-full fixed z-50 flex flex-row items-center justify-between'
         }
       >

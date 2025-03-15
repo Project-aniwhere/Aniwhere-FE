@@ -23,7 +23,6 @@ const getServerCookies = async () => {
 };
 
 export const Fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-  console.log('fetch', `${getURL()}${input}`, init);
   return fetch(`${getURL()}${input}`, init);
 };
 
