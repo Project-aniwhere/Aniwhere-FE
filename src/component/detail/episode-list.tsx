@@ -1,10 +1,10 @@
 import useIsMobile from '@/hook/device-detect/use-is-mobile';
 import EpisodeItem from './episode-item';
 import MobileEpisodeItem from './episode-item-mobile';
-import { AnimeEpisodeContentInfoType } from '@/type/api/anime-api';
+import { AnimeDetailEpisodeInfoType } from '@/type/api/anime-api';
 
 interface EpisodeListProps {
-  list: AnimeEpisodeContentInfoType[];
+  list: AnimeDetailEpisodeInfoType[];
 }
 
 const EpisodeList = ({ list }: EpisodeListProps) => {
@@ -13,7 +13,7 @@ const EpisodeList = ({ list }: EpisodeListProps) => {
   return (
     <ul className='flex flex-col'>
       {list.map((item) => (
-        <li key={item.episode_id}>
+        <li key={item.episodeId}>
           {isMobile ? (
             <MobileEpisodeItem data={item} />
           ) : (
