@@ -39,6 +39,7 @@ export interface AnimeReviewInfoType {
   rating: number;
   content: string;
   nickname: string;
+  userId: number;
 }
 
 export interface AnimeDetailInfoType {

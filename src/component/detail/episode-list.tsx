@@ -13,7 +13,7 @@ const EpisodeList = ({ list }: EpisodeListProps) => {
 
   return (
     <ul className='flex flex-col'>
-      {list ? (
+      {list?.length ? (
         list.map((item) => (
           <li key={item.episode_id}>
             <Link href={`/detail/${item.animeId}/${item.episode_id}`}>
@@ -26,7 +26,7 @@ const EpisodeList = ({ list }: EpisodeListProps) => {
           </li>
         ))
       ) : (
-        <div className='p-4'>에피소드가 없습니다.</div>
+        <div className='p-4 text-gray-400'>에피소드가 없습니다.</div>
       )}
     </ul>
   );

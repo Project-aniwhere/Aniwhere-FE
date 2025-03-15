@@ -75,7 +75,7 @@ export const patchAnimeReview = async (
 
 // 애니메이션 리뷰 삭제
 export const deleteAnimeReview = async (
-  animeId: string | null,
+  animeId: number,
   animeReviewId: number,
   userId: number
 ): Promise<APIResult<null>> => {

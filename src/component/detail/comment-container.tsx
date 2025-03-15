@@ -18,7 +18,11 @@ const CommentContainer = ({
   return (
     <div className='flex flex-col'>
       <Rating id={id} refetchGetAnimeDetail={refetchGetAnimeDetail} />
-      <CommentList list={list} rating={rating} />
+      <CommentList
+        list={list}
+        rating={rating}
+        refetchGetAnimeDetail={refetchGetAnimeDetail}
+      />
     </div>
   );
 };
