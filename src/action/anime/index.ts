@@ -59,7 +59,7 @@ export const patchAnimeReview = async (
   data: { rating: number; content: string }
 ): Promise<APIResult<null>> => {
   const response = await Fetch(
-    `${prefix}/${animeId}/reviews?userId=${userId}`,
+    `${prefix}/${animeId}/reviews/${animeReviewId}?userId=${userId}`,
     {
       method: 'PATCH',
       headers: {
