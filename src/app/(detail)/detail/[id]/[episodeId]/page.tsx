@@ -26,7 +26,12 @@ const EpisodeDetailPage = () => {
         categories={data.categories}
       />
       <div className='py-5 px-5 md:px-8 flex flex-col gap-5'>
-        <CommentContainer list={data.reviews} rating={data.averageRating} />
+        <CommentContainer
+          list={data.reviews}
+          rating={data.averageRating}
+          id={episodeId as string}
+          refetchGetAnimeDetail={() => {}}
+        />
       </div>
     </>
   ) : (

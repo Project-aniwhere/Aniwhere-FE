@@ -19,8 +19,8 @@ export const DAYS: Record<string, string> = {
 
 export const DETAIL_TABS: Record<string, string> = {
   episode: '에피소드',
-  cast: '출연/제작',
-  comment: '코멘트',
+  cast: '제작 및 성우',
+  comment: '평점 및 리뷰',
 };
 
 export const SERVER_RESPONSE: Record<string, string> = {
