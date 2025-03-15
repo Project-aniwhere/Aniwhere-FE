@@ -1,9 +1,4 @@
-import {
-  AnimeDetailResponse,
-  AnimeEpisodeListResponse,
-  AnimeWeeklyResponse,
-} from '@/type/api/anime-api';
-import { PageableRequest } from '@/type/common';
+import { AnimeDetailResponse, AnimeWeeklyResponse } from '@/type/api/anime-api';
 import { Fetch } from '@/util/fetch';
 
 const prefix = '/api/anime';
@@ -30,18 +25,6 @@ export const getAnimeDetail = async (
   id: string | null
 ): Promise<AnimeDetailResponse | null> => {
   const response = await Fetch(`${prefix}/${id}`, {
-    next: { revalidate: 1200 },
-  });
-
-  if (response.ok) return response.json();
-  return null;
-};
-
-export const getAnimeEpisodeList = async (
-  id: string | null,
-  request: PageableRequest
-): Promise<AnimeEpisodeListResponse | null> => {
-  const response = await Fetch(`api/anime/${id}/episodes?request=${request}`, {
     next: { revalidate: 1200 },
   });
 

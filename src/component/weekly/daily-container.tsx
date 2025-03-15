@@ -1,6 +1,7 @@
 import { AnimeWeeklyInfoType } from '@/type/api/anime-api';
 import DailyItem from './daily-item';
 import { DAYS } from '@/constant/common';
+import Link from 'next/link';
 
 interface DailyConatinerProps {
   day: string;
@@ -21,7 +22,9 @@ const DailyConatiner = ({ day, dailyList, active }: DailyConatinerProps) => {
       <ul className='flex flex-col gap-3'>
         {dailyList.map((item) => (
           <li key={item.animeId} className='cursor-pointer'>
-            <DailyItem data={item} />
+            <Link href={`/detail/${item.animeId}`}>
+              <DailyItem data={item} />
+            </Link>
           </li>
         ))}
       </ul>
