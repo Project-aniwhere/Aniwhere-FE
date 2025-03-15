@@ -15,9 +15,6 @@ const getURL = () => {
     return API_URL;
   }
 
-  if (process.env.NODE_ENV === 'production' && isServer) {
-    return 'http://localhost:8080';
-  }
   if (!isServer) {
     return '';
   }
@@ -30,7 +27,6 @@ const getServerCookies = async () => {
 };
 
 export const Fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-  console.log('fetch', `${getURL()}${input}`, init);
   return fetch(`${getURL()}${input}`, init);
 };
 

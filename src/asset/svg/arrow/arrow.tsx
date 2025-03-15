@@ -8,7 +8,7 @@ const directionMap = {
   left: 'rotate-0',
   right: 'rotate-180',
   up: 'rotate-90',
-  down: 'rotate-270',
+  down: '-rotate-90',
 };
 
 const ArrowSvg = ({
