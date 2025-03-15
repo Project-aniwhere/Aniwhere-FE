@@ -10,7 +10,7 @@ const DailyItem = ({ data }: DailyItemProps) => {
     <div className='flex flex-col gap-2'>
       <AWImage
         src={data.poster || `${data.title} 포스터`}
-        alt={`${data.title} 포스터`}
+        alt='포스터 이미지'
         width={384}
         height={543}
         sizes='(min-width: 768px) 15vw, 33vw'

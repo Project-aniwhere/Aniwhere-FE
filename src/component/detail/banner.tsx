@@ -20,7 +20,7 @@ const DetailBanner = ({
       <div className='size-full absolute z-10 bg-gradient-to-b from-transparent to-black/50'></div>
       <Image
         src={poster}
-        alt='배너'
+        alt='배너 이미지'
         layout='responsive'
         width={1280}
         height={720}

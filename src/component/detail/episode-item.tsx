@@ -10,7 +10,7 @@ const EpisodeItem = ({ data }: EpisodeItemProps) => {
     <div className='p-5 flex items-center gap-6'>
       <Image
         src={data.stillImage}
-        alt='섬네일'
+        alt='섬네일 이미지'
         width={200}
         height={150}
         className='object-cover rounded-md'

@@ -11,7 +11,7 @@ const CastProductItem = ({ data }: CastProductItemProps) => {
     <div className='flex items-center gap-4 p-3 md:p-5'>
       <Image
         src={sample1.src}
-        alt='프로필'
+        alt='프로필 이미지'
         width={80}
         height={80}
         className='object-cover rounded-full'

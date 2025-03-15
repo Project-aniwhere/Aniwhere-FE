@@ -7,7 +7,7 @@ const MobileEpisodeItem = ({ data }: EpisodeItemProps) => {
       <div className='flex gap-3'>
         <Image
           src={data.stillImage}
-          alt='섬네일'
+          alt='섬네일 이미지'
           width={100}
           height={100}
           className='object-cover rounded-md'
