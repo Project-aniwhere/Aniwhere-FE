@@ -14,7 +14,7 @@ const EpisodeList = ({ list }: EpisodeListProps) => {
     <ul className='flex flex-col'>
       {list ? (
         list.map((item) => (
-          <li key={item.episodeId}>
+          <li key={item.episode_id}>
             {isMobile ? (
               <MobileEpisodeItem data={item} />
             ) : (

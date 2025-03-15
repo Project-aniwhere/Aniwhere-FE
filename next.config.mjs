@@ -7,10 +7,9 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cloudfronturl',
       },
-      // 테스트용
       {
         protocol: 'https',
-        hostname: 'media.kitsu.app',
+        hostname: 'image.tmdb.org',
       },
     ],
   },

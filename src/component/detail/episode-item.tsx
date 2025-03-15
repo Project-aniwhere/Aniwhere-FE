@@ -1,5 +1,5 @@
 import { AnimeDetailEpisodeInfoType } from '@/type/api/anime-api';
-import AWImage from '../common/image/cf-image';
+import Image from 'next/image';
 
 export interface EpisodeItemProps {
   data: AnimeDetailEpisodeInfoType;
@@ -8,11 +8,11 @@ export interface EpisodeItemProps {
 const EpisodeItem = ({ data }: EpisodeItemProps) => {
   return (
     <div className='p-5 flex items-center gap-6'>
-      <AWImage
+      <Image
         src={data.stillImage}
         alt='섬네일 이미지'
-        width={200}
-        height={150}
+        width={500}
+        height={281}
         className='object-cover rounded-md'
       />
       <div className='flex flex-col gap-3'>

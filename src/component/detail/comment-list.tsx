@@ -16,7 +16,7 @@ const CommentList = ({ list, rating }: CommentListProps) => {
           <span className='text-xs md:text-sm'>({list.length}명)</span>
         </div>
       </div>
-      <ul className='grid grid-cols-4 gap-4'>
+      <ul className='grid md:grid-cols-4 gap-4'>
         {list.map((item) => (
           <li key={item.nickname}>
             <CommentItem data={item} />

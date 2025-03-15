@@ -24,10 +24,11 @@ export interface AnimeCastingInfoType {
 }
 
 export interface AnimeDetailEpisodeInfoType {
-  episodeId: number;
+  episode_id: number;
+  animeId: number;
   episodeNumber: number;
   title: string;
-  releaseDate: string;
+  releaseDate: number[];
   duration: number;
   episodeStory: string;
   stillImage: string;

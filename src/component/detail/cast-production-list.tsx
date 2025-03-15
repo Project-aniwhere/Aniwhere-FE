@@ -15,7 +15,7 @@ const CastProductList = ({
   script,
 }: CastProductListProps) => {
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col md:gap-2'>
       <div className='flex flex-col gap-3 md:gap-5 p-3 md:p-5'>
         <p className='md:text-lg font-bold'>제작</p>
         <ul className='grid md:grid-cols-4 gap-3 md:gap-5'>
