@@ -10,7 +10,7 @@ interface DetailBannerProps {
   isAdult: boolean;
   releaseDate: string[];
   endDate: string[] | null;
-  status: string;
+  status: string | null;
   description: string;
   trailer: string;
 }
@@ -55,7 +55,7 @@ const DetailBanner = ({
               {releaseDate.join('.')} ~ {endDate?.join('.')}
             </span>
             <span>|</span>
-            <span>{status}</span>
+            <span>{status || '-'}</span>
           </div>
           <p className='line-clamp-3 text-xs md:text-sm opacity-70 whitespace-pre-wrap'>
             {description}

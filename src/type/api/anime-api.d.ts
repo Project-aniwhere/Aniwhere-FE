@@ -56,7 +56,7 @@ export interface AnimeDetailInfoType {
   releaseDate: string[];
   endDate: string[] | null;
   runningTime: string;
-  status: string;
+  status: string | null;
   trailer: string;
   description: string;
   poster: string;
