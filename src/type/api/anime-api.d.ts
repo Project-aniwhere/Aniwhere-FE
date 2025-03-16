@@ -35,6 +35,7 @@ export interface AnimeDetailEpisodeInfoType {
 }
 
 export interface AnimeReviewInfoType {
+  id: number;
   animeId: number;
   rating: number;
   content: string;

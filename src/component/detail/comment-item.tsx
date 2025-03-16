@@ -15,7 +15,7 @@ const CommentItem = ({ data, refetchGetAnimeDetail }: CommentItemProps) => {
   const handleDelete = async () => {
     const result = await deleteAnimeReview(
       data.animeId,
-      data.animeId,
+      data.id,
       session.userInfo?.userId || 0
     );
 
