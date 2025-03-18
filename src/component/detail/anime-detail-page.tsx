@@ -4,7 +4,7 @@ import { getAnimeDetail } from '@/action/anime';
 import Layout from '@/app/(default)/layout';
 import Tabs from '@/component/common/tab/tab-list';
 import DetailBanner from '@/component/detail/banner';
-import CastProductList from '@/component/detail/cast-production-list';
+import ProductionList from '@/component/detail/production-list';
 import CommentContainer from '@/component/detail/comment-container';
 import EpisodeList from '@/component/detail/episode-list';
 import { DETAIL_TABS } from '@/constant/common';
@@ -55,7 +55,7 @@ const AnimeDetailClientPage = () => {
         <div>
           {tab === 'episode' && <EpisodeList list={data.episodes} />}
           {tab === 'cast' && (
-            <CastProductList
+            <ProductionList
               list={data.castings}
               studio={data.studio}
               director={data.director}
