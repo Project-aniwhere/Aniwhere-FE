@@ -47,7 +47,7 @@ export const putAnimeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
+  if (response.ok) return null;
   return null;
 };
 
@@ -69,7 +69,7 @@ export const patchAnimeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
+  if (response.ok) return null;
   return null;
 };
 
@@ -86,6 +86,6 @@ export const deleteAnimeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
+  if (response.ok) return null;
   return null;
 };

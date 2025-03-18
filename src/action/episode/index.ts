@@ -31,7 +31,7 @@ export const postEpisodeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
+  if (response.ok) return null;
   return null;
 };
 
@@ -52,7 +52,7 @@ export const putEpisodeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
+  if (response.ok) return null;
   return null;
 };
 
@@ -68,6 +68,6 @@ export const deleteEpisodeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
+  if (response.ok) return null;
   return null;
 };
