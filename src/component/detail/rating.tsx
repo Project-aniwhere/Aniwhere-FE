@@ -1,9 +1,9 @@
 import HoverColorButton from '../common/button/hover-color-button';
 import { useState } from 'react';
-import StarRating from '../common/star-rating/star-rating';
 import { putAnimeReview } from '@/action/anime';
 import { useAtomValue } from 'jotai';
 import { sessionAtom } from '@/store/session-atom';
+import StarRate from '../common/star-rate/star-rate';
 
 interface RatingProps {
   id: string;
@@ -36,7 +36,12 @@ const Rating = ({ id, refetchGetAnimeDetail }: RatingProps) => {
     <div className='flex flex-col gap-4 p-3 md:p-5'>
       <div className='flex flex-col gap-3'>
         <p className='md:text-lg font-bold'>내 평점</p>
-        <StarRating rating={rating} setRating={setRating} disabled={disabled} />
+        <StarRate
+          rate={rating}
+          setRate={setRating}
+          disabled={disabled}
+          size='2.5rem'
+        />
       </div>
       <div className='p-4 flex flex-col gap-2 border border-gray-200 rounded-md'>
         <textarea

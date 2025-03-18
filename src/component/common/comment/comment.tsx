@@ -1,5 +1,5 @@
 import { getDifferenceTime } from '@/util/time';
-import StarRate from './star-rate';
+import StarRate from '../star-rate/star-rate';
 import Image from 'next/image';
 import HeartSvg from '@/asset/svg/heart/heart-svg';
 import MenuDotSvg from '@/asset/svg/menudot/menu-dot-svg';
