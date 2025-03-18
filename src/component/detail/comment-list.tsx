@@ -4,14 +4,9 @@ import { AnimeReviewInfoType } from '@/type/api/anime-api';
 interface CommentListProps {
   list: AnimeReviewInfoType[];
   rating: number;
-  refetchGetAnimeDetail: () => void;
 }
 
-const CommentList = ({
-  list,
-  rating,
-  refetchGetAnimeDetail,
-}: CommentListProps) => {
+const CommentList = ({ list, rating }: CommentListProps) => {
   return (
     <div className='flex flex-col gap-4 p-3 md:p-5'>
       <div className='flex flex-col gap-3'>
@@ -24,10 +19,7 @@ const CommentList = ({
       <ul className='grid md:grid-cols-4 gap-4'>
         {list.map((item) => (
           <li key={item.nickname}>
-            <CommentItem
-              data={item}
-              refetchGetAnimeDetail={refetchGetAnimeDetail}
-            />
+            <CommentItem data={item} />
           </li>
         ))}
       </ul>

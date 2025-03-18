@@ -4,33 +4,33 @@ import { putAnimeReview } from '@/action/anime';
 import { useAtomValue } from 'jotai';
 import { sessionAtom } from '@/store/session-atom';
 import StarRate from '../common/star-rate/star-rate';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface RatingProps {
   id: string;
-  refetchGetAnimeDetail: () => void;
 }
 
-const Rating = ({ id, refetchGetAnimeDetail }: RatingProps) => {
+const Rating = ({ id }: RatingProps) => {
+  const queryClient = useQueryClient();
+
   const session = useAtomValue(sessionAtom);
   const disabled = !session.isLogin;
 
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
 
-  const handleInit = () => {
-    refetchGetAnimeDetail();
-    setRating(0);
-    setContent('');
-  };
-
-  const handleSubmit = async () => {
-    const result = await putAnimeReview(id, session.userInfo?.userId || 0, {
-      rating,
-      content,
-    });
-
-    if (result?.code === 200) handleInit();
-  };
+  const { mutate: handleSubmit } = useMutation({
+    mutationFn: () =>
+      putAnimeReview(id, session.userInfo?.userId || 0, {
+        rating,
+        content,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['animeDetail', id] });
+      setRating(0);
+      setContent('');
+    },
+  });
 
   return (
     <div className='flex flex-col gap-4 p-3 md:p-5'>
@@ -55,7 +55,7 @@ const Rating = ({ id, refetchGetAnimeDetail }: RatingProps) => {
           <HoverColorButton
             text='등록'
             className='px-3 py-1'
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
             disabled={disabled}
           />
         </div>

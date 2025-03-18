@@ -6,23 +6,13 @@ interface CommentContainerProps {
   list: AnimeReviewInfoType[];
   rating: number;
   id: string;
-  refetchGetAnimeDetail: () => void;
 }
 
-const CommentContainer = ({
-  list,
-  rating,
-  id,
-  refetchGetAnimeDetail,
-}: CommentContainerProps) => {
+const CommentContainer = ({ list, rating, id }: CommentContainerProps) => {
   return (
     <div className='flex flex-col'>
-      <Rating id={id} refetchGetAnimeDetail={refetchGetAnimeDetail} />
-      <CommentList
-        list={list}
-        rating={rating}
-        refetchGetAnimeDetail={refetchGetAnimeDetail}
-      />
+      <Rating id={id} />
+      <CommentList list={list} rating={rating} />
     </div>
   );
 };

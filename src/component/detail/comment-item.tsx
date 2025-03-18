@@ -2,25 +2,26 @@ import { deleteAnimeReview } from '@/action/anime';
 import FullStarSvg from '@/asset/svg/star/full-star-svg';
 import { sessionAtom } from '@/store/session-atom';
 import { AnimeReviewInfoType } from '@/type/api/anime-api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 
 interface CommentItemProps {
   data: AnimeReviewInfoType;
-  refetchGetAnimeDetail: () => void;
 }
 
-const CommentItem = ({ data, refetchGetAnimeDetail }: CommentItemProps) => {
+const CommentItem = ({ data }: CommentItemProps) => {
+  const queryClient = useQueryClient();
   const session = useAtomValue(sessionAtom);
 
-  const handleDelete = async () => {
-    const result = await deleteAnimeReview(
-      data.animeId,
-      data.id,
-      session.userInfo?.userId || 0
-    );
-
-    if (result?.code === 200) refetchGetAnimeDetail();
-  };
+  const { mutate: handleDelete } = useMutation({
+    mutationFn: () =>
+      deleteAnimeReview(data.animeId, data.id, session.userInfo?.userId || 0),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['animeDetail', String(data.animeId)],
+      });
+    },
+  });
 
   return (
     <div className='flex flex-col gap-4 p-4 bg-gray-100 rounded-md'>
@@ -36,7 +37,7 @@ const CommentItem = ({ data, refetchGetAnimeDetail }: CommentItemProps) => {
         <div className='flex justify-end'>
           <button
             className='text-red-600 text-sm bg-white py-1 px-2 rounded-lg'
-            onClick={handleDelete}
+            onClick={() => handleDelete()}
           >
             삭제
           </button>

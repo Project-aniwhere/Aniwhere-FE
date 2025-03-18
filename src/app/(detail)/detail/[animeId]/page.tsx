@@ -17,7 +17,7 @@ const DetailPage = () => {
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab') || 'episode';
 
-  const { data, refetch: refetchGetAnimeDetail } = useQuery({
+  const { data } = useQuery({
     queryKey: ['animeDetail', animeId],
     queryFn: () => getAnimeDetail(animeId as string),
     enabled: !!animeId,
@@ -65,7 +65,6 @@ const DetailPage = () => {
               list={data.reviews}
               rating={data.averageRating}
               id={animeId as string}
-              refetchGetAnimeDetail={refetchGetAnimeDetail}
             />
           )}
         </div>
