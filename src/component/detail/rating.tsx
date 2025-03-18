@@ -40,7 +40,7 @@ const Rating = ({ id }: RatingProps) => {
           rate={rating}
           setRate={setRating}
           disabled={disabled}
-          size='2.5rem'
+          size='2.4rem'
         />
       </div>
       <div className='p-4 flex flex-col gap-2 border border-gray-200 rounded-md'>
