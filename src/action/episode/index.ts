@@ -58,7 +58,7 @@ export const putEpisodeReview = async (
 
 // 에피소드 리뷰 삭제
 export const deleteEpisodeReview = async (
-  episodeId: number,
+  episodeId: string | null,
   userId: number
 ): Promise<APIResult<null>> => {
   const response = await Fetch(

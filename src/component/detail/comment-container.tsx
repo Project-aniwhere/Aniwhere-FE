@@ -18,7 +18,7 @@ const CommentContainer = ({
   return (
     <div className='flex flex-col'>
       <Rating id={id} type={type} />
-      <CommentList list={list} rating={rating} type={type} />
+      <CommentList list={list} rating={rating} id={id} type={type} />
     </div>
   );
 };

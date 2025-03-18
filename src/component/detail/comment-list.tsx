@@ -4,10 +4,11 @@ import { AnimeReviewInfoType, PageType } from '@/type/api/anime-api';
 interface CommentListProps {
   list: AnimeReviewInfoType[];
   rating: number;
+  id: string;
   type: PageType;
 }
 
-const CommentList = ({ list, rating, type }: CommentListProps) => {
+const CommentList = ({ list, rating, id, type }: CommentListProps) => {
   return (
     <div className='flex flex-col gap-4 p-3 md:p-5'>
       <div className='flex flex-col gap-3'>
@@ -20,7 +21,7 @@ const CommentList = ({ list, rating, type }: CommentListProps) => {
       <ul className='grid md:grid-cols-4 gap-4'>
         {list.map((item) => (
           <li key={item.nickname}>
-            <CommentItem data={item} type={type} />
+            <CommentItem data={item} id={id} type={type} />
           </li>
         ))}
       </ul>

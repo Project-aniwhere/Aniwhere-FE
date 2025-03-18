@@ -8,31 +8,23 @@ import { useAtomValue } from 'jotai';
 
 interface CommentItemProps {
   data: AnimeReviewInfoType;
+  id: string;
   type: PageType;
 }
 
-const CommentItem = ({ data, type }: CommentItemProps) => {
+const CommentItem = ({ data, id, type }: CommentItemProps) => {
   const queryClient = useQueryClient();
   const session = useAtomValue(sessionAtom);
 
   const { mutate: handleDelete } = useMutation({
     mutationFn: () =>
       type === 'anime'
-        ? deleteAnimeReview(
-            data.animeId,
-            data.id,
-            session.userInfo?.userId || 0
-          )
-        : deleteEpisodeReview(data.episodeId, session.userInfo?.userId || 0),
+        ? deleteAnimeReview(id, data.id, session.userInfo?.userId || 0)
+        : deleteEpisodeReview(id, session.userInfo?.userId || 0),
     onSuccess: () => {
       if (type === 'anime')
-        queryClient.invalidateQueries({
-          queryKey: ['animeDetail', String(data.animeId)],
-        });
-      else
-        queryClient.invalidateQueries({
-          queryKey: ['episodeDetail', String(data.episodeId)],
-        });
+        queryClient.invalidateQueries({ queryKey: ['animeDetail', id] });
+      else queryClient.invalidateQueries({ queryKey: ['episodeDetail', id] });
     },
   });
 
