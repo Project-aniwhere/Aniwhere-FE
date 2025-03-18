@@ -5,12 +5,15 @@ import { useAtomValue } from 'jotai';
 import { sessionAtom } from '@/store/session-atom';
 import StarRate from '../common/star-rate/star-rate';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { postEpisodeReview } from '@/action/episode';
+import { PageType } from '@/type/api/anime-api';
 
 interface RatingProps {
   id: string;
+  type: PageType;
 }
 
-const Rating = ({ id }: RatingProps) => {
+const Rating = ({ id, type }: RatingProps) => {
   const queryClient = useQueryClient();
 
   const session = useAtomValue(sessionAtom);
@@ -21,12 +24,19 @@ const Rating = ({ id }: RatingProps) => {
 
   const { mutate: handleSubmit } = useMutation({
     mutationFn: () =>
-      putAnimeReview(id, session.userInfo?.userId || 0, {
-        rating,
-        content,
-      }),
+      type === 'anime'
+        ? putAnimeReview(id, session.userInfo?.userId || 0, {
+            rating,
+            content,
+          })
+        : postEpisodeReview(id, session.userInfo?.userId || 0, {
+            rating,
+            content,
+          }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['animeDetail', id] });
+      if (type === 'anime')
+        queryClient.invalidateQueries({ queryKey: ['animeDetail', id] });
+      else queryClient.invalidateQueries({ queryKey: ['episodeDetail', id] });
       setRating(0);
       setContent('');
     },

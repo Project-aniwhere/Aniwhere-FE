@@ -3,9 +3,9 @@
 import { getEpisodeDetail } from '@/action/episode';
 import Layout from '@/app/(default)/layout';
 import DetailBanner from '@/component/detail/banner';
-import CommentContainer from '@/component/detail/anime-comment-container';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
+import CommentContainer from './comment-container';
 
 const EpisodeDetailClientPage = () => {
   const { episodeId } = useParams();
@@ -30,6 +30,7 @@ const EpisodeDetailClientPage = () => {
           list={data[0].reviews}
           rating={data[0].averageRating}
           id={episodeId as string}
+          type='episode'
         />
       </div>
     </>

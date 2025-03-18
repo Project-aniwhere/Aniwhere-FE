@@ -1,25 +1,38 @@
 import { deleteAnimeReview } from '@/action/anime';
+import { deleteEpisodeReview } from '@/action/episode';
 import FullStarSvg from '@/asset/svg/star/full-star-svg';
 import { sessionAtom } from '@/store/session-atom';
-import { AnimeReviewInfoType } from '@/type/api/anime-api';
+import { AnimeReviewInfoType, PageType } from '@/type/api/anime-api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 
 interface CommentItemProps {
   data: AnimeReviewInfoType;
+  type: PageType;
 }
 
-const CommentItem = ({ data }: CommentItemProps) => {
+const CommentItem = ({ data, type }: CommentItemProps) => {
   const queryClient = useQueryClient();
   const session = useAtomValue(sessionAtom);
 
   const { mutate: handleDelete } = useMutation({
     mutationFn: () =>
-      deleteAnimeReview(data.animeId, data.id, session.userInfo?.userId || 0),
+      type === 'anime'
+        ? deleteAnimeReview(
+            data.animeId,
+            data.id,
+            session.userInfo?.userId || 0
+          )
+        : deleteEpisodeReview(data.episodeId, session.userInfo?.userId || 0),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['animeDetail', String(data.animeId)],
-      });
+      if (type === 'anime')
+        queryClient.invalidateQueries({
+          queryKey: ['animeDetail', String(data.animeId)],
+        });
+      else
+        queryClient.invalidateQueries({
+          queryKey: ['episodeDetail', String(data.episodeId)],
+        });
     },
   });
 

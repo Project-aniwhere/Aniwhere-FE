@@ -1,3 +1,5 @@
+import { AnimeReviewInfoType } from './anime-api';
+
 export interface EpisodeReviewInfoType {
   episodeReviewId: number;
   episodeId: number;
@@ -16,7 +18,7 @@ export interface EpisodeDetailInfoType {
   episodeStory: string;
   stillImage: string;
   averageRating: number;
-  reviews: EpisodeReviewInfoType[];
+  reviews: AnimeReviewInfoType[];
 }
 
 export type EpisodeDetailResponse = EpisodeDetailInfoType[];

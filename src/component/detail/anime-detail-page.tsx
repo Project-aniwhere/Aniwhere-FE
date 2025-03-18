@@ -5,7 +5,7 @@ import Layout from '@/app/(default)/layout';
 import Tabs from '@/component/common/tab/tab-list';
 import DetailBanner from '@/component/detail/banner';
 import CastProductList from '@/component/detail/cast-production-list';
-import CommentContainer from '@/component/detail/anime-comment-container';
+import CommentContainer from '@/component/detail/comment-container';
 import EpisodeList from '@/component/detail/episode-list';
 import { DETAIL_TABS } from '@/constant/common';
 import { useQuery } from '@tanstack/react-query';
@@ -67,6 +67,7 @@ const AnimeDetailClientPage = () => {
               list={data.reviews}
               rating={data.averageRating}
               id={animeId as string}
+              type='anime'
             />
           )}
         </div>

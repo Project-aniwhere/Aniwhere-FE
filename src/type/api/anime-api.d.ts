@@ -1,3 +1,5 @@
+export type PageType = 'anime' | 'episode';
+
 export interface AnimeWeeklyInfoType {
   animeId: number;
   title: string;
@@ -35,12 +37,16 @@ export interface AnimeDetailEpisodeInfoType {
 }
 
 export interface AnimeReviewInfoType {
-  id: number;
-  animeId: number;
   rating: number;
   content: string;
   nickname: string;
   userId: number;
+  // 애니
+  id: number;
+  animeId: number;
+  // 애피소드
+  episodeReviewId: number;
+  episodeId: number;
 }
 
 export interface AnimeDetailInfoType {
