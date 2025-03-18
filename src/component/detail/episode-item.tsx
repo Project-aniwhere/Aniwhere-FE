@@ -8,7 +8,7 @@ export interface EpisodeItemProps {
 const EpisodeItem = ({ data }: EpisodeItemProps) => {
   return (
     <div className='p-5 flex items-center gap-6'>
-      <div className='relative min-w-[300px] h-[200px] rounded bg-gray-200'>
+      <div className='relative min-w-[270px] h-[180px] rounded bg-gray-200'>
         {data.stillImage && (
           <Image
             src={data.stillImage}
