@@ -8,13 +8,16 @@ export interface EpisodeItemProps {
 const EpisodeItem = ({ data }: EpisodeItemProps) => {
   return (
     <div className='p-5 flex items-center gap-6'>
-      <Image
-        src={data.stillImage}
-        alt='섬네일 이미지'
-        width={500}
-        height={281}
-        className='object-cover rounded-md'
-      />
+      <div className='relative min-w-[300px] h-[200px] rounded bg-gray-200'>
+        {data.stillImage && (
+          <Image
+            src={data.stillImage}
+            alt={`${data.episodeNumber}화 섬네일 이미지`}
+            fill
+            className='object-cover rounded-md'
+          />
+        )}
+      </div>
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col gap-0.5'>
           <div className='text-xl font-bold'>
