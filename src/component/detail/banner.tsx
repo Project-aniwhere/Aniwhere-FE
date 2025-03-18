@@ -35,24 +35,25 @@ const DetailBanner = ({
   return (
     <div className='relative'>
       <div className='size-full absolute z-10 bg-gradient-to-b from-transparent to-black/50'></div>
-      {isAwImage ? (
-        <AWImage
-          src={poster}
-          alt='배너 이미지'
-          width={2000}
-          height={3000}
-          className='object-cover max-h-96 md:max-h-[480px]'
-        />
-      ) : (
-        <Image
-          src={poster}
-          alt='배너 이미지'
-          width={2000}
-          height={3000}
-          className='object-cover max-h-96 md:max-h-[480px]'
-        />
-      )}
-      <div className='w-full absolute bottom-0 z-20 flex flex-col md:flex-row justify-between items-end gap-4 px-5 md:px-12 py-6 md:py-8 text-white'>
+      <div className='relative w-full h-[360px] md:h-[440px] bg-gray-200'>
+        {poster &&
+          (isAwImage ? (
+            <AWImage
+              src={poster}
+              alt={`${title} 배너 이미지`}
+              fill
+              className='object-cover'
+            />
+          ) : (
+            <Image
+              src={poster}
+              alt={`${title} 배너 이미지`}
+              fill
+              className='object-cover'
+            />
+          ))}
+      </div>
+      <div className='w-full absolute bottom-0 z-20 flex flex-col md:flex-row md:justify-between items-end gap-4 px-5 md:px-12 py-6 md:py-8 text-white'>
         <div className='flex flex-col gap-2'>
           <p className='text-2xl md:text-4xl font-bold'>{title}</p>
           <div className='flex gap-1.5 md:text-lg font-medium'>
