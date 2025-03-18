@@ -13,18 +13,18 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 const DetailPage = () => {
   const router = useRouter();
-  const { id } = useParams();
+  const { animeId } = useParams();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab') || 'episode';
 
   const { data, refetch: refetchGetAnimeDetail } = useQuery({
-    queryKey: ['animeDetail', id],
-    queryFn: () => getAnimeDetail(id as string),
-    enabled: !!id,
+    queryKey: ['animeDetail', animeId],
+    queryFn: () => getAnimeDetail(animeId as string),
+    enabled: !!animeId,
   });
 
   const handleChangeTab = (tab: string) => {
-    router.push(`/detail/${id}?tab=${tab}`);
+    router.push(`/detail/${animeId}?tab=${tab}`);
   };
 
   return data ? (
@@ -64,7 +64,7 @@ const DetailPage = () => {
             <CommentContainer
               list={data.reviews}
               rating={data.averageRating}
-              id={id as string}
+              id={animeId as string}
               refetchGetAnimeDetail={refetchGetAnimeDetail}
             />
           )}
