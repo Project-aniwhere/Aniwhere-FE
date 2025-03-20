@@ -39,13 +39,11 @@ const Rating = ({ id, type }: RatingProps) => {
           }),
     onSuccess: (data) => {
       if (data?.code === 200) {
-        if (type === 'anime') {
-          queryClient.invalidateQueries({ queryKey: ['animeDetail', id] });
-        } else {
-          queryClient.invalidateQueries({ queryKey: ['episodeDetail', id] });
-          setRating(0);
-          setContent('');
-        }
+        queryClient.invalidateQueries({
+          queryKey: [type, 'detail', id],
+        });
+        setRating(0);
+        setContent('');
       } else {
         modalRef.current?.openModal();
       }

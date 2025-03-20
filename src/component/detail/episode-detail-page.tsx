@@ -1,20 +1,16 @@
 'use client';
 
-import { getEpisodeDetail } from '@/action/episode';
 import Layout from '@/app/(default)/layout';
 import DetailBanner from '@/component/detail/banner';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import CommentContainer from './comment-container';
+import episodeQuery from '@/hook/query/episode';
 
 const EpisodeDetailClientPage = () => {
   const { episodeId } = useParams();
 
-  const { data } = useQuery({
-    queryKey: ['episodeDetail', episodeId],
-    queryFn: () => getEpisodeDetail(episodeId as string),
-    enabled: !!episodeId,
-  });
+  const { data } = useQuery(episodeQuery.query.detail(episodeId as string));
 
   return data?.[0] ? (
     <>
