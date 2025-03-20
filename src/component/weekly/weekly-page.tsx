@@ -1,10 +1,10 @@
 'use client';
 
-import { getAnimeWeeklyList } from '@/action/anime';
 import MobileDailyConatiner from '@/component/weekly/daily-container-mobile';
 import WeeklyContainer from '@/component/weekly/weekly-container';
 import WeeklyTitle from '@/component/weekly/weekly-title';
 import useIsMobile from '@/hook/device-detect/use-is-mobile';
+import animeQuery from '@/hook/query/anime';
 import { getDay, getQuarter, getYear } from '@/util/date';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -18,14 +18,7 @@ const WeeklyPage = () => {
   const quarter = searchParams.get('quarter') || getQuarter();
   const day = searchParams.get('day') || getDay();
 
-  const { data } = useQuery({
-    queryKey: ['animeQuarterList', year, quarter],
-    queryFn: () =>
-      getAnimeWeeklyList({
-        year,
-        quarter,
-      }),
-  });
+  const { data } = useQuery(animeQuery.query.weekly(year, quarter));
 
   const handleSelectYear = (year: string) => {
     router.push(`/weekly?year=${year}&quarter=${quarter}&day=${day}`);

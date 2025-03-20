@@ -27,11 +27,9 @@ const CommentItem = ({ item, id, type }: CommentItemProps) => {
         : deleteEpisodeReview(id, session.userInfo?.userId || 0),
     onSuccess: (data) => {
       if (data?.code === 200) {
-        if (type === 'anime') {
-          queryClient.invalidateQueries({ queryKey: ['animeDetail', id] });
-        } else {
-          queryClient.invalidateQueries({ queryKey: ['episodeDetail', id] });
-        }
+        queryClient.invalidateQueries({
+          queryKey: [type, 'detail', id],
+        });
       } else {
         modalRef.current?.openModal();
       }
