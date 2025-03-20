@@ -22,7 +22,6 @@ export default async function Home() {
         height={200}
       />
       {data.length > 0 && <MainImageSlider {...data[0]} />}
-
       {data.length > 1 ? (
         <MainLayout>
           {data.slice(1).map((anime) => (

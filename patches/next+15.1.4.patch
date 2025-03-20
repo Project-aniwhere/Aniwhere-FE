@@ -1,0 +1,47 @@
+diff --git a/node_modules/next/dist/client/components/app-router.js b/node_modules/next/dist/client/components/app-router.js
+index 2f5a0b4..bfe7b8f 100644
+--- a/node_modules/next/dist/client/components/app-router.js
++++ b/node_modules/next/dist/client/components/app-router.js
+@@ -339,10 +339,10 @@ function Head(param) {
+                 }
+             }
+         }
+-        window.addEventListener('error', handleUnhandledRedirect);
++        window.addEventListener("error", handleUnhandledRedirect);
+         window.addEventListener('unhandledrejection', handleUnhandledRedirect);
+         return ()=>{
+-            window.removeEventListener('error', handleUnhandledRedirect);
++            window.removeEventListener("error", handleUnhandledRedirect);
+             window.removeEventListener('unhandledrejection', handleUnhandledRedirect);
+         };
+     }, [
+diff --git a/node_modules/next/dist/client/components/redirect-boundary.js b/node_modules/next/dist/client/components/redirect-boundary.js
+index bf25fa1..35cc759 100644
+--- a/node_modules/next/dist/client/components/redirect-boundary.js
++++ b/node_modules/next/dist/client/components/redirect-boundary.js
+@@ -30,7 +30,15 @@ const _redirecterror = require("./redirect-error");
+ function HandleRedirect(param) {
+     let { redirect, reset, redirectType } = param;
+     const router = (0, _navigation.useRouter)();
++    const pathName = (0, _navigation.usePathname)();
++    const searchParams = (0, _navigation.useSearchParams)();
+     (0, _react.useEffect)(()=>{
++        if (
++            redirect ===
++            pathName + (searchParams.size > 0 ? '?' + searchParams.toString() : '')
++          ) {
++            return
++          }
+         _react.default.startTransition(()=>{
+             if (redirectType === _redirecterror.RedirectType.push) {
+                 router.push(redirect, {});
+@@ -43,7 +51,8 @@ function HandleRedirect(param) {
+         redirect,
+         redirectType,
+         reset,
+-        router
++        router,
++        pathName
+     ]);
+     return null;
+ }

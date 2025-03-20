@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch } from 'react';
 import TagFilterModalSelector from './tag-filter-modal-selector';
 import { TagFilterAction, TagFilterState } from './tag-filter-reducer';

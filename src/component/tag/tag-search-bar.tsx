@@ -1,3 +1,5 @@
+'use client';
+
 import SearchIconSvg from '@/asset/svg/search/search-icon-svg';
 import DefaultInput from '../common/input/default-input';
 import ControlIconSvg from '@/asset/svg/control/control-icon-svg';

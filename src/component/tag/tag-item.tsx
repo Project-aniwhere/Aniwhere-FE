@@ -1,3 +1,5 @@
+'use client';
+
 import CrossSvg from '@/asset/svg/cross/cross-svg';
 import { TagState } from './tag-filter-reducer';
 
