@@ -1,18 +1,24 @@
 import CommentList from './comment-list';
 import Rating from './rating';
-import { AnimeReviewInfoType } from '@/type/api/anime-api';
+import { AnimeReviewInfoType, PageType } from '@/type/api/anime-api';
 
 interface CommentContainerProps {
   list: AnimeReviewInfoType[];
   rating: number;
   id: string;
+  type: PageType;
 }
 
-const CommentContainer = ({ list, rating, id }: CommentContainerProps) => {
+const CommentContainer = ({
+  list,
+  rating,
+  id,
+  type,
+}: CommentContainerProps) => {
   return (
     <div className='flex flex-col'>
-      <Rating id={id} />
-      <CommentList list={list} rating={rating} />
+      <Rating id={id} type={type} />
+      <CommentList list={list} rating={rating} id={id} type={type} />
     </div>
   );
 };

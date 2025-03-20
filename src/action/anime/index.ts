@@ -47,8 +47,7 @@ export const putAnimeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
-  return null;
+  return response.json();
 };
 
 // 애니메이션 리뷰 수정
@@ -69,13 +68,12 @@ export const patchAnimeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
-  return null;
+  return response.json();
 };
 
 // 애니메이션 리뷰 삭제
 export const deleteAnimeReview = async (
-  animeId: number,
+  animeId: string | null,
   animeReviewId: number,
   userId: number
 ): Promise<APIResult<null>> => {
@@ -86,6 +84,5 @@ export const deleteAnimeReview = async (
     }
   );
 
-  if (response.ok) return response.json();
-  return null;
+  return response.json();
 };

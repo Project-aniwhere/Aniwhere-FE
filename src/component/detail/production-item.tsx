@@ -1,9 +1,9 @@
-interface CastProductItemProps {
+interface ProductionItemProps {
   name: string;
   description: string;
 }
 
-const CastProductItem = ({ name, description }: CastProductItemProps) => {
+const ProductionItem = ({ name, description }: ProductionItemProps) => {
   return (
     <div className='flex items-center gap-4'>
       <div className='flex flex-col gap-1'>
@@ -14,4 +14,4 @@ const CastProductItem = ({ name, description }: CastProductItemProps) => {
   );
 };
 
-export default CastProductItem;
+export default ProductionItem;

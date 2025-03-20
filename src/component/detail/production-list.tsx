@@ -1,19 +1,19 @@
-import CastProductItem from './cast-production-item';
+import ProductionItem from './production-item';
 import { AnimeCastingInfoType } from '@/type/api/anime-api';
 
-interface CastProductListProps {
+interface ProductionListProps {
   list: AnimeCastingInfoType[];
   studio: string;
   director: string;
   script: string;
 }
 
-const CastProductList = ({
+const ProductionList = ({
   list,
   studio,
   director,
   script,
-}: CastProductListProps) => {
+}: ProductionListProps) => {
   return (
     <div className='flex flex-col md:gap-2'>
       <div className='flex flex-col gap-3 md:gap-5 p-3 md:p-5'>
@@ -34,10 +34,7 @@ const CastProductList = ({
             },
           ].map((item) => (
             <li key={item.descriotion}>
-              <CastProductItem
-                name={item.name}
-                description={item.descriotion}
-              />
+              <ProductionItem name={item.name} description={item.descriotion} />
             </li>
           ))}
         </ul>
@@ -47,7 +44,7 @@ const CastProductList = ({
         <ul className='grid md:grid-cols-4 gap-3 md:gap-5'>
           {list.map((item) => (
             <li key={item.castingId}>
-              <CastProductItem
+              <ProductionItem
                 name={item.voiceActorName}
                 description={item.characterName}
               />
@@ -59,4 +56,4 @@ const CastProductList = ({
   );
 };
 
-export default CastProductList;
+export default ProductionList;
