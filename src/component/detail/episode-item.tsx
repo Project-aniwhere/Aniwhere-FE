@@ -1,33 +1,35 @@
+import { AnimeDetailEpisodeInfoType } from '@/type/api/anime-api';
 import Image from 'next/image';
-import sample1 from '@/asset/img/subslider/sample1.jpg';
 
-const EpisodeItem = () => {
+export interface EpisodeItemProps {
+  data: AnimeDetailEpisodeInfoType;
+}
+
+const EpisodeItem = ({ data }: EpisodeItemProps) => {
   return (
     <div className='p-5 flex items-center gap-6'>
-      <Image
-        src={sample1.src}
-        alt='섬네일'
-        width={200}
-        height={150}
-        className='object-cover rounded-md'
-      />
+      <div className='relative min-w-[270px] h-[180px] rounded bg-gray-200'>
+        {data.stillImage && (
+          <Image
+            src={data.stillImage}
+            alt={`${data.episodeNumber}화 섬네일 이미지`}
+            fill
+            className='object-cover rounded-md'
+          />
+        )}
+      </div>
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col gap-0.5'>
           <div className='text-xl font-bold'>
-            <span>3화 </span>
-            <span>수험 대책을 세워라</span>
+            <span>{data.episodeNumber}화 </span>
+            <span>{data.title}</span>
           </div>
           <div className='flex gap-1 text-sm font-medium text-gray-400'>
-            <span>24분</span>
-            <span>2022.04.24</span>
+            <span>{data.duration}분</span>
+            <span>{data.releaseDate.join('.')}</span>
           </div>
         </div>
-        <p className='text-gray-400'>
-          가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라
-          가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라
-          가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라
-          가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라
-        </p>
+        <p className='text-gray-400 line-clamp-3'>{data.episodeStory}</p>
       </div>
     </div>
   );

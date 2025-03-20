@@ -1,13 +1,33 @@
 import useIsMobile from '@/hook/device-detect/use-is-mobile';
 import EpisodeItem from './episode-item';
 import MobileEpisodeItem from './episode-item-mobile';
+import { AnimeDetailEpisodeInfoType } from '@/type/api/anime-api';
+import Link from 'next/link';
 
-const EpisodeList = () => {
+interface EpisodeListProps {
+  list: AnimeDetailEpisodeInfoType[] | null;
+}
+
+const EpisodeList = ({ list }: EpisodeListProps) => {
   const isMobile = useIsMobile();
 
   return (
     <ul className='flex flex-col'>
-      <li>{isMobile ? <MobileEpisodeItem /> : <EpisodeItem />}</li>
+      {list?.length ? (
+        list.map((item) => (
+          <li key={item.episode_id}>
+            <Link href={`/detail/${item.animeId}/${item.episode_id}`}>
+              {isMobile ? (
+                <MobileEpisodeItem data={item} />
+              ) : (
+                <EpisodeItem data={item} />
+              )}
+            </Link>
+          </li>
+        ))
+      ) : (
+        <div className='p-4 text-gray-400'>에피소드가 없습니다.</div>
+      )}
     </ul>
   );
 };

@@ -1,6 +1,6 @@
 import AnimeCard from '@/component/common/card/anime-card';
 import CommentSwiper from '@/component/common/comment/comment-swiper';
-import StarRate from '@/component/common/comment/star-rate';
+import StarRate from '@/component/common/star-rate/star-rate';
 import AWImage from '@/component/common/image/cf-image';
 import TagItem from '@/component/tag/tag-item';
 

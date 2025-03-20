@@ -10,6 +10,12 @@ export type AnimeWeeklyResponse = {
   animes: AnimeWeeklyInfoType[];
 }[];
 
+export interface AnimeRatingInfoType {
+  userId: number;
+  animeId: number;
+  rating: number;
+}
+
 export interface AnimeCastingInfoType {
   castingId: number;
   characterName: string;
@@ -17,12 +23,24 @@ export interface AnimeCastingInfoType {
   voiceActorName: string;
 }
 
+export interface AnimeDetailEpisodeInfoType {
+  episode_id: number;
+  animeId: number;
+  episodeNumber: number;
+  title: string;
+  releaseDate: number[];
+  duration: number;
+  episodeStory: string;
+  stillImage: string;
+}
+
 export interface AnimeReviewInfoType {
-  reviewId: number;
-  userId: string;
+  id: number;
+  animeId: number;
   rating: number;
   content: string;
-  createdAt: string;
+  nickname: string;
+  userId: number;
 }
 
 export interface AnimeDetailInfoType {
@@ -35,11 +53,10 @@ export interface AnimeDetailInfoType {
   script: string;
   producer: string;
   studio: string;
-  releaseDate: string;
-  endDate: string;
-  episodes: number;
+  releaseDate: string[];
+  endDate: string[] | null;
   runningTime: string;
-  status: string;
+  status: string | null;
   trailer: string;
   description: string;
   poster: string;
@@ -47,10 +64,39 @@ export interface AnimeDetailInfoType {
   isAdult: boolean;
   duration: string;
   weekday: string;
-  anilistId: string;
+  ratings: AnimeRatingInfoType[];
+  backgroundImage: string;
   categories: string[];
   castings: AnimeCastingInfoType[];
+  averageRating: number;
   reviews: AnimeReviewInfoType[];
+  episodes: AnimeDetailEpisodeInfoType[] | null;
 }
 
 export type AnimeDetailResponse = AnimeDetailInfoType;
+
+export interface AnimeEpisodeContentInfoType {
+  episode_id: number;
+  animeId: number;
+  episodeNumber: number;
+  title: string;
+  releaseDate: string;
+  duration: number;
+  episodeStory: string;
+  stillImage: string;
+}
+
+export interface AnimeEpisodeInfoType {
+  content: AnimeEpisodeContentInfoType[];
+  // totalCount: number;
+  // pageNumber: number;
+  // pageSize: number;
+  // totalPages: number;
+  // sort: {
+  //   empty: boolean;
+  //   sorted: boolean;
+  //   unsorted: boolean;
+  // };
+}
+
+export type AnimeEpisodeListResponse = AnimeEpisodeInfoType;

@@ -2,6 +2,7 @@ import DailyItem from './daily-item';
 import Tabs from '../common/tab/tab-list';
 import { DAYS } from '@/constant/common';
 import { AnimeWeeklyInfoType } from '@/type/api/anime-api';
+import Link from 'next/link';
 
 interface DailyConatinerProps {
   dailyList: AnimeWeeklyInfoType[];
@@ -27,7 +28,9 @@ const MobileDailyConatiner = ({
       <ul className='grid grid-cols-3 gap-2'>
         {dailyList.map((item) => (
           <li key={item.animeId} className='cursor-pointer'>
-            <DailyItem data={item} />
+            <Link href={`/detail/${item.animeId}`}>
+              <DailyItem data={item} />
+            </Link>
           </li>
         ))}
       </ul>

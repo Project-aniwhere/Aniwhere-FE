@@ -12,7 +12,7 @@ import TagItem from '@/component/tag/tag-item';
 import Link from 'next/link';
 import { Review } from '@/type/api/anime-recommend-api';
 import CommentSwiper from '../comment/comment-swiper';
-import StarRate from '../comment/star-rate';
+import StarRate from '../star-rate/star-rate';
 import { AnimeTagType } from '@/type/api/tag-api';
 
 interface AnimeCardProps {

@@ -19,6 +19,18 @@ export interface CommonDatepickerProps {
   onError?: (hasError: boolean) => void;
 }
 
+export type APIResult<T> =
+  | T
+  | {
+      code: number;
+      message: string;
+    };
+
+export type PageableRequest = {
+  page: number;
+  size: number;
+  direction: 'ASC' | 'DESC';
+};
 export type ErrorResult = {
   code: number;
   message: string;
