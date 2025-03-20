@@ -43,7 +43,7 @@ const ModalDialog = (
   return (
     <div className='absolute w-full'>
       <ModalContainer
-        className='absolute top-0 z-20 shadow-lg p-4 rounded-lg bg-white'
+        className='absolute top-0 z-20 shadow-lg p-4 rounded-lg bg-white min-w-60 md:min-w-80'
         ref={setDialogRef}
         onClose={closeModal}
         modalType='dialog'
