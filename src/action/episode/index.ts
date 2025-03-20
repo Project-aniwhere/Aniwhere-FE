@@ -31,7 +31,8 @@ export const postEpisodeReview = async (
     }
   );
 
-  return response.json();
+  if (!response.ok) return response.json();
+  return null;
 };
 
 // 에피소드 리뷰 수정
@@ -51,7 +52,8 @@ export const putEpisodeReview = async (
     }
   );
 
-  return response.json();
+  if (!response.ok) return response.json();
+  return null;
 };
 
 // 에피소드 리뷰 삭제
@@ -65,5 +67,7 @@ export const deleteEpisodeReview = async (
       method: 'DELETE',
     }
   );
-  return response.json();
+
+  if (!response.ok) return response.json();
+  return null;
 };

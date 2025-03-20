@@ -28,18 +28,18 @@ const CommentItem = ({ item, id, type }: CommentItemProps) => {
         ? deleteAnimeReview(id, item.id, session.userInfo?.userId || 0)
         : deleteEpisodeReview(id, session.userInfo?.userId || 0),
     onSuccess: (data) => {
-      if (data?.code === 200) {
-        if (type === 'anime') {
-          queryClient.invalidateQueries({
-            queryKey: animeQuery.query.detail(id).queryKey,
-          });
-        } else {
-          queryClient.invalidateQueries({
-            queryKey: episodeQuery.query.detail(id).queryKey,
-          });
-        }
-      } else {
+      if (data) {
         modalRef.current?.openModal();
+        return;
+      }
+      if (type === 'anime') {
+        queryClient.invalidateQueries({
+          queryKey: animeQuery.query.detail(id).queryKey,
+        });
+      } else {
+        queryClient.invalidateQueries({
+          queryKey: episodeQuery.query.detail(id).queryKey,
+        });
       }
     },
   });

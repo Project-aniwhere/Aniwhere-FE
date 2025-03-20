@@ -47,7 +47,8 @@ export const putAnimeReview = async (
     }
   );
 
-  return response.json();
+  if (!response.ok) return response.json();
+  return null;
 };
 
 // 애니메이션 리뷰 수정
@@ -68,7 +69,8 @@ export const patchAnimeReview = async (
     }
   );
 
-  return response.json();
+  if (!response.ok) return response.json();
+  return null;
 };
 
 // 애니메이션 리뷰 삭제
@@ -84,5 +86,6 @@ export const deleteAnimeReview = async (
     }
   );
 
-  return response.json();
+  if (!response.ok) return response.json();
+  return null;
 };
