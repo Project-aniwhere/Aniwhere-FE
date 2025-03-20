@@ -1,6 +1,5 @@
 'use client';
 
-import { getAnimeDetail } from '@/action/anime';
 import Layout from '@/app/(default)/layout';
 import Tabs from '@/component/common/tab/tab-list';
 import DetailBanner from '@/component/detail/banner';
@@ -10,6 +9,7 @@ import EpisodeList from '@/component/detail/episode-list';
 import { DETAIL_TABS } from '@/constant/common';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import animeQuery from '@/hook/query/anime';
 
 const AnimeDetailClientPage = () => {
   const router = useRouter();
@@ -17,11 +17,7 @@ const AnimeDetailClientPage = () => {
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab') || 'episode';
 
-  const { data } = useQuery({
-    queryKey: ['animeDetail', animeId],
-    queryFn: () => getAnimeDetail(animeId as string),
-    enabled: !!animeId,
-  });
+  const { data } = useQuery(animeQuery.query.detail(animeId as string));
 
   const handleChangeTab = (tab: string) => {
     router.push(`/detail/${animeId}?tab=${tab}`);
