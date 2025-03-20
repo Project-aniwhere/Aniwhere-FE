@@ -9,20 +9,14 @@ import { useCallback } from 'react';
 const useSession = () => {
   const [session, setSession] = useAtom(sessionAtom);
 
-  const logoutAction = useCallback(
-    () => async (e: React.MouseEvent) => {
-      e.preventDefault();
-      const result = await handleLogout();
-
-      if (result.code < 400) {
-        setSession(RESET);
-      }
-    },
-    [setSession]
-  );
+  const logoutAction = useCallback(async () => {
+    await handleLogout(session.userInfo?.loginType);
+    setSession(RESET);
+  }, [session, setSession]);
 
   return {
     ...session,
+    setSession,
     logoutAction,
   };
 };

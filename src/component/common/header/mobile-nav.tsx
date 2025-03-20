@@ -83,13 +83,9 @@ const MobileNav = () => {
         </div>
         <div className='absolute bottom-5 right-5'>
           {isLogin ? (
-            <Link
-              href='#'
-              onClick={logoutAction}
-              className='text-white text-xl'
-            >
+            <button onClick={logoutAction} className='text-white text-xl'>
               로그아웃
-            </Link>
+            </button>
           ) : (
             <Link href='/login' className='text-white text-xl'>
               로그인

@@ -20,9 +20,7 @@ const DesktopNav = () => {
         <SearchInput />
         <Link href='/mypage'>마이페이지</Link>
         {isLogin ? (
-          <Link href='#' onClick={logoutAction}>
-            로그아웃
-          </Link>
+          <button onClick={logoutAction}>로그아웃</button>
         ) : (
           <Link href='/login'>로그인</Link>
         )}

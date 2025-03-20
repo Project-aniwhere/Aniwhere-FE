@@ -3,12 +3,18 @@ import { SignupResponse } from '@/type/api/signup';
 import { APIResult } from '@/type/common';
 import { FetchWithJWT } from '@/util/fetch';
 
-export async function handleLogout(): Promise<APIResult<SignupResponse>> {
+export async function handleLogout(
+  oauth?: 'local' | 'kakao' | 'google'
+): Promise<APIResult<SignupResponse>> {
   // login 서버 통신
   const data = {
     method: 'POST',
   };
-  const response = await FetchWithJWT('/api/auth/logout', data);
+
+  const url =
+    oauth === 'local' ? '/api/auth/logout' : `/api/auth/${oauth}/logout`;
+
+  const response = await FetchWithJWT(url, data);
 
   if (response.ok) {
     return {

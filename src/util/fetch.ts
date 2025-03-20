@@ -30,15 +30,15 @@ export const FetchWithCookie = async (
   input: RequestInfo | URL,
   init?: RequestInit
 ) => {
-  if (process.env.NODE_ENV === 'production' && isServer) {
+  if (isServer) {
     try {
       const cookies = await getServerCookies();
       const cookieString = cookies().toString();
+
       return Fetch(input, {
         ...init,
         headers: {
           ...init?.headers,
-          'Content-Type': 'application/json',
           Cookie: cookieString,
         },
         credentials: 'include',
@@ -53,10 +53,7 @@ export const FetchWithCookie = async (
     }
   }
 
-  return Fetch(input, {
-    ...init,
-    credentials: 'include',
-  });
+  return Fetch(input, init);
 };
 
 export const FetchWithJWT = async (
@@ -65,8 +62,8 @@ export const FetchWithJWT = async (
 ) => {
   const res = await FetchWithCookie(input, init);
 
-  if (res.status === 401) {
-    const tokensRequest = await fetch('/api/reissue', {
+  if (res.status === 401 && input !== '/api/auth/logout') {
+    const tokensRequest = await FetchWithCookie('/api/reissue', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +71,7 @@ export const FetchWithJWT = async (
     });
     if (!tokensRequest.ok) redirect('/login');
 
-    if (process.env.NODE_ENV === 'production' && isServer) {
+    if (isServer) {
       const cookiesPromise = await getServerCookies();
       const cookies = await cookiesPromise();
       const newCookies = tokensRequest.headers.get('set-cookie')?.split(';');

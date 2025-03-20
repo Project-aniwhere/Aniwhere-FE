@@ -5,15 +5,15 @@ import HoverColorButton from '../common/button/hover-color-button';
 import DefaultInput from '../common/input/default-input';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSetAtom } from 'jotai';
-import { sessionAtom } from '@/store/session-atom';
 import { isFetchError } from '@/util/fetch';
 import { RESET } from 'jotai/utils';
+import useSession from '@/hook/session/use-session';
+import { UserInfo } from '@/type/auth';
 
 const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
-  const setSession = useSetAtom(sessionAtom);
+  const { setSession } = useSession();
 
   const onSubmit = async (formData: FormData) => {
     const result = await handleLoginForm(formData);
@@ -21,7 +21,10 @@ const LoginForm = () => {
       setErrorMsg('');
       setSession({
         isLogin: true,
-        userInfo: result,
+        userInfo: {
+          ...(result as UserInfo),
+          loginType: 'local',
+        },
       });
       router.back();
     } else {

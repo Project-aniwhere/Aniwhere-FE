@@ -1,13 +1,13 @@
 import { SessionType } from '@/type/auth';
+
 import { atomWithStorage } from 'jotai/utils';
 
-const initialState: SessionType = {
+export const sessionInitialState: SessionType = {
   isLogin: false,
   userInfo: null,
 };
 
-// Session atom
 export const sessionAtom = atomWithStorage<SessionType>(
   'session',
-  initialState
+  sessionInitialState
 );

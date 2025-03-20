@@ -39,7 +39,7 @@ function TagFilterModalSelector({
   const handleTagClose = useCallback(
     (tag: AnimeTagType) => {
       dispatch({
-        type: 'CLEAR',
+        type: 'UNSELECT',
         payload: {
           filterType,
           target: tag.categoryId,

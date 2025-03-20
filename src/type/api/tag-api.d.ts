@@ -18,6 +18,7 @@ export interface AnimeSearchResponse {
     animeId: number;
     title: string;
     status: string;
+    poster: string;
   }[];
   totalCount: number;
   pageNumber: number;
