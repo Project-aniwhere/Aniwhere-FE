@@ -59,8 +59,8 @@ export interface AnimeDetailInfoType {
   script: string;
   producer: string;
   studio: string;
-  releaseDate: string[];
-  endDate: string[] | null;
+  releaseDate: string;
+  endDate: string | null;
   runningTime: string;
   status: string | null;
   trailer: string;

@@ -9,8 +9,8 @@ interface DetailBannerProps {
   rating: number;
   categories?: string[];
   isAdult?: boolean;
-  releaseDate: string[];
-  endDate?: string[] | null;
+  releaseDate: string;
+  endDate?: string | null;
   status?: string | null;
   description: string;
   trailer?: string;
@@ -35,7 +35,7 @@ const DetailBanner = ({
   return (
     <div className='relative'>
       <div className='size-full absolute z-10 bg-gradient-to-b from-transparent to-black/50'></div>
-      <div className='relative w-full h-[360px] md:h-[440px] bg-gray-200'>
+      <div className='relative w-full h-[22rem] md:h-[28rem] bg-gray-200'>
         {poster &&
           (isAwImage ? (
             <AWImage
@@ -76,8 +76,8 @@ const DetailBanner = ({
           </div>
           <div className='flex gap-1.5 text-sm md:text-base opacity-70 font-medium'>
             <span>
-              {releaseDate.join('.')}
-              {endDate && ` ~ ${endDate.join('.')}`}
+              {releaseDate}
+              {endDate && ` ~ ${endDate}`}
             </span>
             {status && (
               <>

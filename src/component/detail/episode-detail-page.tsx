@@ -18,7 +18,7 @@ const EpisodeDetailClientPage = () => {
         poster={data[0].stillImage}
         title={`${data[0].episodeNumber}화 ${data[0].title}`}
         rating={data[0].averageRating}
-        releaseDate={[data[0].releaseDate]}
+        releaseDate={data[0].releaseDate}
         description={data[0].episodeStory}
       />
       <div className='pt-5 pb-20 px-5 md:px-8 flex flex-col gap-5'>
