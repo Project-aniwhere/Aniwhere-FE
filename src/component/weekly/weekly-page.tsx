@@ -1,6 +1,6 @@
 'use client';
 
-import { getAnimeQuarterList } from '@/action/anime';
+import { getAnimeWeeklyList } from '@/action/anime';
 import MobileDailyConatiner from '@/component/weekly/daily-container-mobile';
 import WeeklyContainer from '@/component/weekly/weekly-container';
 import WeeklyTitle from '@/component/weekly/weekly-title';
@@ -21,7 +21,7 @@ const WeeklyPage = () => {
   const { data } = useQuery({
     queryKey: ['animeQuarterList', year, quarter],
     queryFn: () =>
-      getAnimeQuarterList({
+      getAnimeWeeklyList({
         year,
         quarter,
       }),
@@ -45,10 +45,12 @@ const WeeklyPage = () => {
         handleSelectYear={handleSelectYear}
         handleSelectQuarter={handleSelectQuarter}
       />
-      {data ? (
+      {data?.length ? (
         isMobile ? (
           <MobileDailyConatiner
-            dailyList={data[day]}
+            dailyList={
+              data.filter((item) => String(item.weekdayCode) === day)[0].animes
+            }
             currentDay={day}
             handleSelectDay={handleSelectDay}
           />

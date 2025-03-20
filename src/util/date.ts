@@ -5,7 +5,7 @@ export const getYear = () => {
 };
 
 export const getQuarter = () => {
-  return String(Math.floor((date.getMonth() + 1) / 3));
+  return String(Math.floor((date.getMonth() + 3) / 3));
 };
 
 export const getMonth = () => {

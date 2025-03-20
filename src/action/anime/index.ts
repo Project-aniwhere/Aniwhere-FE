@@ -14,15 +14,23 @@ export const getAnimeDetail = async (
   return null;
 };
 
-export const getAnimeWeeklyList =
-  async (): Promise<AnimeWeeklyResponse | null> => {
-    const response = await Fetch(`${prefix}/weekday`, {
+export const getAnimeWeeklyList = async ({
+  year,
+  quarter,
+}: {
+  year: string;
+  quarter: string;
+}): Promise<AnimeWeeklyResponse | null> => {
+  const response = await Fetch(
+    `${prefix}/weekday?year=${year}&quarter=${quarter}`,
+    {
       next: { revalidate: 1200 },
-    });
+    }
+  );
 
-    if (response.ok) return response.json();
-    return null;
-  };
+  if (response.ok) return response.json();
+  return null;
+};
 
 export const getAnimeQuarterList = async ({
   year,
