@@ -12,7 +12,7 @@ interface DailyConatinerProps {
 const DailyConatiner = ({ day, dailyList, active }: DailyConatinerProps) => {
   return (
     <div
-      className={`px-2.5 py-3 flex flex-col gap-3 rounded-md ${active ? 'bg-aniviolet0' : ''}`}
+      className={`p-3 flex flex-col gap-3 rounded-md ${active ? 'bg-aniviolet0' : ''}`}
     >
       <p
         className={`text-center font-semibold text-sm md:text-base ${active ? 'text-aniviolet2' : ''}`}
