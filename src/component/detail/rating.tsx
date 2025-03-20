@@ -9,6 +9,8 @@ import { postEpisodeReview } from '@/action/episode';
 import { PageType } from '@/type/api/anime-api';
 import ModalDialog from '../common/modal/modal-dialog';
 import { ModalRef } from '@/type/modal';
+import animeQuery from '@/hook/query/anime';
+import episodeQuery from '@/hook/query/episode';
 
 interface RatingProps {
   id: string;
@@ -39,9 +41,15 @@ const Rating = ({ id, type }: RatingProps) => {
           }),
     onSuccess: (data) => {
       if (data?.code === 200) {
-        queryClient.invalidateQueries({
-          queryKey: [type, 'detail', id],
-        });
+        if (type === 'anime') {
+          queryClient.invalidateQueries({
+            queryKey: animeQuery.query.detail(id).queryKey,
+          });
+        } else {
+          queryClient.invalidateQueries({
+            queryKey: episodeQuery.query.detail(id).queryKey,
+          });
+        }
         setRating(0);
         setContent('');
       } else {

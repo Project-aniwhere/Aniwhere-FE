@@ -8,6 +8,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { useRef } from 'react';
 import ModalDialog from '../common/modal/modal-dialog';
+import animeQuery from '@/hook/query/anime';
+import episodeQuery from '@/hook/query/episode';
 
 interface CommentItemProps {
   item: AnimeReviewInfoType;
@@ -27,9 +29,15 @@ const CommentItem = ({ item, id, type }: CommentItemProps) => {
         : deleteEpisodeReview(id, session.userInfo?.userId || 0),
     onSuccess: (data) => {
       if (data?.code === 200) {
-        queryClient.invalidateQueries({
-          queryKey: [type, 'detail', id],
-        });
+        if (type === 'anime') {
+          queryClient.invalidateQueries({
+            queryKey: animeQuery.query.detail(id).queryKey,
+          });
+        } else {
+          queryClient.invalidateQueries({
+            queryKey: episodeQuery.query.detail(id).queryKey,
+          });
+        }
       } else {
         modalRef.current?.openModal();
       }
