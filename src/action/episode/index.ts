@@ -65,7 +65,5 @@ export const deleteEpisodeReview = async (
       method: 'DELETE',
     }
   );
-
-  if (response.ok) return null;
-  return null;
+  return response.json();
 };

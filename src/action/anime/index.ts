@@ -84,6 +84,5 @@ export const deleteAnimeReview = async (
     }
   );
 
-  if (response.ok) return null;
-  return null;
+  return response.json();
 };
