@@ -7,8 +7,8 @@ const MypageProfile = () => {
     <div className='relative'>
       <div className='size-24 rounded-full bg-sky-100 flex items-center justify-center overflow-hidden border-2 border-aniviolet2'>
         <Image
-          src=''
-          alt='comment image'
+          src={'/'}
+          alt='프로필 이미지'
           width={0}
           height={0}
           sizes='100%'

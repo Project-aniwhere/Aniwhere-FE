@@ -1,15 +1,3 @@
-export const AnimeGenreObject = {
-  action: '액션',
-  racing: '레이싱',
-  battle: '배틀',
-} as const;
-
-export const AnimeTagObject = {
-  healing: '힐링',
-  ishkai: '이세카이',
-  humor: '유머',
-} as const;
-
 export const AnimeReleaseTypeObject = {
   tva: 'TVA',
   ova: 'OVA',
@@ -29,7 +17,6 @@ export const AnimeBroadCastTypeObject = {
 } as const;
 
 export const AnimeFilterObject = {
-  tag: AnimeTagObject,
   release: AnimeReleaseTypeObject,
   season: AnimeSeasonTypeObject,
   broadcasting: AnimeBroadCastTypeObject,
@@ -42,8 +29,7 @@ export const AnimeFilterNameObject = {
   broadcasting: '방영 유무',
 } as const;
 
-export type AnimeGenreType = keyof typeof AnimeGenreObject;
 export type AnimeReleaseType = keyof typeof AnimeReleaseTypeObject;
-export type AnimeFilterType = keyof typeof AnimeFilterObject;
+export type AnimeFilterType = keyof typeof AnimeFilterObject | 'tag';
 export type AnimeSeasonType = keyof typeof AnimeSeasonTypeObject;
 export type AnimeBroadCastType = keyof typeof AnimeBroadCastTypeObject;

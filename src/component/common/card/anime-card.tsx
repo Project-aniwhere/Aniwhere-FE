@@ -6,7 +6,6 @@ import {
   AnimeSeasonType,
   AnimeSeasonTypeObject,
 } from '@/type/anime-tag';
-import Image from 'next/image';
 import sample from '@/asset/img/mainslider/sample.jpg';
 import TagItem from '@/component/tag/tag-item';
 import Link from 'next/link';
@@ -14,6 +13,7 @@ import { Review } from '@/type/api/anime-recommend-api';
 import CommentSwiper from '../comment/comment-swiper';
 import StarRate from '../star-rate/star-rate';
 import { AnimeTagType } from '@/type/api/tag-api';
+import AWImage from '../image/cf-image';
 
 interface AnimeCardProps {
   id: number;
@@ -28,6 +28,7 @@ interface AnimeCardProps {
   reviews?: Review[];
   ranking?: number;
   imageAspect?: string;
+  imageSize?: string;
 }
 
 const AnimeCard = ({
@@ -43,6 +44,7 @@ const AnimeCard = ({
   className,
   ranking,
   imageAspect = '9/16',
+  imageSize,
 }: AnimeCardProps) => {
   return (
     <div
@@ -67,11 +69,12 @@ const AnimeCard = ({
             자세히 보기
           </span>
         </Link>
-        <Image
+        <AWImage
           src={thumbnail ?? sample.src}
           alt='썸네일'
           fill
           className='object-cover'
+          sizes={imageSize}
         />
       </div>
 

@@ -33,6 +33,7 @@ export const getSearchedAnime = async (
     page: searchProps.page,
     size: searchProps.size,
   };
+
   const res = await Fetch('/api/anime/search', {
     method: 'POST',
     headers: {

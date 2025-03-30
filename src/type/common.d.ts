@@ -38,5 +38,7 @@ export type ErrorResult = {
 
 export interface SignupInputProps {
   onValidation: (isValid: boolean) => void;
+  defaultValue?: string;
+  className?: string;
 }
 export type APIResult<T> = T | ErrorResult;

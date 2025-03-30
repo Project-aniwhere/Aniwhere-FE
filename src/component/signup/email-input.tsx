@@ -23,7 +23,11 @@ interface VerificationState {
 const VERIFICATION_TIME = 300;
 const EMAIL_REGEX = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
-const EmailInput = ({ onValidation }: SignupInputProps) => {
+const EmailInput = ({
+  onValidation,
+  defaultValue,
+  className,
+}: SignupInputProps) => {
   const [email, setEmail] = useState<EmailState>({
     value: '',
     errorMsg: '',
@@ -49,7 +53,7 @@ const EmailInput = ({ onValidation }: SignupInputProps) => {
       value: newEmail,
       errorMsg: !checkEmail ? '올바른 이메일을 입력해주십시오' : '',
       showVerification: false,
-      isVerified: false,
+      isVerified: defaultValue ? defaultValue === newEmail : false,
     });
 
     setVerification({
@@ -141,14 +145,12 @@ const EmailInput = ({ onValidation }: SignupInputProps) => {
 
     if (response.status === 200) {
       setEmail((prev) => ({ ...prev, isVerified: true }));
-      onValidation(true);
       setVerification((prev) => ({
         ...prev,
         errorMsg: '',
         isActive: false,
       }));
     } else {
-      onValidation(false);
       setVerification((prev) => ({
         ...prev,
         errorMsg: '인증코드가 일치하지 않습니다.',
@@ -179,8 +181,23 @@ const EmailInput = ({ onValidation }: SignupInputProps) => {
     return () => clearTimeout(countDown);
   }, [verification]);
 
+  useEffect(() => {
+    if (defaultValue) {
+      setEmail((prev) => ({
+        ...prev,
+        value: defaultValue,
+        isVerified: true,
+      }));
+    }
+  }, [defaultValue]);
+
+  useEffect(() => {
+    onValidation(email.isVerified);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email.isVerified]);
+
   return (
-    <div className='space-y-2'>
+    <div className={`space-y-2 ${className}`}>
       <div className='flex gap-2'>
         <DefaultInput
           name='email'

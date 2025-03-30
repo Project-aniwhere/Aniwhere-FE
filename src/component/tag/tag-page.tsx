@@ -17,12 +17,15 @@ const TagClientPage = ({ initialState }: TagPageProps) => {
 
   return (
     <div className='flex flex-col gap-4'>
-      <TagSearchBar
-        filterState={filterState}
-        dispatch={dispatch}
-        setToggle={setToggle}
-      />
-      {toggle && <TagFilter filterState={filterState} dispatch={dispatch} />}
+      <div className='flex flex-col gap-4 bg-white sticky top-[calc(5rem-1px)] z-40'>
+        <TagSearchBar
+          filterState={filterState}
+          dispatch={dispatch}
+          setToggle={setToggle}
+        />
+        {toggle && <TagFilter filterState={filterState} dispatch={dispatch} />}
+      </div>
+
       <TagSearchResult filterState={filterState} />
     </div>
   );

@@ -21,6 +21,7 @@ const TagSearchResult = ({ filterState }: TagSearchResultProps) => {
       ),
       season: filterState.season.filter((season) => season[0] === 'included'),
       broadcasting: filterState.broadcasting.filter(() => false),
+      year: filterState.year,
     };
   }, [filterState]);
 
@@ -45,6 +46,9 @@ const TagSearchResult = ({ filterState }: TagSearchResultProps) => {
             releaseType='tva'
             isBroadcasting='broadcasting'
             rating={4.5}
+            thumbnail={anime.poster}
+            imageAspect='16/9'
+            imageSize='(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw'
           />
         ))
       )}

@@ -18,7 +18,7 @@ const AniwhereImageLoader = ({
 };
 
 const AWImage = (props: ImageProps) => {
-  return <Image {...props} loader={AniwhereImageLoader} />;
+  return <Image {...props} alt={props.alt} loader={AniwhereImageLoader} />;
 };
 
 export default AWImage;

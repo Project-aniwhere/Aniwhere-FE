@@ -39,10 +39,11 @@ const PopularPage = () => {
                   {idx + 1}
                 </div>
                 <AWImage
-                  src='https://image.tmdb.org/t/p/original/gDvxT2z6TNxervG97WfpePRZ3aR.jpg'
+                  src='posters/xfdyTs0SSVt2FySoL5IEnMzqANj.jpg'
                   alt='랭킹 이미지'
                   fill
                   className='object-cover rounded-lg'
+                  sizes='(max-width:384px) 20rem, (max-width:640px) 40rem, (max-width: 1024px) 15rem, 20rem'
                 />
               </div>
               <div className='flex flex-col gap-4'>
@@ -115,6 +116,8 @@ const PopularPage = () => {
               rating={4.5}
               ranking={idx + 4}
               imageAspect='16/9'
+              imageSize='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+              thumbnail='posters/xfdyTs0SSVt2FySoL5IEnMzqANj.jpg'
               reviews={Array(10)
                 .fill(0)
                 .map((_, idx) => ({

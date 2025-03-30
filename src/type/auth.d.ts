@@ -7,6 +7,7 @@ export interface UserInfo {
   role: string;
   sex: string;
   userId: number;
+  loginType: 'local' | 'kakao' | 'google';
   // user_profile_img: string;
 }
 

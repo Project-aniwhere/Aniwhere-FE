@@ -2,13 +2,16 @@
 
 import { OauthType } from '@/app/(auth)/auth/[oauth]/callback/page';
 import ModalDialog from '@/component/common/modal/modal-dialog';
+import useSession from '@/hook/session/use-session';
 import { ModalRef } from '@/type/modal';
+import { Fetch } from '@/util/fetch';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 const OauthCallback = ({ oauth }: { oauth: OauthType }) => {
   const query = useSearchParams();
   const router = useRouter();
+  const { setSession } = useSession();
   const code = query.get('code');
 
   const modalRef = useRef<ModalRef>(null);
@@ -22,7 +25,7 @@ const OauthCallback = ({ oauth }: { oauth: OauthType }) => {
       return;
     }
     // need to fix...
-    fetch(`/api/auth/${oauth}/callback?code=${code}`, {
+    Fetch(`/api/auth/${oauth}/callback?code=${code}`, {
       method: 'POST',
     })
       .then((res) => {
@@ -32,12 +35,20 @@ const OauthCallback = ({ oauth }: { oauth: OauthType }) => {
           modalRef.current?.openModal();
         }
       })
-      .then(() => {})
+      .then((res) => {
+        setSession({
+          isLogin: true,
+          userInfo: {
+            ...res,
+            loginType: oauth,
+          },
+        });
+        router.push('/');
+      })
       .catch(() => {
         modalRef.current?.openModal();
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, router]);
+  }, [code, oauth, router, setSession]);
 
   return (
     <>

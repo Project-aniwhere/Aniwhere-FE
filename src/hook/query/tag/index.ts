@@ -11,6 +11,7 @@ const query = createQuery(['tag'], {
     season,
     broadcasting,
     size = 10,
+    year,
   }: Partial<TagFilterState> & {
     size?: number;
   }) => {
@@ -25,6 +26,7 @@ const query = createQuery(['tag'], {
           broadcasting,
           page: 0,
           size,
+          year,
         });
       },
     };
@@ -39,11 +41,12 @@ const infiniteQuery = createInfiniteQuery(['tag'], {
     season,
     broadcasting,
     size = 10,
+    year,
   }: Partial<TagFilterState> & {
     size?: number;
   }) => {
     return {
-      queryKey: [searchKeyword, tag, release, season, broadcasting, size],
+      queryKey: [searchKeyword, tag, release, season, broadcasting, size, year],
       queryFn: async ({ pageParam = 0 }) => {
         return getSearchedAnime({
           searchKeyword,
@@ -53,6 +56,7 @@ const infiniteQuery = createInfiniteQuery(['tag'], {
           broadcasting,
           page: pageParam,
           size,
+          year,
         });
       },
       initialPageParam: 0,

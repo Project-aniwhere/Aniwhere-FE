@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DefaultInput from '../common/input/default-input';
 import { SignupInputProps } from '@/type/common';
 
-const PasswordInput = ({ onValidation }: SignupInputProps) => {
+const PasswordInput = ({ onValidation, className }: SignupInputProps) => {
   // 비밀번호
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
@@ -48,7 +48,7 @@ const PasswordInput = ({ onValidation }: SignupInputProps) => {
   ];
 
   return (
-    <div className='space-y-2'>
+    <div className={`space-y-2 ${className}`}>
       <DefaultInput
         type='password'
         name='password'

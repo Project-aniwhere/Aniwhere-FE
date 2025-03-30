@@ -1,38 +1,97 @@
+'use client';
+
+import useSession from '@/hook/session/use-session';
 import HoverColorButton from '../common/button/hover-color-button';
 import UnderlineButton from '../common/button/hover-underline-button';
 import CheckInput from '../common/input/check-input';
+import NicknameInput from '../signup/nickname-input';
+import EmailInput from '../signup/email-input';
+import PasswordInput from '../signup/password-input';
+import { useMemo, useState } from 'react';
+import { FetchWithJWT } from '@/util/fetch';
+
+interface ValidationState {
+  nickname: boolean;
+  email: boolean;
+  password: boolean;
+}
 
 const MypageAccountInfo = () => {
+  const { userInfo } = useSession();
+  const [validation, setValidation] = useState<ValidationState>({
+    nickname: true,
+    email: true,
+    password: false,
+  });
+
+  const updateValidation = (field: keyof ValidationState, isValid: boolean) => {
+    setValidation((prev) => ({
+      ...prev,
+      [field]: isValid,
+    }));
+  };
+
+  const buttonDisabled = useMemo(() => {
+    return Object.values(validation).some((valid) => !valid);
+  }, [validation]);
+
   return (
-    <div className='h-screen p-8 pt-28'>
-      <h1 className='text-2xl font-bold mb-8'>계정 설정</h1>
-      <div className='space-y-6'>
+    <div className='max-w-[48rem] w-full p-8 space-y-8'>
+      <div className=' space-y-6'>
         {/* Profile Info */}
-        <div className='space-y-4'>
-          <div className='flex items-center gap-4'>
-            <label className='w-24 text-lg'>이메일</label>
-            <span className='w-64 p-3 border border-gray-300 rounded-lg bg-gray-50'>
-              이메일
-            </span>
-            <HoverColorButton className='p-3 w-32' text='이메일 인증' />
-          </div>
 
-          <div className='flex items-center gap-4'>
-            <label className='w-24 text-lg'>비밀번호</label>
-            <span className='w-64 p-3 border border-gray-300 rounded-lg bg-gray-50'>
-              ****
-            </span>
-            <HoverColorButton className='p-3 w-32' text='비밀번호 변경' />
-          </div>
+        <form
+          className='grid grid-cols-[1fr_8rem] md:grid-cols-[7rem_1fr_7rem] gap-2'
+          action={async (e) => {
+            const res = await FetchWithJWT(
+              `/api/users/me/update?userId=${userInfo?.userId}`,
+              {
+                method: 'PATCH',
+                body: JSON.stringify({
+                  email: e.get('email'),
+                  nickname: e.get('nickname'),
+                  password: e.get('password'),
+                  userId: userInfo?.userId,
+                }),
+              }
+            );
 
-          <div className='flex items-center gap-4'>
-            <label className='w-24 text-lg'>닉네임</label>
-            <span className='w-64 p-3 border border-gray-300 rounded-lg bg-gray-50'>
-              박종권
-            </span>
-            <HoverColorButton className='p-3 w-32' text='닉네임 변경' />
-          </div>
-        </div>
+            if (res.ok) {
+              alert('변경되었습니다.');
+            } else {
+              alert('변경에 실패했습니다.');
+            }
+          }}
+        >
+          <h1 className='col-span-3 flex items-center justify-between mb-8'>
+            <span className='text-lg font-bold'>계정 설정</span>
+            <HoverColorButton
+              className='px-4 py-2'
+              text='저장'
+              type='submit'
+              disabled={buttonDisabled}
+            />
+          </h1>
+          <label className='text-lg hidden md:block'>이메일</label>
+          <EmailInput
+            onValidation={(isValid) => updateValidation('email', isValid)}
+            className='col-span-3 md:col-span-2'
+            defaultValue={userInfo?.email}
+          />
+
+          <label className='text-lg hidden md:block'>닉네임</label>
+          <NicknameInput
+            onValidation={(isValid) => updateValidation('nickname', isValid)}
+            defaultValue={userInfo?.nickname}
+            className='col-span-3 md:col-span-2'
+          />
+
+          <label className='text-lg hidden md:block'>비밀번호</label>
+          <PasswordInput
+            onValidation={(isValid) => updateValidation('password', isValid)}
+            className='col-span-2'
+          />
+        </form>
 
         {/* Notification Settings */}
         <div className='mt-16'>
