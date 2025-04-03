@@ -97,9 +97,9 @@ export const deleteAnimeReview = async (
 
 // 애니메이션 리뷰 조회
 export const getAnimeReviewList = async (
-  id: string | null,
+  id: string,
   pageableRequest: PageableRequest
-): Promise<PageableResponse<AnimeReviewInfoType> | null> => {
+): Promise<PageableResponse<AnimeReviewInfoType>> => {
   const pageableQuery = new URLSearchParams();
   Object.entries(pageableRequest).forEach(([key, value]) => {
     pageableQuery.append(key, String(value));
@@ -108,14 +108,25 @@ export const getAnimeReviewList = async (
   const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
 
   if (response.ok) return response.json();
-  return null;
+  return {
+    content: [],
+    totalCount: 0,
+    pageNumber: 0,
+    pageSize: 0,
+    totalPages: 0,
+    sort: {
+      empty: true,
+      sorted: true,
+      unsorted: true,
+    },
+  };
 };
 
 // 애니메이션 에피소드 조회
 export const getAnimeEpisodeList = async (
-  id: string | null,
+  id: string,
   pageableRequest: PageableRequest
-): Promise<PageableResponse<AnimeDetailEpisodeInfoType> | null> => {
+): Promise<PageableResponse<AnimeDetailEpisodeInfoType>> => {
   const pageableQuery = new URLSearchParams();
   Object.entries(pageableRequest).forEach(([key, value]) => {
     pageableQuery.append(key, String(value));
@@ -124,5 +135,16 @@ export const getAnimeEpisodeList = async (
   const response = await Fetch(`${prefix}/${id}/episodes?${pageableQuery}`);
 
   if (response.ok) return response.json();
-  return null;
+  return {
+    content: [],
+    totalCount: 0,
+    pageNumber: 0,
+    pageSize: 0,
+    totalPages: 0,
+    sort: {
+      empty: true,
+      sorted: true,
+      unsorted: true,
+    },
+  };
 };

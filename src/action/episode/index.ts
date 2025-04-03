@@ -75,9 +75,9 @@ export const deleteEpisodeReview = async (
 
 // 에피소드 리뷰 조회
 export const getEpisodeReviewList = async (
-  id: string | null,
+  id: string,
   pageableRequest: PageableRequest
-): Promise<PageableResponse<AnimeReviewInfoType> | null> => {
+): Promise<PageableResponse<AnimeReviewInfoType>> => {
   const pageableQuery = new URLSearchParams();
   Object.entries(pageableRequest).forEach(([key, value]) => {
     pageableQuery.append(key, String(value));
@@ -86,5 +86,16 @@ export const getEpisodeReviewList = async (
   const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
 
   if (response.ok) return response.json();
-  return null;
+  return {
+    content: [],
+    totalCount: 0,
+    pageNumber: 0,
+    pageSize: 0,
+    totalPages: 0,
+    sort: {
+      empty: true,
+      sorted: true,
+      unsorted: true,
+    },
+  };
 };

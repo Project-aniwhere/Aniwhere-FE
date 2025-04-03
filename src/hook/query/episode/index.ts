@@ -1,6 +1,7 @@
 import { getEpisodeDetail, getEpisodeReviewList } from '@/action/episode';
-import { PageableRequest } from '@/type/common';
-import { createQuery } from '@/util/query-key';
+import { AnimeReviewInfoType } from '@/type/api/anime-api';
+import { PageableResponse } from '@/type/common';
+import { createInfiniteQuery, createQuery } from '@/util/query-key';
 
 const query = createQuery(['episode'], {
   detail: (id: string) => {
@@ -10,17 +11,31 @@ const query = createQuery(['episode'], {
       enabled: !!id,
     };
   },
-  reviews: (id: string, pageableRequest: PageableRequest) => {
+});
+
+const infiniteQuery = createInfiniteQuery(['episode'], {
+  reviews: (id: string) => {
     return {
       queryKey: ['reviews', id],
-      queryFn: () => getEpisodeReviewList(id, pageableRequest),
+      queryFn: ({ pageParam }) =>
+        getEpisodeReviewList(id, {
+          page: pageParam,
+          size: 1,
+          direction: 'ASC',
+        }),
       enabled: !!id,
+      initialPageParam: 0,
+      getNextPageParam: (lastPage: PageableResponse<AnimeReviewInfoType>) => {
+        if (lastPage.pageNumber >= lastPage.totalPages) return null;
+        return lastPage.pageNumber + 1;
+      },
     };
   },
 });
 
 const episodeQuery = {
   query,
+  infiniteQuery,
 };
 
 export default episodeQuery;
