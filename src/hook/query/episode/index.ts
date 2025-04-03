@@ -1,4 +1,5 @@
-import { getEpisodeDetail } from '@/action/episode';
+import { getEpisodeDetail, getEpisodeReviewList } from '@/action/episode';
+import { PageableRequest } from '@/type/common';
 import { createQuery } from '@/util/query-key';
 
 const query = createQuery(['episode'], {
@@ -6,6 +7,13 @@ const query = createQuery(['episode'], {
     return {
       queryKey: ['detail', id],
       queryFn: () => getEpisodeDetail(id),
+      enabled: !!id,
+    };
+  },
+  reviews: (id: string, pageableRequest: PageableRequest) => {
+    return {
+      queryKey: ['reviews', id],
+      queryFn: () => getEpisodeReviewList(id, pageableRequest),
       enabled: !!id,
     };
   },

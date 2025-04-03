@@ -1,4 +1,10 @@
-import { getAnimeDetail, getAnimeWeeklyList } from '@/action/anime';
+import {
+  getAnimeDetail,
+  getAnimeEpisodeList,
+  getAnimeReviewList,
+  getAnimeWeeklyList,
+} from '@/action/anime';
+import { PageableRequest } from '@/type/common';
 import { createQuery } from '@/util/query-key';
 
 const query = createQuery(['anime'], {
@@ -16,6 +22,20 @@ const query = createQuery(['anime'], {
     return {
       queryKey: ['detail', id],
       queryFn: () => getAnimeDetail(id),
+      enabled: !!id,
+    };
+  },
+  reviews: (id: string, pageableRequest: PageableRequest) => {
+    return {
+      queryKey: ['reviews', id],
+      queryFn: () => getAnimeReviewList(id, pageableRequest),
+      enabled: !!id,
+    };
+  },
+  episodes: (id: string, pageableRequest: PageableRequest) => {
+    return {
+      queryKey: ['episodes', id],
+      queryFn: () => getAnimeEpisodeList(id, pageableRequest),
       enabled: !!id,
     };
   },
