@@ -47,16 +47,8 @@ const Rating = ({ id, type }: RatingProps) => {
         queryClient.invalidateQueries({
           queryKey:
             type === 'anime'
-              ? animeQuery.query.reviews(id, {
-                  page: 1,
-                  size: 10,
-                  direction: 'ASC',
-                }).queryKey
-              : episodeQuery.query.reviews(id, {
-                  page: 1,
-                  size: 10,
-                  direction: 'ASC',
-                }).queryKey,
+              ? animeQuery.infiniteQuery.reviews(id).queryKey
+              : episodeQuery.infiniteQuery.reviews(id).queryKey,
         });
         setRating(0);
         setContent('');

@@ -1,3 +1,4 @@
+import { DEFAULT_PAGEABLE_RESPONSE } from '@/constant/common';
 import {
   AnimeDetailEpisodeInfoType,
   AnimeDetailResponse,
@@ -108,18 +109,7 @@ export const getAnimeReviewList = async (
   const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
 
   if (response.ok) return response.json();
-  return {
-    content: [],
-    totalCount: 0,
-    pageNumber: 0,
-    pageSize: 0,
-    totalPages: 0,
-    sort: {
-      empty: true,
-      sorted: true,
-      unsorted: true,
-    },
-  };
+  return DEFAULT_PAGEABLE_RESPONSE;
 };
 
 // 애니메이션 에피소드 조회
@@ -135,16 +125,5 @@ export const getAnimeEpisodeList = async (
   const response = await Fetch(`${prefix}/${id}/episodes?${pageableQuery}`);
 
   if (response.ok) return response.json();
-  return {
-    content: [],
-    totalCount: 0,
-    pageNumber: 0,
-    pageSize: 0,
-    totalPages: 0,
-    sort: {
-      empty: true,
-      sorted: true,
-      unsorted: true,
-    },
-  };
+  return DEFAULT_PAGEABLE_RESPONSE;
 };

@@ -35,16 +35,8 @@ const CommentItem = ({ item, id, type }: CommentItemProps) => {
       queryClient.invalidateQueries({
         queryKey:
           type === 'anime'
-            ? animeQuery.query.reviews(id, {
-                page: 1,
-                size: 10,
-                direction: 'ASC',
-              }).queryKey
-            : episodeQuery.query.reviews(id, {
-                page: 1,
-                size: 10,
-                direction: 'ASC',
-              }).queryKey,
+            ? animeQuery.infiniteQuery.reviews(id).queryKey
+            : episodeQuery.infiniteQuery.reviews(id).queryKey,
       });
     },
   });

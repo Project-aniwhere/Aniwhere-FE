@@ -1,3 +1,4 @@
+import { DEFAULT_PAGEABLE_RESPONSE } from '@/constant/common';
 import { AnimeReviewInfoType } from '@/type/api/anime-api';
 import { EpisodeDetailResponse } from '@/type/api/episode-api';
 import { APIResult, PageableRequest, PageableResponse } from '@/type/common';
@@ -86,16 +87,5 @@ export const getEpisodeReviewList = async (
   const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
 
   if (response.ok) return response.json();
-  return {
-    content: [],
-    totalCount: 0,
-    pageNumber: 0,
-    pageSize: 0,
-    totalPages: 0,
-    sort: {
-      empty: true,
-      sorted: true,
-      unsorted: true,
-    },
-  };
+  return DEFAULT_PAGEABLE_RESPONSE;
 };

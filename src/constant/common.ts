@@ -50,3 +50,16 @@ export const SERVER_RESPONSE: Record<string, string> = {
   E001: '네트워크 에러입니다.',
   E002: '서비스를 사용할 수 없습니다.',
 };
+
+export const DEFAULT_PAGEABLE_RESPONSE = {
+  content: [],
+  totalCount: 0,
+  pageNumber: 0,
+  pageSize: 0,
+  totalPages: 0,
+  sort: {
+    empty: true,
+    sorted: true,
+    unsorted: true,
+  },
+};
