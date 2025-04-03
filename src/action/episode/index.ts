@@ -1,5 +1,6 @@
+import { AnimeReviewInfoType } from '@/type/api/anime-api';
 import { EpisodeDetailResponse } from '@/type/api/episode-api';
-import { APIResult } from '@/type/common';
+import { APIResult, PageableRequest, PageableResponse } from '@/type/common';
 import { Fetch } from '@/util/fetch';
 
 const prefix = '/api/episodes';
@@ -69,5 +70,21 @@ export const deleteEpisodeReview = async (
   );
 
   if (!response.ok) return response.json();
+  return null;
+};
+
+// 에피소드 리뷰 조회
+export const getEpisodeReviewList = async (
+  id: string | null,
+  pageableRequest: PageableRequest
+): Promise<PageableResponse<AnimeReviewInfoType> | null> => {
+  const pageableQuery = new URLSearchParams();
+  Object.entries(pageableRequest).forEach(([key, value]) => {
+    pageableQuery.append(key, String(value));
+  });
+
+  const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
+
+  if (response.ok) return response.json();
   return null;
 };

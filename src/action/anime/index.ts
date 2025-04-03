@@ -1,5 +1,10 @@
-import { AnimeDetailResponse, AnimeWeeklyResponse } from '@/type/api/anime-api';
-import { APIResult } from '@/type/common';
+import {
+  AnimeDetailEpisodeInfoType,
+  AnimeDetailResponse,
+  AnimeReviewInfoType,
+  AnimeWeeklyResponse,
+} from '@/type/api/anime-api';
+import { APIResult, PageableRequest, PageableResponse } from '@/type/common';
 import { Fetch } from '@/util/fetch';
 
 const prefix = '/api/anime';
@@ -87,5 +92,37 @@ export const deleteAnimeReview = async (
   );
 
   if (!response.ok) return response.json();
+  return null;
+};
+
+// 애니메이션 리뷰 조회
+export const getAnimeReviewList = async (
+  id: string | null,
+  pageableRequest: PageableRequest
+): Promise<PageableResponse<AnimeReviewInfoType> | null> => {
+  const pageableQuery = new URLSearchParams();
+  Object.entries(pageableRequest).forEach(([key, value]) => {
+    pageableQuery.append(key, String(value));
+  });
+
+  const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
+
+  if (response.ok) return response.json();
+  return null;
+};
+
+// 애니메이션 에피소드 조회
+export const getAnimeEpisodeList = async (
+  id: string | null,
+  pageableRequest: PageableRequest
+): Promise<PageableResponse<AnimeDetailEpisodeInfoType> | null> => {
+  const pageableQuery = new URLSearchParams();
+  Object.entries(pageableRequest).forEach(([key, value]) => {
+    pageableQuery.append(key, String(value));
+  });
+
+  const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
+
+  if (response.ok) return response.json();
   return null;
 };
