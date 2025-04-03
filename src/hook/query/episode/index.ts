@@ -20,7 +20,7 @@ const infiniteQuery = createInfiniteQuery(['episode'], {
       queryFn: ({ pageParam }) =>
         getEpisodeReviewList(id, {
           page: pageParam,
-          size: 1,
+          size: 8,
           direction: 'ASC',
         }),
       enabled: !!id,

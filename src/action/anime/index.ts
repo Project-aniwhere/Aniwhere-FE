@@ -6,6 +6,7 @@ import {
   AnimeWeeklyResponse,
 } from '@/type/api/anime-api';
 import { APIResult, PageableRequest, PageableResponse } from '@/type/common';
+import { objectToSearchParams } from '@/util/common';
 import { Fetch } from '@/util/fetch';
 
 const prefix = '/api/anime';
@@ -101,12 +102,9 @@ export const getAnimeReviewList = async (
   id: string,
   pageableRequest: PageableRequest
 ): Promise<PageableResponse<AnimeReviewInfoType>> => {
-  const pageableQuery = new URLSearchParams();
-  Object.entries(pageableRequest).forEach(([key, value]) => {
-    pageableQuery.append(key, String(value));
-  });
+  const params = objectToSearchParams(pageableRequest);
 
-  const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
+  const response = await Fetch(`${prefix}/${id}/reviews?${params}`);
 
   if (response.ok) return response.json();
   return DEFAULT_PAGEABLE_RESPONSE;
@@ -117,12 +115,9 @@ export const getAnimeEpisodeList = async (
   id: string,
   pageableRequest: PageableRequest
 ): Promise<PageableResponse<AnimeDetailEpisodeInfoType>> => {
-  const pageableQuery = new URLSearchParams();
-  Object.entries(pageableRequest).forEach(([key, value]) => {
-    pageableQuery.append(key, String(value));
-  });
+  const params = objectToSearchParams(pageableRequest);
 
-  const response = await Fetch(`${prefix}/${id}/episodes?${pageableQuery}`);
+  const response = await Fetch(`${prefix}/${id}/episodes?${params}`);
 
   if (response.ok) return response.json();
   return DEFAULT_PAGEABLE_RESPONSE;
