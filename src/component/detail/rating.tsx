@@ -44,15 +44,20 @@ const Rating = ({ id, type }: RatingProps) => {
         modalRef.current?.openModal();
         return;
       } else {
-        if (type === 'anime') {
-          queryClient.invalidateQueries({
-            queryKey: animeQuery.query.detail(id).queryKey,
-          });
-        } else {
-          queryClient.invalidateQueries({
-            queryKey: episodeQuery.query.detail(id).queryKey,
-          });
-        }
+        queryClient.invalidateQueries({
+          queryKey:
+            type === 'anime'
+              ? animeQuery.query.reviews(id, {
+                  page: 1,
+                  size: 10,
+                  direction: 'ASC',
+                }).queryKey
+              : episodeQuery.query.reviews(id, {
+                  page: 1,
+                  size: 10,
+                  direction: 'ASC',
+                }).queryKey,
+        });
         setRating(0);
         setContent('');
       }

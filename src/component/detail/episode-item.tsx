@@ -2,17 +2,17 @@ import { AnimeDetailEpisodeInfoType } from '@/type/api/anime-api';
 import Image from 'next/image';
 
 export interface EpisodeItemProps {
-  data: AnimeDetailEpisodeInfoType;
+  item: AnimeDetailEpisodeInfoType;
 }
 
-const EpisodeItem = ({ data }: EpisodeItemProps) => {
+const EpisodeItem = ({ item }: EpisodeItemProps) => {
   return (
     <div className='p-5 flex items-center gap-6'>
       <div className='relative min-w-[270px] h-[180px] rounded bg-gray-200'>
-        {data.stillImage && (
+        {item.stillImage && (
           <Image
-            src={data.stillImage}
-            alt={`${data.episodeNumber}화 섬네일 이미지`}
+            src={item.stillImage}
+            alt={`${item.episodeNumber}화 섬네일 이미지`}
             fill
             className='object-cover rounded-md'
           />
@@ -21,15 +21,15 @@ const EpisodeItem = ({ data }: EpisodeItemProps) => {
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col gap-0.5'>
           <div className='text-xl font-bold'>
-            <span>{data.episodeNumber}화 </span>
-            <span>{data.title}</span>
+            <span>{item.episodeNumber}화 </span>
+            <span>{item.title}</span>
           </div>
           <div className='flex gap-1 text-sm font-medium text-gray-400'>
-            <span>{data.duration}분</span>
-            <span>{data.releaseDate.join('.')}</span>
+            <span>{item.duration}분</span>
+            <span>{item.releaseDate.join('.')}</span>
           </div>
         </div>
-        <p className='text-gray-400 line-clamp-3'>{data.episodeStory}</p>
+        <p className='text-gray-400 line-clamp-3'>{item.episodeStory}</p>
       </div>
     </div>
   );

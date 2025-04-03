@@ -121,7 +121,7 @@ export const getAnimeEpisodeList = async (
     pageableQuery.append(key, String(value));
   });
 
-  const response = await Fetch(`${prefix}/${id}/reviews?${pageableQuery}`);
+  const response = await Fetch(`${prefix}/${id}/episodes?${pageableQuery}`);
 
   if (response.ok) return response.json();
   return null;

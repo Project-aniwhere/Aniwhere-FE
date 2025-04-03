@@ -32,15 +32,20 @@ const CommentItem = ({ item, id, type }: CommentItemProps) => {
         modalRef.current?.openModal();
         return;
       }
-      if (type === 'anime') {
-        queryClient.invalidateQueries({
-          queryKey: animeQuery.query.detail(id).queryKey,
-        });
-      } else {
-        queryClient.invalidateQueries({
-          queryKey: episodeQuery.query.detail(id).queryKey,
-        });
-      }
+      queryClient.invalidateQueries({
+        queryKey:
+          type === 'anime'
+            ? animeQuery.query.reviews(id, {
+                page: 1,
+                size: 10,
+                direction: 'ASC',
+              }).queryKey
+            : episodeQuery.query.reviews(id, {
+                page: 1,
+                size: 10,
+                direction: 'ASC',
+              }).queryKey,
+      });
     },
   });
 

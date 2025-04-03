@@ -53,7 +53,7 @@ const DetailBanner = ({
             />
           ))}
       </div>
-      <div className='w-full absolute bottom-0 z-20 flex flex-col md:flex-row md:justify-between items-end gap-4 px-5 md:px-12 py-6 md:py-8 text-white'>
+      <div className='w-full absolute bottom-0 z-20 flex flex-col md:flex-row md:justify-between md:items-end gap-4 px-5 md:px-12 py-6 md:py-8 text-white'>
         <div className='flex flex-col gap-2'>
           <p className='text-2xl md:text-4xl font-bold'>{title}</p>
           <div className='flex gap-1.5 md:text-lg font-medium'>
