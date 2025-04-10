@@ -24,6 +24,7 @@ const TagFilterSelector = ({
   const year = date.getFullYear();
   const category =
     AnimeFilterObject[filterType as Exclude<AnimeFilterType, 'tag'>];
+
   const handleTagClick = useCallback(
     (target: string | number) => {
       dispatch({
@@ -67,7 +68,7 @@ const TagFilterSelector = ({
                 })
               }
             >
-              <option value=''>전체</option>
+              <option value='null'>전체</option>
               {Array.from({ length: 20 }, (_, i) => year - i).map((year) => (
                 <option key={year} value={year}>
                   {year}

@@ -7,7 +7,7 @@ import { useHydrateAtoms } from 'jotai/utils';
 
 interface JotaiProviderProps {
   children: React.ReactNode;
-  initialState: InitialJotaiState;
+  initialState?: InitialJotaiState;
 }
 
 const InitJotaiWrapper = ({ children }: JotaiProviderProps) => {

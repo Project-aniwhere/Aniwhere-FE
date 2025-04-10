@@ -14,7 +14,7 @@ export const TagFilterInitState = async (): Promise<TagFilterState> => {
 
   return {
     searchKeyword: '',
-    year: new Date().getFullYear(),
+    year: null,
     tag: res.map((tag) => ['neutral', tag]),
     release: Object.keys(AnimeFilterObject.release).map((key) => [
       'neutral',
@@ -48,7 +48,7 @@ interface TagSearchAction {
 
 interface TagSelectYearAction {
   type: 'SELECT_YEAR';
-  payload: number;
+  payload: number | null;
 }
 
 export type TagFilterAction =
@@ -58,7 +58,7 @@ export type TagFilterAction =
 
 export interface TagFilterState {
   searchKeyword: string;
-  year: number;
+  year: number | null;
   tag: [TagState, AnimeTagType][];
   release: [TagState, AnimeReleaseType][];
   season: [TagState, AnimeSeasonType][];

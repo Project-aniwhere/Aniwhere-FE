@@ -1,11 +1,4 @@
-import {
-  AnimeBroadCastType,
-  AnimeBroadCastTypeObject,
-  AnimeReleaseType,
-  AnimeReleaseTypeObject,
-  AnimeSeasonType,
-  AnimeSeasonTypeObject,
-} from '@/type/anime-tag';
+import { AnimeSeasonType, AnimeSeasonTypeObject } from '@/type/anime-tag';
 import sample from '@/asset/img/mainslider/sample.jpg';
 import TagItem from '@/component/tag/tag-item';
 import Link from 'next/link';
@@ -20,8 +13,6 @@ interface AnimeCardProps {
   title: string;
   tag: AnimeTagType[];
   season: AnimeSeasonType;
-  releaseType: AnimeReleaseType;
-  isBroadcasting: AnimeBroadCastType;
   rating: number;
   thumbnail?: string;
   className?: string;
@@ -29,6 +20,7 @@ interface AnimeCardProps {
   ranking?: number;
   imageAspect?: string;
   imageSize?: string;
+  status?: string;
 }
 
 const AnimeCard = ({
@@ -36,8 +28,6 @@ const AnimeCard = ({
   title,
   tag,
   season,
-  releaseType,
-  isBroadcasting,
   rating,
   thumbnail,
   reviews,
@@ -45,11 +35,12 @@ const AnimeCard = ({
   ranking,
   imageAspect = '9/16',
   imageSize,
+  status,
 }: AnimeCardProps) => {
   return (
     <div
       className={
-        'relative flex-grow rounded-lg bg-white overflow-hidden border-2 hover:scale-105 duration-300 z-0 hover:z-10 ' +
+        'relative rounded-lg bg-white overflow-hidden border-2 hover:scale-105 duration-300 z-0 hover:z-10 size-full' +
         className
       }
     >
@@ -78,23 +69,25 @@ const AnimeCard = ({
         />
       </div>
 
-      <div className='p-4 space-y-2'>
-        <div className='flex flex-row justify-between'>
-          <p className='font-semibold'>{title}</p>
+      <div className='flex flex-col p-4 gap-2 justify-between'>
+        <div className='flex flex-col justify-between'>
+          <p className='font-semibold truncate'>{title}</p>
           <StarRate rate={rating} />
         </div>
-        <div className='flex flex-row gap-2 overflow-x-scroll scrollbar-none'>
+
+        <div className='flex flex-row gap-2'>
           {tag.map(({ categoryId, categoryName }) => (
             <TagItem
               tagName={categoryName}
-              className='bg-aniviolet1'
+              className='bg-aniviolet1 text-sm px-2.5'
               key={categoryId}
               tagState='neutral'
             />
           ))}
         </div>
+
         {reviews && <CommentSwiper reviews={reviews} />}
-        <p className='text-sm text-aniviolet3'>{`${AnimeSeasonTypeObject[season]} • ${AnimeReleaseTypeObject[releaseType]} • ${AnimeBroadCastTypeObject[isBroadcasting]}`}</p>
+        <p className='text-sm text-aniviolet3'>{`${AnimeSeasonTypeObject[season]} • ${status ?? ''}`}</p>
       </div>
     </div>
   );

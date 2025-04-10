@@ -55,7 +55,7 @@ const PopularPage = () => {
                   </div>
                   <StarRate rate={4.5} />
                 </div>
-                <p className='line-clamp-3 text-gray-600'>
+                <p className='line-clamp-3 text-gray-600 h-[4.5rem]'>
                   무대는 2010년 여름의 아키하바라. 중증 중2병에서 아직도
                   헤어나오지 못한 대학생 오카베 린타로는, 「미래가젯트
                   연구소」를 설립하여, 용도불명의 희괴한 발명품들을 만들어 내고
@@ -111,8 +111,6 @@ const PopularPage = () => {
                 },
               ]}
               season={1}
-              releaseType='tva'
-              isBroadcasting='broadcasting'
               rating={4.5}
               ranking={idx + 4}
               imageAspect='16/9'
@@ -122,7 +120,7 @@ const PopularPage = () => {
                 .fill(0)
                 .map((_, idx) => ({
                   anime: '스파이 패밀리',
-                  content: `테스트 내용입니다. 이건 truncate 테스트 내용이라${idx}`,
+                  content: `테스트 내용입니다. 이건 truncate 테스트 내용이라assssssssssssssssssssss${idx}`,
                   createdAt: '2020-10-27',
                   rating: 4.5,
                   reviewId: 1,

@@ -24,18 +24,15 @@ const ContentSlider = ({
             <div className='relative aspect-video'>
               <AWImage
                 src={anime.poster}
-                alt='image list'
+                alt='썸네일 이미지'
                 fill
                 className='object-cover rounded-lg'
+                sizes='(max-width:384px) 50vw, (max-width: 1024px) 33vw, 25vw'
               />
             </div>
             <div>
               <p className='font-bold text-lg leading-5'>{anime.title}</p>
-              <p className='text-[0.875rem] text-gray-500'>
-                {anime.categories
-                  .map((category) => category.categoryName)
-                  .join(', ')}
-              </p>
+              <p className='text-[0.875rem] text-gray-500'></p>
             </div>
           </div>
         ))}
