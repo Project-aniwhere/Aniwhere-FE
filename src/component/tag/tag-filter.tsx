@@ -24,11 +24,7 @@ const TagFilter = ({ filterState, dispatch }: TagFilterProps) => {
           dispatch={dispatch}
           itemList={filterState.season}
         />
-        <TagFilterSelector
-          filterType='release'
-          dispatch={dispatch}
-          itemList={filterState.release}
-        />
+
         <TagFilterSelector
           filterType='broadcasting'
           dispatch={dispatch}

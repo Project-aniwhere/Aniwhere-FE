@@ -81,8 +81,6 @@ export interface AnimeRecommendInfoType {
   id: number;
   title: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
   animes: Anime[];
 }
 

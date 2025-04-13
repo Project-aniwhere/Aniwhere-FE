@@ -27,7 +27,9 @@ function InfiniteScroll({ hasNextPage, fetchNextPage }: InfiniteScrollProps) {
     return () => observer && observer.disconnect();
   }, [ref, handleIntersect]);
 
-  return <>{hasNextPage ? <div ref={ref}></div> : null}</>;
+  return (
+    <>{hasNextPage ? <div ref={ref} className='w-full min-h-1'></div> : null}</>
+  );
 }
 
 export default InfiniteScroll;

@@ -8,7 +8,7 @@ export interface AnimeSearchRequest {
   quarters: number[];
   title: string;
   statuses: string[];
-  year: number;
+  year: number | null;
   page: number;
   size: number;
 }

@@ -26,17 +26,16 @@ const Carousel = ({
 
   const screenWidthHandler = useCallback(() => {
     if (window.innerWidth < 640) {
-      setCountPerCarousel(childListLength < 2 ? childListLength : 2);
+      setCountPerCarousel(2);
     } else if (window.innerWidth >= 640 && window.innerWidth < 1024) {
-      setCountPerCarousel(childListLength < 3 ? childListLength : 3);
+      setCountPerCarousel(3);
     } else {
-      setCountPerCarousel(childListLength < 4 ? childListLength : 4);
+      setCountPerCarousel(4);
     }
-  }, [childListLength]);
+  }, []);
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [countPerCarousel, setCountPerCarousel] = useState(0);
-
   const handleNext = useCallback(() => {
     setCurrentIdx((prev) => {
       const currentPerCount = itemPerCarousel || countPerCarousel;

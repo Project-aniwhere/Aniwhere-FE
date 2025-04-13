@@ -1,9 +1,11 @@
+'use client';
+
 import Carousel from '../common/carousel/carousel';
 import { AnimeRecommendInfoType } from '@/type/api/anime-recommend-api';
 import AWImage from '../common/image/cf-image';
 import FullStarSvg from '@/asset/svg/star/full-star-svg';
 
-const MainImageSlider = async ({ animes }: AnimeRecommendInfoType) => {
+const MainImageSlider = ({ animes }: AnimeRecommendInfoType) => {
   return (
     <section className='relative w-full h-full'>
       <Carousel
@@ -21,6 +23,7 @@ const MainImageSlider = async ({ animes }: AnimeRecommendInfoType) => {
               alt='main slider image'
               fill
               className='object-cover -z-10'
+              sizes='100vw'
             />
             <div className='absolute left-4 bottom-4 text-white'>
               <p>{anime.releaseDate}</p>

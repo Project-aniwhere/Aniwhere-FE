@@ -4,18 +4,18 @@ import CrossSvg from '@/asset/svg/cross/cross-svg';
 import MenuLineSvg from '@/asset/svg/menuline/menu-line-svg';
 import useSession from '@/hook/session/use-session';
 
+const menuAniItems = [
+  { href: '/tag', text: '태그 검색' },
+  { href: '/popular', text: '인기 작품' },
+  { href: '/weekly', text: '요일별 작품' },
+];
+
+const menuUserItems = [{ href: '/mypage', text: '마이페이지' }];
+
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLogin, logoutAction } = useSession();
+  const { isLogin, userInfo, logoutAction } = useSession();
   const toggleMenu = () => setIsOpen(!isOpen);
-
-  const menuAniItems = [
-    { href: '/tag', text: '태그 검색' },
-    { href: '/popular', text: '인기 작품' },
-    { href: '/weekly', text: '요일별 작품' },
-  ];
-
-  const menuUserItems = [{ href: '/userinfo', text: '마이페이지' }];
 
   return (
     <div className='relative'>
@@ -51,7 +51,9 @@ const MobileNav = () => {
         </div>
         <div className='flex flex-col items-center mb-8'>
           <div className='w-16 h-16 bg-white rounded-full mb-3' />
-          <div className='text-white text-2xl'>박종권</div>
+          <div className='text-white text-2xl'>
+            {userInfo?.nickname ?? '익명'}
+          </div>
         </div>
         <div className='flex-grow border-t border-gray-300 m-5' />
         <div>

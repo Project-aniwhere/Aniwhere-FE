@@ -40,14 +40,16 @@ const CommentSwiper = ({ reviews, lineCount }: CommentSwiper) => {
         <FullStarSvg fill='#613DC1' />
         <p>{curReview.rating}</p>
       </div>
-      <span
+      <p
         style={{
           display: '-webkit-box',
+          overflow: 'hidden',
           WebkitLineClamp: lineCount ?? 1,
+          WebkitBoxOrient: 'vertical',
         }}
       >
         {curReview.content}
-      </span>
+      </p>
     </div>
   );
 };

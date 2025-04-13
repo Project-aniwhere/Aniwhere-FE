@@ -29,7 +29,7 @@ export const getSearchedAnime = async (
     statuses: searchProps.broadcasting
       ? searchProps.broadcasting.map((broadCast) => broadCast[1])
       : [],
-    year: searchProps.year || 2024,
+    year: searchProps.year ?? null,
     page: searchProps.page,
     size: searchProps.size,
   };
