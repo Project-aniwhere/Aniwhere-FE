@@ -23,7 +23,6 @@ const EpisodeDetailClientPage = () => {
       />
       <div className='pt-5 pb-20 px-5 md:px-8 flex flex-col gap-5'>
         <CommentContainer
-          list={data[0].reviews}
           rating={data[0].averageRating}
           id={episodeId as string}
           type='episode'

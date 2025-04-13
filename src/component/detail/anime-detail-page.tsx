@@ -49,7 +49,7 @@ const AnimeDetailClientPage = () => {
           setValue={handleChangeTab}
         />
         <div>
-          {tab === 'episode' && <EpisodeList list={data.episodes} />}
+          {tab === 'episode' && <EpisodeList id={animeId as string} />}
           {tab === 'cast' && (
             <ProductionList
               list={data.castings}
@@ -60,7 +60,6 @@ const AnimeDetailClientPage = () => {
           )}
           {tab === 'comment' && (
             <CommentContainer
-              list={data.reviews}
               rating={data.averageRating}
               id={animeId as string}
               type='anime'

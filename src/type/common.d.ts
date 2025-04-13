@@ -19,26 +19,37 @@ export interface CommonDatepickerProps {
   onError?: (hasError: boolean) => void;
 }
 
-export type APIResult<T> =
-  | T
-  | {
-      code: number;
-      message: string;
-    };
+export interface SignupInputProps {
+  onValidation: (isValid: boolean) => void;
+  defaultValue?: string;
+  className?: string;
+}
 
 export type PageableRequest = {
   page: number;
   size: number;
   direction: 'ASC' | 'DESC';
 };
+export type PageableResponse<T> = {
+  content: T[];
+  totalCount: number;
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+};
+
+export type APIResult<T> =
+  | T
+  | {
+      code: number;
+      message: string;
+    };
 export type ErrorResult = {
   code: number;
   message: string;
 };
-
-export interface SignupInputProps {
-  onValidation: (isValid: boolean) => void;
-  defaultValue?: string;
-  className?: string;
-}
-export type APIResult<T> = T | ErrorResult;

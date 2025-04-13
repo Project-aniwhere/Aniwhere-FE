@@ -1,4 +1,3 @@
-import Footer from '@/component/common/footer/footer';
 import Header from '@/component/common/header/header';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -6,7 +5,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Header />
       {children}
-      <Footer />
     </>
   );
 };
